@@ -1,0 +1,11 @@
+boton cerrar sesion que apunta a desconectar.php
+
+cambiar el location del cual redireccciona al cerrar la sesion+
+
+cambiar el nombre de estudiante1 a estudiante.php
+
+Cuando inicia sesion que reapunte al nuevo estudiante.php
+
+Cuando se salga no llame al Login sino al la pagina principal a diseñar
+
+Falta el diseño de los comentarios
