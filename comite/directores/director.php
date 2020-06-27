@@ -32,79 +32,34 @@ $dir = $_SESSION['user'];
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SI-COMMITEE || Director</title>
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
-    <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables -->
     <script src="plugins/datatables/jquery.dataTables.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-    <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-
-
     <link rel="stylesheet" href="css/frag.css">
-
-
-    <!-- Ayuda -- CSS -->
     <script rel="stylesheet" src="dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="dist/css/Help/font-awesome.min.css">
-    <!-- Ionicons -->
     <link rel="stylesheet" href="dist/css/Help/ionicons.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/Help/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/Help/_all-skins.min.css">
-
-
-    <!---->
-    <!-- page script -->
-    <script>
-        $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-            });
-        });
-    </script>
-
     <script type="text/javascript" src="js/cambiarPestanna.js"></script>
     <script type="text/javascript" src="js/EditarTesis.js"></script>
-
-
-
-
 </head>
 <style>
-    .white {
-        color: white;
-    }
+.white {
+    color: white;
+}
 </style>
 
-<body onload="javascript:cambiarPestanna(pestanas,pestana1);" class="hold-transition sidebar-mini">
-
+<body class="hold-transition sidebar-mini" onload="myfunction()">
     <div class="loader"></div>
     <!--Formulario Start-->
 
@@ -112,77 +67,68 @@ $dir = $_SESSION['user'];
     <!--FormularioEnd-->
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color:#B42A2A; color: white;">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light"
+            style="background-color:#B42A2A; color: white;">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars white"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="" href="../desconectar.php" style="color: white">Cerrar
-                        Sesión</i></a>
-                </li>
-
-                <!-- <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link" style="color: white">Home</a>
-                </li> -->
-
             </ul>
 
-            <!-- SEARCH FORM -->
-            <!--<form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="far fa-comments white"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
 
-            <!-- Right navbar links -->
-            <!--<ul class="navbar-nav ml-auto">-->
-            <!-- Messages Dropdown Menu -->
+                    <!--   <a class="nav-link" href="../desconectar.php">  -->
+                    <a class="nav-link"
+                        href="javascript:localStorage.removeItem('number');location.replace('../desconectar.php');">
 
-            <!--<li class="nav-item">
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="../desconectar.php" class="nav-link" style="color: white">Cerrar Sesión</a>
-            </li>
-            </li>
-            </ul>-->
+                        <i class="fas fa-door-open white"></i>
+
+                    </a>
+
+
+                </li>
+            </ul>
         </nav>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #B42A2A; color: white">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
             <!-- Brand Logo -->
-            <a href="director.php" class="brand-link" style="background-color: #343a40; color: white">
-                <img src="dist/img/unilibre-logo.png" alt="Unilibre Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <a href="../../index.html" class="brand-link" style="background-color: #343a40; color: white">
+                <img src="dist/img/unilibre-logo.png" alt="Unilibre Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">SI-COMMITEE</span>
             </a>
 
             <!-- Sidebar -->
-            <div class="sidebar" style="background-color: #B42A2A; color: white">
+            <div class="sidebar" style="background-color: #343a40; color: white">
                 <!-- Sidebar user (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                <a href="profile.php" class="d-block" style="color: white;">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                        </div>
+                        <div class="info">
+                            <?php 
+                        $usuario = $_SESSION['user'];
+                        $posicion_espacio = strpos($usuario, " ");
+                        $usuario=substr($usuario,0,$posicion_espacio);
+                        echo $usuario;?>
+                        </div>
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block" style="color: white;"><?php echo $_SESSION['user']  ?></a>
-                    </div>
-                </div>
-
-                <!-- Sidebar Menu -->
+                </a>
                 <nav class="mt-2">
                     <div id="pestanas">
-                        <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-
+                        <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
                             <li id="pestana1" class="nav-item">
                                 <a href='javascript:cambiarPestanna(pestanas,pestana1);' class="nav-link">
                                     <i class="nav-icon fa fa-user-md white"></i>
@@ -259,84 +205,70 @@ $dir = $_SESSION['user'];
                         </ul>
                     </div>
                 </nav>
-
-
-                <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
+        <div class="content-wrapper pb-2">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 id="Text">Monografías/Poster para Evaluar</h1>
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="director.php">Home</a></li>
-                                <li id="Guia" class="breadcrumb-item active">Documentos Registrados</li>
-                            </ol>
-                        </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </section>
-
-
 
             <section class="content">
 
 
-                <!--  <div class="row">
-                        <div class="col-12"> -->
+
                 <div id="contenidopestanas">
                     <!--Empieza pestana1-->
                     <div id="cpestana1">
-
                         <!--Start-->
+                        <div class="container-fluid">
 
-                        <div class="card card-warning">
+                            <div class="card card-warning">
+                                <div class="card-body">
 
-                            <div class="card-body">
-
-                                <?php
-
-                                require("../connect_db.php");
-                                $total = 0;
-                                $sql = ("SELECT * FROM tesis where ID_directores='$dir' and Aprob_Dir='' ORDER BY id_tesis DESC ");
-                                $query = mysqli_query($mysqli, $sql);
-                                //var_dump($query);
-                                ?>
-
-                                <div class="box">
-
+                                    <?php
+                                           require("../connect_db.php");
+                                           $total = 0;
+                                           $sql = ("SELECT * FROM tesis where ID_directores='$dir' and Aprob_Dir='' ORDER BY id_tesis DESC ");
+                                           $query = mysqli_query($mysqli, $sql);
+                                           ?>
                                     <div class="box-body table-responsive no-padding">
-                                        <table class="table table-hover">
+                                        <table class="table table-striped projects">
                                             <thead>
-
                                                 <tr>
-                                                    <th>Titulo</th>
-                                                    <th>Aprob_Dir</th>
-                                                    <th>Documento</th>
-                                                    <th>Fecha_Entrega</th>
-                                                    <th>Archivo</th>
-                                                    <th>Editar</th>
+                                                    <th style="width: 50%">
+                                                        Titulo
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Aprob_Dir
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Documento
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Fecha_Entrega
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Archivo
+                                                    </th>
+                                                    <th class="text-center">
+                                                        Editar
+                                                    </th>
+
                                                 </tr>
                                             </thead>
-
                                             <tbody>
-
                                                 <?php
                                                 $total1 = 0;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     $id = $arreglo[1];
                                                     $titu = $arreglo[3];
-
-                                                    // var_dump($arreglo);
                                                     if ($arreglo[6] == "Entrega Propuesta" or $arreglo[6] == "Correccion Propuesta") {
                                                         $alma = "./propuestas";
                                                     } else if ($arreglo[6] == "Entrega Anteproyecto" or $arreglo[6] == "Correccion Anteproyecto") {
@@ -348,95 +280,116 @@ $dir = $_SESSION['user'];
                                                     }
                                                     $total1++;
                                                 ?>
-                                                    <tr>
-                                                        <td><?php echo "$arreglo[3] "; ?></td>
-                                                        <?php
-
-                                                        if ($arreglo[4] != "" and $total == 0) {
+                                                <tr>
+                                                    <td>
+                                                        <?php echo "$arreglo[3] "; ?>
+                                                    </td>
+                                                    <?php
+                                                        if ($arreglo[4] !== "" and $total == 0) {
                                                             ++$total;
-                                                        ?>
-                                                            <td><?php echo "$arreglo[4] "; ?> </td>
-                                                            <div class="alert alert-info"><strong>¡Atención!</strong> usted
-                                                                tiene <strong>direcciones</strong> por aprobar y
-                                                                <strong>documentos</strong> por evaluar...</div>
-                                                        <?php
+                                                ?>
+                                                    <td class="text-center"><?php echo "$arreglo[4] "; ?> </td>
+                                                    <div class="alert alert-info"><strong>¡Atención!</strong> usted
+                                                        tiene <strong>direcciones</strong> por aprobar y
+                                                        <strong>documentos</strong> por evaluar...</div>
+                                                    <?php
                                                         } else {
                                                         ?>
-                                                            <td><?php echo "$arreglo[4]"; ?></td>
-                                                        <?php
+                                                    <td class="text-center"><?php echo "$arreglo[4]"; ?></td>
+                                                    <?php
                                                         }
                                                         ?>
-                                                        <td><?php echo "$arreglo[6] "; ?> </td>
-                                                        <td><?php echo "$arreglo[9] "; ?></td>
-                                                        <!--<td><?php echo "$arreglo[12]"; ?></td>-->
-                                                        <td>
-                                                            <?php echo "<a href='$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a> "; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php //echo "<a href='actualizartesisdir.php?id=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
-                                                            ?>
-                                                            <?php
+                                                    <td class="text-center"><?php echo "$arreglo[6] "; ?> </td>
 
-                                                            $direccion = '"pages/actualizartesisdir.php?"';
-                                                            $complemento = '"id="';
-                                                            $parametro = $arreglo[0];
-                                                            //$name = '"name"';
-                                                            $img = "<img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>";
+                                                    <td class="text-center">
+                                                        <?php echo str_replace("-","/",$arreglo[9]); ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php
+                                                if(strlen($arreglo[8]) > 1) {
+                                                    echo "
+                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                    target='_blank'>
+                                                    $arreglo[8]
+                                                    </a>
+                                                    ";
+                                                    } else {
+                                                    echo "";
+                                                    }
+                                                    
+                                                    ?>
 
-                                                            echo "<button onclick='CenterWindow($direccion, $complemento+$parametro, 600, 600);'>$img</button>";
-                                                            ?>
-                                                        </td>
-                                                    </tr>
+                                                        <?php // echo "<a href='$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a> "; ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php
+                                                         echo "
+                                                         <a class='btn btn-info btn-sm' href='pages/actualizartesisdir.php?id=$arreglo[0]'>
+                                                         <i class='fas fa-pencil-alt'>
+                                                         
+                                                         </i>
+                                                         </a>
+                                                         ";
+                                                    ?>
+
+                                                    </td>
+                                                    <!-- <td class="project-actions text-right">
+                                                    <a class="btn btn-primary btn-sm" href="#">
+                                                        <i class="fas fa-folder">
+                                                        </i>
+                                                        View
+                                                    </a>
+                                                    <a class="btn btn-info btn-sm" href="#">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" href="#">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Delete
+                                                    </a>
+                                                </td>  -->
+                                                </tr>
                                                 <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <?php echo "<center><font color='red' size='3'>Total registros: $total1</font><br></center>"; ?>
                                     </div>
-                                    <!-- /.box-body -->
+
                                 </div>
                             </div>
+
                         </div>
+
                         <!--End-->
                     </div>
                     <!--termina pestana1-->
+                    <!--Empieza pestana2 -->
                     <div id="cpestana2">
-
                         <!--Start-->
+                        <div class="container-fluid">
 
-                        <div class="card card-warning">
-
-                            <div class="card-body">
-
-                                <?php
+                            <div class="card card-warning">
+                                <div class="card-body">
+                                    <?php
 
                                 require("../connect_db.php");
                                 $total = 0;
                                 $sql = ("SELECT * FROM tesis where ID_directores='$dir' and terminado!=2 and (ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto' or ID_estado='Entrega Monografia' or ID_estado='Entrega Proyecto' or ID_estado='Correccion Propuesta' or ID_estado='Correccion Anteproyecto' or ID_estado='Correccion Proyecto' or ID_estado='Correccion Monografia') ORDER BY  fecha_aprob_propuesta");
                                 $query = mysqli_query($mysqli, $sql);
                                 //var_dump($query);
-
-
                                 ?>
-
-                                <div class="box">
-                                    <!--    <div class="box-header">
-                                            <h3 class="box-title">Responsive Hover Table</h3>
-
-
-                                        </div> -->
-                                    <!-- /.box-header -->
                                     <div class="box-body table-responsive no-padding">
-                                        <table class="table table-hover">
+                                        <table class="table table-striped projects">
                                             <thead>
-
                                                 <tr>
-                                                    <th>Titulo</th>
-                                                    <th>Aprob_Dir</th>
-                                                    <th>Documento</th>
-                                                    <th>Fecha_Entrega</th>
-                                                    <th>Archivo</th>
+                                                    <th style="width: 50%">Titulo</th>
+                                                    <th class="text-center">Aprob_Dir</th>
+                                                    <th class="text-center">Documento</th>
+                                                    <th class="text-center">Fecha_Entrega</th>
+                                                    <th class="text-center">Archivo</th>
                                                     <!--<th>Editar</th>  -->
                                                 </tr>
                                             </thead>
@@ -460,31 +413,43 @@ $dir = $_SESSION['user'];
                                                     }
                                                     $total1++;
                                                 ?>
-                                                    <tr>
-                                                        <td><?php echo "$arreglo[3] "; ?></td>
-                                                        <?php
+                                                <tr>
+                                                    <td><?php echo "$arreglo[3] "; ?></td>
+                                                    <?php
 
-                                                        if ($arreglo[4] != "" and $total == 0) {
+                                                        if ($arreglo[4] !== "" and $total == 0) {
                                                             ++$total;
                                                         ?>
-                                                            <td><?php echo "$arreglo[4] "; ?> </td>
-                                                            <div class="alert alert-info"><strong>¡Atención!</strong> usted
-                                                                tiene <strong>direcciones</strong> por aprobar y
-                                                                <strong>documentos</strong> por evaluar...</div>
-                                                        <?php
+                                                    <td class="text-center"><?php echo "$arreglo[4] "; ?> </td>
+                                                    <div class="alert alert-info"><strong>¡Atención!</strong> usted
+                                                        tiene <strong>direcciones</strong> por aprobar y
+                                                        <strong>documentos</strong> por evaluar...</div>
+                                                    <?php
                                                         } else {
                                                         ?>
-                                                            <td><?php echo "$arreglo[4]"; ?></td>
-                                                        <?php
+                                                    <td class="text-center"><?php echo "$arreglo[4]"; ?></td>
+                                                    <?php
                                                         }
                                                         ?>
-                                                        <td><?php echo "$arreglo[6] "; ?> </td>
-                                                        <td><?php echo "$arreglo[9] "; ?></td>
-                                                        <!--<td><?php echo "$arreglo[12]"; ?></td>-->
-                                                        <td>
-                                                            <?php echo "<a href='$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a> "; ?>
-                                                        </td>
-                                                        <!--<td>
+                                                    <td class="text-center"><?php echo "$arreglo[6] "; ?> </td>
+                                                    <td class="text-center"><?php echo "$arreglo[9] "; ?></td>
+                                                    <!--<td><?php echo "$arreglo[12]"; ?></td>-->
+
+                                                    <td class="text-center">
+                                                        <?php
+                                                if(strlen($arreglo[8]) > 1) {
+                                                    echo "
+                                                    <a class='btn btn-primary btn-sm' href='$alma/$arreglo[8]'
+                                                    target='_blank'>
+                                                    $arreglo[8]
+                                                    </a>
+                                                    ";
+                                                    } else {
+                                                    echo "";
+                                                    }
+                                                    ?>
+                                                    </td>
+                                                    <!--<td>
                                                             <?php //echo "<a href='actualizartesisdir.php?id=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
                                                             ?>
                                                             <?php
@@ -496,85 +461,61 @@ $dir = $_SESSION['user'];
                                                             $img = "<img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>";
 
                                                             echo "<button onclick='CenterWindow($direccion, $complemento+$parametro);'>$img</button>";
-
                                                             //  <img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>
                                                             ?>
                                                         </td>-->
-
-                                                    </tr>
+                                                </tr>
                                                 <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <?php echo "<center><font color='red' size='3'>Total registros: $total1</font><br></center>"; ?>
                                     </div>
-                                    <!-- /.box-body -->
                                 </div>
-
-
                             </div>
-
-
                         </div>
-
-
-
-
-
-
                         <!--End-->
-
-
-
                     </div>
                     <!--Termina pestana2-->
                     <!--Empieza pestana3-->
                     <div id="cpestana3">
 
+                        <div class="container-fluid">
 
-                        <div class="card card-warning">
-
-
-
-                            <div class="card-body">
-
-                                <?php
+                            <div class="card card-warning">
+                                <div class="card-body">
+                                    <?php
 
                                 require("../connect_db.php");
                                 $total = 0;
                                 $totalm = 0;
                                 $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Monografia' or ID_estado='Entrega Poster' or ID_estado='Correccion Monografia') and terminado!=2 ORDER BY id_tesis DESC ");
+                             // prueba// $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') ORDER BY id_tesis DESC ");
 
                                 $query = mysqli_query($mysqli, $sql);
                                 //var_dump($sql);
                                 ?>
 
-                                <div class="box">
-                                    <!--    <div class="box-header">
-                                            <h3 class="box-title">Responsive Hover Table</h3>
+                                    <div class="box">
 
+                                        <div class="box-body table-responsive no-padding">
+                                            <table class="table table-striped projects">
+                                                <thead>
 
-                                        </div> -->
-                                    <!-- /.box-header -->
-                                    <div class="box-body table-responsive no-padding">
-                                        <table class="table table-hover">
-                                            <thead>
+                                                    <tr>
+                                                        <th style="width: 50%">Titulo</th>
+                                                        <th class="text-center">Director</th>
+                                                        <th class="text-center">Estado</th>
+                                                        <th class="text-center">Fecha_Aprob</th>
+                                                        <th class="text-center">Archivo</th>
+                                                        <th class="text-center">Evaluar</th>
+                                                        <th class="text-center">Modificar</th>
+                                                        <th class="text-center">Evaluacion</th>
+                                                    </tr>
+                                                </thead>
 
-                                                <tr>
-                                                    <th>Titulo</th>
-                                                    <th>Director</th>
-                                                    <th>Estado</th>
-                                                    <th>Fecha_Aprob</th>
-                                                    <th>Archivo</th>
-                                                    <th>Evaluar</th>
-                                                    <th>Modificar</th>
-                                                    <th>Ver Eval</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <?php
+                                                <tbody>
+                                                    <?php
 
                                                 while ($arreglo = mysqli_fetch_array($query)) {
 
@@ -593,11 +534,24 @@ $dir = $_SESSION['user'];
                                                 ?>
                                                     <tr>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
-                                                        <td><?php echo "$arreglo[5] "; ?></td>
-                                                        <td><?php echo "$arreglo[6] "; ?></td>
-                                                        <td><?php echo "$arreglo[10] "; ?></td>
-                                                        <td>
-                                                            <?php echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8]</a> "; ?>
+                                                        <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
+                                                        <td class="text-center"><?php echo "$arreglo[6] "; ?></td>
+                                                        <td class="text-center">
+                                                            <?php echo str_replace("-","/",$arreglo[10]); ?></td>
+                                                        <td class="text-center">
+                                                            <?php 
+                                                            if(strlen($arreglo[8]) > 1) {
+                                                                echo "
+                                                                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                                target='_blank'>
+                                                                $arreglo[8]
+                                                                </a>
+                                                                ";
+                                                                } else {
+                                                                echo "";
+                                                                }
+                                                            
+                                                           // echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8]</a> "; ?>
                                                         </td>
                                                         <?php
                                                         require("../connect_db.php");
@@ -610,104 +564,109 @@ $dir = $_SESSION['user'];
                                                             $fecha_eval = $row[16];
 
                                                         ?>
-                                                            <td>EVALUADO</td>
-                                                            <td>
-                                                                <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
+                                                        <td class="text-center">EVALUADO</td>
+                                                        <td class="text-center">
+                                                            <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
                                                                 ?>
-                                                                <?php
+                                                            <?php
 
-                                                                $direccion = '"pages/act_evaluacionposter.php?"';
+                                                                echo "
+                                                                <a class='btn btn-info btn-sm' href='pages/act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                                <i class='fas fa-pencil-alt'>
+                                                                
+                                                                </i>
+                                                                </a>
+                                                                ";
+
+                                                            /*    $direccion = '"pages/act_evaluacionposter.php?"';
 
                                                                 $parametro = '"id=' . $row[0] . '&jurado=' . $dir . '&ID_tesis=' . $arreglo[0] . '"';
                                                                 //$name = '"name"';
                                                                 $img = '<img src="images/actualizar.png"  width="30"  height="30" class="img-rounded"></img>';
 
                                                                 echo "<button onclick='CenterWindow($direccion, $parametro, 600, 600);'>$img</button>";
+                                                                */
                                                                 ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo "<a href='./pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded';" ?>
-                                                            </td>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?php 
+                                                            echo "
+                                                            <a class='btn btn-danger btn-sm' target='_blank' href='../archivos/pdf/verevalposter.php?id=$arreglo[0]'>
+                                                            <i class='fas fa-file-pdf'></i>
+                                                            Ver
+                                                            </i>
+                                                            </a>
+                                                            ";
+
+                                                            if ($asd !== $ide) {
+                                                                echo "
+                                                                <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                                <i class='fas fa-spell-check'></i>
+                                                                Evaluar
+                                                                </i>
+                                                                </a>
+                                                                ";
+                                                            }
+
+                                                        //    echo "<a href='./pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded';" 
+                                                        ?>
+                                                        </td>
                                                         <?php
                                                         }
                                                         ?>
                                                         <?php
-                                                        if ($asd != $ide) {
-                                                        ?>
-                                                            <td>
-                                                                <?php //echo "<a href='evaluarposter.php?id=$arreglo[0]&jurado=$dir'><img src='images/evalua.png'  width='30'  height='30' class='img-rounded';"
-                                                                ?>
-                                                                <?php
-
-                                                                $direccion = '"pages/evaluartesis.php?"';
-
-                                                                $parametro = '"id=' . $row[0] . '&jurado=' . $dir . '&ID_tesis=' . $arreglo[0] . '"';
-                                                                //$name = '"name"';
-
-                                                                $img = '<img src="images/actualizar.png"  width="30"  height="30" class="img-rounded"></img>';
-
-                                                                echo "<button onclick='CenterWindow($direccion, $parametro, 1000, 600);'>$img</button>";
-
-                                                                ?>
-                                                            </td>
-                                                            <td>
-                                                                <img src='images/actualizar.png' width='30' height='30' class='img-rounded'>
-                                                            </td>
-                                                    <?php
-                                                        }
                                                     }
                                                     ?>
                                                     </tr>
-                                            </tbody>
-                                        </table>
-                                        <?php echo "<center><font color='red' size='3'>Total registros: $totalm</font><br></center>"; ?>
+                                                </tbody>
+                                            </table>
+                                            <?php echo "<center><font color='red' size='3'>Total registros: $totalm</font><br></center>"; ?>
+                                        </div>
+                                        <!-- /.box-body -->
                                     </div>
-                                    <!-- /.box-body -->
                                 </div>
                             </div>
+
                         </div>
-
-
-
                     </div>
                     <!--Termina pestana3-->
                     <!--Empieza pestana4-->
                     <div id="cpestana4">
 
+                        <div class="container-fluid">
+                            <div class="card card-warning">
+                                <div class="card-body">
 
-                        <div class="card card-warning">
-                            <div class="card-body">
-
-                                <?php
+                                    <?php
 
                                 $total2 = 0;
                                 //echo $total2;
                                 require("../connect_db.php");
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
-
+                               $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
+                               // prueba // $sql = ("SELECT * FROM tesis ORDER BY id_tesis DESC ");
 
                                 $query = mysqli_query($mysqli, $sql);
                                 ?>
 
-                                <div class="box">
-                                    <div class="box-body table-responsive no-padding">
-                                        <table class="table table-hover">
-                                            <thead>
+                                    <div class="box">
+                                        <div class="box-body table-responsive no-padding">
+                                            <table class="table table-striped projects">
+                                                <thead>
 
-                                                <tr>
-                                                    <th>Titulo</th>
-                                                    <th>Director</th>
-                                                    <th>Estado</th>
-                                                    <th>Fecha_Aprob</th>
-                                                    <th>Archivo</th>
-                                                    <th>Evaluar</th>
-                                                    <th>Modificar</th>
-                                                    <th>Eval</th>
-                                                </tr>
-                                            </thead>
+                                                    <tr>
+                                                        <th style="width: 40%">Titulo</th>
+                                                        <th class="text-center">Director</th>
+                                                        <th class="text-center">Estado</th>
+                                                        <th class="text-center">Fecha_Aprob</th>
+                                                        <th class="text-center">Archivo</th>
+                                                        <th class="text-center">Evaluar</th>
+                                                        <th class="text-center">Modificar</th>
+                                                        <th class="text-center">Eval</th>
+                                                    </tr>
+                                                </thead>
 
-                                            <tbody>
-                                                <?php
+                                                <tbody>
+                                                    <?php
 
                                                 while ($arreglo = mysqli_fetch_array($query)) {
 
@@ -725,11 +684,23 @@ $dir = $_SESSION['user'];
                                                 ?>
                                                     <tr>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
-                                                        <td><?php echo "$arreglo[5] "; ?></td>
-                                                        <td><?php echo "$arreglo[6] "; ?></td>
-                                                        <td><?php echo "$arreglo[10] "; ?></td>
-                                                        <td>
-                                                            <?php echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; ?>
+                                                        <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
+                                                        <td class="text-center"><?php echo "$arreglo[6] "; ?></td>
+                                                        <td class="text-center">
+                                                            <?php echo str_replace("-","/",$arreglo[10]); ?></td>
+                                                        <td class="text-center">
+                                                            <?php
+                                                       if(strlen($arreglo[8]) > 1) {
+                                                        echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        $arreglo[8]
+                                                        </a>
+                                                        ";
+                                                        } else {
+                                                        echo "";
+                                                        }
+                                                      //  echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; ?>
                                                         </td>
                                                         <?php
                                                         require("../connect_db.php");
@@ -741,26 +712,41 @@ $dir = $_SESSION['user'];
                                                             $asd = $row[1];
                                                             $jurado = utf8_decode($row[15]);
                                                             $fecha_eval = $row[16];
-
-
                                                         ?>
 
-                                                            <td>EVALUADO</td>
-                                                            <td>
-                                                                <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
+                                                        <td class="text-center">EVALUADO</td>
+                                                        <td class="text-center">
+                                                            <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
                                                                 ?>
-                                                                <?php
+                                                            <?php
 
-                                                                $direccion = '"pages/act_evaluacion.php?"';
+                                                      echo "
+                                                      <a class='btn btn-info btn-sm' href='pages/act_evaluacion.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                      <i class='fas fa-pencil-alt'></i>
+                                                      Editar
+                                                      </i>
+                                                      </a>
+                                                      ";
+
+                                                          /*      $direccion = '"pages/act_evaluacion.php?"';
                                                                 $parametro = '"id=' . $row[0] . '&jurado=' . $dir . '&ID_tesis=' . $arreglo[0] . '"';
                                                                 $img = '<img src="images/actualizar.png"  width="30"  height="30" class="img-rounded"></img>';
 
                                                                 echo "<button onclick='CenterWindow($direccion, $parametro, 1000, 600);'>$img</button>";
+                                                                */
                                                                 ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo "<a href='./pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='25'  height='35'  class='img-rounded';" ?>
-                                                            </td>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?php
+                                                        echo "
+                                                        <a class='btn btn-danger btn-sm' href='../archivos/pdf/verevalposter.php?id=$arreglo[0]'>
+                                                        <i class='fas fa-file-pdf'></i>
+                                                        
+                                                        </i>
+                                                        </a>
+                                                        ";
+                                                      //  echo "<a href='./pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='25'  height='35'  class='img-rounded';" ?>
+                                                        </td>
 
                                                         <?php
                                                         }
@@ -772,10 +758,18 @@ $dir = $_SESSION['user'];
 
                                                         if ($asd != $ide) {
                                                         ?>
-                                                            <td>
+                                                        <td class="text-center">
 
-                                                                <?php
-                                                                $direccion = '"pages/evaluartesis.php?"';
+                                                            <?php
+
+                                                              echo "
+                                                              <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$arreglo[0]&jur=$dir'>
+                                                              <i class='fas fa-spell-check'></i>
+                                                              Evaluar
+                                                              </i>
+                                                              </a>
+                                                              ";
+                                                             /*   $direccion = '"pages/evaluartesis.php?"';
                                                                 $parametro = '"id=' . $arreglo[0] . '&jur=' . $dir . '"';
                                                                 $img = '<img src="images/evalua.png"  width="30"  height="30" class="img-rounded"></img>';
 
@@ -787,28 +781,30 @@ $dir = $_SESSION['user'];
                                                                     
                                                                     <button onclick='CenterWindow($direccion, $parametro, ancho, alto);'>$img</button>
                                                                     ";
+                                                                    */
                                                                 ?>
-                                                            </td>
-                                                            <td>
-                                                                <img src='images/actualizar.png' width='30' height='30' class='img-rounded'>
-                                                            </td>
-                                                    <?php
+                                                        </td>
+                                                        <td class="text-center">N/A</td>
+                                                        <td class="text-center">N/A</td>
+                                                        <?php
 
 
                                                         }
                                                     }
                                                     ?>
                                                     </tr>
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
 
-                                        <?php
+                                            <?php
 
                                         echo "<center><font color='red' size='3'>Total registros: $total2</font><br></center>"; ?>
+                                        </div>
+                                        <!-- /.box-body -->
                                     </div>
-                                    <!-- /.box-body -->
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
@@ -816,35 +812,35 @@ $dir = $_SESSION['user'];
                     <!--Empieza pestana5-->
                     <div id="cpestana5">
 
+                        <div class="container-fluid">
+                            <div class="card card-warning">
+                                <div class="card-body">
 
-                        <div class="card card-warning">
-                            <div class="card-body">
-
-                                <?php
+                                    <?php
                                 $totalp = 0;
                                 require("../connect_db.php");
                                 $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur')  and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC");
                                 $query = mysqli_query($mysqli, $sql);
                                 ?>
-                                <div class="box">
-                                    <div class="box-body table-responsive no-padding">
-                                        <table class="table table-hover">
-                                            <thead>
+                                    <div class="box">
+                                        <div class="box-body table-responsive no-padding">
+                                            <table class="table table-striped projects">
+                                                <thead>
 
-                                                <tr>
-                                                    <th>Titulo</th>
-                                                    <th>Director</th>
-                                                    <th>Estado</th>
-                                                    <th>Fecha_Aprob</th>
-                                                    <th>Archivo</th>
-                                                    <th>Evaluar</th>
-                                                    <th>Modificar</th>
-                                                    <th>Eval</th>
-                                                </tr>
-                                            </thead>
+                                                    <tr>
+                                                        <th style="width: 40%">Titulo</th>
+                                                        <th class="text-center">Director</th>
+                                                        <th class="text-center">Estado</th>
+                                                        <th class="text-center">Fecha_Aprob</th>
+                                                        <th class="text-center">Archivo</th>
+                                                        <th class="text-center">Evaluar</th>
+                                                        <th class="text-center">Modificar</th>
+                                                        <th class="text-center">Eval</th>
+                                                    </tr>
+                                                </thead>
 
-                                            <tbody>
-                                                <?php
+                                                <tbody>
+                                                    <?php
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     if ($arreglo[6] == "Entrega Propuesta") {
                                                         $alma = "./propuestas";
@@ -861,15 +857,24 @@ $dir = $_SESSION['user'];
 
                                                     <tr>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
-                                                        <td><?php echo "$arreglo[5] "; ?></td>
-                                                        <td><?php echo "$arreglo[6] "; ?></td>
-                                                        <td><?php echo "$arreglo[10] "; ?></td>
-                                                        <td>
-                                                            <?php echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; ?>
+                                                        <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
+                                                        <td class="text-center"><?php echo "$arreglo[6] "; ?></td>
+                                                        <td class="text-center">
+                                                            <?php echo str_replace("-","/",$arreglo[10]); ?></td>
+                                                        <td class="text-center">
+                                                            <?php
+                                                            if(strlen($arreglo[8]) > 1) {
+                                                            echo "<a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; 
+                                                            } else {
+                                                                echo "";
+                                                            }
+                                                            ?>
                                                         </td>
                                                         <?php
                                                         require("../connect_db.php");
                                                         $sql = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                       //  $sql = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                         
                                                         $ressql = mysqli_query($mysqli, $sql);
                                                         while ($row = mysqli_fetch_row($ressql)) {
                                                             $asd = $row[1];
@@ -877,34 +882,61 @@ $dir = $_SESSION['user'];
                                                             $fecha_eval = $row[16];
                                                         ?>
 
-                                                            <td>EVALUADO</td>
-                                                            <td>
-                                                                <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
+                                                        <td class="text-center">EVALUADO</td>
+                                                        <td class="text-center">
+                                                            <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
                                                                 ?>
-                                                                <?php
+                                                            <?php
+                                                            echo "
+                                                            <a class='btn btn-info btn-sm' href='pages/act_evaluacionpro.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                            <i class='fas fa-pencil-alt'></i>
+                                                            Editar
+                                                            </i>
+                                                            </a>
+                                                            ";
 
+                                                            /*
                                                                 $direccion = '"pages/act_evaluacionpro.php?"';
                                                                 $parametro = '"id=' . $row[0] . '&jurado=' . $dir . '&ID_tesis=' . $arreglo[0] . '"';
                                                                 $img = '<img src="images/actualizar.png"  width="30"  height="30" class="img-rounded"></img>';
 
                                                                 echo "<button onclick='CenterWindow($direccion, $parametro, 1000, 600);'>$img</button>";
+
+                                                                */
                                                                 ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo "<a href='./pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='25'  height='35'  class='img-rounded';" ?>
-                                                            </td>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <?php 
+                                                            echo "
+                                                            <a class='btn btn-danger btn-sm' target='_blank' href='../archivos/pdf/verevalposter.php?id=$arreglo[0]'>
+                                                            <i class='fas fa-file-pdf'></i>
+                                                            
+                                                            </i>
+                                                            </a>
+                                                            ";
+                                                            
+                                                            //echo "<a href='./pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='25'  height='35'  class='img-rounded';" ?>
+                                                        </td>
                                                         <?php
                                                         }
 
                                                         ?>
 
                                                         <?php
+                                                        
                                                         if ($asd != $ide) {
-
                                                         ?>
-                                                            <td>
-                                                                <?php
-                                                                $direccion = '"pages/evaluartesispro.php?"';
+                                                        <td>
+                                                            <?php
+                                                            // 	fas fa-spell-check
+                                                            echo "
+                                                            <a class='btn btn-warning btn-sm' href='pages/evaluartesispro.php?id=$arreglo[0]&jurado=$dir'>
+                                                            <i class='fas fa-spell-check'></i>
+                                                            
+                                                            </i>
+                                                            </a>
+                                                            ";	
+                                                            /*    $direccion = '"pages/evaluartesispro.php?"';
                                                                 $parametro = '"id=' . $arreglo[0] . '&jurado=' . $dir . '"';
                                                                 $img = '<img src="images/evalua.png"  width="30"  height="30" class="img-rounded"></img>';
 
@@ -916,26 +948,35 @@ $dir = $_SESSION['user'];
                                                                     
                                                                     <button onclick='CenterWindow($direccion, $parametro, ancho, alto);'>$img</button>
                                                                     ";
+                                                                    */
                                                                 ?>
-                                                            </td>
-                                                            <td>
-                                                                <img src='images/actualizar.png' width='30' height='30' class='img-rounded'>
-                                                            </td>
-                                                    <?php
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <!-- <img src='images/actualizar.png' width='30' height='30'
+                                                                class='img-rounded'> -->
+                                                            N/A
+                                                        </td>
+                                                        <td class="text-center">
+
+                                                            N/A
+                                                        </td>
+                                                        <?php
                                                         }
                                                     }
                                                     ?>
                                                     </tr>
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
 
-                                        <?php
+                                            <?php
 
                                         echo "<center><font color='red' size='3'>Total registros: $totalp</font><br></center>"; ?>
+                                        </div>
+                                        <!-- /.box-body -->
                                     </div>
-                                    <!-- /.box-body -->
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
@@ -955,7 +996,7 @@ $dir = $_SESSION['user'];
                                 ?>
                                 <div class="box">
                                     <div class="box-body table-responsive no-padding">
-                                        <table class="table table-hover">
+                                        <table class="table table-striped projects">
                                             <thead>
 
                                                 <tr>
@@ -985,33 +1026,40 @@ $dir = $_SESSION['user'];
                                                     $total1++;
                                                 ?>
 
-                                                    <tr>
-                                                        <td><?php echo "$arreglo[3] "; ?></td>
-                                                        <?php
+                                                <tr>
+                                                    <td><?php echo "$arreglo[3] "; ?></td>
+                                                    <?php
                                                         if ($arreglo[4] != "" and $total == 0) {
                                                             ++$total;
                                                         ?>
-                                                            <td><?php echo "$arreglo[4] "; ?></td>
-                                                            <div class="alert alert-info">
-                                                                <strong>¡Atención!</strong> usted tiene
-                                                                <strong>direcciones</strong> por aprobar y
-                                                                <strong>documentos</strong> proc_open
-                                                                evaluar...
-                                                            </div>
-                                                        <?php
+                                                    <td><?php echo "$arreglo[4] "; ?></td>
+                                                    <div class="alert alert-info">
+                                                        <strong>¡Atención!</strong> usted tiene
+                                                        <strong>direcciones</strong> por aprobar y
+                                                        <strong>documentos</strong> proc_open
+                                                        evaluar...
+                                                    </div>
+                                                    <?php
                                                         } else {
                                                         ?>
-                                                            <td><?php echo "$arreglo[4]"; ?></td>
-                                                        <?php
+                                                    <td><?php echo "$arreglo[4]"; ?></td>
+                                                    <?php
                                                         }
                                                         ?>
-                                                        <td><?php echo "$arreglo[6]"; ?></td>
-                                                        <td><?php echo "$arreglo[9]"; ?></td>
-                                                        <!--<td><?php echo "$arreglo[12]"; ?></td>-->
-                                                        <td><?php echo "<a href='$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a> "; ?>
-                                                        </td>
+                                                    <td><?php echo "$arreglo[6]"; ?></td>
+                                                    <td><?php echo "$arreglo[9]"; ?></td>
+                                                    <!--<td><?php echo "$arreglo[12]"; ?></td>-->
+                                                    <td><?php 
+                                                    if(strlen($arreglo[8]) > 1) {
+                                                        echo "<a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; 
+                                                        } else {
+                                                            echo "";
+                                                        }
+                                                 //   echo "<a href='../archivos/$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a> "; 
+                                                    ?>
+                                                    </td>
 
-                                                    </tr>
+                                                </tr>
 
                                                 <?php
 
@@ -1037,51 +1085,123 @@ $dir = $_SESSION['user'];
                     <div id="cpestana7">
 
 
-                        <div class="card card-warning">
-                            <div class="card-body">
+                        <div class="container-fluid">
 
-                                <?php
-                                require("../connect_db.php");
-                                $total = 0;
-                                $sql = ("SELECT * FROM actas where programa='$programa' ORDER BY  numero DESC");
-                                $query = mysqli_query($mysqli, $sql);
-                                ?>
-                                <div class="box">
-                                    <div class="box-body table-responsive no-padding">
+                            <div class="card card-primary card-tabs">
+                                <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
+                                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                                         <?php
-                                        echo "<table class='table table-hover'>";
-                                        echo "<thead>";
+        
+        $año = date("Y");
+       // $año = gettype($año);
+        $año = (int)$año;
+        // $año1 = $año - 1;
+        // $año2 = $año1 - 1;
+        // $año3 = $año2 - 1;
+        // $año4 = $año3 - 1;
 
-                                        echo "<tr>";
-                                        echo "<th>Acta No.</th>";
-                                        echo "<th>Fecha Publicación</th>";
-                                        echo "<th>Ver Acta</th>";
-                                        echo "</tr>";
+       // $val = $cont-5;
 
-                                        echo "</thead>";
+        
+       for($cont = 0; $cont < 5; $cont++) {
 
-                                        ?>
+            
+              echo '<li class="nav-item">';
+              if($cont == 0) {
+                echo '<a class="nav-link active" id="custom-tabs-one-1-tab" data-toggle="pill"
+                href="#custom-tabs-one-1" role="tab" aria-controls="custom-tabs-one-1"
+                aria-selected="true">'. $año .'</a>'; 
+              } else if($cont == 1) {
+                echo '<a class="nav-link" id="custom-tabs-one-2-tab" data-toggle="pill"
+                href="#custom-tabs-one-2" role="tab" aria-controls="custom-tabs-one-2"
+                aria-selected="false">'. $año .'</a>';
+              }else if($cont == 2) {
+                echo '<a class="nav-link" id="custom-tabs-one-3-tab" data-toggle="pill"
+                href="#custom-tabs-one-3" role="tab" aria-controls="custom-tabs-one-3"
+                aria-selected="false">'. $año .'</a>';
+              } else if($cont == 3) {
+                echo '<a class="nav-link" id="custom-tabs-one-4-tab" data-toggle="pill"
+                href="#custom-tabs-one-4" role="tab" aria-controls="custom-tabs-one-4"
+                aria-selected="false">'. $año .'</a>';
+              } else if($cont == 4) {
+                echo '<a class="nav-link" id="custom-tabs-one-5-tab" data-toggle="pill"
+                href="#custom-tabs-one-5" role="tab" aria-controls="custom-tabs-one-5"
+                aria-selected="false">'. $año .'</a>';
+              }
+
+            $año = $año - 1;
+    }
+    ?>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-one-tabContent">
                                         <?php
-                                        while ($arreglo = mysqli_fetch_array($query)) {
+            require('../connect_db.php');
+            $año = date("Y");
+       // $año = gettype($año);
+            $año = (int)$año;
+     for($cont = 0; $cont < 5; $cont++) {
+         
+        if($cont == 0) {
+         echo '<div class="tab-pane fade active show" id="custom-tabs-one-1" role="tabpanel"
+         aria-labelledby="custom-tabs-one-1-tab">';
+        } else if($cont == 1) {
+            echo '<div class="tab-pane fade" id="custom-tabs-one-2" role="tabpanel"
+            aria-labelledby="custom-tabs-one-2-tab">';
+        } else if($cont == 2) {
+            echo '<div class="tab-pane fade" id="custom-tabs-one-3" role="tabpanel"
+            aria-labelledby="custom-tabs-one-3-tab">';
+        } else if($cont == 3) {
+            echo '<div class="tab-pane fade" id="custom-tabs-one-4" role="tabpanel"
+            aria-labelledby="custom-tabs-one-4-tab">';
+        } else {
+            echo '<div class="tab-pane fade" id="custom-tabs-one-5" role="tabpanel"
+            aria-labelledby="custom-tabs-one-5-tab">';
+        }
+        
+        $sql = ("SELECT * FROM actas where programa='$programa' AND YEAR(fecha_inicial) = $año ORDER BY numero DESC");
+        $query = mysqli_query($mysqli, $sql);
 
+        echo '<table class="table table-bordered table-striped">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>Acta No.</th>';
+        echo '<th>Fecha Publicacion</th>';
+        echo '<th>Ver Acta</th>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+                            while ($arreglo = mysqli_fetch_array($query)) {
+                                echo "<tr>";
+                                echo "<td>$arreglo[1]</td>";
+                                echo "<td>$arreglo[4]</td>";
+                                //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
+                                echo "<td><a href='../archivos/pdf/$arreglo[6]'><i class='nav-icon fas fa-download'></i></td>";
+                                //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
+                                //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 
-                                            echo "<tbody>";
-                                            echo "<tr>";
-                                            echo "<td>$arreglo[1]</td>";
-                                            echo "<td>$arreglo[4]</td>";
-                                            echo "<td><a href='pdf/$arreglo[6]'><img src='images/pdf.png' width='30'
-                                                        height='40' class='img-rounded'></td>";
-                                            echo "</tr>";
-                                            echo "</tbody>";
-                                        }
+                                //echo "</tr>";
 
-                                        echo "</table>";
-                                        ?>
-
+                                echo "</tr>";
+                            }
+                            
+        echo '</tbody>';
+        echo '</table>';
+        echo '</div>'; 
+            $año = $año - 1;
+            }
+            
+            ?>
                                     </div>
-                                    <!-- /.box-body -->
                                 </div>
                             </div>
+
+
+
+
+
+
                         </div>
 
                     </div>
@@ -1111,14 +1231,17 @@ $dir = $_SESSION['user'];
                                 }
 
                                 ?>
-                                <form id="loginForm2" action="pages/ejecu_act_datos_dir.php" method="post" enctype="multipart/form-data" role="form">
+                                <form id="loginForm2" action="pages/ejecu_act_datos_dir.php" method="post"
+                                    enctype="multipart/form-data" role="form">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <!-- text input -->
                                             <center>
                                                 <div class="form-group">
                                                     <label>Id</label>
-                                                    <input type="text" name="id" class="form-control" placeholder="id" value="<?php echo $id ?>" style="width: 50%" readonly="readonly">
+                                                    <input type="text" name="id" class="form-control" placeholder="id"
+                                                        value="<?php echo $id ?>" style="width: 50%"
+                                                        readonly="readonly">
                                                 </div>
                                             </center>
                                         </div>
@@ -1126,7 +1249,9 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Cedula</label>
-                                                    <input type="text" name="cedula" value="<?php echo $cedula ?>" class="form-control" placeholder="Id Estudiante.." readonly="readonly" style="width: 50%">
+                                                    <input type="text" name="cedula" value="<?php echo $cedula ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        readonly="readonly" style="width: 50%">
                                                 </div>
                                             </center>
                                         </div>
@@ -1134,7 +1259,9 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Nombre</label>
-                                                    <input type="text" name="user" value="<?php echo $user ?>" class="form-control" placeholder="Id Estudiante.." style="width: 50%" readonly="readonly">
+                                                    <input type="text" name="user" value="<?php echo $user ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        style="width: 50%" readonly="readonly">
                                                 </div>
                                             </center>
                                         </div>
@@ -1142,7 +1269,9 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Usuario</label>
-                                                    <input type="text" name="email" value="<?php echo $email ?>" class="form-control" placeholder="Id Estudiante.." readonly="readonly" style="width: 50%">
+                                                    <input type="text" name="email" value="<?php echo $email ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        readonly="readonly" style="width: 50%">
                                                 </div>
                                             </center>
                                         </div>
@@ -1150,7 +1279,8 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Password</label>
-                                                    <input type="text" name="pasdir" value="<?php echo $pasdir ?>" class="form-control" style="width: 50%">
+                                                    <input type="text" name="pasdir" value="<?php echo $pasdir ?>"
+                                                        class="form-control" style="width: 50%">
                                                 </div>
                                             </center>
                                         </div>
@@ -1158,7 +1288,9 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Tipo de Usuario</label>
-                                                    <input type="text" name="TipoUsuario" value="<?php echo $TipoUsuario ?>" class="form-control" readonly="readonly" style="width: 50%">
+                                                    <input type="text" name="TipoUsuario"
+                                                        value="<?php echo $TipoUsuario ?>" class="form-control"
+                                                        readonly="readonly" style="width: 50%">
                                                 </div>
                                             </center>
                                         </div>
@@ -1166,7 +1298,8 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Telefono</label>
-                                                    <input type="text" name="telefono" value="<?php echo $telefono ?>" class="form-control" style="width: 50%">
+                                                    <input type="text" name="telefono" value="<?php echo $telefono ?>"
+                                                        class="form-control" style="width: 50%">
                                                 </div>
                                             </center>
                                         </div>
@@ -1174,7 +1307,9 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Programa</label>
-                                                    <input type="text" name="programa" value="<?php echo $programa ?>" class="form-control" placeholder="Id Estudiante.." readonly="readonly" style="width: 50%">
+                                                    <input type="text" name="programa" value="<?php echo $programa ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        readonly="readonly" style="width: 50%">
                                                 </div>
                                             </center>
                                         </div>
@@ -1182,7 +1317,9 @@ $dir = $_SESSION['user'];
                                             <center>
                                                 <div class="form-group">
                                                     <label>Fecha de Nacimiento</label>
-                                                    <input type="text" name="fechadenacimiento" value="<?php echo $fechadenacimiento ?>" class="form-control" style="width: 50%">
+                                                    <input type="text" name="fechadenacimiento"
+                                                        value="<?php echo $fechadenacimiento ?>" class="form-control"
+                                                        style="width: 50%">
                                                 </div>
                                             </center>
                                         </div>
@@ -1192,7 +1329,8 @@ $dir = $_SESSION['user'];
                             <div class="card-footer">
 
 
-                                <center> <button type="submit" id="login1" class="btn btn-primary mr-2" style="background-color: green; margin-bottom: 10px ">Guardar</button>
+                                <center> <button type="submit" id="login1" class="btn btn-primary mr-2"
+                                        style="background-color: green; margin-bottom: 10px ">Guardar</button>
                                 </center>
 
 
@@ -1209,265 +1347,162 @@ $dir = $_SESSION['user'];
                     <div id="cpestana9">
 
 
-                        <div class="row">
-
-
-
-                            <div class="col-md-6">
-                                <div class="card card-warning">
-
-                                    <div class="card-header" style="background-color: #343a40; color: white">
-                                        <h5 class="card-title">Envianos un comentario</h5>
-                                    </div>
-
-                                    <div class="card-body">
-
-
-                                        <form id="loginForm1" action="enviarmsgcoor.php" method="post">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <!-- text input -->
-                                                    <?php
-                                                    $hoy = date("Y-m-d");;
-                                                    ?>
-                                                    <div class="form-group">
-                                                        <label>Fecha</label>
-                                                        <input type="text" name="fecha" class="form-control" value="<?php echo $hoy; ?>" readonly="readonly">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <!-- text input -->
-                                                    <div class="form-group">
-                                                        <label>Usuario</label>
-                                                        <input type="text" name="user" class="form-control" placeholder="Nombre Estudiante.." value="<?php echo utf8_decode($_SESSION['user']); ?>" readonly="readonly">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <!-- text input -->
-                                                    <div class="form-group">
-                                                        <label>Carrera</label>
-                                                        <input type="text" name="programa" class="form-control" placeholder="Nombre Estudiante.." value="<?php echo utf8_decode($programa); ?>" readonly="readonly">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <!-- text input -->
-                                                    <div class="form-group">
-
-                                                        <textarea class="form-control" rows="6" name="comen" cols="20" placeholder="Escriba su comentario" aria-required="true"></textarea>
-
-                                                    </div>
-                                                </div>
-
-
-
-
-
-
-                                            </div>
-
-                                            <div class="box-footer">
-
-
-                                                <center> <button type="submit" id="login2" class="btn btn-primary mr-2" style="background-color: green; margin-bottom: 10px ">Enviar</button>
-                                                </center>
-
-
-                                            </div>
-
-
-                                        </form>
-
-                                    </div>
-
-
-                                </div>
-                                <div class="card card-warning">
-
-                                    <div class="card-header" style="background-color: #343a40; color: white">
-                                        <h5 class="card-title">Documentacion</h5>
-                                    </div>
-
-                                    <div class="card-body">
-
-
-
-
-                                        <div class="col-sm-12">
-                                            <iframe src="https://docs.google.com/viewer?url=http://5.189.175.156/comite/committeees.pdf&embedded=true" width="100%" height="600" style="border: none;"></iframe>
-
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card card-warning">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Envianos un comentario</h5>
                                         </div>
 
-
-
-
-
-
-
-
-
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-
-
-                                <div class="card card-warning">
-
-                                    <div class="card-body">
-
-
-                                        <div class="box box-solid">
-
-                                            <!-- /.box-header -->
-                                            <div class="box-body">
-                                                <div class="box-group" id="accordion">
-                                                    <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                                                    <div class="panel box box-primary">
-                                                        <div class="card card-warning">
-                                                            <div class="card-header" style="background-color: #B42A2A; color: white">
-                                                                <div class="box-header with-border">
-                                                                    <h4 class="box-title">
-                                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed" style="color: white">
-                                                                            Para Recordar
-                                                                        </a>
-                                                                    </h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                        <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true" style="">
-                                                            <div class="card card-warning" style="background-color: #ffff; color: black">
-                                                                <div class="card-body">
-                                                                    <div class="box-body">
-                                                                        <b>Registrar Documentos....</b>
-                                                                        </br>
-                                                                        <li>Los archivos en formato pdf. Ej:
-                                                                            123456789.pdf, recuerde que debe estar
-                                                                            en
-                                                                            los formatos dispuesto por el comite.
-                                                                            </br>
-                                                                        <li>Para solicitudes y/o casos especiales,
-                                                                            por
-                                                                            favor enviar correo electronico al
-                                                                            comite de
-                                                                            su programa, para ayuda con el
-                                                                            SI-COMMITTEE,
-                                                                            envie un correo a
-                                                                            pabloe.carrenoh@unilibre.edu.co.
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
-                                                    <div class="panel box box-danger">
-
-                                                        <div class="card card-warning">
-                                                            <div class="card-header" style="background-color: #B42A2A; color: white">
-                                                                <div class="box-header with-border">
-                                                                    <h4 class="box-title">
-                                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" style="color: white" class="collapsed">
-                                                                            Importante
-                                                                        </a>
-                                                                    </h4>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div id="collapseTwo" class="panel-collapse collapse in" aria-expanded=" false">
-                                                            <div class="card card-warning">
-                                                                <div class="card-body">
-                                                                    <div class="box-body">
-                                                                        Este es un recurso para estar informado de
-                                                                        lo que esta sucediendo en el comite, por
-                                                                        favor solo comentarios académicos
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                        <div class="card-body">
+                                            <form id="idFormComen">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <!-- text input -->
+                                                        <?php
+                                                        $hoy = date("Y-m-d");;
+                                                        ?>
+                                                        <div class="form-group">
+                                                            <label>Fecha</label>
+                                                            <input type="text" name="fecha" class="form-control"
+                                                                value="<?php echo $hoy; ?>" readonly="readonly">
                                                         </div>
                                                     </div>
-                                                    <div class="panel box box-success">
-
-                                                        <div class="card card-warning">
-                                                            <div class="card-header" style="background-color: #B42A2A; color: white">
-
-                                                                <div class="box-header with-border">
-                                                                    <h4 class="box-title">
-                                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="true" style="color: white">
-                                                                            Documentos
-                                                                        </a>
-                                                                    </h4>
-                                                                </div>
-
-                                                            </div>
+                                                    <div class="col-sm-6">
+                                                        <!-- text input -->
+                                                        <div class="form-group">
+                                                            <label>Usuario</label>
+                                                            <input type="text" name="user" class="form-control"
+                                                                placeholder="Nombre Estudiante.."
+                                                                value="<?php echo utf8_decode($_SESSION['user']); ?>"
+                                                                readonly="readonly">
                                                         </div>
-                                                        <div id="collapseThree" class="panel-collapse collapse show" aria-expanded="false">
-                                                            <div class="card card-warning">
-                                                                <div class="card-body">
-                                                                    <div class="box-body">
-                                                                        <button type="button" class="btn btn-block" style="background: #343a40; color: white">Reglamento
-                                                                            v3.0</button>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <!-- text input -->
+                                                        <div class="form-group">
+                                                            <label>Carrera</label>
+                                                            <input type="text" name="programa" class="form-control"
+                                                                placeholder="Nombre Estudiante.."
+                                                                value="<?php echo utf8_decode($programa); ?>"
+                                                                readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <!-- text input -->
+                                                        <div class="form-group">
 
-                                                                        <button type="button" class="btn btn-block" style="background: #343a40; color: white">Reglamento
-                                                                            v4.0 2019</button>
-                                                                        <button type="button" class="btn btn-block" style="background: #343a40; color: white">Formato
-                                                                            presentacion Propuesta</button>
-                                                                        <button type="button" class="btn btn-block" style="background: #343a40; color: white">Guia
-                                                                            Elaboracion documento Final</button>
-                                                                        <button type="button" class="btn btn-block" style="background: #343a40; color: white">Rubrica
-                                                                            - Presentación de Póster</button>
-                                                                    </div>
+                                                            <textarea id="idTextAreaComen" class="form-control" rows="6"
+                                                                name="comen" cols="29"
+                                                                placeholder="Escriba su comentario"
+                                                                aria-required="true"></textarea>
 
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- /.box-body -->
+                                                <div class="box-footer">
+                                                    <!--  <button type="submit" class="btn btn-default"
+                                                    name="enviar">Enviar</button>
+                                                    -->
+                                                    <div id="idBoxComen"
+                                                        class="alert alert-danger alert-dismissible mt-6"
+                                                        style="Display: None;">
+                                                        <h5>
+                                                            <i id="idIConBoxComen" class="icon fas fa-ban"></i>
+                                                            Alerta
+                                                        </h5>
+                                                        <p id="idMessageComen"></p>
+
+                                                    </div>
+                                                    <button id="idButtonEnviarComen" type="button"
+                                                        class="btn btn-primary float-right">Enviar</button>
+                                                </div>
+
+
+                                                <script>
+
+                                                </script>
+
+                                            </form>
+
+
                                         </div>
-                                        <!-- /.box -->
-
-
-
-
-
                                     </div>
 
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-warning">
+                                        <div class="card-body">
+                                            <div class="callout callout-info">
 
+                                                Para solicitudes y/o casos especiales, por favor enviar correo
+                                                electronico
+                                                al comite de su programa, para ayuda con el SI-COMMITTEE, envie un
+                                                correo a
+                                                pabloe.carrenoh@unilibre.edu.co.
+
+                                            </div>
+                                            <div class="callout callout-info">
+
+                                                Este es un recurso para estar informado de lo que esta sucediendo en el
+                                                comite, por favor solo comentarios académicos
+
+                                            </div>
+                                            <div class="callout callout-info">
+
+                                                Documentos: <br><br>
+                                                <li>
+                                                    <a style="color: blue;">Reglamento v3.0</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Reglamento
+                                                        v4.0 2019</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Formato
+                                                        presentacion Propuesta</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Guia
+                                                        Elaboracion documento Final</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Rubrica
+                                                        - Presentación de Póster</a>
+                                                </li>
+
+
+                                            </div>
+
+                                            <!-- /.box -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card card-warning">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Documentacion</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col-sm-12">
+                                                <iframe
+                                                    src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
+                                                    width="100%" height="600" style="border: none;"></iframe>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
 
                     </div>
                     <!--Termina pestana9-->
-
-
                 </div>
-
-
-
-                <!--    </div>
-
-    </div> -->
-
-
             </section>
-
-
-            <!-- /.content -->
         </div>
-
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
@@ -1478,38 +1513,19 @@ $dir = $_SESSION['user'];
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
+
         </aside>
         <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
-
-
-
-
 
     <script>
-        var modal = document.getElementById('id01');
-
-        // When the user clicks anywhere outside of the modal, close it
-        //window.onclick = function(event) {
-        //    // if (event.target == modal) {
-        //    //     modal.style.display = "none";
-        //    // }
-        //    CenterWindow(1000, 600, 50, 'actualizartesisdir.php', 'demo_win');
-        //}
-    </script>
-
-
-
-    <script>
-        $("#aclick").on('click', function() {
-            alert("123");
-            CenterWindow(1000, 600, 50,
-                'actualizartesisdir.php', 'demo_win');
-            var a = document.getElementById('aclick');
-            // console.log(a);
-        });
+    $("#aclick").on('click', function() {
+        alert("123");
+        CenterWindow(1000, 600, 50,
+            'actualizartesisdir.php', 'demo_win');
+        var a = document.getElementById('aclick');
+        // console.log(a);
+    });
     </script>
 
 

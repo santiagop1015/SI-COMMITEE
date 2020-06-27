@@ -18,13 +18,15 @@ if($aprob_dir=='NO'){
 
 
 	if ($resent==null) {
-		echo "Error de procesamiento no se han actualizado los datos";
-		echo '<script>alert("ERROR EN PROCESAMIENTO NO SE ACTUALIZARON LOS DATOS")</script> ';
-		header("location: ../director.php");
+		echo 0;
+		//echo "Error de procesamiento no se han actualizado los datos";
+		//echo '<script>alert("ERROR EN PROCESAMIENTO NO SE ACTUALIZARON LOS DATOS")</script> ';
+		//header("location: ../director.php");
 		
-		echo "<script>location.href='../director.php'</script>";
+		//echo "<script>location.href='../director.php'</script>";
 	}else {
-		echo '<script>alert("EDICION TERMINADA")</script> ';
+		echo 1;
+	/*	echo '<script>alert("EDICION TERMINADA")</script> ';
 		
 		echo "<script>
 		
@@ -34,6 +36,7 @@ if($aprob_dir=='NO'){
 opener.location.reload();
 		window.close();
 		</script>";
+		*/
 
 		
 	}

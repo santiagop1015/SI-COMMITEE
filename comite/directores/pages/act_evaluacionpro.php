@@ -3,7 +3,7 @@
 session_start();
 extract($_GET);
 if (@!$_SESSION['user']) {
-	header("Location:../Login/index.html");
+	header("Location:../../Login/index.html");
 }
 /*elseif ($_SESSION['rol']==2) {
 	header("Location:index2.php");
@@ -16,7 +16,7 @@ date_default_timezone_set ('America/Bogota');
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Director</title>
+    <title>SI-COMMITEE || Actualizar Evaluación Proyecto</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -101,31 +101,29 @@ date_default_timezone_set ('America/Bogota');
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars white"></i></a>
                 </li>
-                <!-- <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link" style="color: white">Home</a>
-                </li> -->
-
             </ul>
-
-
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
-
                 <li class="nav-item">
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="../desconectar.php" class="nav-link" style="color: white">Cerrar Sesión</a>
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="far fa-comments white"></i>
+                    </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="../../desconectar.php">
+                        <i class="fas fa-door-open white"></i>
+                    </a>
+
                 </li>
             </ul>
         </nav>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #B42A2A; color: white">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
             <!-- Brand Logo -->
             <a href="home.html" class="brand-link" style="background-color: #343a40; color: white">
                 <img src="../dist/img/unilibre-logo.png" alt="Unilibre Logo" class="brand-image img-circle elevation-3"
@@ -134,16 +132,22 @@ date_default_timezone_set ('America/Bogota');
             </a>
 
             <!-- Sidebar -->
-            <div class="sidebar" style="background-color: #B42A2A; color: white">
+            <div class="sidebar" style="background-color: #343a40; color: white">
                 <!-- Sidebar user (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="../dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                <a href="../profile.php" class="d-block" style="color: white;">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="../dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                        </div>
+                        <div class="info">
+                            <?php 
+                        $usuario = $_SESSION['user'];
+                        $posicion_espacio = strpos($usuario, " ");
+                        $usuario=substr($usuario,0,$posicion_espacio);
+                        echo $usuario;?>
+                        </div>
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block" style="color: white;"><?php echo $_SESSION['user']  ?></a>
-                    </div>
-                </div>
+                </a>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -153,11 +157,11 @@ date_default_timezone_set ('America/Bogota');
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                            <li id="pestana1" class="nav-item" style="background: #343a40">
+                            <li id="pestana1" class="nav-item" style="background: #B42A2A">
                                 <a class="nav-link">
                                     <i class="nav-icon fa fa-user-md white"></i>
                                     <p class="white">
-                                        Actualizar Evaluacion
+                                        Actualizar Evaluación
                                     </p>
                                 </a>
                             </li>
@@ -174,13 +178,20 @@ date_default_timezone_set ('America/Bogota');
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper pb-2">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 id="Text">Actualizar Evaluación...</h1>
+                            <h1 id="Text">Actualizar Evaluación Proyecto</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="../director.php">Proyectos para Evaluar</a>
+                                </li>
+                                <li class="breadcrumb-item active">Actualizar Evaluación Proyecto</li>
+                            </ol>
                         </div>
 
                     </div>
@@ -189,17 +200,8 @@ date_default_timezone_set ('America/Bogota');
             </section>
 
             <body>
-
                 <section class="content">
-
-                    <!--  <div class="row">
-                        <div class="col-12"> -->
-                    <div id="contenidopestanas">
-                        <div id="cpestana1">
-
-
-                            <!--Start-->
-                            <?php
+                    <?php
                             require("../../connect_db.php");
 
                             $sql="SELECT * FROM tesis WHERE ID_tesis=$ID_tesis";
@@ -220,16 +222,15 @@ date_default_timezone_set ('America/Bogota');
                                             $programa=$row[12];*/
                                 }
                             ?>
+                    <div class="container-fluid">
+                        <form id="idFormActualEvalProyect">
                             <div class="card card-warning">
-
-
-
                                 <div class="card-body">
-
                                     <?php
                                 require("../../connect_db.php");
 
                                 $sql="SELECT * FROM evaluacion WHERE id=$id";
+                                
                             //la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
                                 $ressql12=mysqli_query($mysqli,$sql);
                                 while ($row=mysqli_fetch_row ($ressql12)){
@@ -252,288 +253,574 @@ date_default_timezone_set ('America/Bogota');
                                     $fecha_eval=$row[16];
                                   }
 
+                                  /* id="loginForm" action="ejecu_act_eval.php" method="post" enctype="multipart/form-data"
+                                role="form"
+                                */
                                 ?>
 
-                                    <form id="loginForm" action="ejecu_act_eval.php" method="post"
-                                        enctype="multipart/form-data" role="form">
-                                        <div class="row">
-                                            <div class="col-sm-4">
+                                    <div class="row">
+                                        <div class="col-sm-4">
 
-                                                <div class="form-group">
-                                                    <label>Id_eval</label>
-                                                    <input type="text" name="id" value="<?php echo $id ?>"
-                                                        class="form-control" placeholder="Id_eval" readonly="readonly">
-                                                </div>
+                                            <div class="form-group">
+                                                <label>Id_eval</label>
+                                                <input type="text" name="id" value="<?php echo $id ?>"
+                                                    class="form-control" placeholder="Id_eval" readonly="readonly">
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div class="form-group">
-                                                    <label>Id Tesis</label>
-                                                    <input type="text" name="ID_tesis" value="<?php echo $ID_tesis ?>"
-                                                        class="form-control" placeholder="Id Tesis" readonly="readonly">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <!-- text input -->
-                                                <div class="form-group">
-                                                    <label>Jurado:</label>
-                                                    <input type="text" name="user" class="form-control"
-                                                        placeholder="Usuario" value="<?php echo $jurado; ?>"
-                                                        readonly="readonly">
-                                                </div>
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Id Tesis</label>
+                                                <input type="text" name="ID_tesis" value="<?php echo $ID_tesis ?>"
+                                                    class="form-control" placeholder="Id Tesis" readonly="readonly">
                                             </div>
                                         </div>
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label>Título:</label>
-                                                    <input type="text" name="titulo"
-                                                        value="<?php echo $titulo_tesis; ?>" class="form-control"
-                                                        placeholder="Titulo.." readonly="readonly">
-                                                </div>
+                                        <div class="col-sm-4">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Jurado:</label>
+                                                <input type="text" name="user" class="form-control"
+                                                    placeholder="Usuario" value="<?php echo $jurado; ?>"
+                                                    readonly="readonly">
                                             </div>
                                         </div>
-                                        </br>
-                                        <?php
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Título:</label>
+                                                <input type="text" name="titulo" value="<?php echo $titulo_tesis; ?>"
+                                                    class="form-control" placeholder="Titulo.." readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
                                           if($id==$ID_tesis or $id==0){
                                         ?>
-                                        <div class="alert alert-info"><strong>¡Nota!</strong> NO SE HA REALIZADO LA
-                                            EVALUACION...
-                                        </div>
-                                        <?php
+                            <div class="alert alert-info"><strong>¡Nota!</strong> NO SE HA REALIZADO LA
+                                EVALUACION...
+                            </div>
+                            <?php
                             } else {
                             ?>
-                                        <div class="box">
+                            <div class="card card-warning">
+                                <div class="card-body">
+                                    <div class="box">
+                                        <div class="box-body table-responsive no-padding">
+                                            <table class="table">
+                                                <thead>
 
-                                            <div class="box-body table-responsive no-padding">
-                                                <table class="table">
-                                                    <thead>
+                                                    <tr>
+                                                        <th>Calificacion del Documento Final</th>
+                                                        <th>Valor Maximo</th>
+                                                        <th>Su Evaluacion</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Edición del documento final</td>
+                                                        <td>2.4</td>
+                                                        <td><input type="number" name="forprob"
+                                                                onchange="onChange(this)"
+                                                                value="<?php echo $forprob; ?>" class="form-control">
+                                                        </td>
+                                                        <script>
+                                                        function onChange(changeVal) {
+                                                            var Subtotal_1 = 0;
+                                                            Subtotal_1 = parseFloat(Subtotal_1);
 
-                                                        <tr>
-                                                            <th>Calificacion del Documento Final</th>
-                                                            <th>Valor Maximo</th>
-                                                            <th>Su Evaluacion</th>
-                                                        </tr>
-                                                    </thead>
+                                                            //console.log(Subtotal_1);
+                                                            // alert("Value is " + changeVal.value);
+                                                            var value = parseFloat(changeVal.value).toFixed(1);
+                                                            //    console.log(Number(Subtotal_1) + Number(value));
 
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Edición del documento final</td>
-                                                            <td>2.4</td>
-                                                            <td><input type="text" name="forprob"
-                                                                    value="<?php echo $forprob; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cumplimiento de objetivos general y específico</td>
-                                                            <td>8.0</td>
-                                                            <td><input type="text" name="justificacion"
-                                                                    value="<?php echo $justificacion; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Profundidad del tema</td>
-                                                            <td>4.0</td>
-                                                            <td><input type="text" name="objetivos"
-                                                                    value="<?php echo $objetivos; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Desarrollo del tema</td>
-                                                            <td>4.0</td>
-                                                            <td><input type="text" name="marcoref"
-                                                                    value="<?php echo $marcoref; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Tecnicas de Cálculo Aplicadas</td>
-                                                            <td>4.8</td>
-                                                            <td><input type="text" name="metodologia"
-                                                                    value="<?php echo $metodologia; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Calidad y manejo de la información</td>
-                                                            <td>3.2</td>
-                                                            <td><input type="text" name="crono"
-                                                                    value="<?php echo $crono; ?>" class="form-control">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Impacto de los resultados</td>
-                                                            <td>6.4</td>
-                                                            <td><input type="text" name="presupuesto"
-                                                                    value="<?php echo $presupuesto; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Conclusiones y recomendaciones del proyecto</td>
-                                                            <td>7.2</td>
-                                                            <td><input type="text" name="biblio"
-                                                                    value="<?php echo $biblio; ?>" class="form-control">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>SubTotal</td>
-                                                            <td>40</td>
-                                                            <td><input type="text" name="biblio"
-                                                                    value="<?php echo $biblio + $presupuesto+$crono+$metodologia+$marcoref+$objetivos+$justificacion+$forprob?>"
-                                                                    class="form-control" readonly="readonly"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                            var data = $("#idFormActualEvalProyect")
+                                                                .serializeArray();
+
+                                                            // 4 - 11
+
+                                                            var sumatoria = 0;
+
+                                                            var uno = parseFloat(data[4].value).toFixed(1),
+                                                                dos = parseFloat(data[5].value).toFixed(1),
+                                                                tres = parseFloat(data[6].value).toFixed(1),
+                                                                cuatro = parseFloat(data[7].value).toFixed(1),
+                                                                cinco = parseFloat(data[8].value).toFixed(1),
+                                                                seis = parseFloat(data[9].value).toFixed(1),
+                                                                siete = parseFloat(data[10].value).toFixed(1),
+                                                                ocho = parseFloat(data[11].value).toFixed(1);
+
+                                                            // document.getElementsByName("acc")[0].value
+
+                                                            var forprob = document.getElementsByName("forprob")[
+                                                                    0],
+                                                                justificacion = document.getElementsByName(
+                                                                    "justificacion")[
+                                                                    0],
+                                                                objetivos = document.getElementsByName(
+                                                                    "objetivos")[
+                                                                    0],
+                                                                marcoref = document.getElementsByName(
+                                                                    "marcoref")[
+                                                                    0],
+                                                                metodologia = document.getElementsByName(
+                                                                    "metodologia")[
+                                                                    0],
+                                                                crono = document.getElementsByName(
+                                                                    "crono")[
+                                                                    0],
+                                                                presupuesto = document.getElementsByName(
+                                                                    "presupuesto")[
+                                                                    0],
+                                                                biblio = document.getElementsByName(
+                                                                    "biblio")[
+                                                                    0];
+
+                                                            //  debugger;
+                                                            var sumatoria = 0;
+                                                            if (uno > 0) {
+                                                                if (uno <= 2.4) {
+                                                                    forprob.value = uno;
+                                                                    sumatoria = sumatoria + Number(uno);
+                                                                } else {
+                                                                    forprob.value = 0;
+                                                                }
+                                                            } else {
+                                                                forprob.value = 0;
+                                                            }
+
+                                                            if (dos > 0) {
+                                                                if (dos <= 8.0) {
+                                                                    justificacion.value = dos;
+                                                                    sumatoria = sumatoria + Number(dos);
+                                                                } else {
+                                                                    justificacion.value = 0;
+                                                                }
+                                                            } else {
+                                                                justificacion.value = 0;
+                                                            }
+
+                                                            if (tres > 0) {
+                                                                if (tres <= 4.0) {
+                                                                    objetivos.value = tres;
+                                                                    sumatoria = sumatoria + Number(tres);
+                                                                } else {
+                                                                    objetivos.value = 0;
+                                                                }
+                                                            } else {
+                                                                objetivos.value = 0;
+                                                            }
+
+                                                            if (cuatro > 0) {
+                                                                if (cuatro <= 4.0) {
+                                                                    marcoref.value = cuatro;
+                                                                    sumatoria = sumatoria + Number(cuatro);
+                                                                } else {
+                                                                    marcoref.value = 0;
+                                                                }
+                                                            } else {
+                                                                marcoref.value = 0;
+                                                            }
+
+                                                            if (cinco > 0) {
+                                                                if (cinco <= 4.8) {
+                                                                    metodologia.value = cinco;
+                                                                    sumatoria = sumatoria + Number(cinco);
+                                                                } else {
+                                                                    metodologia.value = 0;
+                                                                }
+                                                            } else {
+                                                                metodologia.value = 0;
+                                                            }
+
+                                                            if (seis > 0) {
+                                                                if (seis <= 3.2) {
+                                                                    crono.value = seis;
+                                                                    sumatoria = sumatoria + Number(seis);
+                                                                } else {
+                                                                    crono.value = 0;
+                                                                }
+                                                            } else {
+                                                                crono.value = 0;
+                                                            }
+
+                                                            if (siete > 0) {
+                                                                if (siete <= 6.4) {
+                                                                    presupuesto.value = siete;
+                                                                    sumatoria = sumatoria + Number(siete);
+                                                                } else {
+                                                                    presupuesto.value = 0;
+                                                                }
+                                                            } else {
+                                                                presupuesto.value = 0;
+                                                            }
+
+                                                            if (ocho > 0) {
+                                                                if (ocho <= 7.2) {
+                                                                    biblio.value = ocho;
+                                                                    sumatoria = sumatoria + Number(ocho);
+                                                                } else {
+                                                                    biblio.value = 0;
+                                                                }
+                                                            } else {
+                                                                biblio.value = 0;
+                                                            }
+
+                                                            $("#idSubtotal_1").val(sumatoria);
+
+                                                            var SumatoriaTotal = 0;
+                                                            var Subtotal_2 = parseFloat($("#idSubtotal_2").val());
+
+                                                            //  console.log($("#idSubtotal_2").val());
+                                                            SumatoriaTotal = Subtotal_2 + sumatoria;
+
+                                                            $("#idTotal").val(SumatoriaTotal);
+
+
+
+                                                            // console.log(data);
+
+                                                            // var sumatoria = Number(Subtotal_1) + Number(value);
+
+                                                            //  $("#idSubtotal_1").val(sumatoria);
+
+                                                            //Subtotal_1 = Subtotal_1 + value;
+                                                            //alert(Subtotal_1);
+                                                            // idSubtotal_1
+                                                            //     console.log($("#idSubtotal_1").val());
+                                                            //   var subtotal_old = parseFloat($("#idSubtotal_1").val());
+                                                            // console.log(subtotal_old);
+
+                                                            // $("#idSubtotal_1").val("");
+                                                        }
+                                                        </script>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Cumplimiento de objetivos general y específico</td>
+                                                        <td>8.0</td>
+                                                        <td><input type="number" name="justificacion"
+                                                                value="<?php echo $justificacion; ?>"
+                                                                onchange="onChange(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Profundidad del tema</td>
+                                                        <td>4.0</td>
+                                                        <td><input type="number" name="objetivos"
+                                                                value="<?php echo $objetivos; ?>"
+                                                                onchange="onChange(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Desarrollo del tema</td>
+                                                        <td>4.0</td>
+                                                        <td><input type="number" name="marcoref"
+                                                                value="<?php echo $marcoref; ?>"
+                                                                onchange="onChange(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tecnicas de Cálculo Aplicadas</td>
+                                                        <td>4.8</td>
+                                                        <td><input type="number" name="metodologia"
+                                                                value="<?php echo $metodologia; ?>"
+                                                                onchange="onChange(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Calidad y manejo de la información</td>
+                                                        <td>3.2</td>
+                                                        <td><input type="number" name="crono"
+                                                                value="<?php echo $crono; ?>" onchange="onChange(this)"
+                                                                class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Impacto de los resultados</td>
+                                                        <td>6.4</td>
+                                                        <td><input type="number" name="presupuesto"
+                                                                value="<?php echo $presupuesto; ?>"
+                                                                onchange="onChange(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Conclusiones y recomendaciones del proyecto</td>
+                                                        <td>7.2</td>
+                                                        <td><input type="number" name="biblio"
+                                                                value="<?php echo $biblio; ?>" onchange="onChange(this)"
+                                                                class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SubTotal</td>
+                                                        <td>40</td>
+                                                        <td><input id="idSubtotal_1" type="number" class="form-control"
+                                                                value="<?php echo $biblio + $presupuesto+$crono+$metodologia+$marcoref+$objetivos+$justificacion+$forprob?>"
+                                                                readonly="readonly"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
+                                    </div>
+                                    <div class="box">
 
-                                        </br>
-                                        </br>
+                                        <div class="box-body table-responsive no-padding">
+                                            <table class="table">
+                                                <thead>
 
-                                        <div class="box">
+                                                    <tr>
+                                                        <th>Calificacion de la Sustentación</th>
+                                                        <th>Valor Maximo</th>
+                                                        <th>Su Evaluacion</th>
+                                                    </tr>
+                                                </thead>
 
-                                            <div class="box-body table-responsive no-padding">
-                                                <table class="table">
-                                                    <thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Calidad de la sustentación</td>
+                                                        <td>2.0</td>
+                                                        <td><input type="text" name="ciber"
+                                                                value="<?php echo $ciber; ?>" onchange="onChange2(this)"
+                                                                class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Correlación de la sustentación con el documento</td>
+                                                        <td>2.5</td>
+                                                        <td><input type="text" name="claridad"
+                                                                value="<?php echo $claridad; ?>"
+                                                                onchange="onChange2(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Respuestas y aclaración de dudas</td>
+                                                        <td>3.0</td>
+                                                        <td><input type="text" name="evidencia"
+                                                                value="<?php echo $evidencia; ?>"
+                                                                onchange="onChange2(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dominio del tema</td>
+                                                        <td>2.5</td>
+                                                        <td><input type="text" name="concepto"
+                                                                value="<?php echo $concepto; ?>"
+                                                                onchange="onChange2(this)" class="form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <script>
+                                                    function onChange2(changeVal) {
+                                                        var Subtotal_1 = 0;
+                                                        Subtotal_1 = parseFloat(Subtotal_1);
 
-                                                        <tr>
-                                                            <th>Calificacion de la Sustentación</th>
-                                                            <th>Valor Maximo</th>
-                                                            <th>Su Evaluacion</th>
-                                                        </tr>
-                                                    </thead>
+                                                        //console.log(Subtotal_1);
+                                                        // alert("Value is " + changeVal.value);
+                                                        var value = parseFloat(changeVal.value).toFixed(1);
+                                                        //    console.log(Number(Subtotal_1) + Number(value));
 
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Calidad de la sustentación</td>
-                                                            <td>2.0</td>
-                                                            <td><input type="text" name="ciber"
-                                                                    value="<?php echo $ciber; ?>" class="form-control">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Correlación de la sustentación con el documento</td>
-                                                            <td>2.5</td>
-                                                            <td><input type="text" name="claridad"
-                                                                    value="<?php echo $claridad; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Respuestas y aclaración de dudas</td>
-                                                            <td>3.0</td>
-                                                            <td><input type="text" name="evidencia"
-                                                                    value="<?php echo $evidencia; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Dominio del tema</td>
-                                                            <td>2.5</td>
-                                                            <td><input type="text" name="concepto"
-                                                                    value="<?php echo $concepto; ?>"
-                                                                    class="form-control"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>SubTotal</td>
-                                                            <td>10</td>
-                                                            <td><input type="text"
-                                                                    value="<?php echo $ciber + $claridad+$evidencia+$concepto?>"
-                                                                    class="form-control" readonly="readonly"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>TOTAL</td>
-                                                            <td>50</td>
-                                                            <td><input type="text"
-                                                                    value="<?php echo $ciber + $claridad+$evidencia+$concepto+$biblio + $presupuesto+$crono+$metodologia+$marcoref+$objetivos+$justificacion+$forprob?>"
-                                                                    class="form-control" readonly="readonly"></td>
-                                                        </tr>
+                                                        var data = $("#idFormActualEvalProyect")
+                                                            .serializeArray();
 
-                                                    </tbody>
-                                                </table>
+                                                        // 4 - 11
 
-                                                <div class="col-sm-6">
-                                                    <!-- text input -->
-                                                    <div class="form-group">
-                                                        <label>Observaciones:</label>
-                                                        <textarea name="observaciones" class="form-control" rows="auto"
-                                                            placeholder="Enter ..."><?php echo $observaciones?></textarea>
-                                                    </div>
+                                                        var sumatoria = 0;
+
+                                                        var uno = parseFloat(data[12].value).toFixed(1),
+                                                            dos = parseFloat(data[13].value).toFixed(1),
+                                                            tres = parseFloat(data[14].value).toFixed(1),
+                                                            cuatro = parseFloat(data[15].value).toFixed(1);
+
+                                                        // document.getElementsByName("acc")[0].value
+
+                                                        var ciber = document.getElementsByName("ciber")[
+                                                                0],
+                                                            claridad = document.getElementsByName(
+                                                                "claridad")[
+                                                                0],
+                                                            evidencia = document.getElementsByName(
+                                                                "evidencia")[
+                                                                0],
+                                                            concepto = document.getElementsByName(
+                                                                "concepto")[
+                                                                0];
+
+
+                                                        //  debugger;
+                                                        var sumatoria = 0;
+                                                        if (uno > 0) {
+                                                            if (uno <= 2.0) {
+                                                                ciber.value = uno;
+                                                                sumatoria = sumatoria + Number(uno);
+                                                            } else {
+                                                                ciber.value = 0;
+                                                            }
+                                                        } else {
+                                                            ciber.value = 0;
+                                                        }
+
+                                                        if (dos > 0) {
+                                                            if (dos <= 2.5) {
+                                                                claridad.value = dos;
+                                                                sumatoria = sumatoria + Number(dos);
+                                                            } else {
+                                                                claridad.value = 0;
+                                                            }
+                                                        } else {
+                                                            claridad.value = 0;
+                                                        }
+
+                                                        if (tres > 0) {
+                                                            if (tres <= 3.0) {
+                                                                evidencia.value = tres;
+                                                                sumatoria = sumatoria + Number(tres);
+                                                            } else {
+                                                                evidencia.value = 0;
+                                                            }
+                                                        } else {
+                                                            evidencia.value = 0;
+                                                        }
+
+                                                        if (cuatro > 0) {
+                                                            if (cuatro <= 2.5) {
+                                                                concepto.value = cuatro;
+                                                                sumatoria = sumatoria + Number(cuatro);
+                                                            } else {
+                                                                concepto.value = 0;
+                                                            }
+                                                        } else {
+                                                            concepto.value = 0;
+                                                        }
+
+                                                        $("#idSubtotal_2").val(sumatoria);
+
+                                                        // idTotal
+
+                                                        var SumatoriaTotal = 0;
+                                                        var Subtotal_1 = parseFloat($("#idSubtotal_1").val());
+
+                                                        //  console.log($("#idSubtotal_2").val());
+                                                        SumatoriaTotal = Subtotal_1 + sumatoria;
+
+                                                        $("#idTotal").val(SumatoriaTotal);
+
+
+
+
+                                                    }
+                                                    </script>
+                                                    <tr>
+                                                        <td>SubTotal</td>
+                                                        <td>10</td>
+                                                        <td><input id="idSubtotal_2" type="text"
+                                                                value="<?php echo $ciber+$claridad+$evidencia+$concepto?>"
+                                                                class="form-control" readonly="readonly"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>TOTAL</td>
+                                                        <td>50</td>
+                                                        <td><input id="idTotal" type="text"
+                                                                value="<?php echo $ciber+$claridad+$evidencia+$concepto+$biblio + $presupuesto+$crono+$metodologia+$marcoref+$objetivos+$justificacion+$forprob?>"
+                                                                class="form-control" readonly="readonly"></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                            <div class="col-sm-12">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    <label>Observaciones:</label>
+                                                    <textarea name="observaciones" class="form-control" rows="auto"
+                                                        placeholder="Enter ..."><?php echo $observaciones?></textarea>
                                                 </div>
-
                                             </div>
-                                        </div>
-
-
-
-                                        <div class="card-footer">
-                                            <button class="btn btn-default float-right" style="margin-bottom: 10px "
-                                                onclick="window.close();">Volver</button>
-
-                                            <button type="submit" id="login" value=""
-                                                class="btn btn-primary float-right mr-2"
-                                                style="background-color: green; margin-bottom: 10px ">Guardar</button>
 
                                         </div>
-                                    </form>
+                                    </div>
 
-                                    <?php
-                            }
-                            ?>
+                                    <div id="idBox" class="alert alert-danger alert-dismissible mt-6"
+                                        style="Display: None;">
+                                        <h5>
+                                            <i id="idIConBox" class="icon fas fa-ban"></i>
 
+                                        </h5>
+                                        <p id="idMessageComen"></p>
 
+                                    </div>
 
-                                    </form>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-default float-right"
+                                            style="margin-bottom: 10px "
+                                            onclick="location.replace('../director.php')">Volver</button>
 
+                                        <button id="idButtonGuardar" type="button" value=""
+                                            class="btn btn-primary float-right mr-2"
+                                            style="background-color: green; margin-bottom: 10px ">Guardar</button>
 
+                                    </div>
 
+                                    <script>
+                                    $(document).ready(function() {
+                                        Actualizar_Eval();
+                                    });
 
+                                    var Actualizar_Eval = function() {
+                                        $('#idButtonGuardar').on("click", function(e) {
+                                            e.preventDefault();
+                                            // alert("123");
 
+                                            var other_data = $("#idFormActualEvalProyect")
+                                                .serializeArray();
+                                            var paqueteDeDatos = new FormData();
 
+                                            $.each(other_data, function(key, input) {
+                                                paqueteDeDatos.append(input.name, input
+                                                    .value);
+                                            });
 
+                                            var Box = document.getElementById("idBox");
+                                            Box.style.display = 'None';
+                                            var iconBox = document.getElementById(
+                                                "idIConBox");
+                                            var Mensaje = document.getElementById(
+                                                "idMessageComen");
+
+                                            $.ajax({
+                                                type: "POST",
+                                                contentType: false,
+                                                processData: false,
+                                                cache: false,
+                                                url: "ejecu_act_eval.php",
+                                                data: paqueteDeDatos,
+                                            }).done(function(info) {
+                                                //console.log(info);
+                                                if (info === "1") {
+                                                    Box.style.display = 'Block';
+                                                    Box.className =
+                                                        "alert alert-success alert-dismissible";
+                                                    iconBox.className =
+                                                        "icon fas fa-check";
+                                                    iconBox.innerHTML = "   Exito";
+                                                    Mensaje.innerHTML =
+                                                        "Evaluación actualizada con éxito";
+                                                }
+                                            });
+                                        })
+                                    }
+                                    </script>
                                 </div>
-
-
                             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <!--End-->
-
-
-
-
-                        </div>
-                        <!--termina pestana1-->
-
-
-
-
-
+                            <?php
+                            }
+                            ?>
+                        </form>
                     </div>
-
-
-
-                    <!--    </div>
-
-    </div> -->
-
-
                 </section>
-
-
                 <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
