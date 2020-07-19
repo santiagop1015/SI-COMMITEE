@@ -104,7 +104,8 @@ function myfunction() {
         cambiarPestanna(pestanas, pestana4);
         break;
 
-      default:
+      default: 2
+        cambiarPestanna(pestanas, pestana2);
         break;
     }
     // console.log(Local);

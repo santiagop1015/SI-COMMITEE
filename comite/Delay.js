@@ -54,7 +54,7 @@ function onRedirect() {
             break;
         case "coordinador":
             console.log("Coordinador");
-            location.href = 'coordinadores/Coordinador.php';
+            location.href = 'coordinadores/coordinador.php';
             break;
         case "estudiante":
             console.log("Estudiante");

@@ -1,9 +1,0 @@
-Se realizaron las correccionesa los usuarios:
-- Estudiante
-- Director
-
-Mejoras:
-- Diseño (Estudiante. Director)
-- Diseño Chat ( Estudiante)
-- Operaciones asincronas ajax (Estudiante, Directorio) (global, todos los formularios)
-- Cambios de Iconos (modifcar, visualizar y Evaluar) (Estudiante, Director)

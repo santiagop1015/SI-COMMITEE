@@ -539,7 +539,9 @@ $dir = $_SESSION['user'];
                                                         <td class="text-center">
                                                             <?php echo str_replace("-","/",$arreglo[10]); ?></td>
                                                         <td class="text-center">
+
                                                             <?php 
+                                                            
                                                             if(strlen($arreglo[8]) > 1) {
                                                                 echo "
                                                                 <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
@@ -909,7 +911,7 @@ $dir = $_SESSION['user'];
                                                             <?php 
                                                             echo "
                                                             <a class='btn btn-danger btn-sm' target='_blank' href='../archivos/pdf/verevalposter.php?id=$arreglo[0]'>
-                                                            <i class='fas fa-file-pdf'></i>
+                                                            <i class='fas fa-file-pdf'>
                                                             
                                                             </i>
                                                             </a>

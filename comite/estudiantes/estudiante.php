@@ -76,7 +76,7 @@ $raiz = "../archivos";
 
     <!---->
 
-    <link rel="stylesheet" href="css/frag.css">
+    <!--<link rel="stylesheet" href="css/frag.css">  -->
 
     <!-- <script type="text/javascript" src="js/cambiarPestanna.js"></script> -->
 
@@ -98,6 +98,7 @@ $raiz = "../archivos";
 <body class="hold-transition sidebar-mini" onload="myfunction()">
 
     <div class="loader"></div>
+    <!--<div id="user_model_details"></div>  -->
     <div class="wrapper">
 
         <nav class="main-header navbar navbar-expand navbar-white navbar-light"
@@ -1080,6 +1081,8 @@ $raiz = "../archivos";
 
     </div>
 
+
+
     </section>
 
     </div>
@@ -1095,195 +1098,169 @@ $raiz = "../archivos";
         <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
     </footer>
 
+    <div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Busqueda de usuarios</h4>
+                    <button id="idButtonCloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form id="idFormSearchUser">
+                    <div class="modal-body">
 
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+
+                                <div class="form-group">
+                                    <label>Nombre Usuario</label>
+                                    <input type="text" class="form-control" id="idNombreUsuario"
+                                        placeholder="Escriba Nombre" style="MozUserSelect:None;">
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Programa</label>
+                                    <!--  <select value="<?php echo $programa; ?>" class="form-control">
+                                        <option value="">-- Seleccione --</option>
+                                        <option value="Sistemas">Sistemas</option>
+                                        <option value="Industrial">Industrial</option>
+                                        <option value="Mecanica">Mecanica</option>
+                                        <option value="Ambiental">Ambiental</option>
+                                    </select>
+                                    -->
+                                    <input type="text" class="form-control" value="<?php echo $programa; ?>" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="direct-chat" style="
+                         background: #343a40;
+                         bottom: 0;
+                         color: #fff;
+                         height: fit-content;
+                         overflow: auto;
+                         top: 0;
+                         width: 100%;
+                         max-height: 250px">
+                            <div class="direct-chat-messages" style="padding: 0px;height: fit-content;">
+                                <ul id="idContactsSearch" class="contacts-list mb-0">
+
+                                </ul>
+
+
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="submit" class="btn btn-default fade">Close</button>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                        <!-- id="idButtonSearchUser"-->
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 
 
     <!-- Control Sidebar -->
-    <aside id="idBox" class="control-sidebar control-sidebar-dark position-fixed" style="border-radius: .25rem">
+    <aside id="idAside" class="control-sidebar control-sidebar-dark position-fixed"
+        style="border-radius: .25rem; height: 100%;">
         <!-- Control sidebar content goes here -->
 
-        <div class="card direct-chat direct-chat-primary" style="position: relative; left: 0px; top: 0px; height: 100%">
-            <div class="card-header ui-sortable-handle" style="cursor: move;">
+        <div id="idCard" class="card direct-chat direct-chat-primary direct-chat-contacts-open"
+            style="position: relative; left: 0px; top: 0px; height: 100%">
+            <div class="card-header ui-sortable-handle" style="">
                 <h3 class="card-title">Direct Chat</h3>
 
-
                 <div class="card-tools">
-                    <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
+                    <button id="idButtonUsers" type="button" class="btn btn-tool" data-toggle="modal"
+                        data-target="#modal-lg">
+                        <i class="fa fa-users"></i>
                     </button>
-                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
-                        data-widget="chat-pane-toggle">
+
+                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
+                        Launch Large Modal
+                    </button>
+                        -->
+                    <button id="idButtonMessages" type="button" class="btn btn-tool" data-toggle="tooltip"
+                        title="Contacts" data-widget="chat-pane-toggle">
                         <i class="fas fa-comments"></i>
                     </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+
+                    <button type="button" class="btn btn-tool" data-widget="control-sidebar" data-slide="true"><i
+                            class="fas fa-times"></i>
+                        <!-- 
+                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="far fa-comments white"></i>
+                    </a>
+                            -->
                     </button>
                 </div>
+
             </div>
+
+            <div id="idCardNameChat" class="card-header ui-sortable-handle" style="
+                          padding-left: 5px;
+                          padding-top: 5px;
+                          display: None;
+                         ">
+
+                <h3 id="idNameChat" class="card-title" style="color: rgb(33, 37, 41); font-size: 14px;">
+                    Seleccione un Chat</h3>
+
+            </div>
+
+
             <!-- /.card-header -->
             <div class="card-body">
                 <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages" style="height: 100%">
-                    <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-left">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            Is this template really for free? That's unbelievable!
-                        </div>
-                        <!-- /.direct-chat-text -->
+                <div id="idContainerFather" class="direct-chat-messages" style="height: 100%">
+                    <!-- <div class="card-header ui-sortable-handle" style="
+                          padding-left: 5px;
+                          padding-top: 5px;
+                         ">
+                        <h3 id="idNameChat" class="card-title" style="color: black;">
+                            US-Visitors Report</h3>
                     </div>
-                    <!-- /.direct-chat-msg -->
+                    -->
+                    <div id="idContainerMessages" class="ContainerMessages">
 
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-right">Sarah Bullock</span>
-                            <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            You better believe it!
-                        </div>
-                        <!-- /.direct-chat-text -->
                     </div>
-                    <!-- /.direct-chat-msg -->
 
-                    <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-left">Alexander Pierce</span>
-                            <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            Working with AdminLTE on a great new app! Wanna join?
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
 
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                        <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-right">Sarah Bullock</span>
-                            <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-                        </div>
-                        <!-- /.direct-chat-infos -->
-                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                            I would love to.
-                        </div>
-                        <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
+
+
+
 
                 </div>
                 <!--/.direct-chat-messages-->
 
                 <!-- Contacts are loaded here -->
                 <div class="direct-chat-contacts" style="height: 100%">
-                    <ul class="contacts-list">
-                        <li>
-                            <a href="#">
-                                <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+                    <ul id="idContactsList" class="contacts-list mb-0">
 
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        Count Dracula
-                                        <small class="contacts-list-date float-right">2/28/2015</small>
-                                    </span>
-                                    <span class="contacts-list-msg">How have you been? I was...</span>
-                                </div>
-                                <!-- /.contacts-list-info -->
-                            </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                            <a href="#">
-                                <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
-
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        Sarah Doe
-                                        <small class="contacts-list-date float-right">2/23/2015</small>
-                                    </span>
-                                    <span class="contacts-list-msg">I will be waiting for...</span>
-                                </div>
-                                <!-- /.contacts-list-info -->
-                            </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                            <a href="#">
-                                <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
-
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        Nadia Jolie
-                                        <small class="contacts-list-date float-right">2/20/2015</small>
-                                    </span>
-                                    <span class="contacts-list-msg">I'll call you back at...</span>
-                                </div>
-                                <!-- /.contacts-list-info -->
-                            </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                            <a href="#">
-                                <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
-
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        Nora S. Vans
-                                        <small class="contacts-list-date float-right">2/10/2015</small>
-                                    </span>
-                                    <span class="contacts-list-msg">Where is your new...</span>
-                                </div>
-                                <!-- /.contacts-list-info -->
-                            </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                            <a href="#">
-                                <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
-
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        John K.
-                                        <small class="contacts-list-date float-right">1/27/2015</small>
-                                    </span>
-                                    <span class="contacts-list-msg">Can I take a look at...</span>
-                                </div>
-                                <!-- /.contacts-list-info -->
-                            </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                            <a href="#">
-                                <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
-
-                                <div class="contacts-list-info">
-                                    <span class="contacts-list-name">
-                                        Kenneth M.
-                                        <small class="contacts-list-date float-right">1/4/2015</small>
-                                    </span>
-                                    <span class="contacts-list-msg">Never mind I found...</span>
-                                </div>
-                                <!-- /.contacts-list-info -->
-                            </a>
-                        </li>
-                        <!-- End Contact Item -->
                     </ul>
                     <!-- /.contacts-list -->
                 </div>
@@ -1291,14 +1268,18 @@ $raiz = "../archivos";
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
-                <form action="#" method="post">
-                    <div class="input-group">
-                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+
+                <form id="idFormSendMessage">
+
+                    <div id="idEnviarMensaje" class="input-group">
+                        <input id="idMessage_Content" type="text" name="message" placeholder="Type Message ..."
+                            class="form-control">
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-primary">Send</button>
+                            <button type="submit" class="btn btn-primary send_chat">Enviar</button>
                         </span>
                     </div>
                 </form>
+
             </div>
             <!-- /.card-footer-->
         </div>
@@ -1312,5 +1293,258 @@ $raiz = "../archivos";
 
 </body>
 <script type="text/javascript" src="js/cambiarPestanna.js"></script>
+
+<script>
+$(document).ready(function() {
+
+    fetch_user();
+
+    setInterval(() => {
+        fetch_user();
+    }, 4000);
+
+
+
+    function fetch_user() {
+        $.ajax({
+            url: "chat/fetch_user.php",
+            method: "POST",
+            success: function(data) {
+                $('#idContactsList').html(data);
+
+                //console.log(data);
+            }
+        });
+    }
+
+    //idContactsSearch
+
+    //svar ButtonMessages = document.getElementById("idButtonMessages");
+    //sButtonMessages.style.display = "None";
+
+    $("#idFormSearchUser").on("submit", function(e) {
+        e.preventDefault();
+
+        function search_user() {
+            var name_user = $('#idNombreUsuario').val();
+
+            $.ajax({
+                url: "chat/search_user.php",
+                method: "POST",
+                data: {
+                    name_user: name_user
+                },
+                success: function(data) {
+                    $('#idContactsSearch').html(data);
+                    console.log(data);
+                }
+            });
+        }
+        search_user();
+    });
+
+});
+
+
+
+$(document).on('click', '#idButtonSearchUser', function() {
+    // alert('Search');
+    /*
+        function search_user() {
+            var name_user = $('#idNombreUsuario').val();
+
+            $.ajax({
+                url: "chat/search_user.php",
+                method: "POST",
+                data: {
+                    name_user: name_user
+                },
+                success: function(data) {
+                    $('#idContactsSearch').html(data);
+                    console.log(data);
+
+                }
+            });
+        }
+        search_user();
+
+        */
+});
+
+//idItemSearch
+$(document).on('click', '.idItemSearch', function() {
+    //alert('Search');
+
+    //idButtonMessages
+    var to_user_id = $(this).data('touserid');
+    var to_user_name = $(this).data('tousername');
+    var name_to_chat = document.getElementById("idNameChat");
+    name_to_chat.innerHTML = to_user_name;
+
+    var ButtonSend = document.getElementsByClassName("send_chat")[0];
+    ButtonSend.setAttribute("id", to_user_id);
+
+    var ContainerMessages = document.getElementsByClassName("ContainerMessages")[0];
+    ContainerMessages.setAttribute("id", "idContainerMessages" + to_user_id);
+
+    document.getElementById("idCard").style.height = "90%";
+    setTimeout(() => {
+        document.getElementById("idCardNameChat").style.display = "Block";
+    }, 100);
+    setTimeout(() => {
+        onHistoryChat(to_user_id);
+    }, 110);
+    setInterval(() => {
+        onHistoryChat(to_user_id);
+    }, 5000);
+
+    var Card = $('#idCard');
+
+    if (Card[0].className !== "card direct-chat direct-chat-primary") {
+        document.getElementById("idButtonMessages").click();
+    }
+
+    //idButtonCloseModal
+    document.getElementById("idButtonCloseModal").click();
+
+
+
+});
+
+function onHistoryChat(to_user_id) {
+    $.ajax({
+        url: "chat/fetch_user_chat_history.php",
+        method: "POST",
+        data: {
+            to_user_id: to_user_id
+        },
+        success: function(data) {
+            // idContainerMessages
+            // console.log(data);
+            $('#idContainerMessages' + to_user_id).html(data);
+            //   $('.ContainerMessages').html(data);
+            //   var ContainerMessages = document.getElementsByClassName("ContainerMessages")[0];
+            var altura = $('#idContainerFather').prop("scrollHeight");
+            $('#idContainerFather').scrollTop(altura);
+        }
+    })
+}
+
+$(document).on('click', '.idItem', function() {
+    // clearInterval(update);
+    var to_user_id = $(this).data('touserid');
+    var to_user_name = $(this).data('tousername');
+
+    var name_to_chat = document.getElementById("idNameChat");
+    name_to_chat.innerHTML = to_user_name;
+
+    var ButtonSend = document.getElementsByClassName("send_chat")[0];
+    ButtonSend.setAttribute("id", to_user_id);
+
+    var ContainerMessages = document.getElementsByClassName("ContainerMessages")[0];
+    ContainerMessages.setAttribute("id", "idContainerMessages" + to_user_id);
+
+
+
+    document.getElementById("idCard").style.height = "90%";
+    setTimeout(() => {
+        document.getElementById("idCardNameChat").style.display = "Block";
+    }, 100);
+
+    setTimeout(() => {
+        onHistoryChat(to_user_id);
+    }, 110);
+    //
+    //var ButtonMessages = document.getElementById("idButtonMessages");
+    //ButtonMessages.style.display = "Block";
+    //
+    setInterval(() => {
+        onHistoryChat(to_user_id);
+    }, 5000);
+
+
+
+});
+
+//$(document).on('click', '.send_chat', function() {
+
+$("#idFormSendMessage").on("submit", function(e) {
+    e.preventDefault();
+    //   var to_user_id = $(this).attr('id');
+    var to_user_id = $('.send_chat').attr('id');
+    //console.log(to_user_id);
+    var chat_message = $('#idMessage_Content').val();
+
+    if (chat_message == '') {
+        alert('Vacio');
+    } else {
+        $('#idMessage_Content').val('');
+        //  console.log(chat_message);
+        $.ajax({
+            url: "chat/insert_chat.php",
+            method: "POST",
+            data: {
+                to_user_id: to_user_id,
+                chat_message: chat_message
+            },
+            success: function(data) {
+                // idContainerMessages
+                // console.log(data);
+                $('#idContainerMessages').html(data);
+                var altura = $('#idContainerFather').prop("scrollHeight");
+                $('#idContainerFather').scrollTop(altura);
+                onHistoryChat(to_user_id);
+
+
+            }
+        })
+
+
+    }
+});
+
+$(document).on('click', '#idButtonMessages', function() {
+
+    var Card = $('#idCard');
+
+    // console.log(Aside[0].className);
+    //control-sidebar control-sidebar-dark position-fixed
+    if (Card[0].className == "card direct-chat direct-chat-primary") {
+        //  alert('es igual');
+        //.css("height", "90%");
+        var TitleChat = $('#idNameChat')[0].innerHTML.trim();
+        if (TitleChat !== "Seleccione un Chat") {
+            document.getElementById("idCard").style.height = "90%";
+        }
+        setTimeout(() => {
+            document.getElementById("idCardNameChat").style.display = "Block";
+        }, 450);
+
+        // idNameChat
+
+        //console.log(TitleChat);
+        //  if (TitleChat === "Seleccione un Chat") {
+        //  alert("No hay chats");
+        //idEnviarMensaje
+        // document.getElementById("idEnviarMensaje").style.display = "None";
+        //var element = document.getElementById("myDIV");
+        //element.classList.remove("mystyle");
+        // document.getElementById("idEnviarMensaje").classList.add("fade");
+        // } else {
+        // document.getElementById("idEnviarMensaje").style.display = "Block";
+        //  document.getElementById("idEnviarMensaje").classList.remove("fade");
+        // }
+
+    } else {
+        //  alert('no es igual');
+        //Aside.css("height", "100%");
+        document.getElementById("idCard").style.height = "100%";
+        document.getElementById("idCardNameChat").style.display = "None";
+    }
+
+    //idButtonUsers
+});
+</script>
+
 
 </html>

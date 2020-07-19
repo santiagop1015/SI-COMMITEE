@@ -88,7 +88,7 @@ extract($_GET);
 
                 <li class="nav-item">
                 <li class="nav-item d-none d-sm-inline-block">
-                  <!--  <a href="../../desconectar.php" class="nav-link" style="color: white">Cerrar Sesión</a>  -->
+                    <!--  <a href="../../desconectar.php" class="nav-link" style="color: white">Cerrar Sesión</a>  -->
                 </li>
                 </li>
             </ul>
@@ -166,34 +166,37 @@ extract($_GET);
 
                                 <div class="card-body">
                                     <?php $fecha=date("Y-m-d");?>
-                                    <form id="loginForm" autocomplete="off" action="ejec_enviar_msgjur.php" method="post"
-                                        enctype="multipart/form-data" role="form">
+                                    <form id="loginForm" autocomplete="off" action="ejec_enviar_msgjur.php"
+                                        method="post" enctype="multipart/form-data" role="form">
                                         <div class="row">
-                                          <div class="col-6">
+                                            <div class="col-6">
                                                 <label>De:</label>
-                                                <input type="text" class="form-control" id="user" name="user" value="<?php echo ''.$usuario;?>" readonly="readonly">
-                                          </div>
-                                          <div class="col-6">
+                                                <input type="text" class="form-control" id="user" name="user"
+                                                    value="<?php echo ''.$usuario;?>" readonly="readonly">
+                                            </div>
+                                            <div class="col-6">
                                                 <label>Programa: </label>
-                                                <input type="email" class="form-control" id="programa" name="programa" value="<?php echo $programa;?>" readonly="readonly">
-                                          </div>
+                                                <input type="email" class="form-control" id="programa" name="programa"
+                                                    value="<?php echo $programa;?>" readonly="readonly">
+                                            </div>
 
-                                          <div class="col-12">
-                                                  <label>Mensaje</label>
-                                                  <textarea required  class="form-control" rows="4" cols="50" id="comen" name="comen"  placeholder="Mensaje"></textarea>
-                                          </div>
+                                            <div class="col-12">
+                                                <label>Mensaje</label>
+                                                <textarea required class="form-control" rows="4" cols="50" id="comen"
+                                                    name="comen" placeholder="Mensaje"></textarea>
+                                            </div>
 
-                                          <div class="col-12 pt-2">
+                                            <div class="col-12 pt-2">
 
+                                                <div class="card-footer">
+                                                    <button class="btn btn-default float-right"
+                                                        style="margin-bottom: 10px "
+                                                        onclick="window.close();">Volver</button>
 
-                                        <div class="card-footer">
-                                            <button class="btn btn-default float-right" style="margin-bottom: 10px "
-                                                onclick="window.close();">Volver</button>
-
-                                            <button type="submit" id="login" value=""
-                                                class="btn btn-primary float-right mr-2"
-                                                style="background-color: green; margin-bottom: 10px ">Enviar</button>
-                                        </div>
+                                                    <button type="submit" id="login" value=""
+                                                        class="btn btn-primary float-right mr-2"
+                                                        style="background-color: green; margin-bottom: 10px ">Enviar</button>
+                                                </div>
                                     </form>
 
                                 </div>
