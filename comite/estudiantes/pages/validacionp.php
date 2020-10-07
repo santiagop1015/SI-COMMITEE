@@ -53,13 +53,14 @@ $pr=$_SESSION['id'];
       //  echo $ID_directores. '<br>';
      }
      
-
+   
      if(!isset($_POST['id_estudiante2'])) {
         echo "Opcion de Grado <br>";
     } else {
        $id_estudiante2=$_POST['id_estudiante2'];
-      // echo $id_estudiante2. '<br>';
     }
+    
+    
 
     if(!isset($_POST['fecha_propuesta'])) {
         echo "La variable fecha propuesta esta vacia <br>";
@@ -140,24 +141,36 @@ if(isset($_POST['ID_estudiante1']) || isset($_POST['ID_estado']) || isset($ID_di
 
  // ID_estudiante1
 
+// empty($_POST['ID_estudiante1'])
+// empty($_POST['ID_estado'])
 
-if(empty($_POST['ID_estudiante1']) || empty($_POST['ID_estado']) || empty($ID_directores) || empty($_POST['Titulo_tesis'])) {
+if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudiante2) <= 0) {
   echo "Revise que los siguientes campos esten completos: <br>";
     if(empty($_POST['Titulo_tesis'])) {
         echo "Titulo Tesis <br>";
     }
+   /* Mensaje falta id otro integrante: cambio: es opcional 21/09/2020
     if(empty($_POST['ID_estudiante1'])) {
         echo "Id otro integrante <br>";
     }
+    */
+    /* Mensaje falta tipo de documento: cambio: es opcional 21/09/2020
     if(empty($_POST['ID_estado'])) {
         echo "Tipo de documento <br>";
     }
+    */
     if(empty($ID_directores)) {
         echo "Director <br>";
     }
-    
-    
 
+    if(strlen($id_estudiante2) <= 0) {
+        echo "Opcion de grado <br>";
+    }
+    /*
+    echo '-' . $id_estudiante2 . '-';
+    echo strlen($id_estudiante2);
+    */
+    
 } else {
 
     // 1 Correcto
@@ -170,7 +183,8 @@ if(empty($_POST['ID_estudiante1']) || empty($_POST['ID_estado']) || empty($ID_di
     $consultaIntegrante = mysqli_query($mysqli, $sqlIntegrante );
     $DatosIntegrante = mysqli_fetch_array($consultaIntegrante);
    // echo $idIntegrante;
-    
+    if(!empty($idIntegrante)){
+       
     if (!$DatosIntegrante) {
         echo "El usuario no existe";
        // echo $DatosIntegrante;
@@ -178,7 +192,7 @@ if(empty($_POST['ID_estudiante1']) || empty($_POST['ID_estado']) || empty($ID_di
         
        // echo $DatosIntegrante;
 
-    echo 1;
+    
     //var_dump($_REQUEST);
 
     
@@ -187,12 +201,28 @@ if(empty($_POST['ID_estudiante1']) || empty($_POST['ID_estado']) || empty($ID_di
           or die("Problemas en el select".mysqli_error($conexion));
           
           mysqli_close($conexion);
+
+          echo 1;
           
 
         }
+
+    } else {
+
+
+          mysqli_query($conexion,"insert into tesis(Titulo_tesis, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado ) values
+          ('$_REQUEST[Titulo_tesis]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante1]', $id_estudiante2, '$_REQUEST[terminado]')") 
+          or die("Problemas en el select".mysqli_error($conexion));
+          
+          mysqli_close($conexion);
+
+          echo 1;
+         
+        
+    }
     
 
-}
+} 
 
 } else {
     echo "Error Inesperado. Por favor contacte al administrador";
@@ -201,8 +231,8 @@ if(empty($_POST['ID_estudiante1']) || empty($_POST['ID_estado']) || empty($ID_di
 
 
 
-
 }
+
 
 
 /*

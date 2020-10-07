@@ -34,6 +34,10 @@ $raiz = "../archivos";
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
     <title>SI-COMMITEE || Estudiante</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,10 +69,6 @@ $raiz = "../archivos";
     <!-- Ayuda -- CSS -->
     <script rel="stylesheet" src="dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="dist/css/Help/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="dist/css/Help/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/Help/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/Help/_all-skins.min.css">
@@ -85,6 +85,11 @@ $raiz = "../archivos";
 <style>
 .white {
     color: white;
+}
+
+.direct-chat-text::before,
+.direct-chat-text::after {
+    border-left-color: #B42A2A;
 }
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -214,7 +219,7 @@ $raiz = "../archivos";
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper pb-1">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
@@ -399,10 +404,8 @@ $raiz = "../archivos";
                     <div id="cpestana2">
                         <div class="container-fluid">
                             <div class="callout callout-info">
-
                                 Fechas reuniones Comité Ingeniería de Sistemas... 2020-1, Enero 29, Febrero 19, Marzo
                                 18, Abril 22, Mayo 20, Junio 17
-
                             </div>
                             <form id="idFormRegistrarDoc" role="form">
                                 <div class="row">
@@ -813,7 +816,7 @@ $raiz = "../archivos";
 
 
                             </div>
-                            <div class="callout callout-warning">
+                            <div class="callout callout-info">
                                 <b>Los archivos</b>, si el archivo es grande por
                                 favor espere a que cargue y luego, si haga clic en Registrar,
                                 recuerde que para el caso de si sube archivos duplicados esto se
@@ -834,13 +837,7 @@ $raiz = "../archivos";
 
                     </div>
 
-
                 </div>
-
-
-
-
-
         </div>
         <!--TPestana2-->
         <!--Pestana3-->
@@ -849,11 +846,13 @@ $raiz = "../archivos";
             <div class="container-fluid">
 
                 <div class="card">
-                    <div class="card-header" style="background-color: #343a40; color: white">
-                        <h3 class="card-title">Fechas reuniones Comité Ingeniería de Sistemas...
+                   <div class="card-header" style="background-color: #B42A2A; color: white">
+                       <!-- <h3 class="card-title">Fechas reuniones Comité Ingeniería de Sistemas...
                             2020-1, Enero 29, Febrero 19, Marzo 18, Abril 22, Mayo 20, Junio 17.
-                        </h3>
+                        </h3> -->
                     </div>
+                    
+                    
                     <!-- /.card-header -->
                     <div class="card-body">
                         <?php
@@ -909,7 +908,7 @@ $raiz = "../archivos";
                                                     echo "<td>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
-                                                    echo "<td style='color: red'><a href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
+                                                    echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
                                                     echo "<td>$arreglo[9]</td>";
                                                     echo "<td></td>";
                                                     /*echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";*/
@@ -921,16 +920,16 @@ $raiz = "../archivos";
                                                     echo "<td>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
-                                                    echo "<td style='color: red'><a href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
+                                                    echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
                                                     echo "<td>$arreglo[9]</td>";
                                                     echo "<td>No Aplica</td>";
                                                     /* echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";*/
                                                     if ($arreglo[6] == 'Entrega Proyecto') {
-                                                        echo "<td><a href='$raiz/pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td><a class='btn btn-primary' href='$raiz/pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
                                                     } else if ($arreglo[6] == 'Entrega Poster') {
-                                                        echo "<td><a href='$raiz/pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td><a class='btn btn-primary' href='$raiz/pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
                                                     } else if ($arreglo[6] == 'Entrega Anteproyecto') {
-                                                        echo "<td><a href='$raiz/pdf/vereval.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td><a class='btn btn-primary' href='$raiz/pdf/vereval.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
                                                     } else {
                                                         echo "<td><font color='black' size='2'>N/A</font></td>";
                                                     }
@@ -1174,7 +1173,6 @@ $raiz = "../archivos";
                     <div class="modal-footer justify-content-between">
                         <button type="submit" class="btn btn-default fade">Close</button>
                         <button type="submit" class="btn btn-primary">Buscar</button>
-                        <!-- id="idButtonSearchUser"-->
                     </div>
                 </form>
             </div>
@@ -1186,7 +1184,7 @@ $raiz = "../archivos";
 
     <!-- Control Sidebar -->
     <aside id="idAside" class="control-sidebar control-sidebar-dark position-fixed"
-        style="border-radius: .25rem; height: 100%;">
+        style="border-radius: .25rem; height: 90%;">
         <!-- Control sidebar content goes here -->
 
         <div id="idCard" class="card direct-chat direct-chat-primary direct-chat-contacts-open"
@@ -1249,16 +1247,11 @@ $raiz = "../archivos";
 
                     </div>
 
-
-
-
-
-
                 </div>
                 <!--/.direct-chat-messages-->
 
                 <!-- Contacts are loaded here -->
-                <div class="direct-chat-contacts" style="height: 100%">
+                <div class="direct-chat-contacts" style="height: 100%; border-radius: .25rem;">
                     <ul id="idContactsList" class="contacts-list mb-0">
 
                     </ul>
@@ -1267,12 +1260,12 @@ $raiz = "../archivos";
                 <!-- /.direct-chat-pane -->
             </div>
             <!-- /.card-body -->
-            <div class="card-footer">
+            <div id="idFormChat" class="card-footer" style="display: none;">
 
                 <form id="idFormSendMessage">
 
                     <div id="idEnviarMensaje" class="input-group">
-                        <input id="idMessage_Content" type="text" name="message" placeholder="Type Message ..."
+                        <input id="idMessage_Content" type="text" name="message" placeholder="Escribe un mensaje"
                             class="form-control">
                         <span class="input-group-append">
                             <button type="submit" class="btn btn-primary send_chat">Enviar</button>
@@ -1294,257 +1287,9 @@ $raiz = "../archivos";
 </body>
 <script type="text/javascript" src="js/cambiarPestanna.js"></script>
 
-<script>
-$(document).ready(function() {
-
-    fetch_user();
-
-    setInterval(() => {
-        fetch_user();
-    }, 4000);
+<script type="text/javascript" src="chat/chat.js"></script>
 
 
-
-    function fetch_user() {
-        $.ajax({
-            url: "chat/fetch_user.php",
-            method: "POST",
-            success: function(data) {
-                $('#idContactsList').html(data);
-
-                //console.log(data);
-            }
-        });
-    }
-
-    //idContactsSearch
-
-    //svar ButtonMessages = document.getElementById("idButtonMessages");
-    //sButtonMessages.style.display = "None";
-
-    $("#idFormSearchUser").on("submit", function(e) {
-        e.preventDefault();
-
-        function search_user() {
-            var name_user = $('#idNombreUsuario').val();
-
-            $.ajax({
-                url: "chat/search_user.php",
-                method: "POST",
-                data: {
-                    name_user: name_user
-                },
-                success: function(data) {
-                    $('#idContactsSearch').html(data);
-                    console.log(data);
-                }
-            });
-        }
-        search_user();
-    });
-
-});
-
-
-
-$(document).on('click', '#idButtonSearchUser', function() {
-    // alert('Search');
-    /*
-        function search_user() {
-            var name_user = $('#idNombreUsuario').val();
-
-            $.ajax({
-                url: "chat/search_user.php",
-                method: "POST",
-                data: {
-                    name_user: name_user
-                },
-                success: function(data) {
-                    $('#idContactsSearch').html(data);
-                    console.log(data);
-
-                }
-            });
-        }
-        search_user();
-
-        */
-});
-
-//idItemSearch
-$(document).on('click', '.idItemSearch', function() {
-    //alert('Search');
-
-    //idButtonMessages
-    var to_user_id = $(this).data('touserid');
-    var to_user_name = $(this).data('tousername');
-    var name_to_chat = document.getElementById("idNameChat");
-    name_to_chat.innerHTML = to_user_name;
-
-    var ButtonSend = document.getElementsByClassName("send_chat")[0];
-    ButtonSend.setAttribute("id", to_user_id);
-
-    var ContainerMessages = document.getElementsByClassName("ContainerMessages")[0];
-    ContainerMessages.setAttribute("id", "idContainerMessages" + to_user_id);
-
-    document.getElementById("idCard").style.height = "90%";
-    setTimeout(() => {
-        document.getElementById("idCardNameChat").style.display = "Block";
-    }, 100);
-    setTimeout(() => {
-        onHistoryChat(to_user_id);
-    }, 110);
-    setInterval(() => {
-        onHistoryChat(to_user_id);
-    }, 5000);
-
-    var Card = $('#idCard');
-
-    if (Card[0].className !== "card direct-chat direct-chat-primary") {
-        document.getElementById("idButtonMessages").click();
-    }
-
-    //idButtonCloseModal
-    document.getElementById("idButtonCloseModal").click();
-
-
-
-});
-
-function onHistoryChat(to_user_id) {
-    $.ajax({
-        url: "chat/fetch_user_chat_history.php",
-        method: "POST",
-        data: {
-            to_user_id: to_user_id
-        },
-        success: function(data) {
-            // idContainerMessages
-            // console.log(data);
-            $('#idContainerMessages' + to_user_id).html(data);
-            //   $('.ContainerMessages').html(data);
-            //   var ContainerMessages = document.getElementsByClassName("ContainerMessages")[0];
-            var altura = $('#idContainerFather').prop("scrollHeight");
-            $('#idContainerFather').scrollTop(altura);
-        }
-    })
-}
-
-$(document).on('click', '.idItem', function() {
-    // clearInterval(update);
-    var to_user_id = $(this).data('touserid');
-    var to_user_name = $(this).data('tousername');
-
-    var name_to_chat = document.getElementById("idNameChat");
-    name_to_chat.innerHTML = to_user_name;
-
-    var ButtonSend = document.getElementsByClassName("send_chat")[0];
-    ButtonSend.setAttribute("id", to_user_id);
-
-    var ContainerMessages = document.getElementsByClassName("ContainerMessages")[0];
-    ContainerMessages.setAttribute("id", "idContainerMessages" + to_user_id);
-
-
-
-    document.getElementById("idCard").style.height = "90%";
-    setTimeout(() => {
-        document.getElementById("idCardNameChat").style.display = "Block";
-    }, 100);
-
-    setTimeout(() => {
-        onHistoryChat(to_user_id);
-    }, 110);
-    //
-    //var ButtonMessages = document.getElementById("idButtonMessages");
-    //ButtonMessages.style.display = "Block";
-    //
-    setInterval(() => {
-        onHistoryChat(to_user_id);
-    }, 5000);
-
-
-
-});
-
-//$(document).on('click', '.send_chat', function() {
-
-$("#idFormSendMessage").on("submit", function(e) {
-    e.preventDefault();
-    //   var to_user_id = $(this).attr('id');
-    var to_user_id = $('.send_chat').attr('id');
-    //console.log(to_user_id);
-    var chat_message = $('#idMessage_Content').val();
-
-    if (chat_message == '') {
-        alert('Vacio');
-    } else {
-        $('#idMessage_Content').val('');
-        //  console.log(chat_message);
-        $.ajax({
-            url: "chat/insert_chat.php",
-            method: "POST",
-            data: {
-                to_user_id: to_user_id,
-                chat_message: chat_message
-            },
-            success: function(data) {
-                // idContainerMessages
-                // console.log(data);
-                $('#idContainerMessages').html(data);
-                var altura = $('#idContainerFather').prop("scrollHeight");
-                $('#idContainerFather').scrollTop(altura);
-                onHistoryChat(to_user_id);
-
-
-            }
-        })
-
-
-    }
-});
-
-$(document).on('click', '#idButtonMessages', function() {
-
-    var Card = $('#idCard');
-
-    // console.log(Aside[0].className);
-    //control-sidebar control-sidebar-dark position-fixed
-    if (Card[0].className == "card direct-chat direct-chat-primary") {
-        //  alert('es igual');
-        //.css("height", "90%");
-        var TitleChat = $('#idNameChat')[0].innerHTML.trim();
-        if (TitleChat !== "Seleccione un Chat") {
-            document.getElementById("idCard").style.height = "90%";
-        }
-        setTimeout(() => {
-            document.getElementById("idCardNameChat").style.display = "Block";
-        }, 450);
-
-        // idNameChat
-
-        //console.log(TitleChat);
-        //  if (TitleChat === "Seleccione un Chat") {
-        //  alert("No hay chats");
-        //idEnviarMensaje
-        // document.getElementById("idEnviarMensaje").style.display = "None";
-        //var element = document.getElementById("myDIV");
-        //element.classList.remove("mystyle");
-        // document.getElementById("idEnviarMensaje").classList.add("fade");
-        // } else {
-        // document.getElementById("idEnviarMensaje").style.display = "Block";
-        //  document.getElementById("idEnviarMensaje").classList.remove("fade");
-        // }
-
-    } else {
-        //  alert('no es igual');
-        //Aside.css("height", "100%");
-        document.getElementById("idCard").style.height = "100%";
-        document.getElementById("idCardNameChat").style.display = "None";
-    }
-
-    //idButtonUsers
-});
-</script>
 
 
 </html>

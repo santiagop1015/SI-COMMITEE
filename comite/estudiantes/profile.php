@@ -37,8 +37,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
@@ -62,10 +60,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <!-- Ayuda -- CSS -->
     <script rel="stylesheet" src="dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="dist/css/Help/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="dist/css/Help/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/Help/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/Help/_all-skins.min.css">
@@ -329,220 +323,111 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
 
         <!-- Control Sidebar -->
-        <aside id="idBox" class="control-sidebar control-sidebar-dark position-fixed" style="border-radius: .25rem">
-            <!-- Control sidebar content goes here -->
+    <aside id="idAside" class="control-sidebar control-sidebar-dark position-fixed"
+        style="border-radius: .25rem; height: 90%;">
+        <!-- Control sidebar content goes here -->
 
-            <div class="card direct-chat direct-chat-primary"
-                style="position: relative; left: 0px; top: 0px; height: 100%">
-                <div class="card-header ui-sortable-handle" style="cursor: move;">
-                    <h3 class="card-title">Direct Chat</h3>
+        <div id="idCard" class="card direct-chat direct-chat-primary direct-chat-contacts-open"
+            style="position: relative; left: 0px; top: 0px; height: 100%">
+            <div class="card-header ui-sortable-handle" style="">
+                <h3 class="card-title">Direct Chat</h3>
 
+                <div class="card-tools">
+                    <button id="idButtonUsers" type="button" class="btn btn-tool" data-toggle="modal"
+                        data-target="#modal-lg">
+                        <i class="fa fa-users"></i>
+                    </button>
 
-                    <div class="card-tools">
-                        <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
-                            data-widget="chat-pane-toggle">
-                            <i class="fas fa-comments"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                                class="fas fa-times"></i>
-                        </button>
-                    </div>
+                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
+                        Launch Large Modal
+                    </button>
+                        -->
+                    <button id="idButtonMessages" type="button" class="btn btn-tool" data-toggle="tooltip"
+                        title="Contacts" data-widget="chat-pane-toggle">
+                        <i class="fas fa-comments"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-tool" data-widget="control-sidebar" data-slide="true"><i
+                            class="fas fa-times"></i>
+                        <!-- 
+                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="far fa-comments white"></i>
+                    </a>
+                            -->
+                    </button>
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <!-- Conversations are loaded here -->
-                    <div class="direct-chat-messages" style="height: 100%">
-                        <!-- Message. Default to the left -->
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                            </div>
-                            <!-- /.direct-chat-infos -->
-                            <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                Is this template really for free? That's unbelievable!
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
 
-                        <!-- Message to the right -->
-                        <div class="direct-chat-msg right">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-right">Sarah Bullock</span>
-                                <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                            </div>
-                            <!-- /.direct-chat-infos -->
-                            <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                You better believe it!
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
+            </div>
 
-                        <!-- Message. Default to the left -->
-                        <div class="direct-chat-msg">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-left">Alexander Pierce</span>
-                                <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-                            </div>
-                            <!-- /.direct-chat-infos -->
-                            <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                Working with AdminLTE on a great new app! Wanna join?
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
+            <div id="idCardNameChat" class="card-header ui-sortable-handle" style="
+                          padding-left: 5px;
+                          padding-top: 5px;
+                          display: None;
+                         ">
 
-                        <!-- Message to the right -->
-                        <div class="direct-chat-msg right">
-                            <div class="direct-chat-infos clearfix">
-                                <span class="direct-chat-name float-right">Sarah Bullock</span>
-                                <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-                            </div>
-                            <!-- /.direct-chat-infos -->
-                            <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                I would love to.
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
+                <h3 id="idNameChat" class="card-title" style="color: rgb(33, 37, 41); font-size: 14px;">
+                    Seleccione un Chat</h3>
 
-                    </div>
-                    <!--/.direct-chat-messages-->
-
-                    <!-- Contacts are loaded here -->
-                    <div class="direct-chat-contacts" style="height: 100%">
-                        <ul class="contacts-list">
-                            <li>
-                                <a href="#">
-                                    <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
-
-                                    <div class="contacts-list-info">
-                                        <span class="contacts-list-name">
-                                            Count Dracula
-                                            <small class="contacts-list-date float-right">2/28/2015</small>
-                                        </span>
-                                        <span class="contacts-list-msg">How have you been? I was...</span>
-                                    </div>
-                                    <!-- /.contacts-list-info -->
-                                </a>
-                            </li>
-                            <!-- End Contact Item -->
-                            <li>
-                                <a href="#">
-                                    <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
-
-                                    <div class="contacts-list-info">
-                                        <span class="contacts-list-name">
-                                            Sarah Doe
-                                            <small class="contacts-list-date float-right">2/23/2015</small>
-                                        </span>
-                                        <span class="contacts-list-msg">I will be waiting for...</span>
-                                    </div>
-                                    <!-- /.contacts-list-info -->
-                                </a>
-                            </li>
-                            <!-- End Contact Item -->
-                            <li>
-                                <a href="#">
-                                    <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
-
-                                    <div class="contacts-list-info">
-                                        <span class="contacts-list-name">
-                                            Nadia Jolie
-                                            <small class="contacts-list-date float-right">2/20/2015</small>
-                                        </span>
-                                        <span class="contacts-list-msg">I'll call you back at...</span>
-                                    </div>
-                                    <!-- /.contacts-list-info -->
-                                </a>
-                            </li>
-                            <!-- End Contact Item -->
-                            <li>
-                                <a href="#">
-                                    <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
-
-                                    <div class="contacts-list-info">
-                                        <span class="contacts-list-name">
-                                            Nora S. Vans
-                                            <small class="contacts-list-date float-right">2/10/2015</small>
-                                        </span>
-                                        <span class="contacts-list-msg">Where is your new...</span>
-                                    </div>
-                                    <!-- /.contacts-list-info -->
-                                </a>
-                            </li>
-                            <!-- End Contact Item -->
-                            <li>
-                                <a href="#">
-                                    <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
-
-                                    <div class="contacts-list-info">
-                                        <span class="contacts-list-name">
-                                            John K.
-                                            <small class="contacts-list-date float-right">1/27/2015</small>
-                                        </span>
-                                        <span class="contacts-list-msg">Can I take a look at...</span>
-                                    </div>
-                                    <!-- /.contacts-list-info -->
-                                </a>
-                            </li>
-                            <!-- End Contact Item -->
-                            <li>
-                                <a href="#">
-                                    <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
-
-                                    <div class="contacts-list-info">
-                                        <span class="contacts-list-name">
-                                            Kenneth M.
-                                            <small class="contacts-list-date float-right">1/4/2015</small>
-                                        </span>
-                                        <span class="contacts-list-msg">Never mind I found...</span>
-                                    </div>
-                                    <!-- /.contacts-list-info -->
-                                </a>
-                            </li>
-                            <!-- End Contact Item -->
-                        </ul>
-                        <!-- /.contacts-list -->
-                    </div>
-                    <!-- /.direct-chat-pane -->
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <form action="#" method="post">
-                        <div class="input-group">
-                            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                            <span class="input-group-append">
-                                <button type="button" class="btn btn-primary">Send</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.card-footer-->
             </div>
 
 
-        </aside>
-        <!-- /.control-sidebar -->
+            <!-- /.card-header -->
+            <div class="card-body">
+                <!-- Conversations are loaded here -->
+                <div id="idContainerFather" class="direct-chat-messages" style="height: 100%">
+                    <!-- <div class="card-header ui-sortable-handle" style="
+                          padding-left: 5px;
+                          padding-top: 5px;
+                         ">
+                        <h3 id="idNameChat" class="card-title" style="color: black;">
+                            US-Visitors Report</h3>
+                    </div>
+                    -->
+                    <div id="idContainerMessages" class="ContainerMessages">
+
+                    </div>
+
+                </div>
+                <!--/.direct-chat-messages-->
+
+                <!-- Contacts are loaded here -->
+                <div class="direct-chat-contacts" style="height: 100%; border-radius: .25rem;">
+                    <ul id="idContactsList" class="contacts-list mb-0">
+
+                    </ul>
+                    <!-- /.contacts-list -->
+                </div>
+                <!-- /.direct-chat-pane -->
+            </div>
+            <!-- /.card-body -->
+            <div id="idFormChat" class="card-footer" style="display: none;">
+
+                <form id="idFormSendMessage">
+
+                    <div id="idEnviarMensaje" class="input-group">
+                        <input id="idMessage_Content" type="text" name="message" placeholder="Escribe un mensaje"
+                            class="form-control">
+                        <span class="input-group-append">
+                            <button type="submit" class="btn btn-primary send_chat">Enviar</button>
+                        </span>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.card-footer-->
+        </div>
+
+
+    </aside>
+    <!-- /.control-sidebar -->
+
     </div>
     <!-- ./wrapper -->
 
 
 </body>
+
+<script type="text/javascript" src="chat/chat.js"></script>
 
 
 </html>

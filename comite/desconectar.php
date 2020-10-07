@@ -6,9 +6,11 @@ localStorage.removeItem("number");
 
 if($_SESSION['user']){	
 	session_destroy();
-	header("location:Login/index.html");
+	//header("location:Login/index.html");
+	header("location:../index.html");
 }
 else{
-	header("location:Login/index.html");
+	//header("location:Login/index.html");
+	header("location:../index.html");
 }
 ?>

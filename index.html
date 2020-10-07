@@ -16,7 +16,12 @@
   <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
 
   <link rel="stylesheet" href="css/style.css">
+
+  <!--Validacion de formulario recuperar contraseña-->
+  <script src="js/jquery-3.4.1.slim.min.js"></script>
+
 </head>
+
 
 <body>
   <!--================Header Menu Area =================-->
@@ -40,11 +45,17 @@
               <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
 
               <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <!--<li class="nav-item"><a id="Modal_Login" href="#theModal" class="nav-link" data-toggle="modal"
+                  data-target="#theModal">Modal</a></li>
+              -->
+
             </ul>
 
             <ul class="navbar-right">
               <li class="nav-item">
-                <a href="comite/Login"><button class="button button-header bg">Ingresar</button></a>
+                <!-- <a href="comite/Login"><button class="button button-header bg">Ingresar</button></a> -->
+                <a id="Modal_Login" href="#theModal" class="nav-link" data-toggle="modal"
+                  data-target="#theModal"><button class="button button-header bg">Ingresar</button></a>
               </li>
             </ul>
           </div>
@@ -53,6 +64,121 @@
     </div>
   </header>
   <!--================Header Menu Area =================-->
+
+  <div class="modal fade" id="theModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <!--
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">My modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        -->
+        <div class="modal-body">
+          <!--
+           <iframe src="comite/Login/index.html" width="100%" height="300px" style="border: none;"></iframe>
+         -->
+          <!-- divs -->
+          <div class="container h-100 py-2">
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active border-bottom-0" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                  aria-controls="home" aria-selected="true">Iniciar Sesión</a>
+              </li>
+              <li class="nav-item">
+                <a id="idNav_Recover" class="nav-link border-bottom-0" id="profile-tab" data-toggle="tab"
+                  href="#profile" role="tab" aria-controls="profile" aria-selected="false">Recuperar Contraseña</a>
+              </li>
+
+            </ul>
+
+            <div class="tab-content h-75">
+              <div class="tab-pane h-100 p-3 active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="card">
+                  <article class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1">Iniciar Sesión</h4>
+                    <hr>
+                    <p class="text-success text-center">Si ya tienes cuenta</p>
+                    <form action="comite/validar.php" method="post" autocomplete="off">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                          </div>
+                          <input id="Email-Login" name="mail" class="form-control" placeholder="Email" type="email"
+                            required>
+                        </div> <!-- input-group.// -->
+                      </div> <!-- form-group// -->
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                          </div>
+                          <input class="form-control" placeholder="******" type="password" name="pass" required>
+                        </div> <!-- input-group.// -->
+                      </div> <!-- form-group// -->
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                      </div>
+                      <div id="Alert-Error" style="display: none;" class="alert alert-danger" role="alert">
+                        A simple primary alert—check it out!
+                      </div> <!-- form-group// -->
+                      <!-- <p class="text-center"><a href="#" class="btn">Forgot password?</a></p> -->
+                    </form>
+                  </article>
+                </div>
+              </div>
+              <div class="tab-pane h-100 p-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="card">
+                  <article class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1">Recuperar Contraseña</h4>
+                    <hr>
+                    <p class="text-success text-center">Por favor ingrese un correo válido, registrado en nuestra base
+                      de datos, para enviar la contraseña.</p>
+                    <form id="recover-form" action="enviarmail.php" method="post">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                          </div>
+                          <input id="email" name="email" class="form-control" placeholder="Email@unilibre.edu.co"
+                            type="email" required>
+                          <!--<input name="email" id="email" type="email" class="form-control" placeholder="example@example.com"> -->
+                        </div> <!-- input-group.// -->
+                      </div> <!-- form-group// -->
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Recuperar Contraseña </button>
+                      </div>
+                      <div id="Alert-Error-Recover" style="display: none;" class="alert alert-danger" role="alert">
+                        A simple primary alert—check it out!
+                      </div>
+                      <!-- form-group// -->
+                      <p class="text-center" style="color: #007bff;">
+                        Es posible que el correo sea enviado a su bandeja de correo no deseado
+                      </p>
+                    </form>
+                  </article>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <!-- end divs -->
+        </div>
+
+        <div class="modal-footer">
+          <!--
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send message</button>
+          -->
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
   <main class="side-main">
@@ -176,27 +302,27 @@
           <div class="row">
             <div class="col-lg-4">
               <a href="./modelo/Reglamento.pdf" target="_blank">
-              <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
+                <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
 
-                <h3 class="card-feature__title">Reglamento</h3>
-                <p class="card-feature__subtitle">v3.0</p>
-              </div>
+                  <h3 class="card-feature__title">Reglamento</h3>
+                  <p class="card-feature__subtitle">v3.0</p>
+                </div>
               </a>
             </div>
             <div class="col-lg-4">
               <a href="./modelo/reglamento-grados-ingenieria-2019.pdf" target="_blank">
-              <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
-                <h3 class="card-feature__title">Reglamento </h3>
-                <p class="card-feature__subtitle">v4.0 2019 / Antes de marzo 2019</p>
-              </div>
+                <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
+                  <h3 class="card-feature__title">Reglamento </h3>
+                  <p class="card-feature__subtitle">v4.0 2019 / Antes de marzo 2019</p>
+                </div>
               </a>
             </div>
             <div class="col-lg-4">
               <a href="./modelo/propuesta.docx" target="_blank">
-              <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
-                <h3 class="card-feature__title">Formato presentación Propuesta</h3>
-                <p class="card-feature__subtitle">A partir de marzo 2019</p>
-              </div>
+                <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
+                  <h3 class="card-feature__title">Formato presentación Propuesta</h3>
+                  <p class="card-feature__subtitle">A partir de marzo 2019</p>
+                </div>
               </a>
             </div>
             <br>
@@ -214,26 +340,26 @@
           <div class="row">
             <div class="col-lg-4">
               <a href="./modelo/GUÍA PARA LA ELABORACIÓN DEL ANTEPROYECTO.pdf" target="_blank">
-              <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
-                <h3 class="card-feature__title">Guía Elaboracion Anteproyecto</h3>
-                <p class="card-feature__subtitle">A partir de marzo 2019</p>
-              </div>
+                <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
+                  <h3 class="card-feature__title">Guía Elaboracion Anteproyecto</h3>
+                  <p class="card-feature__subtitle">A partir de marzo 2019</p>
+                </div>
               </a>
             </div>
             <div class="col-lg-4">
               <a href="./modelo/GUÍA PARA LA ELABORACIÓN DEL DOCUMENTO FINAL.pdf" target="_blank">
-              <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
-                <h3 class="card-feature__title">Guía Elaboración documento Final</h3>
-                <p class="card-feature__subtitle">A partir de marzo 2019</p>
-              </div>
+                <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
+                  <h3 class="card-feature__title">Guía Elaboración documento Final</h3>
+                  <p class="card-feature__subtitle">A partir de marzo 2019</p>
+                </div>
               </a>
             </div>
             <div class="col-lg-4">
               <a href="./modelo/rubrica-poster.docx" target="_blank">
-              <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
-                <h3 class="card-feature__title">Guía Elaboración documento Final</h3>
-                <p class="card-feature__subtitle">A partir de marzo 2019</p>
-              </div>
+                <div class="card card-feature text-center text-lg-left mb-4 mb-lg-0">
+                  <h3 class="card-feature__title">Guía Elaboración documento Final</h3>
+                  <p class="card-feature__subtitle">A partir de marzo 2019</p>
+                </div>
               </a>
             </div>
 
@@ -293,12 +419,114 @@
   </footer>
   <!-- ================ End footer Area ================= -->
 
+  <script type="text/javascript" src="js/bs4-form-validation.js"></script>
+  <script type="text/javascript">
+    let form_recover = new Validation("recover-form");
+    // Validation Functions
+    form_recover.requireEmail("email", 4, 50, [" "], []);
+    /*
+    form_login.requireText("name", 5, 20, [" "], []);
+    form_login.requireEmail("email", 4, 30, [" "], []);
+    form_login.registerPassword("password", 6, 20, [" "], [], "confirm");
+    */
+    $(document).ready(function () {
+      onVerifyMessageLogin();
+      onVerifyMessageRecover();
+    });
+
+    function onVerifyMessageLogin() {
+      var StateLogin = localStorage.getItem("StateMessageLogin");
+      switch (StateLogin) {
+        case null:
+          localStorage.setItem("StateMessageLogin", 0);
+          break;
+        case "1":
+          document.getElementById("Modal_Login").click();
+          var Message = localStorage.getItem("MessageLogin");
+          // mostrar mensaje
+          var AlertLogin = document.getElementById("Alert-Error");
+          AlertLogin.style.display = "block";
+          AlertLogin.innerHTML = Message;
+
+          // mapear email
+          if (localStorage.getItem("EmailLogin") != null) {
+            document.getElementById("Email-Login").value = localStorage.getItem("EmailLogin");
+          }
+
+          // eliminar el localStorage
+          localStorage.removeItem("StateMessageLogin");
+          localStorage.removeItem("MessageLogin");
+          localStorage.removeItem("EmailLogin");
+
+          break;
+        default:
+
+          break;
+      }
+    }
+
+    function onVerifyMessageRecover() {
+      var StateRecover = localStorage.getItem("StateMessageRecover");
+      switch (StateRecover) {
+        case null:
+          localStorage.setItem("StateMessageRecover", 0);
+          break;
+        case "1":
+          // 1  = error
+          document.getElementById("Modal_Login").click();
+          //idNav_Recover
+          //setTimeout(() => {
+          document.getElementById("idNav_Recover").click();
+          //}, 500);
+
+          var Message_Recover = localStorage.getItem("MessageRecover");
+          // mostrar mensaje
+          var AlertLogin = document.getElementById("Alert-Error-Recover");
+          AlertLogin.style.display = "block";
+          AlertLogin.className = "alert alert-danger";
+          AlertLogin.innerHTML = Message_Recover;
+
+          // mapear correo
+          if (localStorage.getItem("Email-Recover") != null) {
+            document.getElementById("email").value = localStorage.getItem("Email-Recover");
+          }
+
+          // eliminar el localStorage
+          localStorage.removeItem("StateMessageRecover");
+          localStorage.removeItem("MessageRecover");
+          localStorage.removeItem("Email-Recover");
+          break;
+        case "2":
+          document.getElementById("Modal_Login").click();
+          document.getElementById("idNav_Recover").click();
+
+          var Message_Recover = localStorage.getItem("MessageRecover");
+          // mostrar mensaje
+          var AlertLogin = document.getElementById("Alert-Error-Recover");
+          AlertLogin.style.display = "block";
+          AlertLogin.className = "alert alert-success";
+          AlertLogin.innerHTML = Message_Recover;
+
+          // eliminar el localStorage
+          localStorage.removeItem("StateMessageRecover");
+          localStorage.removeItem("MessageRecover");
+          localStorage.removeItem("Email-Recover");
+
+          break;
+        default:
+
+          break;
+      }
+    }
+  </script>
+
   <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
   <script src="js/jquery.ajaxchimp.min.js"></script>
   <script src="js/mail-script.js"></script>
   <script src="js/main.js"></script>
+
 </body>
 
 </html>

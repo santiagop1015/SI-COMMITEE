@@ -12,7 +12,14 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
     if ($pass == "") {
 
         echo '<script>alert("CONTRASEÑA INCORRECTA")</script> ';
-        echo "<script>location.href='index.html'</script>";
+        //echo "<script>location.href='index.html'</script>";
+        echo "<script>
+        localStorage.setItem('StateMessageLogin', 1);
+        localStorage.setItem('MessageLogin', 'Usuario o contraseña Incorrecta');
+        localStorage.setItem('EmailLogin', '$username');
+        location.href='../index.html';
+        </script>";
+        
     }
     if ($pass == $f2['pasadmin']) {
         $_SESSION['id'] = $f2['id'];
@@ -131,10 +138,22 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
     } else {
         //echo '<script>alert("CONTRASEÑA INCORRECTA")</script> ';
         //echo "<script>location.href='Login/index.html'</script>";
-        echo "<script>location.href='Delayed.php?incorrecta'</script>";
+       // echo "<script>location.href='Delayed.php?incorrecta'</script>";
+       echo "<script>
+        localStorage.setItem('StateMessageLogin', 1);
+        localStorage.setItem('MessageLogin', 'Usuario o contraseña Incorrecta');
+        localStorage.setItem('EmailLogin', '$username');
+        location.href='../index.html';
+        </script>";
     }
 } else {
     //echo '<script>alert("ESTE USUARIO NO EXISTE, POR FAVOR COMUNIQUESE CON EL COORDINADOR PARA PODER INGRESAR")</script> ';
     //echo "<script>location.href='Login/index.html'</script>";
-    echo "<script>location.href='Delayed.php?noex'</script>";
+    //echo "<script>location.href='Delayed.php?noex'</script>";
+    echo "<script>
+        localStorage.setItem('StateMessageLogin', 1);
+        localStorage.setItem('MessageLogin', 'Este usuario no existe, por favor comuniquese con el coordinador para poder ingresar');
+        localStorage.setItem('EmailLogin', '$username');
+        location.href='../index.html';
+        </script>";
 }

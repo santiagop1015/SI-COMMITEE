@@ -1,7 +1,7 @@
 //
 // Component: Direct Chat
 //
- 
+
 .direct-chat {
   .card-body {
     overflow-x: hidden;
@@ -14,7 +14,6 @@
       @include translate(0, 0);
     }
   }
-
 
   &.timestamp-light {
     .direct-chat-timestamp {
@@ -48,7 +47,7 @@
 
 .direct-chat-messages,
 .direct-chat-contacts {
-  transition: transform .5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .direct-chat-text {
@@ -68,7 +67,7 @@
   &::before {
     border: solid transparent;
     border-right-color: $direct-chat-default-msg-border-color;
-    content: ' ';
+    content: " ";
     height: 0;
     pointer-events: none;
     position: absolute;
