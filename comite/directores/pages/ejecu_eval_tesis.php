@@ -16,7 +16,7 @@ echo ' <script language="javascript">alert("Debe llenar todo los campos... Evalu
 
 //	var_dump($_POST);
 
-	mysqli_query($mysqli,"INSERT INTO evaluacion1 VALUES('','$ID_tesis','$forprob','$justificacion','$objetivos','$marcoref','$metodologia','$crono','$presupuesto','$biblio','$ciber','$claridad','$evidencia','$concepto','$observaciones','$user','$fecha_eval')");
+	mysqli_query($mysqli,"INSERT INTO evaluacion VALUES('','$ID_tesis','$forprob','$justificacion','$objetivos','$marcoref','$metodologia','$crono','$presupuesto','$biblio','$ciber','$claridad','$evidencia','$concepto','$observaciones','$user','$fecha_eval')");
 
 		//		echo ' <script language="javascript">alert("Evaluacion registrada con éxito");</script> ';
 								 //echo "<script>window.open('director.php', '_top')</script>";

@@ -807,6 +807,9 @@ date_default_timezone_set ('America/Bogota');
                                                     iconBox.innerHTML = "   Exito";
                                                     Mensaje.innerHTML =
                                                         "Evaluación actualizada con éxito";
+                                                    $('#idButtonGuardar').prop(
+                                                        'disabled',
+                                                        true);
                                                 }
                                             });
                                         })
