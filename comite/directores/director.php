@@ -646,12 +646,9 @@ $dir = $_SESSION['user'];
                                 $total2 = 0;
                                 //echo $total2;
                                 require("../connect_db.php");
-                               $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
-                               // prueba // $sql = ("SELECT * FROM tesis ORDER BY id_tesis DESC ");
-
+                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                 $query = mysqli_query($mysqli, $sql);
                                 ?>
-
                                     <div class="box">
                                         <div class="box-body table-responsive no-padding">
                                             <table class="table table-striped projects">
@@ -664,8 +661,8 @@ $dir = $_SESSION['user'];
                                                         <th class="text-center">Fecha_Aprob</th>
                                                         <th class="text-center">Archivo</th>
                                                         <th class="text-center">Evaluar</th>
-                                                        <th class="text-center">Modificar</th>
-                                                        <th class="text-center">Eval</th>
+                                                        <!--    <th class="text-center">Modificar</th>
+                                                        <th class="text-center">Eval</th> -->
                                                     </tr>
                                                 </thead>
 
@@ -688,6 +685,22 @@ $dir = $_SESSION['user'];
                                                 ?>
                                                     <tr>
 
+                                                        <?php
+                                                    require("../connect_db.php");
+                                                    $sql_Eval_anteproyect = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                    $result_Eval_Anteproyecto = mysqli_query($mysqli, $sql_Eval_anteproyect);
+                                                    $state = 0;
+                                                    while ($row = mysqli_fetch_row($result_Eval_Anteproyecto)) {
+                                                        $id_Eval_anteproyecto = $row[0];
+                                                        $asd = $row[1];
+                                                        $jurado = utf8_decode($row[15]);
+                                                        $fecha_eval = $row[16];
+
+                                                        $state = 1;
+                                                    }
+
+                                                    if($state != 1) {
+                                                        ?>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[6] "; ?></td>
@@ -705,68 +718,10 @@ $dir = $_SESSION['user'];
                                                         } else {
                                                         echo "";
                                                         }
-                                                      //  echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; ?>
-                                                        </td>
-                                                        <?php
-                                                        require("../connect_db.php");
-                                                        $sql = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
-                                                        //echo $sql;
-                                                        $ressql = mysqli_query($mysqli, $sql);
-
-                                                        while ($row = mysqli_fetch_row($ressql)) {
-                                                            $asd = $row[1];
-                                                            $jurado = utf8_decode($row[15]);
-                                                            $fecha_eval = $row[16];
-                                                        ?>
-
-                                                        <td class="text-center">EVALUADO</td>
-                                                        <td class="text-center">
-                                                            <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
-                                                                ?>
-                                                            <?php
-
-                                                      echo "
-                                                      <a class='btn btn-info btn-sm' href='pages/act_evaluacion.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
-                                                      <i class='fas fa-pencil-alt'></i>
-                                                      Editar
-                                                      </i>
-                                                      </a>
-                                                      ";
-
-                                                          /*      $direccion = '"pages/act_evaluacion.php?"';
-                                                                $parametro = '"id=' . $row[0] . '&jurado=' . $dir . '&ID_tesis=' . $arreglo[0] . '"';
-                                                                $img = '<img src="images/actualizar.png"  width="30"  height="30" class="img-rounded"></img>';
-
-                                                                echo "<button onclick='CenterWindow($direccion, $parametro, 1000, 600);'>$img</button>";
-                                                                */
-                                                                ?>
+                                                      ?>
                                                         </td>
                                                         <td class="text-center">
                                                             <?php
-                                                        echo "
-                                                        <a class='btn btn-danger btn-sm' href='../archivos/pdf/verevalposter.php?id=$arreglo[0]'>
-                                                        <i class='fas fa-file-pdf'></i>
-                                                        
-                                                        </i>
-                                                        </a>
-                                                        ";
-                                                      //  echo "<a href='./pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='25'  height='35'  class='img-rounded';" ?>
-                                                        </td>
-
-                                                        <?php
-                                                        }
-                                                        ?>
-
-
-                                                        <?php
-
-
-                                                        if ($asd != $ide) {
-                                                        ?>
-                                                        <td class="text-center">
-
-                                                            <?php
-
                                                               echo "
                                                               <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$arreglo[0]&jur=$dir'>
                                                               <i class='fas fa-spell-check'></i>
@@ -774,28 +729,13 @@ $dir = $_SESSION['user'];
                                                               </i>
                                                               </a>
                                                               ";
-                                                             /*   $direccion = '"pages/evaluartesis.php?"';
-                                                                $parametro = '"id=' . $arreglo[0] . '&jur=' . $dir . '"';
-                                                                $img = '<img src="images/evalua.png"  width="30"  height="30" class="img-rounded"></img>';
-
-                                                                echo "
-                                                                    <script>
-                                                                    var alto = screen.height;
-                                                                    var ancho = screen.width;
-                                                                    </script>
-                                                                    
-                                                                    <button onclick='CenterWindow($direccion, $parametro, ancho, alto);'>$img</button>
-                                                                    ";
-                                                                    */
                                                                 ?>
                                                         </td>
-                                                        <td class="text-center">N/A</td>
-                                                        <td class="text-center">N/A</td>
                                                         <?php
-
-
-                                                        }
-                                                    }
+                                                    } else {
+                                                        $total2 - 1;
+                                                    } 
+                                            }
                                                     ?>
                                                     </tr>
                                                 </tbody>
@@ -1077,11 +1017,10 @@ $dir = $_SESSION['user'];
                                                                 <th class="text-center">Eval</th>
                                                             </tr>
                                                         </thead>
-
                                                         <tbody>
                                                             <?php
                                                             require("../connect_db.php");
-                                                            $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC ");
+                                                            $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                                             $query = mysqli_query($mysqli, $sql);
                                                             $total1 = 0;
                                                             while ($arreglo = mysqli_fetch_array($query)) {
@@ -1186,17 +1125,18 @@ $dir = $_SESSION['user'];
                             </div>
 
                         </div>
-                        <!--Termina pestana6-->
-                        <!--Empieza pestana7-->
-                        <div id="cpestana7">
+                    </div>
+                    <!--Termina pestana6-->
+                    <!--Empieza pestana7-->
+                    <div id="cpestana7">
 
 
-                            <div class="container-fluid">
+                        <div class="container-fluid">
 
-                                <div class="card card-primary card-tabs">
-                                    <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
-                                        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                                            <?php
+                            <div class="card card-primary card-tabs">
+                                <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
+                                    <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                                        <?php
         
         $año = date("Y");
        // $año = gettype($año);
@@ -1238,11 +1178,11 @@ $dir = $_SESSION['user'];
             $año = $año - 1;
     }
     ?>
-                                        </ul>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="tab-content" id="custom-tabs-one-tabContent">
-                                            <?php
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-one-tabContent">
+                                        <?php
             require('../connect_db.php');
             $año = date("Y");
        // $año = gettype($año);
@@ -1299,26 +1239,27 @@ $dir = $_SESSION['user'];
             }
             
             ?>
-                                        </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
                             </div>
 
+
+
+
+
+
                         </div>
-                        <!--Termina pestana7-->
-                        <!--Empieza pestana8-->
-                        <div id="cpestana8">
 
 
-                            <div class="card card-warning">
-                                <div class="card-body">
-                                    <?php
+                    </div>
+                    <!--Termina pestana7-->
+                    <!--Empieza pestana8-->
+                    <div id="cpestana8">
+
+
+                        <div class="card card-warning">
+                            <div class="card-body">
+                                <?php
                                 require("../connect_db.php");
                                 $pr = $_SESSION['id'];
                                 $sql = "SELECT * FROM login WHERE id=$pr";
@@ -1337,279 +1278,277 @@ $dir = $_SESSION['user'];
                                 }
 
                                 ?>
-                                    <form id="loginForm2" action="pages/ejecu_act_datos_dir.php" method="post"
-                                        enctype="multipart/form-data" role="form">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <!-- text input -->
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Id</label>
-                                                        <input type="text" name="id" class="form-control"
-                                                            placeholder="id" value="<?php echo $id ?>"
-                                                            style="width: 50%" readonly="readonly">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Cedula</label>
-                                                        <input type="text" name="cedula" value="<?php echo $cedula ?>"
-                                                            class="form-control" placeholder="Id Estudiante.."
-                                                            readonly="readonly" style="width: 50%">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Nombre</label>
-                                                        <input type="text" name="user" value="<?php echo $user ?>"
-                                                            class="form-control" placeholder="Id Estudiante.."
-                                                            style="width: 50%" readonly="readonly">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Usuario</label>
-                                                        <input type="text" name="email" value="<?php echo $email ?>"
-                                                            class="form-control" placeholder="Id Estudiante.."
-                                                            readonly="readonly" style="width: 50%">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Password</label>
-                                                        <input type="text" name="pasdir" value="<?php echo $pasdir ?>"
-                                                            class="form-control" style="width: 50%">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Tipo de Usuario</label>
-                                                        <input type="text" name="TipoUsuario"
-                                                            value="<?php echo $TipoUsuario ?>" class="form-control"
-                                                            readonly="readonly" style="width: 50%">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Telefono</label>
-                                                        <input type="text" name="telefono"
-                                                            value="<?php echo $telefono ?>" class="form-control"
-                                                            style="width: 50%">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Programa</label>
-                                                        <input type="text" name="programa"
-                                                            value="<?php echo $programa ?>" class="form-control"
-                                                            placeholder="Id Estudiante.." readonly="readonly"
-                                                            style="width: 50%">
-                                                    </div>
-                                                </center>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <center>
-                                                    <div class="form-group">
-                                                        <label>Fecha de Nacimiento</label>
-                                                        <input type="text" name="fechadenacimiento"
-                                                            value="<?php echo $fechadenacimiento ?>"
-                                                            class="form-control" style="width: 50%">
-                                                    </div>
-                                                </center>
-                                            </div>
+                                <form id="loginForm2" action="pages/ejecu_act_datos_dir.php" method="post"
+                                    enctype="multipart/form-data" role="form">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Id</label>
+                                                    <input type="text" name="id" class="form-control" placeholder="id"
+                                                        value="<?php echo $id ?>" style="width: 50%"
+                                                        readonly="readonly">
+                                                </div>
+                                            </center>
                                         </div>
-                                </div>
-
-                                <div class="card-footer">
-
-
-                                    <center> <button type="submit" id="login1" class="btn btn-primary mr-2"
-                                            style="background-color: green; margin-bottom: 10px ">Guardar</button>
-                                    </center>
-
-
-
-
-                                </div>
-
-
-                                </form>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Cedula</label>
+                                                    <input type="text" name="cedula" value="<?php echo $cedula ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        readonly="readonly" style="width: 50%">
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Nombre</label>
+                                                    <input type="text" name="user" value="<?php echo $user ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        style="width: 50%" readonly="readonly">
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Usuario</label>
+                                                    <input type="text" name="email" value="<?php echo $email ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        readonly="readonly" style="width: 50%">
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="text" name="pasdir" value="<?php echo $pasdir ?>"
+                                                        class="form-control" style="width: 50%">
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Tipo de Usuario</label>
+                                                    <input type="text" name="TipoUsuario"
+                                                        value="<?php echo $TipoUsuario ?>" class="form-control"
+                                                        readonly="readonly" style="width: 50%">
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Telefono</label>
+                                                    <input type="text" name="telefono" value="<?php echo $telefono ?>"
+                                                        class="form-control" style="width: 50%">
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Programa</label>
+                                                    <input type="text" name="programa" value="<?php echo $programa ?>"
+                                                        class="form-control" placeholder="Id Estudiante.."
+                                                        readonly="readonly" style="width: 50%">
+                                                </div>
+                                            </center>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <center>
+                                                <div class="form-group">
+                                                    <label>Fecha de Nacimiento</label>
+                                                    <input type="text" name="fechadenacimiento"
+                                                        value="<?php echo $fechadenacimiento ?>" class="form-control"
+                                                        style="width: 50%">
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
                             </div>
+
+                            <div class="card-footer">
+
+
+                                <center> <button type="submit" id="login1" class="btn btn-primary mr-2"
+                                        style="background-color: green; margin-bottom: 10px ">Guardar</button>
+                                </center>
+
+
+
+
+                            </div>
+
+
+                            </form>
                         </div>
-                        <!--Termina pestana8-->
-                        <!--Empieza pestana9-->
-                        <div id="cpestana9">
+                    </div>
+                    <!--Termina pestana8-->
+                    <!--Empieza pestana9-->
+                    <div id="cpestana9">
 
 
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card card-warning">
-                                            <div class="card-header" style="background-color: #B42A2A; color: white">
-                                                <h5 class="card-title">Envianos un comentario</h5>
-                                            </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card card-warning">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Envianos un comentario</h5>
+                                        </div>
 
-                                            <div class="card-body">
-                                                <form id="idFormComen">
-                                                    <div class="row">
-                                                        <div class="col-sm-12">
-                                                            <!-- text input -->
-                                                            <?php
+                                        <div class="card-body">
+                                            <form id="idFormComen">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <!-- text input -->
+                                                        <?php
                                                         $hoy = date("Y-m-d");;
                                                         ?>
-                                                            <div class="form-group">
-                                                                <label>Fecha</label>
-                                                                <input type="text" name="fecha" class="form-control"
-                                                                    value="<?php echo $hoy; ?>" readonly="readonly">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <!-- text input -->
-                                                            <div class="form-group">
-                                                                <label>Usuario</label>
-                                                                <input type="text" name="user" class="form-control"
-                                                                    placeholder="Nombre Estudiante.."
-                                                                    value="<?php echo utf8_decode($_SESSION['user']); ?>"
-                                                                    readonly="readonly">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <!-- text input -->
-                                                            <div class="form-group">
-                                                                <label>Carrera</label>
-                                                                <input type="text" name="programa" class="form-control"
-                                                                    placeholder="Nombre Estudiante.."
-                                                                    value="<?php echo utf8_decode($programa); ?>"
-                                                                    readonly="readonly">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <!-- text input -->
-                                                            <div class="form-group">
-
-                                                                <textarea id="idTextAreaComen" class="form-control"
-                                                                    rows="6" name="comen" cols="29"
-                                                                    placeholder="Escriba su comentario"
-                                                                    aria-required="true"></textarea>
-
-                                                            </div>
+                                                        <div class="form-group">
+                                                            <label>Fecha</label>
+                                                            <input type="text" name="fecha" class="form-control"
+                                                                value="<?php echo $hoy; ?>" readonly="readonly">
                                                         </div>
                                                     </div>
-                                                    <div class="box-footer">
-                                                        <!--  <button type="submit" class="btn btn-default"
+                                                    <div class="col-sm-6">
+                                                        <!-- text input -->
+                                                        <div class="form-group">
+                                                            <label>Usuario</label>
+                                                            <input type="text" name="user" class="form-control"
+                                                                placeholder="Nombre Estudiante.."
+                                                                value="<?php echo utf8_decode($_SESSION['user']); ?>"
+                                                                readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <!-- text input -->
+                                                        <div class="form-group">
+                                                            <label>Carrera</label>
+                                                            <input type="text" name="programa" class="form-control"
+                                                                placeholder="Nombre Estudiante.."
+                                                                value="<?php echo utf8_decode($programa); ?>"
+                                                                readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <!-- text input -->
+                                                        <div class="form-group">
+
+                                                            <textarea id="idTextAreaComen" class="form-control" rows="6"
+                                                                name="comen" cols="29"
+                                                                placeholder="Escriba su comentario"
+                                                                aria-required="true"></textarea>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="box-footer">
+                                                    <!--  <button type="submit" class="btn btn-default"
                                                     name="enviar">Enviar</button>
                                                     -->
-                                                        <div id="idBoxComen"
-                                                            class="alert alert-danger alert-dismissible mt-6"
-                                                            style="Display: None;">
-                                                            <h5>
-                                                                <i id="idIConBoxComen" class="icon fas fa-ban"></i>
-                                                                Alerta
-                                                            </h5>
-                                                            <p id="idMessageComen"></p>
+                                                    <div id="idBoxComen"
+                                                        class="alert alert-danger alert-dismissible mt-6"
+                                                        style="Display: None;">
+                                                        <h5>
+                                                            <i id="idIConBoxComen" class="icon fas fa-ban"></i>
+                                                            Alerta
+                                                        </h5>
+                                                        <p id="idMessageComen"></p>
 
-                                                        </div>
-                                                        <button id="idButtonEnviarComen" type="button"
-                                                            class="btn btn-primary float-right">Enviar</button>
                                                     </div>
-
-
-                                                    <script>
-
-                                                    </script>
-
-                                                </form>
-
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card card-warning">
-                                            <div class="card-body">
-                                                <div class="callout callout-info">
-
-                                                    Para solicitudes y/o casos especiales, por favor enviar correo
-                                                    electronico
-                                                    al comite de su programa, para ayuda con el SI-COMMITTEE, envie un
-                                                    correo a
-                                                    pabloe.carrenoh@unilibre.edu.co.
-
-                                                </div>
-                                                <div class="callout callout-info">
-
-                                                    Este es un recurso para estar informado de lo que esta sucediendo en
-                                                    el
-                                                    comite, por favor solo comentarios académicos
-
-                                                </div>
-                                                <div class="callout callout-info">
-
-                                                    Documentos: <br><br>
-                                                    <li>
-                                                        <a style="color: blue;">Reglamento v3.0</a>
-                                                    </li>
-                                                    <li>
-                                                        <a style="color: blue;">Reglamento
-                                                            v4.0 2019</a>
-                                                    </li>
-                                                    <li>
-                                                        <a style="color: blue;">Formato
-                                                            presentacion Propuesta</a>
-                                                    </li>
-                                                    <li>
-                                                        <a style="color: blue;">Guia
-                                                            Elaboracion documento Final</a>
-                                                    </li>
-                                                    <li>
-                                                        <a style="color: blue;">Rubrica
-                                                            - Presentación de Póster</a>
-                                                    </li>
-
-
+                                                    <button id="idButtonEnviarComen" type="button"
+                                                        class="btn btn-primary float-right">Enviar</button>
                                                 </div>
 
-                                                <!-- /.box -->
-                                            </div>
+
+                                                <script>
+
+                                                </script>
+
+                                            </form>
+
+
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="card card-warning">
-                                            <div class="card-header" style="background-color: #B42A2A; color: white">
-                                                <h5 class="card-title">Documentacion</h5>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-warning">
+                                        <div class="card-body">
+                                            <div class="callout callout-info">
+
+                                                Para solicitudes y/o casos especiales, por favor enviar correo
+                                                electronico
+                                                al comite de su programa, para ayuda con el SI-COMMITTEE, envie un
+                                                correo a
+                                                pabloe.carrenoh@unilibre.edu.co.
+
                                             </div>
-                                            <div class="card-body">
-                                                <div class="col-sm-12">
-                                                    <iframe
-                                                        src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
-                                                        width="100%" height="600" style="border: none;"></iframe>
+                                            <div class="callout callout-info">
+
+                                                Este es un recurso para estar informado de lo que esta sucediendo en
+                                                el
+                                                comite, por favor solo comentarios académicos
+
+                                            </div>
+                                            <div class="callout callout-info">
+
+                                                Documentos: <br><br>
+                                                <li>
+                                                    <a style="color: blue;">Reglamento v3.0</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Reglamento
+                                                        v4.0 2019</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Formato
+                                                        presentacion Propuesta</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Guia
+                                                        Elaboracion documento Final</a>
+                                                </li>
+                                                <li>
+                                                    <a style="color: blue;">Rubrica
+                                                        - Presentación de Póster</a>
+                                                </li>
 
 
-                                                </div>
+                                            </div>
+
+                                            <!-- /.box -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card card-warning">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Documentacion</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="col-sm-12">
+                                                <iframe
+                                                    src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
+                                                    width="100%" height="600" style="border: none;"></iframe>
+
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                        <!--Termina pestana9-->
+
                     </div>
+                    <!--Termina pestana9-->
+                </div>
             </section>
         </div>
         <!-- /.content-wrapper -->
