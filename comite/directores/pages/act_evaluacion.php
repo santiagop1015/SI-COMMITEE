@@ -357,8 +357,8 @@ date_default_timezone_set ('America/Bogota');
                                                         placeholder=""><?php echo $evidencia?></textarea>
                                                 </div>
                                                 <div class="form-group ancho">
-                                                    <label>CONCEPTO: (Aprobado-Aprobado con
-                                                        Modificaciones-Aplazado-Rechazado)</label>
+                                                    <label>CONCEPTO: ("Aprobado" - "Aprobado con
+                                                        Modificaciones" - "Aplazado" - "Rechazado")</label>
                                                     <textarea name="concepto" class="form-control" rows="auto"
                                                         placeholder=""><?php echo $concepto?></textarea>
                                                 </div>
@@ -442,6 +442,10 @@ date_default_timezone_set ('America/Bogota');
                                             iconBox.innerHTML = "   Exito";
                                             Mensaje.innerHTML =
                                                 "Evaluación realizada con éxito";
+                                            $('#idButtonGuardar').prop(
+                                                'disabled',
+                                                true);
+
                                         } else {
                                             Box.style.display = 'Block';
                                             Box.className =

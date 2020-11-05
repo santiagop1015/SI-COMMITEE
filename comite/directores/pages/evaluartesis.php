@@ -241,14 +241,14 @@ date_default_timezone_set ('America/Bogota');
 
                                                 <div class="form-group">
                                                     <label>Id_eval</label>
-                                                    <input type="text" name="id" value="<?php echo $id ?>"
+                                                    <input type="text" name="ide" value="<?php echo $ide ?>"
                                                         class="form-control" placeholder="Id_eval" readonly="readonly">
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label>Id Tesis</label>
-                                                    <input type="text" name="id_tesis" value="<?php echo $ID_tesis ?>"
+                                                    <input type="text" name="ID_tesis" value="<?php echo $ID_tesis ?>"
                                                         class="form-control" placeholder="Id Tesis" readonly="readonly">
                                                 </div>
                                             </div>
@@ -618,6 +618,10 @@ date_default_timezone_set ('America/Bogota');
                                                                 $('#idButtonGuardar').prop(
                                                                     'disabled',
                                                                     true);
+
+                                                                setTimeout(() => {
+                                                                    location.reload();
+                                                                }, 2000);
                                                             } else {
                                                                 Box.style.display = 'Block';
                                                                 Box.className =

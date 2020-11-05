@@ -643,7 +643,7 @@ $dir = $_SESSION['user'];
 
                                     <?php
 
-                                $total2 = 0;
+                                $total_anteproyects = 0;
                                 //echo $total2;
                                 require("../connect_db.php");
                                 $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
@@ -681,7 +681,7 @@ $dir = $_SESSION['user'];
                                                         $alma = "./otros";
                                                     }
                                                     $ide = $arreglo[0];
-                                                    $total2++;
+                                                    $total_anteproyects++;
                                                 ?>
                                                     <tr>
 
@@ -696,10 +696,11 @@ $dir = $_SESSION['user'];
                                                         $jurado = utf8_decode($row[15]);
                                                         $fecha_eval = $row[16];
 
-                                                        $state = 1;
-                                                    }
+                                                        $state = 1;  
+                                                        }
 
-                                                    if($state != 1) {
+                                                        if($state != 1) {
+                                                           $anteproyectos_exist = true;
                                                         ?>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
@@ -725,7 +726,6 @@ $dir = $_SESSION['user'];
                                                               echo "
                                                               <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$arreglo[0]&jur=$dir'>
                                                               <i class='fas fa-spell-check'></i>
-                                                              Evaluar
                                                               </i>
                                                               </a>
                                                               ";
@@ -733,8 +733,11 @@ $dir = $_SESSION['user'];
                                                         </td>
                                                         <?php
                                                     } else {
-                                                        $total2 - 1;
+                                                        $state = 0;
+                                                        $total_anteproyects = $total_anteproyects - 1;
+                                                        $anteproyectos_exist = false;
                                                     } 
+                                                    
                                             }
                                                     ?>
                                                     </tr>
@@ -743,7 +746,7 @@ $dir = $_SESSION['user'];
 
                                             <?php
 
-                                        echo "<center><font color='red' size='3'>Total registros: $total2</font><br></center>"; ?>
+                                        echo "<center><font color='red' size='3'>Total registros: $total_anteproyects</font><br></center>"; ?>
                                         </div>
                                         <!-- /.box-body -->
                                     </div>
@@ -762,7 +765,7 @@ $dir = $_SESSION['user'];
                                 <div class="card-body">
 
                                     <?php
-                                $totalp = 0;
+                                $total_proyects = 0;
                                 require("../connect_db.php");
                                 $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC");
                                 $query = mysqli_query($mysqli, $sql);
@@ -794,7 +797,7 @@ $dir = $_SESSION['user'];
                                                         $alma = "./otros";
                                                     }
                                                     $ide = $arreglo[0];
-                                                    $totalp++;
+                                                    $total_proyects++;
                                                 ?>
 
                                                     <tr>
@@ -807,9 +810,10 @@ $dir = $_SESSION['user'];
                                                             
                                                             while ($row = mysqli_fetch_row($result_Evalproyect)) {
                                                                 $state = 1;
-                                                                $totalp = 0;
                                                             }
+                                                            
                                                             if($state != 1) {
+                                                                $proyectos_exist = true;
                                                                 ?>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
@@ -837,6 +841,10 @@ $dir = $_SESSION['user'];
                                                         ?>
                                                         </td>
                                                         <?php
+                                                          } else {
+                                                            $state = 0;
+                                                            $total_proyects = $total_proyects - 1;
+                                                            $proyectos_exist = false;
                                                           }
                                                     }
                                                     ?>
@@ -846,7 +854,7 @@ $dir = $_SESSION['user'];
 
                                             <?php
 
-                                        echo "<center><font color='red' size='3'>Total registros: $totalp</font><br></center>"; ?>
+                                        echo "<center><font color='red' size='3'>Total registros: $total_proyects</font><br></center>"; ?>
                                         </div>
                                         <!-- /.box-body -->
                                     </div>
@@ -881,8 +889,8 @@ $dir = $_SESSION['user'];
                                 </div>
                                 <div class="card-body">
                                     <?php
+                                      $totalpeval = 0;
                                       require("../connect_db.php");
-                                      $total = 0;
                                       $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur')  and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC ");
                                       $query = mysqli_query($mysqli, $sql);
                                       ?>
@@ -907,7 +915,7 @@ $dir = $_SESSION['user'];
 
                                                         <tbody>
                                                             <?php
-                                                $total1 = 0;
+                                                
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     $id = $arreglo[1];
                                                     $titu = $arreglo[3];
@@ -920,7 +928,8 @@ $dir = $_SESSION['user'];
                                                     } else {
                                                         $alma = "./otros";
                                                     }
-                                                    $total1++;
+                                                    $ide = $arreglo[0];
+                                                    $totalpeval++;
                                                 ?>
                                                             <tr>
                                                                 <?php
@@ -940,12 +949,15 @@ $dir = $_SESSION['user'];
                                                         ?>
                                                                 <td><?php echo "$arreglo[3] "; ?></td>
 
-                                                                <td><?php echo "$arreglo[4]"; ?></td>
+                                                                <td class="text-center"><?php echo "$arreglo[4]"; ?>
+                                                                </td>
 
-                                                                <td><?php echo "$arreglo[6]"; ?></td>
-                                                                <td><?php echo "$arreglo[9]"; ?></td>
+                                                                <td class="text-center"><?php echo "$arreglo[6]"; ?>
+                                                                </td>
+                                                                <td class="text-center"><?php echo "$arreglo[9]"; ?>
+                                                                </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
-                                                                <td><?php 
+                                                                <td class="text-center"><?php 
                                                     if(strlen($arreglo[8]) > 1) {
                                                         echo "<a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; 
                                                         } else {
@@ -972,27 +984,29 @@ $dir = $_SESSION['user'];
                                                         ";
                                                         ?>
                                                                 </td>
-
                                                                 <?php
                                                         } else {
-                                                            $total1 = 0;
-                                                            echo '<div class="alert alert-info">
-                                                            <strong>¡Atención!</strong> usted tiene
-                                                            <strong>direcciones</strong> por aprobar y
-                                                            <strong>documentos</strong> por
-                                                            evaluar...
-                                                        </div>';
+                                                            $state = 0;
+                                                            $totalpeval = $totalpeval - 1; 
                                                         }
                                                     ?>
                                                             </tr>
                                                             <?php
+                                                }
+                                                if($proyectos_exist) {
+                                                    echo '<div class="alert alert-info">
+                                                    <strong>¡Atención!</strong> usted tiene
+                                                    <strong>proyectos</strong> por aprobar y
+                                                    <strong>documentos</strong> por
+                                                    evaluar...
+                                                </div>';
                                                 }
                                                 ?>
                                                         </tbody>
                                                     </table>
 
                                                     <?php
-                                           echo "<center><font color='red' size='3'>Total registros: $total1</font><br></center>";
+                                           echo "<center><font color='red' size='3'>Total registros: $totalpeval</font><br></center>";
                                            ?>
                                                 </div>
                                                 <!-- /.box-body -->
@@ -1022,7 +1036,7 @@ $dir = $_SESSION['user'];
                                                             require("../connect_db.php");
                                                             $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                                             $query = mysqli_query($mysqli, $sql);
-                                                            $total1 = 0;
+                                                            $totalanteval = 0;
                                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                                 if ($arreglo[6] == "Entrega Propuesta") {
                                                                     $alma = "./propuestas";
@@ -1034,7 +1048,7 @@ $dir = $_SESSION['user'];
                                                                     $alma = "./otros";
                                                                 }
                                                                 $ide = $arreglo[0];
-                                                                $total1++;
+                                                                $totalanteval++;
                                                             ?>
                                                             <tr>
                                                                 <?php
@@ -1076,7 +1090,7 @@ $dir = $_SESSION['user'];
                                                                 <td class="text-center">
                                                                     <?php
                                                         echo "
-                                                        <a class='btn btn-info btn-sm' href='pages/act_evaluacionpro.php?id=$id_Eval&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                        <a class='btn btn-info btn-sm' href='pages/act_evaluacion.php?id=$id_Eval&jurado=$dir&ID_tesis=$arreglo[0]'>
                                                         <i class='fas fa-pencil-alt'></i>
                                                         Editar
                                                         </a>
@@ -1095,24 +1109,26 @@ $dir = $_SESSION['user'];
 
                                                                 <?php
                                                         } else {
-                                                            $total1 = 0;
-                                                            echo '<div class="alert alert-info">
-                                                            <strong>¡Atención!</strong> usted tiene
-                                                            <strong>anteproyectos</strong> por aprobar y
-                                                            <strong>documentos</strong> por
-                                                            evaluar...
-                                                        </div>';
+                                                            $totalanteval = $totalanteval - 1;
                                                         }
                                                     ?>
                                                             </tr>
                                                             <?php
+                                                }
+                                                if($anteproyectos_exist) {
+                                                    echo '<div class="alert alert-info">
+                                                    <strong>¡Atención!</strong> usted tiene
+                                                    <strong>anteproyectos</strong> por aprobar y
+                                                    <strong>documentos</strong> por
+                                                    evaluar...
+                                                </div>';
                                                 }
                                                 ?>
                                                         </tbody>
                                                     </table>
 
                                                     <?php
-                                           echo "<center><font color='red' size='3'>Total registros: $total1</font><br></center>";
+                                           echo "<center><font color='red' size='3'>Total registros: $totalanteval</font><br></center>";
                                            ?>
                                                 </div>
                                             </div>
