@@ -102,7 +102,9 @@ $raiz = "../archivos";
 
 <body class="hold-transition sidebar-mini" onload="myfunction()">
 
-    <div class="loader"></div>
+    <!-- <div class="loader"></div> -->
+
+
     <!--<div id="user_model_details"></div>  -->
     <div class="wrapper">
 
@@ -410,9 +412,8 @@ $raiz = "../archivos";
                             <form id="idFormRegistrarDoc" role="form">
                                 <div class="row">
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="card card-warning">
-
                                             <?php
                                         require("../connect_db.php");
                                         $sql = ("SELECT * FROM login where id='$pr'");
@@ -423,8 +424,6 @@ $raiz = "../archivos";
 
                                         ?>
                                             <div class="card-body">
-
-
 
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -448,7 +447,7 @@ $raiz = "../archivos";
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-12">
                                                         <!-- textarea -->
                                                         <div class="form-group">
                                                             <label>Estado</label>
@@ -545,39 +544,32 @@ $raiz = "../archivos";
                                 ?>
                                 </div>
 
-                                <div class="callout callout-info">
-                                    Recuerde que si documento es
-                                    <b>Monografía</b>, debe anexar al final del archivo, el
-                                    certificado de terminación de materias
-                                </div>
-                                <div class="callout callout-info">
-                                    Recuerde que si documento es
-                                    <b>Poster</b>, debe cumplir con la Rúbrica -
-                                    Presentación de Póster
-                                </div>
-
-
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
 
                             <div class="card card-warning">
-                                <div class="card-header" style="background-color: #B42A2A; color: white">
-                                    <h5 class="card-title">Registre otro integrante</h5>
-                                </div>
+
 
                                 <div class="card-body">
+                                    <div class="alert alert-warning alert-dismissible" style="margin-bottom: 10px">
+                                        <i class="icon fas fa-exclamation-triangle"></i>Si tiene otro integrante,
+                                        escriba su numero de Id proporcionado por el sistema, sin puntos o espacios. Ej:
+                                        106
+                                    </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+
+                                        <div class="col-sm-12">
                                             <!-- text input -->
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Id otro
                                                     integrante...</label>
                                                 <input type="text" name="ID_estudiante1" class="form-control"
-                                                    id="exampleInputEmail1" placeholder="Id otro integrante..."
-                                                    required>
+                                                    id="exampleInputEmail1" placeholder="Opcional.">
                                             </div>
                                         </div>
+
+
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tipo de documento:</label>
@@ -621,7 +613,7 @@ $raiz = "../archivos";
                                                 $Observaciones = $uobservaciones;
                                             }
                                             if ($contador == 0) {
-                                    ?>
+                                       ?>
                                                 <option value="Correccion Propuesta">Corrección Propuesta
                                                 </option>
                                                 <option value="Correccion Poster">Corrección Poster</option>
@@ -713,17 +705,17 @@ $raiz = "../archivos";
                                                 }
                                             }
                                         }
-                                ?>
+                                      ?>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
+
                                         <div class="col-sm-6">
                                             <!-- textarea -->
                                             <div class="form-group">
-                                                <label>Opcion de grado: </label>
+                                                <label>Opcion de grado:</label>
                                                 <select name="id_estudiante2" class="form-control select2"
-                                                    style="width: 100%;">
+                                                    style="width: 100%;"
+                                                    placeholder="Es la modalidad en la cual esta enmarcado su documento">
                                                     <option></option>
                                                     <option value="0">Proyecto</option>
                                                     <option value="1">Semillero</option>
@@ -768,6 +760,18 @@ $raiz = "../archivos";
                                                 <input type="text" class="form-control" name="programa" id="programa"
                                                     value="<?php echo '' . $programa . ''; ?>" placeholder="Programa"
                                                     readonly="readonly">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="callout callout-info" style="margin-bottom: 5px;">
+                                                Recuerde que si documento es
+                                                <b>Monografía</b>, debe anexar al final del archivo, el
+                                                certificado de terminación de materias
+                                                <br>
+                                                Recuerde que si documento es
+                                                <b>Poster</b>, debe cumplir con la Rúbrica -
+                                                Presentación de Póster
                                             </div>
                                         </div>
                                     </div>
@@ -846,13 +850,13 @@ $raiz = "../archivos";
             <div class="container-fluid">
 
                 <div class="card">
-                   <div class="card-header" style="background-color: #B42A2A; color: white">
-                       <!-- <h3 class="card-title">Fechas reuniones Comité Ingeniería de Sistemas...
+                    <div class="card-header" style="background-color: #B42A2A; color: white">
+                        <!-- <h3 class="card-title">Fechas reuniones Comité Ingeniería de Sistemas...
                             2020-1, Enero 29, Febrero 19, Marzo 18, Abril 22, Mayo 20, Junio 17.
                         </h3> -->
                     </div>
-                    
-                    
+
+
                     <!-- /.card-header -->
                     <div class="card-body">
                         <?php
@@ -871,7 +875,8 @@ $raiz = "../archivos";
                                         <th>Estado</th>
                                         <th>Disposiciones</th>
                                         <th>Archivo</th>
-                                        <th>Fecha</th>
+                                        <th>Fecha Doc.</th>
+                                        <th>Fecha propuesta</th>
                                         <th>CIFI</th>
                                         <th>Evaluación pdf</th>
                                     </tr>
@@ -908,7 +913,13 @@ $raiz = "../archivos";
                                                     echo "<td>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
-                                                    echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
+                                                    $namefile_reducer = substr($arreglo[8], 0, 12).'...';
+                                                    if(strlen($arreglo[8]) > 13) {
+                                                        echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$namefile_reducer</a></td>";
+                                                    } else {
+                                                        echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
+                                                    }
+                                                    echo "<td>$arreglo[21]</td>";
                                                     echo "<td>$arreglo[9]</td>";
                                                     echo "<td></td>";
                                                     /*echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";*/
@@ -920,7 +931,13 @@ $raiz = "../archivos";
                                                     echo "<td>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
-                                                    echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
+                                                    $namefile_reducer = substr($arreglo[8], 0, 12).'...';
+                                                    if(strlen($arreglo[8]) > 13) {
+                                                        echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$namefile_reducer</a></td>";
+                                                    } else {
+                                                        echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
+                                                    }
+                                                    echo "<td>$arreglo[21]</td>";
                                                     echo "<td>$arreglo[9]</td>";
                                                     echo "<td>No Aplica</td>";
                                                     /* echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";*/

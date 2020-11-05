@@ -61,6 +61,7 @@ $dir = $_SESSION['user'];
 
 <body class="hold-transition sidebar-mini" onload="myfunction()">
     <div class="loader"></div>
+
     <!--Formulario Start-->
 
 

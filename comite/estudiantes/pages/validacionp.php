@@ -144,7 +144,7 @@ if(isset($_POST['ID_estudiante1']) || isset($_POST['ID_estado']) || isset($ID_di
 // empty($_POST['ID_estudiante1'])
 // empty($_POST['ID_estado'])
 
-if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudiante2) <= 0) {
+if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudiante2) <= 0 || empty($_POST['ID_estado'])) {
   echo "Revise que los siguientes campos esten completos: <br>";
     if(empty($_POST['Titulo_tesis'])) {
         echo "Titulo Tesis <br>";
@@ -159,6 +159,10 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
         echo "Tipo de documento <br>";
     }
     */
+    if(strlen($_POST['ID_estado']) <= 0) {
+        echo "Tipo de documento <br>";
+    }
+
     if(empty($ID_directores)) {
         echo "Director <br>";
     }
@@ -166,6 +170,8 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
     if(strlen($id_estudiante2) <= 0) {
         echo "Opcion de grado <br>";
     }
+
+    
     /*
     echo '-' . $id_estudiante2 . '-';
     echo strlen($id_estudiante2);
@@ -178,6 +184,8 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
     // 3 El id otro integrante no existe en el sistema
     $idIntegrante = $_POST['ID_estudiante1'];
     $sqlIntegrante = "SELECT * FROM login where Cedula='$idIntegrante'";
+
+    $fecha_actual = '"'.date('Y') . '-' . date('m') . '-' . date('d').'"';
 
    
     $consultaIntegrante = mysqli_query($mysqli, $sqlIntegrante );
@@ -196,8 +204,8 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
     //var_dump($_REQUEST);
 
     
-         mysqli_query($conexion,"insert into tesis(Titulo_tesis, ID_estudiante,ID_estado,archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado ) values
-          ('$_REQUEST[Titulo_tesis]','$_REQUEST[ID_estudiante]','$_REQUEST[ID_estado]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante1]', $id_estudiante2, '$_REQUEST[terminado]')") 
+         mysqli_query($conexion,"insert into tesis(fecha_doc, Titulo_tesis, ID_estudiante,ID_estado,archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado ) values
+          ($fecha_actual,'$_REQUEST[Titulo_tesis]','$_REQUEST[ID_estudiante]','$_REQUEST[ID_estado]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante1]', $id_estudiante2, '$_REQUEST[terminado]')") 
           or die("Problemas en el select".mysqli_error($conexion));
           
           mysqli_close($conexion);
@@ -210,9 +218,11 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
     } else {
 
 
-          mysqli_query($conexion,"insert into tesis(Titulo_tesis, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado ) values
-          ('$_REQUEST[Titulo_tesis]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante1]', $id_estudiante2, '$_REQUEST[terminado]')") 
+          mysqli_query($conexion,"insert into tesis(fecha_doc, Titulo_tesis, ID_estudiante, ID_estado, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado ) values
+          ($fecha_actual, '$_REQUEST[Titulo_tesis]', '$_REQUEST[ID_estudiante]', '$_REQUEST[ID_estado]', '$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante1]', $id_estudiante2, '$_REQUEST[terminado]')") 
           or die("Problemas en el select".mysqli_error($conexion));
+          echo $fecha_actual;
+        //  echo date('Y') . '-' . date('m') . '-' . date('d'); 
           
           mysqli_close($conexion);
 

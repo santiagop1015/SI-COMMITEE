@@ -1,3 +1,6 @@
+
+//$('#modalloading').modal('show');
+document.body.style.backgroundColor = "Transparent";
 // Dadas la division que contiene todas las pestañas y la de la pestaña que se
 // quiere mostrar, la funcion oculta todas las pestañas a excepcion de esa.
 function cambiarPestanna(pestannas, pestanna) {
@@ -79,7 +82,8 @@ function cambiarPestanna(pestannas, pestanna) {
     enviarComen();
   });
 
-  $(".loader").fadeOut("slow");
+  //  $(".loader").fadeOut("slow");
+
 }
 
 function myfunction() {
@@ -255,7 +259,7 @@ var registerMessages = function () {
           console.log(info);
 
           if (info == 1) {
-            pharaf.innerHTML = "Integrante Registrado Correctamente";
+            pharaf.innerHTML = "Documento Registrado Correctamente";
             cardMessages.style.display = "Block";
             cardMessages.className = "alert alert-success alert-dismissible";
             iconBox.className = "icon fas fa-check";
@@ -264,7 +268,7 @@ var registerMessages = function () {
             document.getElementById("idButtonRegistrarDoc").disabled = true;
 
             setTimeout(function () {
-              location.reload();
+              // location.reload();
               //clearForm();
             }, 3000);
             // $('#idFormRegistrarDoc')
