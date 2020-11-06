@@ -165,9 +165,9 @@ $passd=$arreglo[8];
             </div>
             <div class="card-footer">
                 <div class="text-right">
-                <a href="15.1-elim_user_coorp.php?id='.$arreglo[0].'" class="btn btn-sm bg-danger">
+                <!--<a href="15.1-elim_user_coorp.php?id='.$arreglo[0].'" class="btn btn-sm bg-danger">
                         <i class="fa fa-trash"></i>
-                    </a>
+                    </a> -->
                     <a href="15.2-enviar_msg_coor.php?Correo='.$arreglo[4].'&programa='.$programa.'" class="btn btn-sm bg-teal">
                         <i class="fas fa-comments"></i>
                     </a>
@@ -250,7 +250,8 @@ if($total === 0) {
                         <?php endfor ?>
                         <li class="page-item
                         <?php echo $_GET['pagina']>=$paginas ? 'disabled' : '' ?>">
-                            <a class="page-link" href="?pagina=<?php echo $_GET['pagina']+1 ?>">Siguiente</a></li>
+                            <a class="page-link" href="?pagina=<?php echo $_GET['pagina']+1 ?>">Siguiente</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

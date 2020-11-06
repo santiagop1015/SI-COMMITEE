@@ -3,7 +3,7 @@
 <?php
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../Login/index.html");
+    header("Location:../../index.html");
 }
 $coor=$_SESSION['user'];
 date_default_timezone_set ('America/Bogota');
@@ -21,7 +21,7 @@ while($arreglo=mysqli_fetch_array($query)){
 
  if ($arreglo[2]!='Coordinador') {
 	require("../desconectar.php");
-	header("Location:../Login/index.html");
+	header("Location:../../index.html");
 }
 }
 ?>
@@ -47,7 +47,6 @@ while($arreglo=mysqli_fetch_array($query)){
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
     <!-- -->
 
     <!-- -->
@@ -299,14 +298,401 @@ while($arreglo=mysqli_fetch_array($query)){
                     <div id="contenidopestanas">
                         <div id="cpestana1">
 
+                            <?php
+                        $contadorp=0;
+                        $sql=("SELECT * FROM login where programa='$programa' ");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorp++;
+                        
+                        }
+                        $contadorpro=0;
+                        $sql=("SELECT * FROM tesis where programa='$programa' and ID_estado='Entrega Proyecto'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorpro++;
+                        
+                        }
+                        $contadorante=0;
+                        $sql=("SELECT * FROM tesis where programa='$programa' and ID_estado='Entrega Anteproyecto'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorante++;
+                        
+                        }
+                        $contadorprop=0;
+                        $sql=("SELECT * FROM tesis where programa='$programa' and ID_estado='Entrega Propuesta'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorprop++;
+                        
+                        }
+                        $contadorprot=0;
+                        $sql=("SELECT * FROM tesis where programa='$programa' and ID_estado='Entrega Proyecto' and nota>0");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorprot++;
+                        
+                        }
+                        $contadorse=0;$contadorset=0;
+                        $sql=("SELECT * FROM tesis where programa='$programa' and id_estudiante2=1 and nota>0 ");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                          $nota=$arreglo[20];
+                          if($nota>0){
+                            $contadorset++;
+                          }
+                        $contadorse++;
+                        
+                        }
+                        $contadoraux=0;
+                        $sql=("SELECT * FROM tesis where programa='$programa' and id_estudiante2=3 and nota>0");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadoraux++;
+                        
+                        }
+                        $evaluardoc=0;
+                                $sql=("SELECT * FROM tesis  where programa='$programa' and (terminado=0 or terminado=6) and observaciones='Por definir' and (aprob_dir='SI' or ID_directores='No aplica' or ID_directores='Por definir')");
+                                $query=mysqli_query($mysqli,$sql);
+                                while($arreglo=mysqli_fetch_array($query)){
+                                $evaluardoc++;
+                        
+                        }
+                        $totaldoc=0;
+                        $sql=("SELECT * FROM tesis where programa='$programa'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $totaldoc++;
+                        
+                        }
+                        $totalactas=0;
+                        $sql=("SELECT * FROM actas where programa='$programa'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $totalactas++;
+                        
+                        }
+                        $totalvb=0;
+                        $sql=("SELECT * FROM tesis  where programa='$programa' and aprob_dir='' and ID_directores!='No aplica'" );
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $totalvb++;
+                        
+                        }
+                        $entradast=0;
+                        $ff=date('Y-m-d');
+                        $fi=date('Y-m-d',strtotime($ff.'- 3 month'));
+                        $sql=("SELECT * FROM entradas where fecha between '$fi' and '$ff'");
+                        $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $entradast++;
+                        
+                        }
+                        $aux=0;
+                        $totald=($contadorprop+$contadorante+$contadorpro)
+                        ?>
+
+                            <div class="row">
+
+                                <div class="col-lg-3 col-6">
+                                    <div class="small-box bg-warning">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorp ?></h3>
+                                            <p>Usuarios Registrados</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-person-add"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal"
+                                            data-target="#usuariosRegistradosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box  bg-success">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorpro ?></h3>
+                                            <p>Proyectos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#proyectosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-success">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorante ?></h3>
+
+                                            <p>Anteproyectos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal"
+                                            data-target="#anteproyectosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box  bg-success">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorprop ?></h3>
+
+                                            <p>Propuestas</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#propuestasModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-danger">
+                                        <div class="inner">
+                                            <h3><?php echo $totaldoc ?></h3>
+
+                                            <p>Total de Documentos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#documentosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-info">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorprot ?></h3>
+
+                                            <p>Proyectos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-bag"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal"
+                                            data-target="#proyectostermModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-info">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorset?></h3>
+
+                                            <p>Semilleros</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#semillerosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-info">
+                                        <div class="inner">
+                                            <h3><?php echo $aux ?></h3>
+
+                                            <p>Auxiliares de Inv</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#auxiliaresModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Modals container -->
+                            <div class="modal fade" id="usuariosRegistradosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-warning">
+                                        <div class="modal-body">
+                                            La cantidad corresponde a todos lo usuarios registrados desde julio de
+                                            2016...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="proyectosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-success">
+                                        <div class="modal-body">
+                                            Estos proyectos son los que estan actualmente en proceso...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="anteproyectosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-success">
+                                        <div class="modal-body">
+                                            Estos Anteproyectos son los que estan actualmente en proceso...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="propuestasModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-success">
+                                        <div class="modal-body">
+                                            Estas propuestas son las que estan actualmente en proceso...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="documentosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-danger">
+                                        <div class="modal-body">
+                                            Corresponde a todos los documentos procesados desde julio de 2016...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="proyectostermModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-info">
+                                        <div class="modal-body">
+                                            Estos proyectos son los que estan terminados...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="semillerosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-info">
+                                        <div class="modal-body">
+                                            Proyectos inscritos con opcion de grado por semillero...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="auxiliaresModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-info">
+                                        <div class="modal-body">
+                                            Estudiantes con opcion de grado auxiliares investigacion...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End modals container -->
+
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box">
+                                        <span class="info-box-icon bg-info elevation-1"><i
+                                                class="fas fa-cog"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Documentos por Evaluar...</span>
+                                            <span class="info-box-number">
+                                                <?php echo $evaluardoc ?>
+                                                <small>A hoy</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box mb-3">
+                                        <span class="info-box-icon bg-danger elevation-1"><i
+                                                class="fas fa-thumbs-up"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Actas</span>
+                                            <span class="info-box-number"><?php echo $totalactas ?><small>
+                                                    Publicadas</small></span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+
+                                <div class="clearfix hidden-md-up"></div>
+
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box mb-3">
+                                        <span class="info-box-icon bg-success elevation-1"><i
+                                                class="fas fa-shopping-cart"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Documentos por VoBo</span>
+                                            <span class="info-box-number"><?php echo $totalvb ?><small> A
+                                                    hoy</small></span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box mb-3">
+                                        <span class="info-box-icon bg-warning elevation-1"><i
+                                                class="fas fa-users"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Visitas</span>
+                                            <span class="info-box-number"><?php echo $entradast?><small> Ultimo
+                                                    mes</small></span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+
+
+                            </div>
+
                             <!-- <input value="1" /> -->
 
                             <div class="card card-default">
                                 <div class="card-header">
                                     <h3 class="card-title">Generar actas de Comite</h3>
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left"
-                                                onclick="location.reload();"></i></button>
+                                        <!--  <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left"
+                                                onclick="location.reload();"></i></button> -->
                                         <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
                                                 class="fas fa-expand"></i></button>
                                     </div>

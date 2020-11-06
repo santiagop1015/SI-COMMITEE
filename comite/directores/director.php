@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../Login/index.html");
+    header("Location:../../index.html");
 }
 date_default_timezone_set('America/Bogota');
 $fecha = date("d-m-Y H:i:s");
@@ -19,7 +19,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     $programa = $arreglo[11];
     if ($arreglo[2] != 'Director') {
         require("../desconectar.php");
-        header("Location:../Login/index.html");
+        header("Location:../../index.html");
     }
 }
 

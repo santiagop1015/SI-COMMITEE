@@ -1,0 +1,26 @@
+// Cambios estructura tabla tesis - Agregar columna fecha_doc
+ 
+CREATE TABLE `tesis` (
+  `ID_tesis` int(11) NOT NULL,
+  `ID_estudiante` int(11) NOT NULL,
+  `proyecto` date NOT NULL,
+  `Titulo_tesis` varchar(600) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `aprob_dir` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_directores` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_estado` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `observaciones` varchar(1000) COLLATE utf8_spanish_ci NOT NULL,
+  `archivo` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_propuesta` date NOT NULL,
+  `fecha_aprob_propuesta` date NOT NULL,
+  `fecha_ent_anteproyecto` date NOT NULL,
+  `programa` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `jurado1` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `jurado2` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `ID_estudiante1` int(11) NOT NULL,
+  `id_area` int(11) NOT NULL,
+  `id_eje` int(11) NOT NULL,
+  `id_estudiante2` int(11) NOT NULL,
+  `terminado` int(11) NOT NULL,
+  `nota` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_doc` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;  
