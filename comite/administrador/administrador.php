@@ -3,7 +3,7 @@
 <?php
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../Login/index.html");
+    header("Location:../../index.html");
 }
 $coor=$_SESSION['user'];
 date_default_timezone_set ('America/Bogota');
