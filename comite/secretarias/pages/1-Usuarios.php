@@ -6,7 +6,7 @@ session_cache_limiter('private_no_expire'); // works
 
 session_start();
 if(@!$_SESSION['user']) {
-    header("Location: .../../Login/index.html");
+    header("Location: .../../../index.html");
 }
 // document.referrer;
 @$buscar=$_POST['buscar'];
@@ -23,14 +23,15 @@ $sql = ("SELECT * FROM login where id='$pr'");
 $query = mysqli_query($mysqli, $sql);
 
 while ($arreglo = mysqli_fetch_array($query)) {
-    utf8_decode($programa='Sistemas');
+  //  utf8_decode($programa='Sistemas'); actualizacion #2
+  utf8_decode($programa=$arreglo[11]);
 
     $coordir=$arreglo[4];
     $passd=$arreglo[8];
     
     if ($arreglo[2] != 'Jurado') {
         require("../../desconectar.php");
-        header("Location:../../Login/index.html");
+        header("Location:../../../index.html");
     }
 }
 
@@ -80,16 +81,29 @@ while ($arreglo = mysqli_fetch_array($query)) {
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
                 <div class="card-tools">
+                    <?php
+if(!$_GET) {
+    header('Location:?pagina=1&user=Estudiante');
+}
+//var_dump($_POST);
+//echo $_GET['user'];
+
+
+                ?>
 
                     <form id="idFormBusqueda" autocomplete="off" method="post">
                         <div class="input-group input-group-sm">
+
                             <select value="<?php 
-                          //  echo $tipousuario
-                            if (@$_POST['tipousuario']) {
-                                 $tipousuario = $_POST['tipousuario'];
-                            } else {
-                                $tipousuario = "Estudiante";
+                            if($_POST) {
+                                $tipousuario = $_POST['tipousuario'];
+                            } else if($_GET['user']){
+                                $tipousuario = $_GET['user'];
                             }
+                            
+                            echo $tipousuario;
+                        
+                            
                             
                                 ?>
                                 " class="form-control" name="tipousuario">
@@ -102,6 +116,12 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                 <option <?php if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
                                     Secretari@</option>
                             </select>
+                            <?php
+                            //echo $tipousuario;
+                            if($_POST) {
+                                header('Location:?pagina=1&user='.$tipousuario);
+                            }
+                            ?>
 
                             <input type="text" name="buscar" class="form-control float-right" value="<?php 
                         if (@$_POST['buscar']) {
@@ -125,12 +145,14 @@ while ($arreglo = mysqli_fetch_array($query)) {
                     <?php
                      $total=0;
                     
-                     if(!$_GET) {
-                         header('Location:?pagina=1');
-                     }
-
                      $estudiantes_x_pagina = 9;
-                     $iniciar = ($_GET['pagina']-1)*$estudiantes_x_pagina;
+                     if($_POST){
+                         //echo "1";
+                         $iniciar = 0;
+                     } else {
+                        $iniciar = ($_GET['pagina']-1)*$estudiantes_x_pagina;
+                     }
+                     //$iniciar = ($_GET['pagina']-1)*$estudiantes_x_pagina;
 
 
                  if (@$_POST['buscar']) {
@@ -146,6 +168,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                  $query=mysqli_query($mysqli,$sql);
          
                  while($arreglo=mysqli_fetch_array($query)){
+                     
                  $Id = $arreglo[0];
                  $Cedula = $arreglo[1];
                  $TipoUsuario = $arreglo[2];
@@ -190,9 +213,15 @@ while ($arreglo = mysqli_fetch_array($query)) {
             </div>
             <div class="card-footer">
                 <div class="text-right">
-                <a href="1.1-act_usuario.php?id='.$arreglo[0].'" class="btn btn-sm bg-navy">
-                        <i class="fa fa-edit"></i>
-                    </a>
+                ';
+                if($TipoUsuario == 'Estudiante') {
+                  echo '<a href="1.1-act_usuario.php?id='.$arreglo[0].'" class="btn btn-sm bg-navy">
+                  <i class="fa fa-edit"></i>
+              </a>';
+                }
+                 echo '
+
+                
                     <a href="1.2-enviar_msg_jur.php?Correo='.$arreglo[4].'&programa='.$programa.'" class="btn btn-sm bg-teal">
                         <i class="fas fa-comments"></i>
                     </a>
@@ -243,21 +272,24 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         <ul class="pagination justify-content-center m-0">
                             <li class="page-item
                         <?php echo $_GET['pagina']<=1 ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?pagina=<?php echo $_GET['pagina']-1 ?>">
+                                <a class="page-link"
+                                    href="?pagina=<?php echo $_GET['pagina']-1 ?>&user=<?php echo $tipousuario ?>">
                                     Anterior
                                 </a>
                             </li>
                             <?php for($i=0;$i<$paginas;$i++): ?>
                             <li class="page-item
                         <?php echo $_GET['pagina']==$i+1 ? 'active' : '' ?>">
-                                <a class="page-link" href="?pagina=<?php echo $i+1; ?>">
+                                <a class="page-link" href="?pagina=<?php echo $i+1; ?>&user=<?php echo $tipousuario ?>">
                                     <?php echo $i+1; ?>
                                 </a>
                             </li>
                             <?php endfor ?>
                             <li class="page-item
                         <?php echo $_GET['pagina']>=$paginas ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?pagina=<?php echo $_GET['pagina']+1 ?>">Siguiente</a></li>
+                                <a class="page-link"
+                                    href="?pagina=<?php echo $_GET['pagina']+1 ?>&user=<?php echo $tipousuario ?>">Siguiente</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>

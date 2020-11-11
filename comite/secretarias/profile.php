@@ -1,58 +1,69 @@
 <!DOCTYPE html>
-
 <?php
 session_start();
-if(@!$_SESSION['user']) {
-    header("Location: ../../index.html");
+if (@!$_SESSION['user']) {
+    header("Location:../Login/index.html");
 }
-$corr=$_SESSION['user'];
 date_default_timezone_set('America/Bogota');
-$fecha = date("d-m-Y H:i:s");
-$nuevafecha = date('Y-m-d', strtotime($fecha .'+3 month'));
 $pr = $_SESSION['id'];
-$tipousuario = 'Estudiante';
-extract($_GET);
+$est = $_SESSION['id'];
+
 require("../connect_db.php");
 $sql = ("SELECT * FROM login where id='$pr'");
 $query = mysqli_query($mysqli, $sql);
 
+
 while ($arreglo = mysqli_fetch_array($query)) {
-  //  utf8_decode($programa='Sistemas');
-
-    $programa=$arreglo[11];
-
-    $coordir=$arreglo[4];
-    $passd=$arreglo[8];
-    
-    if ($arreglo[2] != 'Jurado') {
-        require("../desconectar.php");
-        header("Location:../../index.html");
-    }
+    //var_dump($arreglo);
+    $nombre = $arreglo[3];
+    $correo = $arreglo[4];
+    $cedula = $arreglo[1];
+    $tipouser = $arreglo[2];
+   // die();
+    $programa = $arreglo[11];
+    $fecha = date("d-m-Y H:i:s");
 }
 
 ?>
+
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Secretaria</title>
+    <title>SI-COMMITEE || Estudiante</title>
+    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
-    <!-- -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+
+
+    <!-- Ayuda -- CSS -->
+    <script rel="stylesheet" src="dist/css/Help/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="dist/css/Help/font-awesome.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/Help/_all-skins.min.css">
+
 
 </head>
 <style>
@@ -60,10 +71,19 @@ while ($arreglo = mysqli_fetch_array($query)) {
     color: white;
 }
 </style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<body class="hold-transition sidebar-mini" onload="myfunction()">
+<script>
 
-    <div id="idHeader" class="wrapper">
+</script>
+
+
+<body class="hold-transition sidebar-mini">
+
+    <div class="loader"></div>
+    <div class="wrapper">
+
         <nav class="main-header navbar navbar-expand navbar-white navbar-light"
             style="background-color:#B42A2A; color: white;">
             <!-- Left navbar links -->
@@ -74,33 +94,17 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 </li>
 
             </ul>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item">
-                    <a id="idHelpIcon" class="nav-link">
-                        <i id="idIconClassHelp" class="far fa-question-circle white"></i>
-                    </a>
-                    <script>
-                    $(document).on("click", "#idHelpIcon", function() {
-                        var iconHelpBar = document.getElementById("idIconClassHelp");
-                        if (iconHelpBar.className == "far fa-question-circle white") {
-                            iconHelpBar.className = "fas fa-question-circle white";
-                        } else {
-                            iconHelpBar.className = "far fa-question-circle white";
-                        }
-                    });
-                    </script>
-                </li>
-                <li class="nav-item">
                     <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
                         role="button">
-                        <i id="idIconClassChat" class="far fa-comments white"></i>
+                        <i id="idIconClass" class="far fa-comments white"></i>
                     </a>
                     <script>
                     $(document).on("click", "#idChatIcon", function() {
-                        var iconChatBar = document.getElementById("idIconClassChat");
+                        var iconChatBar = document.getElementById("idIconClass");
                         if (iconChatBar.className == "far fa-comments white") {
                             iconChatBar.className = "fas fa-comments white";
                         } else {
@@ -110,11 +114,15 @@ while ($arreglo = mysqli_fetch_array($query)) {
                     </script>
                 </li>
                 <li class="nav-item dropdown">
+                    <!--  <a class="nav-link" href="../desconectar.php">
+                        <i class="fas fa-door-open white"></i>
+                    </a> -->
                     <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">
                         <i class="fas fa-door-open white"></i>
                     </a>
-                </li>
 
+
+                </li>
             </ul>
         </nav>
 
@@ -140,164 +148,192 @@ while ($arreglo = mysqli_fetch_array($query)) {
         </div>
         <!-- End Modal cerrar sesion-->
 
+
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
+            <!-- Brand Logo -->
             <a href="../../index.html" class="brand-link" style="background-color: #343a40; color: white">
                 <img src="dist/img/unilibre-logo.png" alt="Unilibre Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">SI-COMMITEE</span>
             </a>
+
+            <!-- Sidebar -->
             <div class="sidebar" style="background-color: #343a40; color: white">
                 <!-- Sidebar user (optional) -->
-                <a href="profile.php" class="d-block" style="color: white;">
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
-                        </div>
+                <div class="user-panel pt-3 pb-3 pb-3 d-flex" style="background: rgb(180, 42, 42);">
+                    <div class="image">
+                        <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
 
-                        <div class="info">
+                    <div class="info">
+                        <a href="#" class="d-block" style="color: white;">
                             <?php 
                         $usuario = $_SESSION['user'];
                         $posicion_espacio = strpos($usuario, " ");
                         $usuario=substr($usuario,0,$posicion_espacio);
                         echo $usuario;?>
-                        </div>
-
+                        </a>
                     </div>
-                </a>
+
+                </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <div id="pestanas">
                         <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
-                            <li id="pestana1" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana1);ReloadsFrames();'
-                                    class="nav-link">
-                                    <i class="nav-icon fa fa-users white"></i>
-                                    <p class="white">
-                                        Usuarios
-                                    </p>
-                                </a>
-                            </li>
-                            <?php
-                              if($programa=='Sistemas'){
-                            ?>
-                            <li id="pestana2" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana2);ReloadsFrames();'
-                                    class="nav-link">
-                                    <i class="nav-icon fa fa-book white"></i>
-                                    <p class="white">
-                                        Actas Sistemas
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana3" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana3);ReloadsFrames();'
-                                    class="nav-link">
-                                    <i class="nav-icon fa fa-book white"></i>
-                                    <p class="white">
-                                        Actas Industrial
-                                    </p>
-                                </a>
-                            </li>
-                            <?php
-                            } else if($programa=='Ambiental'){
-                            ?>
-                            <li id="pestana2" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana2);ReloadsFrames();'
-                                    class="nav-link">
-                                    <i class="nav-icon fa fa-book white"></i>
-                                    <p class="white">
-                                        Actas Ambiental
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana3" class="nav-item" style="display: none;">
+                            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
 
-                            </li>
-                            <?php
-                            } else if($programa =='Mecanica') {
-                            ?>
                             <li id="pestana2" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana2);ReloadsFrames();'
-                                    class="nav-link">
-                                    <i class="nav-icon fa fa-book white"></i>
+                                <a href='javascript:toEstudiante(0);' class="nav-link">
+                                    <i class="nav-icon fa fa-arrow-left white"></i>
                                     <p class="white">
-                                        Actas Mecanica
+                                        Volver
                                     </p>
                                 </a>
                             </li>
-                            <li id="pestana3" class="nav-item" style="display: none;">
-
-                            </li>
-                            <?php
-                            }
-                            ?>
                         </ul>
-
                     </div>
                 </nav>
+
+                <script>
+                function toEstudiante(numero) {
+                    // localStorage.setItem("number", numero);
+                    location.replace("secretaria.php");
+                }
+                </script>
+
+
+                <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
-        <!-- Start Content-wrapper -->
-        <div class="content-wrapper pb-2">
-            <!--  <section class="content-header">
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
                 <div class="container-fluid">
-                </div>
-            </section>
-            -->
-            <section class="content">
-                <div class="container-fluid pt-1">
-                    <div id="contenidopestanas">
-                        <div id="cpestana1">
-                            <!-- <div class="card card-default">  -->
-                            <iframe id="idFrame1" src="pages/1-Usuarios.php" width="100%" style="border: none;"
-                                frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                            <!--   </div>  -->
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 id="Text">Perfil</h1>
                         </div>
-                        <?php if($programa=='Sistemas'){?>
-                        <div id="cpestana2">
-                            <iframe id="idFrame2" src="pages/2-ActasSistemas.php" width="100%" style="border: none;"
-                                frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                        </div>
-                        <div id="cpestana3">
-                            <iframe id="idFrame3" src="pages/3-ActasIndustrial.php" width="100%" style="border: none;"
-                                frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                        </div>
-                        <?php } else if($programa=='Ambiental'){?>
-                        <div id="cpestana2">
-                            <iframe id="idFrame2" src="pages/4-ActasAmbiental.php" width="100%" style="border: none;"
-                                frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                        </div>
-                        <div id="cpestana3">
-                        </div>
-                        <?php } else if($programa=='Mecanica'){?>
-                        <div id="cpestana2">
-                            <iframe id="idFrame2" src="pages/5-ActasMecanica.php" width="100%" style="border: none;"
-                                frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                        </div>
-                        <div id="cpestana3">
-                        </div>
-                        <?php }?>
+                        <!-- <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#" data-toggle="control-sidebar"><i
+                                            class="nav-icon fa fa-user-md black"></i>
+                                    </a></li>
+                                <li id="Guia" class="breadcrumb-item active">Documentos Registrados</li>
+                            </ol>
+                        </div>  -->
                     </div>
+
                 </div>
+
             </section>
+
+
+            <!--    <body onload="javascript:cambiarPestanna(pestanas,pestana2);">  -->
+            <section class="content">
+                <!--   <div class="row">
+                        <div class="col-12"> -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <!-- Profile Image -->
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="dist/img/avatar-user.jpg" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center"><?php echo $nombre; ?></h3>
+
+                                    <p class="text-muted text-center">
+                                        <?php echo $tipouser ?>
+                                    </p>
+
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+
+
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-12">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">About Me</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <strong><i class="fas fa-book mr-1"></i> Programa</strong>
+
+                                    <p class="text-muted">
+                                        <!--  $nombre = $arreglo[3];
+                                        $correo = $arreglo[4];
+                                        $codigo = $arreglo[1];
+                                        $tipouser = $arreglo[2];
+                                        -->
+                                        <?php
+                                        echo $programa;  
+                                        ?>
+
+                                    </p>
+
+                                    <hr>
+
+                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Correo</strong>
+
+                                    <p class="text-muted"><?php echo $correo ?></p>
+
+                                    <hr>
+
+                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Ciudad</strong>
+
+                                    <p class="text-muted">Bogota D.C</p>
+
+                                    <hr>
+
+                                    <strong><i class="far fa-file-alt mr-1"></i> Cedula</strong>
+
+                                    <p class="text-muted"><?php echo $cedula ?></p>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.nav-tabs-custom -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+
+            </section>
+
         </div>
-        <!-- End Content-wrapper -->
 
+
+        <!-- /.content -->
+
+        <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <button id="idButtonModal" type="button" class="btn btn-success" style="display: none;" data-toggle="modal"
-                data-target="#modal-success">
-                <i class="fas fa-door-open white"></i>
-            </button>
             <div class="float-right d-none d-sm-block">
-                <b><?php echo date('Y')?></b>
+                <b>2020</b>
             </div>
-            <strong>Universidad Libre - <a href="../../index.html">SI-COMMITEE</a>.</strong>
-
-
+            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
         </footer>
+
+
+
 
         <div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -473,50 +509,13 @@ while ($arreglo = mysqli_fetch_array($query)) {
         </aside>
         <!-- /.control-sidebar -->
 
-        <!-- modal-start -->
-        <div class="modal fade" id="modal-success">
-            <div class="modal-dialog">
-                <div id="idModal" class="modal-content bg-success">
-                    <div class="modal-header">
-                        <h4 id="idModalTittle" class="modal-title">Success Modal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="idModalText">One fine body&hellip;</p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-light" data-dismiss="modal"
-                            onclick="ReloadsFrames()">Cerrar</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- modal-end -->
-
-
     </div>
+    <!-- ./wrapper -->
 
 
 </body>
 
-<script type="text/javascript" src="js/cambiarPestanna.js"></script>
-
-
-
-<script type="text/javascript" src="js/CardChange.js"></script>
-
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
-<script src="plugins/toastr/toastr.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/demo.js"></script>
-
 <script type="text/javascript" src="chat/chat.js"></script>
+
 
 </html>

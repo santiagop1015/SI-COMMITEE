@@ -87,10 +87,12 @@ $raiz = "../archivos";
     color: white;
 }
 
+/*
 .direct-chat-text::before,
 .direct-chat-text::after {
     border-left-color: #B42A2A;
 }
+*/
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -1170,21 +1172,9 @@ $raiz = "../archivos";
                                 </ul>
 
 
-
-
-
-
-
                             </div>
 
                         </div>
-
-
-
-
-
-
-
 
                     </div>
                     <div class="modal-footer justify-content-between">
