@@ -79,10 +79,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item">
-                    <a id="idHelpIcon" class="nav-link">
-                        <i id="idIconClassHelp" class="far fa-question-circle white"></i>
+                    <a class="nav-link" data-toggle="modal" data-target="#IdButtonHelp">
+                        <i id="idIconClassHelp" class="fas fa-question-circle white"></i>
                     </a>
-                    <script>
+                    <!--   <script>
                     $(document).on("click", "#idHelpIcon", function() {
                         var iconHelpBar = document.getElementById("idIconClassHelp");
                         if (iconHelpBar.className == "far fa-question-circle white") {
@@ -91,7 +91,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             iconHelpBar.className = "far fa-question-circle white";
                         }
                     });
-                    </script>
+                    </script> -->
                 </li>
                 <li class="nav-item">
                     <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
@@ -110,7 +110,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                     </script>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">
+                    <a class="nav-link" data-toggle="modal" data-target="#IdButtonLogout">
                         <i class="fas fa-door-open white"></i>
                     </a>
                 </li>
@@ -119,7 +119,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
         </nav>
 
         <!-- Modal cerrar sesion -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        <div class="modal fade" id="IdButtonLogout" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -139,6 +139,141 @@ while ($arreglo = mysqli_fetch_array($query)) {
             </div>
         </div>
         <!-- End Modal cerrar sesion-->
+
+        <!-- Modal Help -->
+        <div class="modal fade" id="IdButtonHelp" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">Ayuda</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="container-fluid" style="padding: 15px 15px 15px 15px;">
+                        <div class="callout callout-info" style="border-left-color: #B42A2A;">
+
+                            Para solicitudes y/o casos especiales, por favor enviar correo
+                            electronico
+                            al comite de su programa, para ayuda con el SI-COMMITTEE, envie un
+                            correo a
+                            pabloe.carrenoh@unilibre.edu.co.
+
+                        </div>
+                        <div class="callout callout-info" style="border-left-color: #B42A2A;">
+
+                            Este es un recurso para estar informado de lo que esta sucediendo en el
+                            comite, por favor solo comentarios académicos
+
+                        </div>
+                        <div class="card card-warning">
+                            <div class="card-header" style="background-color: #B42A2A; color: white">
+                                <h5 class="card-title">Envianos un comentario</h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="idFormComen">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <?php
+                                              $hoy = date("Y-m-d");;
+                                            ?>
+                                            <div class="form-group">
+                                                <label>Fecha</label>
+                                                <input type="text" name="fecha" class="form-control"
+                                                    value="<?php echo $hoy; ?>" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Usuario</label>
+                                                <input type="text" name="user" class="form-control"
+                                                    placeholder="Nombre Estudiante.."
+                                                    value="<?php echo utf8_decode($_SESSION['user']); ?>"
+                                                    readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Carrera</label>
+                                                <input type="text" name="programa" class="form-control"
+                                                    placeholder="Nombre Estudiante.."
+                                                    value="<?php echo utf8_decode($programa); ?>" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <textarea id="idTextAreaComen" class="form-control" rows="6" name="comen"
+                                                    cols="29" placeholder="Escriba su comentario"
+                                                    aria-required="true"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-footer">
+                                        <!--  <button type="submit" class="btn btn-default"
+                                                    name="enviar">Enviar</button>
+                                                    -->
+                                        <div id="idBoxComen" class="alert alert-danger alert-dismissible mt-6"
+                                            style="Display: None;">
+                                            <h5>
+                                                <i id="idIConBoxComen" class="icon fas fa-ban"></i>
+                                                Alerta
+                                            </h5>
+                                            <p id="idMessageComen"></p>
+
+                                        </div>
+                                        <button id="idButtonEnviarComen" type="submit"
+                                            class="btn btn-secondary float-right">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="callout callout-info" style="border-left-color: #B42A2A;">
+
+                            Documentos: <br><br>
+                            <li>
+                                <a style="color: blue;">Reglamento v3.0</a>
+                            </li>
+                            <li>
+                                <a style="color: blue;">Reglamento
+                                    v4.0 2019</a>
+                            </li>
+                            <li>
+                                <a style="color: blue;">Formato
+                                    presentacion Propuesta</a>
+                            </li>
+                            <li>
+                                <a style="color: blue;">Guia
+                                    Elaboracion documento Final</a>
+                            </li>
+                            <li>
+                                <a style="color: blue;">Rubrica
+                                    - Presentación de Póster</a>
+                            </li>
+
+                        </div>
+
+                        <div class="card card-warning">
+                            <div class="card-header" style="background-color: #B42A2A; color: white">
+                                <h5 class="card-title">Documentacion</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-sm-12">
+                                    <iframe
+                                        src="https://docs.google.com/viewer?url=http://5.189.175.156/comite/committeees.pdf&embedded=true"
+                                        width="100%" height="600" style="border: none;"></iframe>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Help -->
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
             <a href="../../index.html" class="brand-link" style="background-color: #343a40; color: white">
@@ -518,5 +653,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
 <script src="dist/js/demo.js"></script>
 
 <script type="text/javascript" src="chat/chat.js"></script>
+<script type="text/javascript" src="js/SendHelp.js"></script>
 
 </html>
