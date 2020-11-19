@@ -80,11 +80,13 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <section class="content">
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
+            <button type="button" class="btn btn-tool"><i class="fa fa-plus-circle white"
+                        onclick="window.location.href='6-RegistrarUsuarios.php'"></i></button>
                 <div class="card-tools">
                     <?php
 if(!$_GET) {
     header('Location:?pagina=1&user=Estudiante');
-}
+} 
 //var_dump($_POST);
 //echo $_GET['user'];
 
@@ -119,7 +121,7 @@ if(!$_GET) {
                             <?php
                             //echo $tipousuario;
                             if($_POST) {
-                                header('Location:?pagina=1&user='.$tipousuario);
+                               // header('Location:?pagina=1&user='.$tipousuario);
                             }
                             ?>
 

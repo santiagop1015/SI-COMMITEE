@@ -231,44 +231,35 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             </div>
                         </div>
 
-                        <div class="callout callout-info" style="border-left-color: #B42A2A;">
+                        <div class="callout callout-info" style="border-left-color: #B42A2A; margin-bottom: 0px">
 
                             Documentos: <br><br>
                             <li>
-                                <a style="color: blue;">Reglamento v3.0</a>
+                                <a href="../modelo/Reglamento.pdf" style="color: blue;" target="_blanck">Reglamento v3.0</a>
                             </li>
                             <li>
-                                <a style="color: blue;">Reglamento
+                                <a href="../modelo/reglamento-grados-ingenieria-2019.pdf" style="color: blue;" target="_blanck">Reglamento
                                     v4.0 2019</a>
                             </li>
                             <li>
-                                <a style="color: blue;">Formato
+                                <a href="../modelo/propuesta.docx" style="color: blue;" target="_blanck">Formato
                                     presentacion Propuesta</a>
                             </li>
                             <li>
-                                <a style="color: blue;">Guia
+                                <a style="color: blue;" target="_blanck">Guia
+                                    Elaboracion Anteproyecto</a>
+                            </li>
+                            <li>
+                                <a style="color: blue;" target="_blanck">Guia
                                     Elaboracion documento Final</a>
                             </li>
                             <li>
-                                <a style="color: blue;">Rubrica
+                                <a href="../modelo/propuesta.docx" style="color: blue;" target="_blanck">Rubrica
                                     - Presentación de Póster</a>
                             </li>
 
                         </div>
 
-                        <div class="card card-warning">
-                            <div class="card-header" style="background-color: #B42A2A; color: white">
-                                <h5 class="card-title">Documentacion</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="col-sm-12">
-                                    <iframe
-                                        src="https://docs.google.com/viewer?url=http://5.189.175.156/comite/committeees.pdf&embedded=true"
-                                        width="100%" height="600" style="border: none;"></iframe>
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
