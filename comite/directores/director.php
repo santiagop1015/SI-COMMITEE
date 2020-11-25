@@ -647,7 +647,7 @@ $dir = $_SESSION['user'];
                                 $total_anteproyects = 0;
                                 //echo $total2;
                                 require("../connect_db.php");
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
+                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY id_tesis DESC ");
                                 $query = mysqli_query($mysqli, $sql);
                                 ?>
                                     <div class="box">
@@ -885,17 +885,23 @@ $dir = $_SESSION['user'];
                                                 aria-controls="custom-tabs-one-2"
                                                 aria-selected="false">Anteproyectos</a>
                                         </li>
-
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-otros-tab" data-toggle="pill"
+                                                href="#custom-tabs-otros" role="tab" aria-controls="custom-tabs-one-2"
+                                                aria-selected="false">Otros</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
                                     <?php
                                       $totalpeval = 0;
                                       require("../connect_db.php");
-                                      $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur')  and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC ");
+                                      $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC ");
                                       $query = mysqli_query($mysqli, $sql);
                                       ?>
                                     <div class="tab-content" id="custom-tabs-evaluados-tabContent">
+
+                                        <!-- Tab proyectos -->
                                         <div class="tab-pane fade active show" id="custom-tabs-proyectos"
                                             role="tabpanel" aria-labelledby="custom-tabs-proyectos-tab">
                                             <div class="box">
@@ -955,7 +961,7 @@ $dir = $_SESSION['user'];
 
                                                                 <td class="text-center"><?php echo "$arreglo[6]"; ?>
                                                                 </td>
-                                                                <td class="text-center"><?php echo "$arreglo[9]"; ?>
+                                                                <td class="text-center"><?php echo str_replace("-","/",$arreglo[9]); ?>
                                                                 </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
@@ -1013,8 +1019,10 @@ $dir = $_SESSION['user'];
                                                 <!-- /.box-body -->
                                             </div>
                                         </div>
+                                        <!-- End Tab proyectos -->
 
 
+                                        <!-- Tab anteproyectos -->
                                         <div class="tab-pane fade" id="custom-tabs-anteproyectos" role="tabpanel"
                                             aria-labelledby="custom-tabs-anteproyectos">
                                             <div class="box">
@@ -1024,9 +1032,9 @@ $dir = $_SESSION['user'];
 
                                                             <tr>
                                                                 <th style="width: 40%">Titulo</th>
-                                                                <th class="text-center">Director</th>
-                                                                <th class="text-center">Estado</th>
-                                                                <th class="text-center">Fecha_Aprob</th>
+                                                                <th class="text-center">Aprob_Dir</th>
+                                                                <th class="text-center">Documento</th>
+                                                                <th class="text-center">Fecha_Entrega</th>
                                                                 <th class="text-center">Archivo</th>
                                                                 <th class="text-center">Modificar</th>
                                                                 <th class="text-center">Eval</th>
@@ -1035,7 +1043,7 @@ $dir = $_SESSION['user'];
                                                         <tbody>
                                                             <?php
                                                             require("../connect_db.php");
-                                                            $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
+                                                            $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                                             $query = mysqli_query($mysqli, $sql);
                                                             $totalanteval = 0;
                                                             while ($arreglo = mysqli_fetch_array($query)) {
@@ -1069,10 +1077,10 @@ $dir = $_SESSION['user'];
                                                         ?>
                                                                 <td><?php echo "$arreglo[3] "; ?></td>
 
-                                                                <td><?php echo "$arreglo[5]"; ?></td>
+                                                                <td class="text-center"><?php echo "$arreglo[4]"; ?></td>
 
-                                                                <td><?php echo "$arreglo[6]"; ?></td>
-                                                                <td><?php echo str_replace("-","/",$arreglo[10]); ?>
+                                                                <td class="text-center"><?php echo "$arreglo[6]"; ?></td>
+                                                                <td class="text-center"><?php echo str_replace("-","/",$arreglo[11]); ?>
                                                                 </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td><?php 
@@ -1129,12 +1137,119 @@ $dir = $_SESSION['user'];
                                                     </table>
 
                                                     <?php
-                                           echo "<center><font color='red' size='3'>Total registros: $totalanteval</font><br></center>";
-                                           ?>
+                                                echo "<center><font color='red' size='3'>Total registros: $totalanteval</font><br></center>";
+                                                 ?>
                                                 </div>
                                             </div>
 
                                         </div>
+                                        <!-- End Tab anteproyectos -->
+
+                                        <!-- Tab otros -->
+                                        <div class="tab-pane fade" id="custom-tabs-otros" role="tabpanel"
+                                            aria.labelledby="custom-tabs-otros">
+                                            <div class="box">
+                                                <div class="box-body table-responsive no-padding">
+                                                    <table class="table table-striped projects">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 40%">Titulo</th>
+                                                                <th class="text-center">Aprob_Dir</th>
+                                                                <th class="text-center">Documento</th>
+                                                                <th class="text-center">Fecha_Entrega</th>
+                                                                <th class="text-center">Archivo</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            require("../connect_db.php");
+                                                            $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado!='Entrega Anteproyecto' and ID_estado!='Correccion Anteproyecto') and (ID_estado!='Entrega Proyecto' and ID_estado!='Correccion Proyecto') ORDER BY id_tesis DESC");
+                                                            $query = mysqli_query($mysqli, $sql);
+                                                            $totalotroseval = 0;
+                                                            while ($arreglo = mysqli_fetch_array($query)) {
+                                                                if($arreglo[6]=="Entrega Propuesta" or $arreglo[6]=="Correccion Propuesta"){
+                                                                    $alma="./propuestas";
+                                                                }else if($arreglo[6]=="Entrega Anteproyecto" or $arreglo[6]=="Correccion Anteproyecto")
+                                                                {
+                                                                $alma="./anteproyectos";
+                                                                }else if($arreglo[6]=="Entrega Proyecto" or $arreglo[6]=="Correccion Proyecto")
+                                                                {
+                                                                $alma="./proyectos";
+                                                                }else {
+                                                                $alma="./otros";	
+                                                                }	
+                                                                $ide = $arreglo[0];
+                                                                $totalotroseval++;
+                                                            ?>
+                                                            <tr>
+                                                                <?php
+                                                        require("../connect_db.php");
+                                                        $sql_eval = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                        $result_Evalotrosproyecto = mysqli_query($mysqli, $sql_eval);
+                                                        $state = 0;
+                                                        while ($row = mysqli_fetch_row($result_Evalotrosproyecto)) {
+                                                            $id_Eval = $row[0];
+                                                            $asd = $row[1];
+                                                            $jurado = utf8_decode($row[15]);
+                                                            $fecha_eval = $row[16];
+
+                                                            $state = 1;
+                                                        }
+                                                        if($state == 1) {
+                                                            $otros_exist = true;
+                                                        ?>
+                                                                <td><?php echo "$arreglo[3] "; ?></td>
+
+                                                                <td class="text-center"><?php echo "$arreglo[4]"; ?></td>
+
+                                                                <td class="text-center"><?php echo "$arreglo[6]"; ?></td>
+                                                                <td class="text-center"><?php echo str_replace("-","/",$arreglo[9]); ?>
+                                                                </td>
+                                                                <?php //echo "$arreglo[12]"; ?>
+                                                                <td class="text-center"><?php 
+                                                    if(strlen($arreglo[8]) > 1) {
+                                                        echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        $arreglo[8]
+                                                        </a>
+                                                        ";
+                                                        } else {
+                                                        echo "";
+                                                        }
+                                                    ?>
+                                                                </td>
+                                                                
+                                                                <?php
+                                                        } else {
+                                                            $totalotroseval = $totalotroseval - 1;
+                                                            $otros_exist = false;
+                                                        }
+                                                    ?>
+                                                            </tr>
+                                                            <?php
+                                                }
+                                                if($otros_exist) {
+                                                    echo '<div class="alert alert-info">
+                                                    <strong>¡Atención!</strong> usted tiene actividades de
+                                                    <strong>otros</strong> por aprobar y
+                                                    <strong>documentos</strong> por
+                                                    evaluar...
+                                                </div>';
+                                                }
+                                                ?>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <?php
+                                                echo "<center><font color='red' size='3'>Total registros: $totalotroseval</font><br></center>";
+                                                 ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Tab otros -->
+
+
 
                                     </div>
                                 </div>
