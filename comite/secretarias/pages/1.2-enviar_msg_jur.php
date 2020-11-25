@@ -36,7 +36,7 @@ extract($_GET);
 }
 </style>
 
-<body id="idCardBorrar">
+<body style="background-color: #f4f6f9;" id="idCardBorrar">
 
     <section class="content-header">
         <div class="container-fluid">
@@ -87,7 +87,7 @@ extract($_GET);
 
 
                 <div class="card-footer mt-3">
-                    <button type="button" class="btn btn-danger float-right" onclick="history.back();">Volver</button>
+                    
                     <button id="idActualEval" type="submit" class="btn btn-primary float-right mr-2">Enviar</button>
 
                     <div id="idSpinner" class="spinner-border text-danger" role="status" style="display: None;">

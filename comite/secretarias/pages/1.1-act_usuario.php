@@ -216,8 +216,7 @@ $tipousuario="Secretari@";
 
 
                     <div class="card-footer mt-3">
-                        <button type="button" class="btn btn-danger float-right"
-                            onclick="history.back();">Volver</button>
+                        
                         <button id="idActualUser" type="submit"
                             class="btn btn-primary float-right mr-2">Actualizar</button>
 

@@ -615,7 +615,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-light" data-dismiss="modal"
-                            onclick="ReloadsFrames()">Cerrar</button>
+                            >Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

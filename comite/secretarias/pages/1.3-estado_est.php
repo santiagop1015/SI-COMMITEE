@@ -57,7 +57,7 @@ $nota=0;
 }
 </style>
 
-<body onresize="Evaluar()">
+<body style="background-color: #f4f6f9;" onresize="Evaluar()">
 
     <section class="content-header">
         <div class="container-fluid">

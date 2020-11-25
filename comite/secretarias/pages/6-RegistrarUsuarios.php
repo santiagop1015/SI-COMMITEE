@@ -21,6 +21,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
   //  utf8_decode($programa='Sistemas'); actualizacion #2
   utf8_decode($programa=$arreglo[11]);
 
+
     $coordir=$arreglo[4];
     $passd=$arreglo[8];
     
@@ -61,7 +62,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 }
 </style>
 
-<body id="idCard" style="background-color: #f4f6f9;" onresize="location.reload();">
+<body id="idCard" style="background-color: #f4f6f9;" onresize="Height();">
 
     <!-- Start Content-wrapper -->
     <section class="content-header">
@@ -75,20 +76,123 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <section class="content">
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
-            <h3 class="card-title">
-                <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
-                        onclick="history.back();"></i></button>
-                 </h3>
+                <h3 class="card-title">
+                    <button id="idOnBack" type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
+                            onclick="history.back();"></i></button>
+                </h3>
             </div>
             <div class="card-body">
-                <div class="row d-flex align-items-stretch">
-                    
-                </div>
+                <?php $fecha=date("Y-m-d");?>
+                <form id="FormRegistrar" autocomplete="off">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Tipo de Usuario: </label>
+                            <select id="TipoUsuario" class="form-control" name="tipousuario" required>
+                                <option value="Estudiante">Estudiante</option>
+                                <option value="Director">Profesor</option>
+                            </select>
+                            <script>
+                            const selectUser = document.querySelector('#TipoUsuario');
+                            selectUser.addEventListener('change', (event) => {
 
-                <div class="card-footer">
-                    
-                </div>
+                                var selectItem = event.target.value;
+                                var LineaInvestigacion = document.getElementById("DivLineaInves");
+                                if (selectItem == "Director") {
+                                    //  LineaInvestigacion.classList.remove("disabled");
+                                    LineaInvestigacion.disabled = false;
+                                } else if (selectItem == "Estudiante") {
+                                    //  LineaInvestigacion.classList.add("disabled");
+                                    LineaInvestigacion.disabled = true;
+                                }
+                            });
+                            </script>
 
+                        </div>
+                        <div class="col-6">
+                            <label>Nombres y Apellidos: </label>
+                            <input type="text" class="form-control" name="user" class="Nombre"
+                                placeholder="Nombres y Apellidos" required>
+                        </div>
+
+                        <div class="col-6">
+                            <label>Email:</label>
+                            <input type="text" class="form-control" name="email" class="Usuario"
+                                placeholder="Email @unilibre.edu.co" required>
+                        </div>
+
+                        <div class="col-6">
+                            <label>Contraseña</label>
+                            <input type="text" class="form-control" name="password" class="Contraseña"
+                                placeholder="Contraseña/Cedula" required>
+                        </div>
+
+                        <div class="col-6">
+                            <label>Teléfono</label>
+                            <input type="text" class="form-control" name="telefono" class="telefono"
+                                placeholder="Telefono" required>
+                        </div>
+
+                        <div class="col-6">
+                            <label>Programa: </label>
+                            <select class="form-control" name="programa" required>
+                                <?php
+                                    if($programa=='Sistemas'){
+                                ?>
+
+                                <option value="Industrial">Industrial</option>
+                                <option value="Sistemas">Sistemas</option>
+
+                                <?php
+                                } else if($programa=='Ambiental'){
+                                ?>
+
+                                <option value="Ambiental">Ambiental</option>
+
+                                <?php
+                                } else if($programa=='Mecanica'){
+                                ?>
+
+                                <option value="Mecanica">Mecanica</option>
+
+                                <?php
+                                }
+                                ?>
+
+                            </select>
+                        </div>
+
+                        <div class="col-6">
+                            <label>Fecha Nacimiento</label>
+                            <input type="date" class="form-control" name="fechadenacimiento" id="fechadenacimiento"
+                                placeholder="Fec_nacimiento" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label>Linea de Investigación: </label>
+                            <select id="DivLineaInves" class="form-control" name="area" required disabled>
+                                <option value="0">No Aplica</option>
+                                <?php
+                                    $query = $mysqli -> query ("SELECT * FROM area_inves ORDER BY  id_area ASC ");
+                                    while ($valores = mysqli_fetch_array($query)) {
+                                    if($nombre_area==''){ $nombre_area=0;}
+                                    echo '<option value="'.$valores[id_area].'">'.$valores[id_area].': '.$valores[nombre_area].'</option>';
+                                    } 
+                                ?>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="card-footer mt-2">
+                        
+                        <button type="submit" id="idRegistrar" value="" class="btn btn-primary float-right mr-2"
+                            >Registrar</button>
+
+                        <div id="idSpinner" class="spinner-border text-danger" role="status" style="display: None;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -99,11 +203,69 @@ while ($arreglo = mysqli_fetch_array($query)) {
 <script>
 $(document).ready(function() {
     Height();
+    onSubmitRegistrar();
 });
 
 function Height(event) {
     var card = document.getElementById("idCard");
     localStorage.setItem("height", card.clientHeight);
+}
+
+var onSubmitRegistrar = function() {
+    $('#FormRegistrar').on("submit", function(e) {
+        e.preventDefault();
+        $('#idRegistrar').attr("disabled", true);
+
+        document.getElementById("idSpinner").style.display = "block";
+
+        var other_data = $("#FormRegistrar").serializeArray();
+        var paqueteDeDatos = new FormData();
+        $.each(other_data, function(key, input) {
+            paqueteDeDatos.append(input.name, input.value);
+        });
+       // console.log(other_data);
+        $.ajax({
+            type: "POST",
+            contentType: false,
+            processData: false,
+            cache: false,
+            url: "6.1-ejec_registrar_usuario.php",
+            data: paqueteDeDatos,
+        }).done(function(info) {
+          //  console.log(info);
+              if (info === "1") {
+                  localStorage.setItem("Mensaje", 1);
+                  localStorage.setItem("Mensaje-Title", "Registrar Usuario");
+                  localStorage.setItem("Mensaje-Message",
+                      "El usuario ha sido registrado con éxito!");
+              } else if(info === "0"){
+                  localStorage.setItem("Mensaje", 0);
+                  localStorage.setItem("Mensaje-Title", "Registrar Usuario");
+                  localStorage.setItem("Mensaje-Message",
+                  "Error en el procesamiento, el Usuario no fue registrado");
+                  $('#idRegistrar').attr("disabled", false);
+              } else if(info === "2") {
+                  localStorage.setItem("Mensaje", 0);
+                  localStorage.setItem("Mensaje-Title", "Registrar Usuario");
+                  localStorage.setItem("Mensaje-Message",
+                  "Atencion, ya existe un usuario con estos caracteres, verifique sus datos");
+                  $('#idRegistrar').attr("disabled", false);
+              } else if(info === "3") {
+                  localStorage.setItem("Mensaje", 0);
+                  localStorage.setItem("Mensaje-Title", "Registrar Usuario");
+                  localStorage.setItem("Mensaje-Message",
+                  "Las contraseñas son incorrectas");
+                  $('#idRegistrar').attr("disabled", false);
+              }
+              setTimeout(() => {
+                localStorage.setItem("Mensaje", null);
+              }, 500);
+              
+              setTimeout(() => {
+                document.getElementById("idSpinner").style.display = "none";
+            }, 1000);
+        });
+    })
 }
 </script>
 

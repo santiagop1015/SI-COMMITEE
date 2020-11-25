@@ -65,8 +65,14 @@ while ($arreglo = mysqli_fetch_array($query)) {
     color: white;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    Height();
+});
+</script>
 
-<body id="idCard" style="background-color: #f4f6f9;" onresize="location.reload();">
+<body id="idCard" style="background-color: #f4f6f9;" onresize="Height();">
 
     <!-- Start Content-wrapper -->
     <section class="content-header">
@@ -80,7 +86,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <section class="content">
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
-            <button type="button" class="btn btn-tool"><i class="fa fa-plus-circle white"
+            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i class="fa fa-plus-circle white"
                         onclick="window.location.href='6-RegistrarUsuarios.php'"></i></button>
                 <div class="card-tools">
                     <?php
@@ -109,14 +115,14 @@ if(!$_GET) {
                             
                                 ?>
                                 " class="form-control" name="tipousuario">
-                                <option <?php if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
-                                    Coordinador</option>
+                               <!-- <option <?php //if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
+                                    Coordinador</option> -->
                                 <option <?php if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
                                     Estudiante</option>
                                 <option <?php if($tipousuario == "Director") echo 'selected'  ?> value="Director">
                                     Profesor</option>
-                                <option <?php if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
-                                    Secretari@</option>
+                               <!-- <option <?php //if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
+                                    Secretari@</option> -->
                             </select>
                             <?php
                             //echo $tipousuario;
@@ -159,12 +165,26 @@ if(!$_GET) {
 
                  if (@$_POST['buscar']) {
                      $limpio = preg_replace('([^A-Za-z0-9])', '', $buscar);
-                     
-                     $sql=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
-                 ORDER BY Id DESC");
+                     if($programa == 'Sistemas') {
+                        $sql=("SELECT * FROM login where user like '%$limpio%' and (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
+                        ORDER BY Id DESC");
+                     } else {
+                        $sql=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
+                        ORDER BY Id DESC");
+                     }
+                  /*   $sql=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
+                 ORDER BY Id DESC"); */
                  } else {
-                  $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
+                /*  $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
+                 ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina"); */
+                 if($programa == 'Sistemas') {
+                    $sql=("SELECT * FROM login where (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
+                    ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina");
+                 } else {
+                    $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
                  ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina");
+                 }
+
                  }
 
                  $query=mysqli_query($mysqli,$sql);
@@ -243,12 +263,26 @@ if(!$_GET) {
                 <?php
         if (@$_POST['buscar']) {
             $limpio = preg_replace('([^A-Za-z0-9])', '', $buscar);
+            if($programa == 'Sistemas') {
+                $sql2=("SELECT * FROM login where user like '%$limpio%' and (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
+                ORDER BY Id DESC");
+             } else {
+                $sql2=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
+                ORDER BY Id DESC");
+             }
 
-            $sql2=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
-                ORDER BY Id DESC");
+          /*  $sql2=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
+                ORDER BY Id DESC"); */
         } else {
-            $sql2=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
-                ORDER BY Id DESC");
+        /*    $sql2=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
+                ORDER BY Id DESC"); */
+                if($programa == 'Sistemas') {
+                    $sql2=("SELECT * FROM login where (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
+                    ORDER BY Id DESC");
+                 } else {
+                    $sql2=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
+                    ORDER BY Id DESC");
+                 }
         }
 
         $query2=mysqli_query($mysqli,$sql2);
@@ -302,17 +336,14 @@ if(!$_GET) {
 
     <!-- End Content-wrapper -->
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    Height();
-});
 
+<script>
 function Height(event) {
     var card = document.getElementById("idCard");
     localStorage.setItem("height", card.clientHeight);
 }
 </script>
+
 
 
 </html>
