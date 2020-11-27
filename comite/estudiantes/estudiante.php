@@ -124,9 +124,19 @@ $raiz = "../archivos";
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
+                    <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i id="idIconClassChat" class="far fa-comments white"></i>
                     </a>
+                    <script>
+                    $(document).on("click", "#idChatIcon", function() {
+                        var iconChatBar = document.getElementById("idIconClassChat");
+                        if (iconChatBar.className == "far fa-comments white") {
+                            iconChatBar.className = "fas fa-comments white";
+                        } else {
+                            iconChatBar.className = "far fa-comments white";
+                        }
+                    });
+                    </script>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link"
@@ -872,15 +882,15 @@ $raiz = "../archivos";
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Titulo de Documento</th>
-                                        <th>Director</th>
-                                        <th>Estado</th>
-                                        <th>Disposiciones</th>
-                                        <th>Archivo</th>
-                                        <th>Fecha Doc.</th>
-                                        <th>Fecha propuesta</th>
-                                        <th>CIFI</th>
-                                        <th>Evaluación pdf</th>
+                                        <th style="width: 30%" class="text-center">Titulo de Documento</th>
+                                        <th class="text-center">Director</th>
+                                        <th class="text-center">Estado</th>
+                                        <th style="width: 10%" class="text-center">Disposiciones</th>
+                                        <th style="width: 5%" class="text-center">Archivo</th>
+                                        <th style="width: 10%" class="text-center">Fecha Doc.</th>
+                                        <th style="width: 15%" class="text-center">Fecha propuesta</th>
+                                        <th class="text-center">CIFI</th>
+                                        <th class="text-center">Evaluación pdf</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -912,7 +922,7 @@ $raiz = "../archivos";
 
                                                     echo "<tr>";
                                                     echo "<td>$arreglo[3]</td>";
-                                                    echo "<td>$arreglo[5]</td>";
+                                                    echo "<td class='text-center'>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
                                                     $namefile_reducer = substr($arreglo[8], 0, 12).'...';
@@ -921,16 +931,16 @@ $raiz = "../archivos";
                                                     } else {
                                                         echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
                                                     }
-                                                    echo "<td>$arreglo[21]</td>";
-                                                    echo "<td>$arreglo[9]</td>";
-                                                    echo "<td></td>";
+                                                    echo "<td class='text-center'>$arreglo[21]</td>";
+                                                    echo "<td class='text-center'>$arreglo[9]</td>";
+                                                    echo "<td class='text-center'></td>";
                                                     /*echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";*/
                                                     /*echo "<td><a href='./pdf/vereval.php?id=$arreglo[0]'><img src='images/pdf.png' width='20'  height='20'  class='img-rounded'></td>";*/
                                                     echo "</tr>";
                                                 } else {
                                                     echo "<tr>";
                                                     echo "<td>$arreglo[3]</td>";
-                                                    echo "<td>$arreglo[5]</td>";
+                                                    echo "<td class='text-center'>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
                                                     $namefile_reducer = substr($arreglo[8], 0, 12).'...';
@@ -939,24 +949,24 @@ $raiz = "../archivos";
                                                     } else {
                                                         echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
                                                     }
-                                                    echo "<td>$arreglo[21]</td>";
-                                                    echo "<td>$arreglo[9]</td>";
-                                                    echo "<td>No Aplica</td>";
+                                                    echo "<td class='text-center'>$arreglo[21]</td>";
+                                                    echo "<td class='text-center'>$arreglo[9]</td>";
+                                                    echo "<td class='text-center'>No Aplica</td>";
                                                     /* echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";*/
                                                     if ($arreglo[6] == 'Entrega Proyecto') {
-                                                        echo "<td><a class='btn btn-primary' href='$raiz/pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td class='text-center'><a class='btn btn-primary' href='$raiz/pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
                                                     } else if ($arreglo[6] == 'Entrega Poster') {
-                                                        echo "<td><a class='btn btn-primary' href='$raiz/pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td class='text-center'><a class='btn btn-primary' href='$raiz/pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
                                                     } else if ($arreglo[6] == 'Entrega Anteproyecto') {
-                                                        echo "<td><a class='btn btn-primary' href='$raiz/pdf/vereval.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td class='text-center'><a class='btn btn-primary' href='$raiz/pdf/vereval.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
                                                     } else {
-                                                        echo "<td><font color='black' size='2'>N/A</font></td>";
+                                                        echo "<td class='text-center'><font color='black' size='2'>N/A</font></td>";
                                                     }
                                                     echo "</tr>";
                                                     //  $total1++;
 
                                                     //echo "<td><a href='./pdf/vereval.php?id=$arreglo[0]'><img src='images/pdf.png' width='20'  height='20'  class='img-rounded'></td>";
-                                                    echo "</tr>";
+                                                    //echo "</tr>";
                                                 }
                                             }
                                             ?>
@@ -1189,104 +1199,8 @@ $raiz = "../archivos";
     </div>
 
 
-    <!-- Control Sidebar -->
-    <aside id="idAside" class="control-sidebar control-sidebar-dark position-fixed"
-        style="border-radius: .25rem; height: 90%;">
-        <!-- Control sidebar content goes here -->
+    <?php include 'chat.php'; ?>
 
-        <div id="idCard" class="card direct-chat direct-chat-primary direct-chat-contacts-open"
-            style="position: relative; left: 0px; top: 0px; height: 100%">
-            <div class="card-header ui-sortable-handle" style="">
-                <h3 class="card-title">Direct Chat</h3>
-
-                <div class="card-tools">
-                    <button id="idButtonUsers" type="button" class="btn btn-tool" data-toggle="modal"
-                        data-target="#modal-lg">
-                        <i class="fa fa-users"></i>
-                    </button>
-
-                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-                        Launch Large Modal
-                    </button>
-                        -->
-                    <button id="idButtonMessages" type="button" class="btn btn-tool" data-toggle="tooltip"
-                        title="Contacts" data-widget="chat-pane-toggle">
-                        <i class="fas fa-comments"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-tool" data-widget="control-sidebar" data-slide="true"><i
-                            class="fas fa-times"></i>
-                        <!-- 
-                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
-                    </a>
-                            -->
-                    </button>
-                </div>
-
-            </div>
-
-            <div id="idCardNameChat" class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                          display: None;
-                         ">
-
-                <h3 id="idNameChat" class="card-title" style="color: rgb(33, 37, 41); font-size: 14px;">
-                    Seleccione un Chat</h3>
-
-            </div>
-
-
-            <!-- /.card-header -->
-            <div class="card-body">
-                <!-- Conversations are loaded here -->
-                <div id="idContainerFather" class="direct-chat-messages" style="height: 100%">
-                    <!-- <div class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                         ">
-                        <h3 id="idNameChat" class="card-title" style="color: black;">
-                            US-Visitors Report</h3>
-                    </div>
-                    -->
-                    <div id="idContainerMessages" class="ContainerMessages">
-
-                    </div>
-
-                </div>
-                <!--/.direct-chat-messages-->
-
-                <!-- Contacts are loaded here -->
-                <div class="direct-chat-contacts" style="height: 100%; border-radius: .25rem;">
-                    <ul id="idContactsList" class="contacts-list mb-0">
-
-                    </ul>
-                    <!-- /.contacts-list -->
-                </div>
-                <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.card-body -->
-            <div id="idFormChat" class="card-footer" style="display: none;">
-
-                <form id="idFormSendMessage">
-
-                    <div id="idEnviarMensaje" class="input-group">
-                        <input id="idMessage_Content" type="text" name="message" placeholder="Escribe un mensaje"
-                            class="form-control">
-                        <span class="input-group-append">
-                            <button type="submit" class="btn btn-primary send_chat">Enviar</button>
-                        </span>
-                    </div>
-                </form>
-
-            </div>
-            <!-- /.card-footer-->
-        </div>
-
-
-    </aside>
-    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -1294,7 +1208,6 @@ $raiz = "../archivos";
 </body>
 <script type="text/javascript" src="js/cambiarPestanna.js"></script>
 
-<script type="text/javascript" src="chat/chat.js"></script>
 
 
 

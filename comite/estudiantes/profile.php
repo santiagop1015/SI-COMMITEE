@@ -15,12 +15,17 @@ $query = mysqli_query($mysqli, $sql);
 
 while ($arreglo = mysqli_fetch_array($query)) {
     //var_dump($arreglo);
-    $nombre = $arreglo[3];
-    $correo = $arreglo[4];
+    $id = $arreglo[0];
     $cedula = $arreglo[1];
-    $tipouser = $arreglo[2];
-   // die();
+    $correo = $arreglo[4];
+    $password = $arreglo[9];
+    $tipoUsuario = $arreglo[2];
+    $telefono = $arreglo[10];
     $programa = $arreglo[11];
+    $fechaNacimiento = $arreglo[12];
+
+    $nombre = $arreglo[3];
+    
     $fecha = date("d-m-Y H:i:s");
 }
 
@@ -98,9 +103,20 @@ while ($arreglo = mysqli_fetch_array($query)) {
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
+                    <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
+                        role="button">
+                        <i id="idIconClassChat" class="far fa-comments white"></i>
                     </a>
+                    <script>
+                    $(document).on("click", "#idChatIcon", function() {
+                        var iconChatBar = document.getElementById("idIconClassChat");
+                        if (iconChatBar.className == "far fa-comments white") {
+                            iconChatBar.className = "fas fa-comments white";
+                        } else {
+                            iconChatBar.className = "far fa-comments white";
+                        }
+                    });
+                    </script>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="../desconectar.php">
@@ -207,16 +223,31 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 id="Text">Perfil</h1>
+                            <h1 id="Text">Perfil
+                                <i id="idIconEdit" class="fas fa-pencil-alt ml-2"></i>
+                                <script>
+                                $(document).on("click", "#idIconEdit", function() {
+                                    var IconEdit = document.getElementById("idIconEdit");
+                                    if (IconEdit.className == "fas fa-pencil-alt ml-2") {
+                                        IconEdit.className = "fas fa-save ml-2";
+                                        Edit(true);
+                                    } else if (IconEdit.className == "fas fa-save ml-2") {
+                                        /*IconEdit.className = "fas fa-pencil-alt ml-2";
+                                        Edit(false); */
+                                        Save();
+                                    }
+                                });
+                                </script>
+                                <i id="idIconCancel" class="fas fa-times ml-2 d-none"></i>
+                                <script>
+                                $(document).on("click", "#idIconCancel", function() {
+                                    var IconEdit = document.getElementById("idIconCancel");
+                                    Cancel();
+                                });
+                                </script>
+                            </h1>
                         </div>
-                        <!-- <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#" data-toggle="control-sidebar"><i
-                                            class="nav-icon fa fa-user-md black"></i>
-                                    </a></li>
-                                <li id="Guia" class="breadcrumb-item active">Documentos Registrados</li>
-                            </ol>
-                        </div>  -->
+
                     </div>
 
                 </div>
@@ -224,7 +255,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
             </section>
 
 
-            <!--    <body onload="javascript:cambiarPestanna(pestanas,pestana2);">  -->
             <section class="content">
                 <!--   <div class="row">
                         <div class="col-12"> -->
@@ -243,9 +273,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                     <h3 class="profile-username text-center"><?php echo $nombre; ?></h3>
 
                                     <p class="text-muted text-center">
-                                        <?php echo $tipouser ?>
+                                        <?php echo $tipoUsuario ?>
                                     </p>
-
 
                                 </div>
                                 <!-- /.card-body -->
@@ -258,41 +287,137 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         <div class="col-md-12">
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">About Me</h3>
+                                    <h3 class="card-title">Información Actual</h3>
                                 </div>
                                 <!-- /.card-header -->
+                                <script>
+                                function Edit(event) {
+                                    document.getElementById("idIconCancel").classList.remove("d-none");
+                                    var PassLabel = document.getElementById("PassLabel");
+                                    var PassInput = document.getElementById("PassInput");
+                                    var TelILabel = document.getElementById("TelLabel");
+                                    var TelInput = document.getElementById("TelInput");
+                                    var FechaNacLabel = document.getElementById("FechaNacLabel");
+                                    var FechaNacInput = document.getElementById("FechaNacInput");
+
+                                    if (event) {
+                                        PassLabel.classList.add("d-none");
+                                        PassInput.classList.remove("d-none");
+                                        TelILabel.classList.add("d-none");
+                                        TelInput.classList.remove("d-none");
+                                        FechaNacLabel.classList.remove("d-none");
+                                        FechaNacInput.classList.remove("d-none");
+                                    }
+                                }
+
+                                function Cancel() {
+                                    var IconEdit = document.getElementById("idIconEdit");
+                                    IconEdit.className = "fas fa-pencil-alt ml-2";
+                                    document.getElementById("idIconCancel").classList.add("d-none");
+
+                                    var PassLabel = document.getElementById("PassLabel");
+                                    var PassInput = document.getElementById("PassInput");
+                                    var TelILabel = document.getElementById("TelLabel");
+                                    var TelInput = document.getElementById("TelInput");
+                                    var FechaNacLabel = document.getElementById("FechaNacLabel");
+                                    var FechaNacInput = document.getElementById("FechaNacInput");
+
+                                    PassLabel.classList.remove("d-none");
+                                    PassInput.classList.add("d-none");
+                                    TelILabel.classList.remove("d-none");
+                                    TelInput.classList.add("d-none");
+                                    FechaNacLabel.classList.remove("d-none");
+                                    FechaNacInput.classList.add("d-none");
+                                }
+
+                                function Save() {
+                                    var PassInput = document.getElementById("PassInput");
+                                    var TelInput = document.getElementById("TelInput");
+                                    var FechaNacInput = document.getElementById("FechaNacInput");
+
+                                    var Data = [];
+                                    Data.push(PassInput.value);
+                                    Data.push(TelInput.value);
+                                    Data.push(FechaNacInput.value);
+                                    console.log(Data);
+                                    /*
+                                    $.ajax({
+                                        type: "POST",
+                                        url: ,
+                                        data: JSON.stringify(Data),
+                                        success: function(data){
+
+                                        }
+                                    })
+                                    */
+                                    //--------------------
+                                    var IconEdit = document.getElementById("idIconEdit");
+                                    IconEdit.className = "fas fa-pencil-alt ml-2";
+                                    document.getElementById("idIconCancel").classList.add("d-none");
+                                }
+                                </script>
                                 <div class="card-body">
-                                    <strong><i class="fas fa-book mr-1"></i> Programa</strong>
-
-                                    <p class="text-muted">
-                                        <!--  $nombre = $arreglo[3];
-                                        $correo = $arreglo[4];
-                                        $codigo = $arreglo[1];
-                                        $tipouser = $arreglo[2];
-                                        -->
-                                        <?php
-                                        echo $programa;  
-                                        ?>
-
-                                    </p>
-
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Id</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $id; ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Cedula</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $cedula; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Usuario</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $correo; ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Password</strong>
+                                            <p id="PassLabel" class="text-muted mb-0">
+                                                <?php echo $password; ?>
+                                            </p>
+                                            <input id="PassInput" class="form-control d-none"
+                                                value="<?php echo $password; ?>" />
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Telefono</strong>
+                                            <p id="TelLabel" class="text-muted mb-0">
+                                                <?php echo $telefono; ?>
+                                            </p>
+                                            <input id="TelInput" type="number" class="form-control d-none"
+                                                value="<?php echo $telefono; ?>" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Programa</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $programa; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Fecha de Nacimiento</strong>
+                                            <p id="FechaNacLabel" class="text-muted mb-0">
+                                                <?php echo $fechaNacimiento; ?>
+                                            </p>
+                                            <input id="FechaNacInput" type="date" class="form-control d-none"
+                                                value="<?php echo $fechaNacimiento; ?>" />
+                                        </div>
+                                    </div>
                                     <hr>
 
-                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Correo</strong>
-
-                                    <p class="text-muted"><?php echo $correo ?></p>
-
-                                    <hr>
-
-                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Ciudad</strong>
-
-                                    <p class="text-muted">Bogota D.C</p>
-
-                                    <hr>
-
-                                    <strong><i class="far fa-file-alt mr-1"></i> Cedula</strong>
-
-                                    <p class="text-muted"><?php echo $cedula ?></p>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -322,104 +447,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
 
 
-        <!-- Control Sidebar -->
-    <aside id="idAside" class="control-sidebar control-sidebar-dark position-fixed"
-        style="border-radius: .25rem; height: 90%;">
-        <!-- Control sidebar content goes here -->
-
-        <div id="idCard" class="card direct-chat direct-chat-primary direct-chat-contacts-open"
-            style="position: relative; left: 0px; top: 0px; height: 100%">
-            <div class="card-header ui-sortable-handle" style="">
-                <h3 class="card-title">Direct Chat</h3>
-
-                <div class="card-tools">
-                    <button id="idButtonUsers" type="button" class="btn btn-tool" data-toggle="modal"
-                        data-target="#modal-lg">
-                        <i class="fa fa-users"></i>
-                    </button>
-
-                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-                        Launch Large Modal
-                    </button>
-                        -->
-                    <button id="idButtonMessages" type="button" class="btn btn-tool" data-toggle="tooltip"
-                        title="Contacts" data-widget="chat-pane-toggle">
-                        <i class="fas fa-comments"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-tool" data-widget="control-sidebar" data-slide="true"><i
-                            class="fas fa-times"></i>
-                        <!-- 
-                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
-                    </a>
-                            -->
-                    </button>
-                </div>
-
-            </div>
-
-            <div id="idCardNameChat" class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                          display: None;
-                         ">
-
-                <h3 id="idNameChat" class="card-title" style="color: rgb(33, 37, 41); font-size: 14px;">
-                    Seleccione un Chat</h3>
-
-            </div>
-
-
-            <!-- /.card-header -->
-            <div class="card-body">
-                <!-- Conversations are loaded here -->
-                <div id="idContainerFather" class="direct-chat-messages" style="height: 100%">
-                    <!-- <div class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                         ">
-                        <h3 id="idNameChat" class="card-title" style="color: black;">
-                            US-Visitors Report</h3>
-                    </div>
-                    -->
-                    <div id="idContainerMessages" class="ContainerMessages">
-
-                    </div>
-
-                </div>
-                <!--/.direct-chat-messages-->
-
-                <!-- Contacts are loaded here -->
-                <div class="direct-chat-contacts" style="height: 100%; border-radius: .25rem;">
-                    <ul id="idContactsList" class="contacts-list mb-0">
-
-                    </ul>
-                    <!-- /.contacts-list -->
-                </div>
-                <!-- /.direct-chat-pane -->
-            </div>
-            <!-- /.card-body -->
-            <div id="idFormChat" class="card-footer" style="display: none;">
-
-                <form id="idFormSendMessage">
-
-                    <div id="idEnviarMensaje" class="input-group">
-                        <input id="idMessage_Content" type="text" name="message" placeholder="Escribe un mensaje"
-                            class="form-control">
-                        <span class="input-group-append">
-                            <button type="submit" class="btn btn-primary send_chat">Enviar</button>
-                        </span>
-                    </div>
-                </form>
-
-            </div>
-            <!-- /.card-footer-->
-        </div>
-
-
-    </aside>
-    <!-- /.control-sidebar -->
+        <?php include 'chat.php'; ?>
 
     </div>
     <!-- ./wrapper -->
@@ -427,7 +455,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
 </body>
 
-<script type="text/javascript" src="chat/chat.js"></script>
+<!--<script type="text/javascript" src="chat/chat.js"></script> -->
 
 
 </html>
