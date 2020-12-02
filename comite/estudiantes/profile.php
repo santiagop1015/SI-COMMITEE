@@ -27,6 +27,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
     $nombre = $arreglo[3];
     
     $fecha = date("d-m-Y H:i:s");
+
+    $foto = $arreglo[14];
 }
 
 ?>
@@ -266,8 +268,139 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile">
                                     <div class="text-center">
-                                        <img class="profile-user-img img-fluid img-circle"
-                                            src="dist/img/avatar-user.jpg" alt="User profile picture">
+                                        <!-- <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
+                                            src="dist/img/avatar-user.jpg" alt="User profile picture"> -->
+                                        <?php
+                                        
+
+                                        ?>
+                                        <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
+                                            src="data:image/jpg;base64,<?php echo base64_encode($foto); ?>"
+                                            alt="User profile picture">
+
+
+
+                                        <!-- Editar -->
+                                        <img id="IdImgEdit" class="profile-user-img img-fluid img-circle d-none"
+                                            src="dist/img/addimage.jpg" alt="User profile picture">
+                                        <!-- End Edit image    -->
+                                    </div>
+                                    <script>
+                                    window.addEventListener('load', iniciar, false);
+
+                                    function iniciar() {
+                                        var imagenPerfil = document.getElementById('IdImgPerfil');
+                                        imagenPerfil.addEventListener('mouseover', over, false);
+                                        var imagenEditar = document.getElementById('IdImgEdit');
+                                        imagenEditar.addEventListener('mouseout', out, false);
+                                    }
+
+                                    function over() {
+                                        document.getElementById("IdImgPerfil").classList.add("d-none");
+                                        document.getElementById("IdImgEdit").classList.remove("d-none");
+                                    }
+
+                                    function out() {
+                                        document.getElementById("IdImgPerfil").classList.remove("d-none");
+                                        document.getElementById("IdImgEdit").classList.add("d-none");
+                                    }
+                                    $(document).on("click", "#IdImgEdit", function() {
+                                        document.getElementById("idButtonModalActImgPerfil").click();
+                                    });
+                                    </script>
+
+                                    <button id="idButtonModalActImgPerfil" type="button" class="btn btn-primary d-none"
+                                        data-toggle="modal" data-target="#ModalSubirCambiarImagenPerfil"></button>
+
+                                    <!-- Modal Edit Image Profile -->
+                                    <div class="modal fade" id="ModalSubirCambiarImagenPerfil" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Subir foto de
+                                                        perfil</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form id="formUploadImg" action="profile_ejec.php" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    <div class="modal-body">
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">Seleccione imagen</label>
+                                                            <div class="input-group">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="Imagen"
+                                                                        class="custom-file-input" id="idInputImgUpload"
+                                                                        accept="image/png,image/jpeg">
+                                                                    <label class="custom-file-label"
+                                                                        for="exampleInputFile"
+                                                                        id="IdLabelInputImgUpload">Choose file</label>
+                                                                    <script>
+                                                                    // idInputImgUpload
+                                                                    var InputImgUpload = document.getElementById(
+                                                                        "idInputImgUpload");
+                                                                    var LabelInputImgUpload = document.getElementById(
+                                                                        "IdLabelInputImgUpload");
+
+                                                                    InputImgUpload.onchange = function(e) {
+                                                                        //alert("Onchanger");
+                                                                        var file = $("#idInputImgUpload").prop(
+                                                                            "files")[0];
+                                                                        var fileName = file.name;
+                                                                        // console.log(document.getElementById("idInputImgUpload").value);
+                                                                        LabelInputImgUpload.innerHTML = fileName;
+
+                                                                        //var imageType = /image.*/;
+
+                                                                        console.log(file.type);
+
+                                                                        if (file.type.match("image/png") || file
+                                                                            .type.match("image/jpeg")) {
+                                                                            //alert("File supported!");
+                                                                            document.getElementById(
+                                                                                    "idMessageFileNotSupported")
+                                                                                .classList.add("d-none");
+                                                                            $("#idButtonUploadImage").removeAttr(
+                                                                                "disabled");
+                                                                        } else {
+                                                                            //alert("File not supported!");
+                                                                            document.getElementById(
+                                                                                    "idMessageFileNotSupported")
+                                                                                .classList.remove("d-none");
+                                                                            $("#idButtonUploadImage").attr(
+                                                                                "disabled",
+                                                                                "disabled");
+                                                                        }
+                                                                    };
+                                                                    </script>  
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <p>Solo se admiten archivos .png, .jpg y .jpeg</p>
+                                                        <p>Tamaño maximo 40 MB</p>
+                                                        <div id="idMessageFileNotSupported"
+                                                            class="alert alert-danger mb-1 d-none" role="alert">
+                                                            Archivo no soportado
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit"
+                                                            class="btn btn-primary">Actualizar</button>
+                                                    </div>
+                                                </form>
+                                                <script>
+
+
+
+                                                </script>
+
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <h3 class="profile-username text-center"><?php echo $nombre; ?></h3>
