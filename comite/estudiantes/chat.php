@@ -97,3 +97,75 @@
         </aside>
         <!-- /.control-sidebar -->
 <script type="text/javascript" src="chat/chat.js"></script>
+
+<div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Busqueda de usuarios</h4>
+                    <button id="idButtonCloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form id="idFormSearchUser">
+                    <div class="modal-body">
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <!-- text input -->
+
+                                <div class="form-group">
+                                    <label>Nombre Usuario</label>
+                                    <input type="text" class="form-control" id="idNombreUsuario"
+                                        placeholder="Escriba Nombre" style="MozUserSelect:None;">
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Programa</label>
+                                    <!--  <select value="<?php echo $programa; ?>" class="form-control">
+                                        <option value="">-- Seleccione --</option>
+                                        <option value="Sistemas">Sistemas</option>
+                                        <option value="Industrial">Industrial</option>
+                                        <option value="Mecanica">Mecanica</option>
+                                        <option value="Ambiental">Ambiental</option>
+                                    </select>
+                                    -->
+                                    <input type="text" class="form-control" value="<?php echo $programa; ?>" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="direct-chat" style="
+                         background: #343a40;
+                         bottom: 0;
+                         color: #fff;
+                         height: fit-content;
+                         overflow: auto;
+                         top: 0;
+                         width: 100%;
+                         max-height: 250px">
+                            <div class="direct-chat-messages" style="padding: 0px;height: fit-content;">
+                                <ul id="idContactsSearch" class="contacts-list mb-0">
+
+                                </ul>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="submit" class="btn btn-default fade">Close</button>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>

@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../Login/index.html");
+    header("Location:../../index.html");
 }
 date_default_timezone_set('America/Bogota');
 $pr = $_SESSION['id'];
@@ -271,18 +271,25 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                         <!-- <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
                                             src="dist/img/avatar-user.jpg" alt="User profile picture"> -->
                                         <?php
-                                        
-
-                                        ?>
+                                        if(!$foto) {
+                                            ?>
+                                        <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
+                                            src="dist/img/avatar-user.jpg" alt="User profile picture">
+                                        <?php
+                                        } else {
+                                            ?>
                                         <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
                                             src="data:image/jpg;base64,<?php echo base64_encode($foto); ?>"
                                             alt="User profile picture">
-
-
+                                        <?php
+                                        }
+                                        ?>
+                                        <i id="IconEditPerfil" class="fas fa-pencil-alt ml-2 d-none"
+                                            style="position: absolute;"></i>
 
                                         <!-- Editar -->
-                                        <img id="IdImgEdit" class="profile-user-img img-fluid img-circle d-none"
-                                            src="dist/img/addimage.jpg" alt="User profile picture">
+                                        <!--<img id="IdImgEdit" class="profile-user-img img-fluid img-circle d-none"
+                                            src="dist/img/addimage.jpg" alt="User profile picture"> -->
                                         <!-- End Edit image    -->
                                     </div>
                                     <script>
@@ -291,20 +298,25 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                     function iniciar() {
                                         var imagenPerfil = document.getElementById('IdImgPerfil');
                                         imagenPerfil.addEventListener('mouseover', over, false);
-                                        var imagenEditar = document.getElementById('IdImgEdit');
-                                        imagenEditar.addEventListener('mouseout', out, false);
+                                        imagenPerfil.addEventListener('mouseout', out, false);
+                                        //var imagenEditar = document.getElementById('IdImgEdit');
+                                        //imagenEditar.addEventListener('mouseout', out, false);
                                     }
 
                                     function over() {
-                                        document.getElementById("IdImgPerfil").classList.add("d-none");
-                                        document.getElementById("IdImgEdit").classList.remove("d-none");
+                                        //document.getElementById("IdImgPerfil").classList.add("d-none");
+                                        // document.getElementById("IdImgEdit").classList.remove("d-none");
+                                        document.getElementById("IconEditPerfil").classList.remove("d-none");
                                     }
 
                                     function out() {
-                                        document.getElementById("IdImgPerfil").classList.remove("d-none");
-                                        document.getElementById("IdImgEdit").classList.add("d-none");
+                                        //document.getElementById("IdImgPerfil").classList.remove("d-none");
+                                        //document.getElementById("IdImgEdit").classList.add("d-none");
+                                        document.getElementById("IconEditPerfil").classList.add("d-none");
                                     }
-                                    $(document).on("click", "#IdImgEdit", function() {
+
+
+                                    $(document).on("click", "#IdImgPerfil", function() {
                                         document.getElementById("idButtonModalActImgPerfil").click();
                                     });
                                     </script>
@@ -325,7 +337,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form id="formUploadImg" action="profile_ejec.php" method="POST"
+                                                <form id="formUploadImg" action="profile/save_img.php" method="POST"
                                                     enctype="multipart/form-data">
                                                     <div class="modal-body">
 
@@ -356,7 +368,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
                                                                         //var imageType = /image.*/;
 
-                                                                        console.log(file.type);
+                                                                        //console.log(file.type);
 
                                                                         if (file.type.match("image/png") || file
                                                                             .type.match("image/jpeg")) {
@@ -376,9 +388,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                                                                 "disabled");
                                                                         }
                                                                     };
-                                                                    </script>  
+                                                                    </script>
                                                                 </div>
-                                                                
+
                                                             </div>
                                                         </div>
                                                         <p>Solo se admiten archivos .png, .jpg y .jpeg</p>
@@ -473,16 +485,18 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                     Data.push(TelInput.value);
                                     Data.push(FechaNacInput.value);
                                     console.log(Data);
-                                    /*
+/*
                                     $.ajax({
                                         type: "POST",
-                                        url: ,
-                                        data: JSON.stringify(Data),
-                                        success: function(data){
-
+                                        url: "profile/save_data.php",
+                                        data: Data,
+                                        success: function(data) {
+                                            console.log(data);
                                         }
-                                    })
+                                    });
+
                                     */
+
                                     //--------------------
                                     var IconEdit = document.getElementById("idIconEdit");
                                     IconEdit.className = "fas fa-pencil-alt ml-2";
@@ -587,8 +601,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
 
 </body>
-
-<!--<script type="text/javascript" src="chat/chat.js"></script> -->
 
 
 </html>
