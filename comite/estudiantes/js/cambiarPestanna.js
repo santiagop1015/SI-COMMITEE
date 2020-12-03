@@ -83,7 +83,6 @@ function cambiarPestanna(pestannas, pestanna) {
   });
 
   //  $(".loader").fadeOut("slow");
-
 }
 
 function myfunction() {

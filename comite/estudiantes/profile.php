@@ -146,7 +146,14 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel pt-3 pb-3 pb-3 d-flex" style="background: rgb(180, 42, 42);">
                     <div class="image">
-                        <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                        <?php
+                    if(empty($foto)) {
+                      echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
+                    } else {
+                    echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" class="img-circle elevation-2" alt="User Image">';
+                    }
+                    ?>
+
                     </div>
 
                     <div class="info">
@@ -271,7 +278,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                         <!-- <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
                                             src="dist/img/avatar-user.jpg" alt="User profile picture"> -->
                                         <?php
-                                        if(!$foto) {
+                                        if(empty($foto)) {
                                             ?>
                                         <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
                                             src="dist/img/avatar-user.jpg" alt="User profile picture">
@@ -400,7 +407,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                                             </div>
                                                         </div>
                                                         <p>Solo se admiten archivos .png, .jpg y .jpeg</p>
-                                                        <p>Tamaño maximo 40 MB</p>
+                                                        <p>Tamaño maximo 40 MB (238 x 250 pixeles)</p>
                                                         <div id="idMessageFileNotSupported"
                                                             class="alert alert-danger mb-1 d-none" role="alert">
                                                             Archivo no soportado
@@ -436,6 +443,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         </div>
                         <!-- /.col -->
                         <div class="col-md-12">
+                            <div id="AlertProblemActInfo" class="alert alert-danger mb-3 d-none" role="alert">
+                            <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
+                                No se logro actualizar la informacion, Intentelo mas tarde (De persistir el error contacte al Adminitrador del SI-COMMITEE)
+                            </div>
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Información Actual</h3>
@@ -515,6 +526,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                                     "d-none");
                                                     */
 
+                                    var AlertProblemActData = document.getElementById("AlertProblemActInfo");
+
                                     $.ajax({
                                         type: "POST",
                                         url: "profile/save_data.php",
@@ -524,12 +537,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                             if (data == "1") {
                                                 location.reload();
                                             } else {
-
+                                                AlertProblemActData.classList.remove("d-none");
                                             }
                                         }
                                     });
-
-
 
                                     //--------------------
 

@@ -51,7 +51,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
        $query_Login = mysqli_query($mysqli, $sql_Login);
 
        while ($arreglo_User = mysqli_fetch_array($query_Login)) {
-
+        $foto = $arreglo_User[14];
         /*
 $os = array("Mac", "NT", "Irix", "Linux");
 if (in_array("Irix", $os)) {
@@ -77,24 +77,47 @@ if (in_array("Irix", $os)) {
            $Message = $arreglo_Message[3];
        }
 
+       if(empty($foto)) {
+        $output .= '<li>
+        <a class="idItemSearch" data-touserid="'.$id_Item.'" data-tousername="'.$arreglo_User[3].'" data-widget="chat-pane-toggle">
+            <img class="contacts-list-img" src="dist/img/user1-128x128.jpg"> 
+           
+            <div class="contacts-list-info">
+                <span class="contacts-list-name">
+                    '. $arreglo_User[3].'
+                <!--    <small class="contacts-list-date float-right">2/28/2015</small> -->
+                <small class="contacts-list-date float-right">'.count_unseen_message($id_Item, $id).'</small>
+                </span>
+               <!-- <span class="contacts-list-msg">'.$arreglo[3].'</span> -->
+               <span class="contacts-list-msg">'.$Message.'</span>
+            </div>
+            <!-- /.contacts-list-info -->
+        </a>
+    </li>
+    ';
 
-            $output .= '<li>
-            <a class="idItemSearch" data-touserid="'.$id_Item.'" data-tousername="'.$arreglo_User[3].'" data-widget="chat-pane-toggle">
-                <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
-    
-                <div class="contacts-list-info">
-                    <span class="contacts-list-name">
-                        '. $arreglo_User[3].'
-                    <!--    <small class="contacts-list-date float-right">2/28/2015</small> -->
-                    <small class="contacts-list-date float-right">'.count_unseen_message($id_Item, $id).'</small>
-                    </span>
-                   <!-- <span class="contacts-list-msg">'.$arreglo[3].'</span> -->
-                   <span class="contacts-list-msg">'.$Message.'</span>
-                </div>
-                <!-- /.contacts-list-info -->
-            </a>
-        </li>
-        ';
+       } else {
+        $output .= '<li>
+        <a class="idItemSearch" data-touserid="'.$id_Item.'" data-tousername="'.$arreglo_User[3].'" data-widget="chat-pane-toggle">
+           <!-- <img class="contacts-list-img" src="dist/img/user1-128x128.jpg"> -->
+           <img class="contacts-list-img" src="data:image/jpg;base64,'.base64_encode($foto).'">
+           
+            <div class="contacts-list-info">
+                <span class="contacts-list-name">
+                    '. $arreglo_User[3].'
+                <!--    <small class="contacts-list-date float-right">2/28/2015</small> -->
+                <small class="contacts-list-date float-right">'.count_unseen_message($id_Item, $id).'</small>
+                </span>
+               <!-- <span class="contacts-list-msg">'.$arreglo[3].'</span> -->
+               <span class="contacts-list-msg">'.$Message.'</span>
+            </div>
+            <!-- /.contacts-list-info -->
+        </a>
+    </li>
+    ';
+       }
+
+            
         }
 
         $array[$cont] = $id_Item;

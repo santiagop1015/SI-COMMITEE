@@ -15,6 +15,7 @@ $query = mysqli_query($mysqli, $sql);
 while ($arreglo = mysqli_fetch_array($query)) {
     $programa = $arreglo[11];
     $fecha = date("d-m-Y H:i:s");
+    $foto = $arreglo[14];
 }
 
 $query = $mysqli->query("SELECT * FROM tesis where ID_estudiante=$pr");
@@ -80,6 +81,15 @@ $raiz = "../archivos";
 
     <!-- <script type="text/javascript" src="js/cambiarPestanna.js"></script> -->
 
+    <script>
+    $(document).ready(function() {
+        setTimeout(() => {
+            document.getElementById("IdIconLoad").classList.add("d-none");
+        }, 500);
+
+    });
+    </script>
+
 
 </head>
 <style>
@@ -124,7 +134,8 @@ $raiz = "../archivos";
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item">
-                    <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
+                        role="button">
                         <i id="idIconClassChat" class="far fa-comments white"></i>
                     </a>
                     <script>
@@ -166,7 +177,13 @@ $raiz = "../archivos";
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                            <?php
+                        if(empty($foto)) {
+                            echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
+                          } else {
+                          echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" class="img-circle elevation-2" alt="User Image">';
+                          }
+                        ?>
                         </div>
 
                         <div class="info">
@@ -183,46 +200,54 @@ $raiz = "../archivos";
                 </a>
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <div id="pestanas">
-                        <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                            data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                <nav id="custom-tabs-five-overlay-dark" class="mt-2">
+                    <div class="overlay d-flex justify-content-center align-items-center">
+                        <div id="IdIconLoad" class="overlay dark"
+                            style="position: absolute; background-size: cover; background-color: rgba(0,0,0,0.6);">
+                            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                        </div>
 
-                            <li id="pestana2" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana2);' class="nav-link">
-                                    <i class="nav-icon fa fa-edit white"></i>
-                                    <p class="white">
-                                        Registrar Documento
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana3" class="nav-item">
-                                <a href="javascript:cambiarPestanna(pestanas,pestana3);" class="nav-link">
-                                    <i class="nav-icon fas fa-copy white"></i>
-                                    <p class="white">
-                                        Documentos Registrados
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana4" class="nav-item">
-                                <a href="javascript:cambiarPestanna(pestanas,pestana4);" class="nav-link">
-                                    <i class="nav-icon fa fa-book white"></i>
-                                    <p class="white">
-                                        Actas
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana1" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana1);' class="nav-link">
-                                    <i class="nav-icon fa fa-user-md white"></i>
-                                    <p class="white">
-                                        Ayuda
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
+                        <div id="pestanas">
+                            <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
+                                role="menu" data-accordion="false">
+                                <!-- Add icons to the links using the .nav-icon class
+                                   with font-awesome or any other icon font library -->
+
+                                <li id="pestana2" class="nav-item">
+                                    <a href='javascript:cambiarPestanna(pestanas,pestana2);' class="nav-link">
+                                        <i class="nav-icon fa fa-edit white"></i>
+                                        <p class="white">
+                                            Registrar Documento
+                                        </p>
+                                    </a>
+                                </li>
+                                <li id="pestana3" class="nav-item">
+                                    <a href="javascript:cambiarPestanna(pestanas,pestana3);" class="nav-link">
+                                        <i class="nav-icon fas fa-copy white"></i>
+                                        <p class="white">
+                                            Documentos Registrados
+                                        </p>
+                                    </a>
+                                </li>
+                                <li id="pestana4" class="nav-item">
+                                    <a href="javascript:cambiarPestanna(pestanas,pestana4);" class="nav-link">
+                                        <i class="nav-icon fa fa-book white"></i>
+                                        <p class="white">
+                                            Actas
+                                        </p>
+                                    </a>
+                                </li>
+                                <li id="pestana1" class="nav-item">
+                                    <a href='javascript:cambiarPestanna(pestanas,pestana1);' class="nav-link">
+                                        <i class="nav-icon fa fa-user-md white"></i>
+                                        <p class="white">
+                                            Ayuda
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
                 </nav>
 
@@ -1126,7 +1151,7 @@ $raiz = "../archivos";
         <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
     </footer>
 
-    
+
 
 
     <?php include 'chat.php'; ?>
