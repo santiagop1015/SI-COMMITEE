@@ -376,16 +376,22 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                                                             document.getElementById(
                                                                                     "idMessageFileNotSupported")
                                                                                 .classList.add("d-none");
-                                                                            $("#idButtonUploadImage").removeAttr(
-                                                                                "disabled");
+
+
+                                                                            document.getElementById(
+                                                                                    "idButtonUploadImage")
+                                                                                .disabled = false;
+
                                                                         } else {
                                                                             //alert("File not supported!");
                                                                             document.getElementById(
                                                                                     "idMessageFileNotSupported")
                                                                                 .classList.remove("d-none");
-                                                                            $("#idButtonUploadImage").attr(
-                                                                                "disabled",
-                                                                                "disabled");
+
+                                                                            document.getElementById(
+                                                                                    "idButtonUploadImage")
+                                                                                .disabled = true;
+
                                                                         }
                                                                     };
                                                                     </script>
@@ -401,7 +407,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="submit"
+                                                        <button id="idButtonUploadImage" type="submit"
                                                             class="btn btn-primary">Actualizar</button>
                                                     </div>
                                                 </form>
@@ -481,26 +487,53 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                     var FechaNacInput = document.getElementById("FechaNacInput");
 
                                     var Data = [];
-                                    Data.push(PassInput.value);
-                                    Data.push(TelInput.value);
-                                    Data.push(FechaNacInput.value);
-                                    console.log(Data);
-/*
+                                    var DataPass = {};
+                                    var DataTel = {};
+                                    var DataFec = {};
+                                    DataPass.name = "password";
+                                    DataPass.value = PassInput.value;
+                                    Data.push(DataPass);
+
+                                    DataTel.name = "telefono";
+                                    DataTel.value = TelInput.value;
+                                    Data.push(DataTel);
+
+                                    DataFec.name = "fecha nacimiento";
+                                    DataFec.value = FechaNacInput.value;
+                                    Data.push(DataFec);
+
+                                    /*
+                                        Data.push(PassInput.value);
+                                        Data.push(TelInput.value);
+                                        Data.push(FechaNacInput.value);
+                                                                        */
+                                    //console.log(Data);
+
+                                    /*var IconEdit = document.getElementById("idIconEdit");
+                                    IconEdit.className = "fas fa-pencil-alt ml-2";
+                                                document.getElementById("idIconCancel").classList.add(
+                                                    "d-none");
+                                                    */
+
                                     $.ajax({
                                         type: "POST",
                                         url: "profile/save_data.php",
                                         data: Data,
                                         success: function(data) {
                                             console.log(data);
+                                            if (data == "1") {
+                                                location.reload();
+                                            } else {
+
+                                            }
                                         }
                                     });
 
-                                    */
+
 
                                     //--------------------
-                                    var IconEdit = document.getElementById("idIconEdit");
-                                    IconEdit.className = "fas fa-pencil-alt ml-2";
-                                    document.getElementById("idIconCancel").classList.add("d-none");
+
+
                                 }
                                 </script>
                                 <div class="card-body">
