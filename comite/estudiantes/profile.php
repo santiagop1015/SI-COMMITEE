@@ -121,13 +121,53 @@ while ($arreglo = mysqli_fetch_array($query)) {
                     </script>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="../desconectar.php">
-                        <i class="fas fa-door-open white"></i>
+                    <a id="idAnclaIconLogout" class="nav-link" data-toggle="modal" data-target="#idModalLogout">
+                        <i id="idIconLogout" class="fas fa-door-closed white"></i>
                     </a>
+                    <script>
+                    window.addEventListener('load', iniciar, false);
 
+                    function iniciar() {
+                        var AnclaLogout = document.getElementById('idAnclaIconLogout');
+                        AnclaLogout.addEventListener('mouseover', overLogout, false);
+                        AnclaLogout.addEventListener('mouseout', outLogout, false);
+                    }
+
+                    function overLogout() {
+                        var IconLogout = document.getElementById('idIconLogout');
+                        IconLogout.className = "fas fa-door-open white";
+                    }
+
+                    function outLogout() {
+                        var IconLogout = document.getElementById('idIconLogout');
+                        IconLogout.className = "fas fa-door-closed white";
+                    }
+                    </script>
                 </li>
             </ul>
         </nav>
+
+        <!-- Modal cerrar sesion -->
+        <div class="modal fade" id="idModalLogout" tabindex="-1" role="dialog"
+            aria-labelledby="idModalLogoutTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">¿Seguro que quieres salir?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success"
+                            onclick="window.location.href='../desconectar.php'">Si</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal cerrar sesion-->
 
 
         <!-- /.navbar -->
@@ -444,8 +484,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         <!-- /.col -->
                         <div class="col-md-12">
                             <div id="AlertProblemActInfo" class="alert alert-danger mb-3 d-none" role="alert">
-                            <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
-                                No se logro actualizar la informacion, Intentelo mas tarde (De persistir el error contacte al Adminitrador del SI-COMMITEE)
+                                <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
+                                No se logro actualizar la informacion, Intentelo mas tarde (De persistir el error
+                                contacte al Adminitrador del SI-COMMITEE)
                             </div>
                             <div class="card card-primary">
                                 <div class="card-header">

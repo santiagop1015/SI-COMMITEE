@@ -80,7 +80,8 @@ if (in_array("Irix", $os)) {
        if(empty($foto)) {
         $output .= '<li>
         <a class="idItemSearch" data-touserid="'.$id_Item.'" data-tousername="'.$arreglo_User[3].'" data-widget="chat-pane-toggle">
-            <img class="contacts-list-img" src="dist/img/user1-128x128.jpg"> 
+          <!--  <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">  -->
+          <img class="contacts-list-img" src="dist/img/avatar-user.jpg">
            
             <div class="contacts-list-info">
                 <span class="contacts-list-name">
@@ -99,7 +100,7 @@ if (in_array("Irix", $os)) {
        } else {
         $output .= '<li>
         <a class="idItemSearch" data-touserid="'.$id_Item.'" data-tousername="'.$arreglo_User[3].'" data-widget="chat-pane-toggle">
-           <!-- <img class="contacts-list-img" src="dist/img/user1-128x128.jpg"> -->
+           <!-- <img class="contacts-list-img" src="dist/img/avatar-user.jpg"> -->
            <img class="contacts-list-img" src="data:image/jpg;base64,'.base64_encode($foto).'">
            
             <div class="contacts-list-info">
