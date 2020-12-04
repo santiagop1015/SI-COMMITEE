@@ -333,6 +333,10 @@ $raiz = "../archivos";
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div class="callout callout-info" style="border-left-color: #B42A2A;">
+                                        Este es un recurso para estar informado de lo que esta sucediendo en el
+                                        comite, por favor solo comentarios académicos
+                                    </div>
                                     <div class="card card-warning">
                                         <div class="card-header" style="background-color: #B42A2A; color: white">
                                             <h5 class="card-title">Envíenos un comentario!</h5>
@@ -402,71 +406,64 @@ $raiz = "../archivos";
                                                         class="btn btn-primary float-right">Enviar Comentario</button>
                                                 </div>
 
-
-                                                <script>
-
-                                                </script>
-
                                             </form>
 
-
                                         </div>
+
                                     </div>
 
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="callout callout-info" style="border-left-color: #B42A2A;">
+                                        Para solicitudes y/o casos especiales, por favor enviar correo
+                                        electronico
+                                        al comite de su programa, para ayuda con el SI-COMMITTEE, envie un
+                                        correo a
+                                        pabloe.carrenoh@unilibre.edu.co
+                                    </div>
                                     <div class="card card-warning">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Documentos</h5>
+                                        </div>
                                         <div class="card-body">
-                                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
-
-                                                Para solicitudes y/o casos especiales, por favor enviar correo
-                                                electronico
-                                                al comite de su programa, para ayuda con el SI-COMMITTEE, envie un
-                                                correo a
-                                                pabloe.carrenoh@unilibre.edu.co.
-
-                                            </div>
-                                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
-
-                                                Este es un recurso para estar informado de lo que esta sucediendo en el
-                                                comite, por favor solo comentarios académicos
-
-                                            </div>
-                                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
-
-                                                Documentos: <br><br>
-                                                <li>
-                                                    <a href="../modelo/Reglamento.pdf" style="color: blue;"
-                                                        target="_blanck">Reglamento v3.0</a>
-                                                </li>
-                                                <h5 class="mt-2">Antes de marzo de 2019</h5>
-                                                <li>
-                                                    <a href="../modelo/reglamento-grados-ingenieria-2019.pdf"
-                                                        style="color: blue;" target="_blanck">Reglamento
-                                                        v4.0 2019</a>
-                                                </li>
-                                                <h5 class="mt-2">A partir de marzo de 2019</h5>
-                                                <li>
-                                                    <a href="../modelo/propuesta.docx" style="color: blue;"
-                                                        target="_blanck">Formato
-                                                        presentacion Propuesta</a>
-                                                </li>
-                                                <li>
-                                                    <a href="../modelo/guia_anteproyecto.pdf" style="color: blue;" target="_blanck">Guia
-                                                        Elaboracion Anteproyecto</a>
-                                                </li>
-                                                <li>
-                                                    <a href="../modelo/guia_documento.pdf" style="color: blue;" target="_blanck">Guia
-                                                        Elaboracion documento Final</a>
-                                                </li>
-                                                <li>
-                                                    <a href="../modelo/rubrica-poster.docx" style="color: blue;"
-                                                        target="_blanck">Rubrica
-                                                        - Presentación de Póster</a>
-                                                </li>
 
 
-                                            </div>
+
+                                            Documentos: <br><br>
+                                            <li>
+                                                <a href="../modelo/Reglamento.pdf" style="color: blue;"
+                                                    target="_blanck">Reglamento v3.0</a>
+                                            </li>
+                                            <h5 class="mt-2">Antes de marzo de 2019</h5>
+                                            <li>
+                                                <a href="../modelo/reglamento-grados-ingenieria-2019.pdf"
+                                                    style="color: blue;" target="_blanck">Reglamento
+                                                    v4.0 2019</a>
+                                            </li>
+                                            <h5 class="mt-2">A partir de marzo de 2019</h5>
+                                            <li>
+                                                <a href="../modelo/propuesta.docx" style="color: blue;"
+                                                    target="_blanck">Formato
+                                                    presentacion Propuesta</a>
+                                            </li>
+                                            <li>
+                                                <a href="../modelo/guia_anteproyecto.pdf" style="color: blue;"
+                                                    target="_blanck">Guia
+                                                    Elaboracion Anteproyecto</a>
+                                            </li>
+                                            <li>
+                                                <a href="../modelo/guia_documento.pdf" style="color: blue;"
+                                                    target="_blanck">Guia
+                                                    Elaboracion documento Final</a>
+                                            </li>
+                                            <li>
+                                                <a href="../modelo/rubrica-poster.docx" style="color: blue;"
+                                                    target="_blanck">Rubrica
+                                                    - Presentación de Póster</a>
+                                            </li>
+
+
+
 
                                             <!-- /.box -->
                                         </div>
@@ -484,6 +481,66 @@ $raiz = "../archivos";
                                                     width="100%" height="600" style="border: none;"></iframe>
 
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-warning">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Información General</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <center>
+                                                <h5><b>Comite de proyectos de grado</b>
+                                                    <h5>
+                                                        <br>
+                                                        <b>Ambiental-Industrial-Mecanica-Sistemas</b>
+                                                        <br>
+                                                        Espacio creado para el manejo y colaboración de Proyectos de
+                                                        grado
+                                                        <br>
+                                                        en la
+                                                        Facultad de Ingeniería de la Universidad Libre
+                                                        <br>
+                                                        <br>
+                                                        <h5><b>Diseño y programación</b></h5>
+
+                                                        Ing. Pablo E. Carreño H.
+                                                        <br>
+                                                        Ing. Mauricio A. Alonso M.
+                                                        <br>
+                                                        Ing. Fabian Blanco G.
+                                                        <br>
+                                                        Ing. Fredys A. Simanca H.
+                                                        <br>
+                                                        Ing. Santiago Patiño Hernández
+                                                        <br>
+                                                        Ing. Victor Cuellar
+                                            </center>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-warning">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Contacto</h5>
+                                        </div>
+                                        <div class="card-body">
+                                         <center>
+                                             <b>Ing. Pablo E. Carreño H.</b>
+                                             <br>
+                                             Webmaster
+                                             <br>
+                                             pabloe.carreno@unilibre.edu.co
+                                             <br>
+                                             Programa Ingenieria de Sistemas
+                                             <br>
+                                             <b>Director:</b>
+                                             Mauricio Alonso
+                                        
+                        </center>
                                         </div>
                                     </div>
                                 </div>
