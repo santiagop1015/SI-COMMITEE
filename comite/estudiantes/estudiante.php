@@ -46,13 +46,13 @@ $raiz = "../archivos";
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="LocalSources/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -104,8 +104,10 @@ $raiz = "../archivos";
 }
 */
 </style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+<script src="LocalSources/js/jquery.min.js"></script>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+<script src="LocalSources/js/bootstrap.min.js"></script>
 
 <script>
 
@@ -178,8 +180,8 @@ $raiz = "../archivos";
         </nav>
 
         <!-- Modal cerrar sesion -->
-        <div class="modal fade" id="idModalLogout" tabindex="-1" role="dialog"
-            aria-labelledby="idModalLogoutTitle" aria-hidden="true">
+        <div class="modal fade" id="idModalLogout" tabindex="-1" role="dialog" aria-labelledby="idModalLogoutTitle"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -240,55 +242,55 @@ $raiz = "../archivos";
                 </a>
 
                 <!-- Sidebar Menu -->
-                <nav id="custom-tabs-five-overlay-dark" class="mt-2">
-                    <div class="overlay d-flex justify-content-center align-items-center">
-                        <div id="IdIconLoad" class="overlay dark"
-                            style="position: absolute; background-size: cover; background-color: rgba(0,0,0,0.6);">
-                            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                <nav class="mt-2">
+                    <div id="pestanas">
+                        <div class="overlay d-flex justify-content-center align-items-center">
+                            <div id="IdIconLoad" class="overlay dark"
+                                style="position: absolute; background-size: cover; background-color: rgba(0,0,0,0.6);">
+                                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                            </div>
                         </div>
-
-                        <div id="pestanas">
-                            <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
-                                role="menu" data-accordion="false">
-                                <!-- Add icons to the links using the .nav-icon class
+                        <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
+                            <!-- Add icons to the links using the .nav-icon class
                                    with font-awesome or any other icon font library -->
 
-                                <li id="pestana2" class="nav-item">
-                                    <a href='javascript:cambiarPestanna(pestanas,pestana2);' class="nav-link">
-                                        <i class="nav-icon fa fa-edit white"></i>
-                                        <p class="white">
-                                            Registrar Documento
-                                        </p>
-                                    </a>
-                                </li>
-                                <li id="pestana3" class="nav-item">
-                                    <a href="javascript:cambiarPestanna(pestanas,pestana3);" class="nav-link">
-                                        <i class="nav-icon fas fa-copy white"></i>
-                                        <p class="white">
-                                            Documentos Registrados
-                                        </p>
-                                    </a>
-                                </li>
-                                <li id="pestana4" class="nav-item">
-                                    <a href="javascript:cambiarPestanna(pestanas,pestana4);" class="nav-link">
-                                        <i class="nav-icon fa fa-book white"></i>
-                                        <p class="white">
-                                            Actas
-                                        </p>
-                                    </a>
-                                </li>
-                                <li id="pestana1" class="nav-item">
-                                    <a href='javascript:cambiarPestanna(pestanas,pestana1);' class="nav-link">
-                                        <i class="nav-icon fa fa-user-md white"></i>
-                                        <p class="white">
-                                            Ayuda
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
+                            <li id="pestana2" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana2);' class="nav-link">
+                                    <i class="nav-icon fa fa-edit white"></i>
+                                    <p class="white">
+                                        Registrar Documento
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="pestana3" class="nav-item">
+                                <a href="javascript:cambiarPestanna(pestanas,pestana3);" class="nav-link">
+                                    <i class="nav-icon fas fa-copy white"></i>
+                                    <p class="white">
+                                        Documentos Registrados
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="pestana4" class="nav-item">
+                                <a href="javascript:cambiarPestanna(pestanas,pestana4);" class="nav-link">
+                                    <i class="nav-icon fa fa-book white"></i>
+                                    <p class="white">
+                                        Actas
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="pestana1" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana1);' class="nav-link">
+                                    <i class="nav-icon fa fa-user-md white"></i>
+                                    <p class="white">
+                                        Ayuda
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
+
+                    <!--   </div> -->
                 </nav>
 
 
@@ -333,7 +335,7 @@ $raiz = "../archivos";
                                 <div class="col-md-6">
                                     <div class="card card-warning">
                                         <div class="card-header" style="background-color: #B42A2A; color: white">
-                                            <h5 class="card-title">Envianos un comentario</h5>
+                                            <h5 class="card-title">Envíenos un comentario!</h5>
                                         </div>
 
                                         <div class="card-body">
@@ -397,7 +399,7 @@ $raiz = "../archivos";
 
                                                     </div>
                                                     <button id="idButtonEnviarComen" type="submit"
-                                                        class="btn btn-primary float-right">Enviar</button>
+                                                        class="btn btn-primary float-right">Enviar Comentario</button>
                                                 </div>
 
 
@@ -415,7 +417,7 @@ $raiz = "../archivos";
                                 <div class="col-md-6">
                                     <div class="card card-warning">
                                         <div class="card-body">
-                                            <div class="callout callout-info">
+                                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
 
                                                 Para solicitudes y/o casos especiales, por favor enviar correo
                                                 electronico
@@ -424,32 +426,42 @@ $raiz = "../archivos";
                                                 pabloe.carrenoh@unilibre.edu.co.
 
                                             </div>
-                                            <div class="callout callout-info">
+                                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
 
                                                 Este es un recurso para estar informado de lo que esta sucediendo en el
                                                 comite, por favor solo comentarios académicos
 
                                             </div>
-                                            <div class="callout callout-info">
+                                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
 
                                                 Documentos: <br><br>
                                                 <li>
-                                                    <a style="color: blue;">Reglamento v3.0</a>
+                                                    <a href="../modelo/Reglamento.pdf" style="color: blue;"
+                                                        target="_blanck">Reglamento v3.0</a>
                                                 </li>
+                                                <h5 class="mt-2">Antes de marzo de 2019</h5>
                                                 <li>
-                                                    <a style="color: blue;">Reglamento
+                                                    <a href="../modelo/reglamento-grados-ingenieria-2019.pdf"
+                                                        style="color: blue;" target="_blanck">Reglamento
                                                         v4.0 2019</a>
                                                 </li>
+                                                <h5 class="mt-2">A partir de marzo de 2019</h5>
                                                 <li>
-                                                    <a style="color: blue;">Formato
+                                                    <a href="../modelo/propuesta.docx" style="color: blue;"
+                                                        target="_blanck">Formato
                                                         presentacion Propuesta</a>
                                                 </li>
                                                 <li>
-                                                    <a style="color: blue;">Guia
+                                                    <a href="../modelo/guia_anteproyecto.pdf" style="color: blue;" target="_blanck">Guia
+                                                        Elaboracion Anteproyecto</a>
+                                                </li>
+                                                <li>
+                                                    <a href="../modelo/guia_documento.pdf" style="color: blue;" target="_blanck">Guia
                                                         Elaboracion documento Final</a>
                                                 </li>
                                                 <li>
-                                                    <a style="color: blue;">Rubrica
+                                                    <a href="../modelo/rubrica-poster.docx" style="color: blue;"
+                                                        target="_blanck">Rubrica
                                                         - Presentación de Póster</a>
                                                 </li>
 
@@ -468,7 +480,7 @@ $raiz = "../archivos";
                                         <div class="card-body">
                                             <div class="col-sm-12">
                                                 <iframe
-                                                    src="https://docs.google.com/viewer?url=http://5.189.175.156/comite/committeees.pdf&embedded=true"
+                                                    src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
                                                     width="100%" height="600" style="border: none;"></iframe>
 
                                             </div>
@@ -1012,18 +1024,18 @@ $raiz = "../archivos";
                                                     if(strlen($arreglo[8]) > 13) {
                                                         echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$namefile_reducer</a></td>";
                                                     } else {
-                                                        echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
+                                                        echo "<td class='text-center'><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
                                                     }
                                                     echo "<td class='text-center'>$arreglo[21]</td>";
                                                     echo "<td class='text-center'>$arreglo[9]</td>";
                                                     echo "<td class='text-center'>No Aplica</td>";
                                                     /* echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";*/
                                                     if ($arreglo[6] == 'Entrega Proyecto') {
-                                                        echo "<td class='text-center'><a class='btn btn-primary' href='$raiz/pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/verevalproy.php?id=$arreglo[0]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></a></td>";
                                                     } else if ($arreglo[6] == 'Entrega Poster') {
-                                                        echo "<td class='text-center'><a class='btn btn-primary' href='$raiz/pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></a></td>";
                                                     } else if ($arreglo[6] == 'Entrega Anteproyecto') {
-                                                        echo "<td class='text-center'><a class='btn btn-primary' href='$raiz/pdf/vereval.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded'></a></td>";
+                                                        echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/vereval.php?id=$arreglo[0]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></a></td>";
                                                     } else {
                                                         echo "<td class='text-center'><font color='black' size='2'>N/A</font></td>";
                                                     }
@@ -1131,18 +1143,18 @@ $raiz = "../archivos";
                         echo '<table class="table table-bordered table-striped">';
                         echo '<thead>';
                         echo '<tr>';
-                        echo '<th>Acta No.</th>';
-                        echo '<th>Fecha Publicacion</th>';
-                        echo '<th>Ver Acta</th>';
+                        echo '<th class="text-center">Acta No.</th>';
+                        echo '<th class="text-center">Fecha Publicacion</th>';
+                        echo '<th class="text-center">Ver Acta</th>';
                         echo '</tr>';
                         echo '</thead>';
                         echo '<tbody>';
                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                 echo "<tr>";
-                                                echo "<td>$arreglo[1]</td>";
-                                                echo "<td>$arreglo[4]</td>";
+                                                echo "<td class='text-center'>$arreglo[1]</td>";
+                                                echo "<td class='text-center'>$arreglo[4]</td>";
                                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                                echo "<td><a href='$raiz/pdf/$arreglo[6]'><i class='nav-icon fas fa-download'></i></td>";
+                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/$arreglo[6]'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
                                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 
@@ -1188,7 +1200,7 @@ $raiz = "../archivos";
         <div class="float-right d-none d-sm-block">
             <b>2020</b>
         </div>
-        <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
+        <strong>Universidad Libre - <a href="../../index.html">SI-COMMITEE</a>.</strong>
     </footer>
 
 
