@@ -67,9 +67,13 @@ while ($arreglo = mysqli_fetch_array($query)) {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+/*
+// No hace falta llamar a la funcion cuando el documento este listo ya ue se llama cuando el body cambia su tamaño
+// Se cammbio por que no se estaba reconociendo la funcion sino despues de que el documento se encutrara listo
 $(document).ready(function() {
     Height();
 });
+*/
 </script>
 
 <body id="idCard" style="background-color: #f4f6f9;" onresize="Height();">
