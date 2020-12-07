@@ -153,7 +153,7 @@ $raiz = "../archivos";
                 </li>
                 <li class="nav-item dropdown">
                     <a id="idAnclaIconLogout" class="nav-link" data-toggle="modal" data-target="#idModalLogout">
-                        <i id="idIconLogout" class="fas fa-door-closed white"></i>
+                        <i id="idIconLogout" class="fas fa-door-open white"></i>
                     </a>
                     <script>
                     window.addEventListener('load', iniciar, false);
@@ -166,12 +166,12 @@ $raiz = "../archivos";
 
                     function overLogout() {
                         var IconLogout = document.getElementById('idIconLogout');
-                        IconLogout.className = "fas fa-door-open white";
+                        IconLogout.className = "fas fa-door-closed white";
                     }
 
                     function outLogout() {
                         var IconLogout = document.getElementById('idIconLogout');
-                        IconLogout.className = "fas fa-door-closed white";
+                        IconLogout.className = "fas fa-door-open white";
                     }
                     </script>
 
@@ -485,62 +485,72 @@ $raiz = "../archivos";
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card card-warning">
-                                        <div class="card-header" style="background-color: #B42A2A; color: white">
-                                            <h5 class="card-title">Información General</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <center>
-                                                <h5><b>Comite de proyectos de grado</b>
-                                                    <h5>
-                                                        <br>
-                                                        <b>Ambiental-Industrial-Mecanica-Sistemas</b>
-                                                        <br>
-                                                        Espacio creado para el manejo y colaboración de Proyectos de
-                                                        grado
-                                                        <br>
-                                                        en la
-                                                        Facultad de Ingeniería de la Universidad Libre
-                                                        <br>
-                                                        <br>
-                                                        <h5><b>Diseño y programación</b></h5>
-
-                                                        Ing. Pablo E. Carreño H.
-                                                        <br>
-                                                        Ing. Mauricio A. Alonso M.
-                                                        <br>
-                                                        Ing. Fabian Blanco G.
-                                                        <br>
-                                                        Ing. Fredys A. Simanca H.
-                                                        <br>
-                                                        Ing. Santiago Patiño Hernández
-                                                        <br>
-                                                        Ing. Victor Cuellar
-                                            </center>
+                                <div class="card card-warning">
+                                    <div class="card-header" style="background-color: #B42A2A; color: white">
+                                        <h5 class="card-title">Información General</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <center>
+                                            <h5><b>Comite de proyectos de grado</b></h5>
+                                                
+                                                    <br>
+                                                    <b>Ambiental-Industrial-Mecanica-Sistemas</b>
+                                                    <br>
+                                                    Espacio creado para el manejo y colaboración de Proyectos de
+                                                    grado
+                                                    <br>
+                                                    en la
+                                                    Facultad de Ingeniería de la Universidad Libre
+                                                    
+                                        </center>
 
 
-                                        </div>
                                     </div>
                                 </div>
+                            </div>
                                 <div class="col-md-6">
                                     <div class="card card-warning">
                                         <div class="card-header" style="background-color: #B42A2A; color: white">
                                             <h5 class="card-title">Contacto</h5>
                                         </div>
                                         <div class="card-body">
-                                         <center>
-                                             <b>Ing. Pablo E. Carreño H.</b>
-                                             <br>
-                                             Webmaster
-                                             <br>
-                                             pabloe.carreno@unilibre.edu.co
-                                             <br>
-                                             Programa Ingenieria de Sistemas
-                                             <br>
-                                             <b>Director:</b>
-                                             Mauricio Alonso
-                                        
-                        </center>
+                                            <center>
+                                                <b>Ing. Pablo E. Carreño H.</b>
+                                                <br>
+                                                Webmaster
+                                                <br>
+                                                pabloe.carreno@unilibre.edu.co
+                                                <br>
+                                                Programa Ingenieria de Sistemas
+                                                <br>
+                                                <b>Director:</b>
+                                                Mauricio Alonso
+
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card card">
+                                        <div class="card-header" style="background-color: #B42A2A; color: white">
+                                            <h5 class="card-title">Diseño y programación</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <center>
+                                                Ing. Pablo E. Carreño H.
+                                                <br>
+                                                Ing. Mauricio A. Alonso M.
+                                                <br>
+                                                Ing. Fabian Blanco G.
+                                                <br>
+                                                Ing. Fredys A. Simanca H.
+                                                <br>
+                                                Ing. Santiago Patiño Hernández
+                                                <br>
+                                                Ing. Victor Cuellar
+                                            </center>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -551,7 +561,7 @@ $raiz = "../archivos";
                     <!--Pestana2-->
                     <div id="cpestana2">
                         <div class="container-fluid">
-                            <div class="callout callout-info">
+                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
                                 Fechas reuniones Comité Ingeniería de Sistemas... 2020-1, Enero 29, Febrero 19, Marzo
                                 18, Abril 22, Mayo 20, Junio 17
                             </div>
@@ -910,7 +920,8 @@ $raiz = "../archivos";
                                         </div>
 
                                         <div class="col-sm-12">
-                                            <div class="callout callout-info" style="margin-bottom: 5px;">
+                                            <div class="callout callout-info"
+                                                style="margin-bottom: 5px; border-left-color: #B42A2A;">
                                                 Recuerde que si documento es
                                                 <b>Monografía</b>, debe anexar al final del archivo, el
                                                 certificado de terminación de materias
@@ -966,13 +977,13 @@ $raiz = "../archivos";
 
 
                             </div>
-                            <div class="callout callout-info">
+                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
                                 <b>Los archivos</b>, si el archivo es grande por
                                 favor espere a que cargue y luego, si haga clic en Registrar,
                                 recuerde que para el caso de si sube archivos duplicados esto se
                                 sobre escribe
                             </div>
-                            <div class="callout callout-info">
+                            <div class="callout callout-info" style="border-left-color: #B42A2A;">
                                 <b>Los archivos en formato pdf. Ej: 123456789.pdf, recuerde que debe estar en los
                                     formatos
                                     dispuesto por el comite</b>
@@ -1255,9 +1266,10 @@ $raiz = "../archivos";
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>2020</b>
+            <b><?php echo date("Y"); ?></b>
         </div>
-        <strong>Universidad Libre - <a href="../../index.html">SI-COMMITEE</a>.</strong>
+        <strong>
+            Copyright © <a href="../../index.html">SI-COMMITEE</a> 2019</strong>
     </footer>
 
 
