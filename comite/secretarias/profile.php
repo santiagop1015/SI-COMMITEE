@@ -15,13 +15,25 @@ $query = mysqli_query($mysqli, $sql);
 
 while ($arreglo = mysqli_fetch_array($query)) {
     //var_dump($arreglo);
-    $nombre = $arreglo[3];
-    $correo = $arreglo[4];
+    $id = $arreglo[0];
     $cedula = $arreglo[1];
-    $tipouser = $arreglo[2];
-   // die();
+    $correo = $arreglo[4];
+    $password = $arreglo[7];
+    $tipoUsuario = $arreglo[2];
+    $telefono = $arreglo[10];
     $programa = $arreglo[11];
+    $fechaNacimiento = $arreglo[12];
+
+    $nombre = $arreglo[3];
+    
     $fecha = date("d-m-Y H:i:s");
+
+    $foto = $arreglo[14];
+
+    if ($arreglo[2] != 'Jurado') {
+        require("../desconectar.php");
+        header("Location:../../index.html");
+    }
 }
 
 ?>
@@ -31,7 +43,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Estudiante</title>
+    <title>SI-COMMITEE || Secretaria</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -42,7 +54,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -71,8 +83,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
     color: white;
 }
 </style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+<script src="LocalSources/js/jquery.min.js"></script>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+<script src="LocalSources/js/bootstrap.min.js"></script>
 
 <script>
 
@@ -100,11 +114,11 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <li class="nav-item">
                     <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
                         role="button">
-                        <i id="idIconClass" class="far fa-comments white"></i>
+                        <i id="idIconClassChat" class="far fa-comments white"></i>
                     </a>
                     <script>
                     $(document).on("click", "#idChatIcon", function() {
-                        var iconChatBar = document.getElementById("idIconClass");
+                        var iconChatBar = document.getElementById("idIconClassChat");
                         if (iconChatBar.className == "far fa-comments white") {
                             iconChatBar.className = "fas fa-comments white";
                         } else {
@@ -114,21 +128,35 @@ while ($arreglo = mysqli_fetch_array($query)) {
                     </script>
                 </li>
                 <li class="nav-item dropdown">
-                    <!--  <a class="nav-link" href="../desconectar.php">
-                        <i class="fas fa-door-open white"></i>
-                    </a> -->
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">
-                        <i class="fas fa-door-open white"></i>
+                    <a id="idAnclaIconLogout" class="nav-link" data-toggle="modal" data-target="#idModalLogout">
+                        <i id="idIconLogout" class="fas fa-door-closed white"></i>
                     </a>
+                    <script>
+                    window.addEventListener('load', iniciar, false);
 
+                    function iniciar() {
+                        var AnclaLogout = document.getElementById('idAnclaIconLogout');
+                        AnclaLogout.addEventListener('mouseover', overLogout, false);
+                        AnclaLogout.addEventListener('mouseout', outLogout, false);
+                    }
 
+                    function overLogout() {
+                        var IconLogout = document.getElementById('idIconLogout');
+                        IconLogout.className = "fas fa-door-open white";
+                    }
+
+                    function outLogout() {
+                        var IconLogout = document.getElementById('idIconLogout');
+                        IconLogout.className = "fas fa-door-closed white";
+                    }
+                    </script>
                 </li>
             </ul>
         </nav>
 
         <!-- Modal cerrar sesion -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="idModalLogout" tabindex="-1" role="dialog" aria-labelledby="idModalLogoutTitle"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -165,7 +193,14 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel pt-3 pb-3 pb-3 d-flex" style="background: rgb(180, 42, 42);">
                     <div class="image">
-                        <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                        <?php
+                    if(empty($foto)) {
+                      echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
+                    } else {
+                    echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" class="img-circle elevation-2" alt="User Image">';
+                    }
+                    ?>
+
                     </div>
 
                     <div class="info">
@@ -202,7 +237,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
                 <script>
                 function toEstudiante(numero) {
-                    // localStorage.setItem("number", numero);
                     location.replace("secretaria.php");
                 }
                 </script>
@@ -220,16 +254,31 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 id="Text">Perfil</h1>
+                            <h1 id="Text">Perfil
+                                <i id="idIconEdit" class="fas fa-pencil-alt ml-2"></i>
+                                <script>
+                                $(document).on("click", "#idIconEdit", function() {
+                                    var IconEdit = document.getElementById("idIconEdit");
+                                    if (IconEdit.className == "fas fa-pencil-alt ml-2") {
+                                        IconEdit.className = "fas fa-save ml-2";
+                                        Edit(true);
+                                    } else if (IconEdit.className == "fas fa-save ml-2") {
+                                        /*IconEdit.className = "fas fa-pencil-alt ml-2";
+                                        Edit(false); */
+                                        Save();
+                                    }
+                                });
+                                </script>
+                                <i id="idIconCancel" class="fas fa-times ml-2 d-none"></i>
+                                <script>
+                                $(document).on("click", "#idIconCancel", function() {
+                                    var IconEdit = document.getElementById("idIconCancel");
+                                    Cancel();
+                                });
+                                </script>
+                            </h1>
                         </div>
-                        <!-- <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#" data-toggle="control-sidebar"><i
-                                            class="nav-icon fa fa-user-md black"></i>
-                                    </a></li>
-                                <li id="Guia" class="breadcrumb-item active">Documentos Registrados</li>
-                            </ol>
-                        </div>  -->
+
                     </div>
 
                 </div>
@@ -237,7 +286,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
             </section>
 
 
-            <!--    <body onload="javascript:cambiarPestanna(pestanas,pestana2);">  -->
             <section class="content">
                 <!--   <div class="row">
                         <div class="col-12"> -->
@@ -249,16 +297,164 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile">
                                     <div class="text-center">
-                                        <img class="profile-user-img img-fluid img-circle"
+                                        <!-- <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
+                                            src="dist/img/avatar-user.jpg" alt="User profile picture"> -->
+                                        <?php
+                                        if(empty($foto)) {
+                                            ?>
+                                        <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
                                             src="dist/img/avatar-user.jpg" alt="User profile picture">
+                                        <?php
+                                        } else {
+                                            ?>
+                                        <img id="IdImgPerfil" class="profile-user-img img-fluid img-circle"
+                                            src="data:image/jpg;base64,<?php echo base64_encode($foto); ?>"
+                                            alt="User profile picture">
+                                        <?php
+                                        }
+                                        ?>
+                                        <i id="IconEditPerfil" class="fas fa-pencil-alt ml-2 d-none"
+                                            style="position: absolute;"></i>
+
+                                        <!-- Editar -->
+                                        <!--<img id="IdImgEdit" class="profile-user-img img-fluid img-circle d-none"
+                                            src="dist/img/addimage.jpg" alt="User profile picture"> -->
+                                        <!-- End Edit image    -->
+                                    </div>
+                                    <script>
+                                    window.addEventListener('load', iniciar, false);
+
+                                    function iniciar() {
+                                        var imagenPerfil = document.getElementById('IdImgPerfil');
+                                        imagenPerfil.addEventListener('mouseover', over, false);
+                                        imagenPerfil.addEventListener('mouseout', out, false);
+                                        //var imagenEditar = document.getElementById('IdImgEdit');
+                                        //imagenEditar.addEventListener('mouseout', out, false);
+                                    }
+
+                                    function over() {
+                                        //document.getElementById("IdImgPerfil").classList.add("d-none");
+                                        // document.getElementById("IdImgEdit").classList.remove("d-none");
+                                        document.getElementById("IconEditPerfil").classList.remove("d-none");
+                                    }
+
+                                    function out() {
+                                        //document.getElementById("IdImgPerfil").classList.remove("d-none");
+                                        //document.getElementById("IdImgEdit").classList.add("d-none");
+                                        document.getElementById("IconEditPerfil").classList.add("d-none");
+                                    }
+
+
+                                    $(document).on("click", "#IdImgPerfil", function() {
+                                        document.getElementById("idButtonModalActImgPerfil").click();
+                                    });
+                                    </script>
+
+                                    <button id="idButtonModalActImgPerfil" type="button" class="btn btn-primary d-none"
+                                        data-toggle="modal" data-target="#ModalSubirCambiarImagenPerfil"></button>
+
+                                    <!-- Modal Edit Image Profile -->
+                                    <div class="modal fade" id="ModalSubirCambiarImagenPerfil" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Subir foto de
+                                                        perfil</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form id="formUploadImg" action="profile/save_img.php" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    <div class="modal-body">
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">Seleccione imagen</label>
+                                                            <div class="input-group">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="Imagen"
+                                                                        class="custom-file-input" id="idInputImgUpload"
+                                                                        accept="image/png,image/jpeg">
+                                                                    <label class="custom-file-label"
+                                                                        for="exampleInputFile"
+                                                                        id="IdLabelInputImgUpload">Choose file</label>
+                                                                    <script>
+                                                                    // idInputImgUpload
+                                                                    var InputImgUpload = document.getElementById(
+                                                                        "idInputImgUpload");
+                                                                    var LabelInputImgUpload = document.getElementById(
+                                                                        "IdLabelInputImgUpload");
+
+                                                                    InputImgUpload.onchange = function(e) {
+                                                                        //alert("Onchanger");
+                                                                        var file = $("#idInputImgUpload").prop(
+                                                                            "files")[0];
+                                                                        var fileName = file.name;
+                                                                        // console.log(document.getElementById("idInputImgUpload").value);
+                                                                        LabelInputImgUpload.innerHTML = fileName;
+
+                                                                        //var imageType = /image.*/;
+
+                                                                        //console.log(file.type);
+
+                                                                        if (file.type.match("image/png") || file
+                                                                            .type.match("image/jpeg")) {
+                                                                            //alert("File supported!");
+                                                                            document.getElementById(
+                                                                                    "idMessageFileNotSupported")
+                                                                                .classList.add("d-none");
+
+
+                                                                            document.getElementById(
+                                                                                    "idButtonUploadImage")
+                                                                                .disabled = false;
+
+                                                                        } else {
+                                                                            //alert("File not supported!");
+                                                                            document.getElementById(
+                                                                                    "idMessageFileNotSupported")
+                                                                                .classList.remove("d-none");
+
+                                                                            document.getElementById(
+                                                                                    "idButtonUploadImage")
+                                                                                .disabled = true;
+
+                                                                        }
+                                                                    };
+                                                                    </script>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <p>Solo se admiten archivos .png, .jpg y .jpeg</p>
+                                                        <p>Tamaño maximo 40 MB (238 x 250 pixeles)</p>
+                                                        <div id="idMessageFileNotSupported"
+                                                            class="alert alert-danger mb-1 d-none" role="alert">
+                                                            Archivo no soportado
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button id="idButtonUploadImage" type="submit"
+                                                            class="btn btn-primary">Actualizar</button>
+                                                    </div>
+                                                </form>
+                                                <script>
+
+
+
+                                                </script>
+
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <h3 class="profile-username text-center"><?php echo $nombre; ?></h3>
 
                                     <p class="text-muted text-center">
-                                        <?php echo $tipouser ?>
+                                        <?php echo $tipoUsuario ?>
                                     </p>
-
 
                                 </div>
                                 <!-- /.card-body -->
@@ -269,43 +465,173 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         </div>
                         <!-- /.col -->
                         <div class="col-md-12">
+                            <div id="AlertProblemActInfo" class="alert alert-danger mb-3 d-none" role="alert">
+                                <h5><i class="icon fas fa-ban"></i> Alerta!</h5>
+                                No se logro actualizar la informacion, Intentelo mas tarde (De persistir el error
+                                contacte al Adminitrador del SI-COMMITEE)
+                            </div>
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">About Me</h3>
+                                    <h3 class="card-title">Información Actual</h3>
                                 </div>
                                 <!-- /.card-header -->
+                                <script>
+                                function Edit(event) {
+                                    document.getElementById("idIconCancel").classList.remove("d-none");
+                                    var PassLabel = document.getElementById("PassLabel");
+                                    var PassInput = document.getElementById("PassInput");
+                                    var TelILabel = document.getElementById("TelLabel");
+                                    var TelInput = document.getElementById("TelInput");
+                                    var FechaNacLabel = document.getElementById("FechaNacLabel");
+                                    var FechaNacInput = document.getElementById("FechaNacInput");
+
+                                    if (event) {
+                                        PassLabel.classList.add("d-none");
+                                        PassInput.classList.remove("d-none");
+                                        TelILabel.classList.add("d-none");
+                                        TelInput.classList.remove("d-none");
+                                        FechaNacLabel.classList.remove("d-none");
+                                        FechaNacInput.classList.remove("d-none");
+                                    }
+                                }
+
+                                function Cancel() {
+                                    var IconEdit = document.getElementById("idIconEdit");
+                                    IconEdit.className = "fas fa-pencil-alt ml-2";
+                                    document.getElementById("idIconCancel").classList.add("d-none");
+
+                                    var PassLabel = document.getElementById("PassLabel");
+                                    var PassInput = document.getElementById("PassInput");
+                                    var TelILabel = document.getElementById("TelLabel");
+                                    var TelInput = document.getElementById("TelInput");
+                                    var FechaNacLabel = document.getElementById("FechaNacLabel");
+                                    var FechaNacInput = document.getElementById("FechaNacInput");
+
+                                    PassLabel.classList.remove("d-none");
+                                    PassInput.classList.add("d-none");
+                                    TelILabel.classList.remove("d-none");
+                                    TelInput.classList.add("d-none");
+                                    FechaNacLabel.classList.remove("d-none");
+                                    FechaNacInput.classList.add("d-none");
+                                }
+
+                                function Save() {
+                                    var PassInput = document.getElementById("PassInput");
+                                    var TelInput = document.getElementById("TelInput");
+                                    var FechaNacInput = document.getElementById("FechaNacInput");
+
+                                    var Data = [];
+                                    var DataPass = {};
+                                    var DataTel = {};
+                                    var DataFec = {};
+                                    DataPass.name = "password";
+                                    DataPass.value = PassInput.value;
+                                    Data.push(DataPass);
+
+                                    DataTel.name = "telefono";
+                                    DataTel.value = TelInput.value;
+                                    Data.push(DataTel);
+
+                                    DataFec.name = "fecha nacimiento";
+                                    DataFec.value = FechaNacInput.value;
+                                    Data.push(DataFec);
+
+                                    /*
+                                        Data.push(PassInput.value);
+                                        Data.push(TelInput.value);
+                                        Data.push(FechaNacInput.value);
+                                                                        */
+                                    //console.log(Data);
+
+                                    /*var IconEdit = document.getElementById("idIconEdit");
+                                    IconEdit.className = "fas fa-pencil-alt ml-2";
+                                                document.getElementById("idIconCancel").classList.add(
+                                                    "d-none");
+                                                    */
+
+                                    var AlertProblemActData = document.getElementById("AlertProblemActInfo");
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "profile/save_data.php",
+                                        data: Data,
+                                        success: function(data) {
+                                            console.log(data);
+                                            if (data == "1") {
+                                                location.reload();
+                                            } else {
+                                                AlertProblemActData.classList.remove("d-none");
+                                            }
+                                        }
+                                    });
+
+                                    //--------------------
+
+
+                                }
+                                </script>
                                 <div class="card-body">
-                                    <strong><i class="fas fa-book mr-1"></i> Programa</strong>
-
-                                    <p class="text-muted">
-                                        <!--  $nombre = $arreglo[3];
-                                        $correo = $arreglo[4];
-                                        $codigo = $arreglo[1];
-                                        $tipouser = $arreglo[2];
-                                        -->
-                                        <?php
-                                        echo $programa;  
-                                        ?>
-
-                                    </p>
-
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Id</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $id; ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Cedula</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $cedula; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Usuario</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $correo; ?>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Password</strong>
+                                            <p id="PassLabel" class="text-muted mb-0">
+                                                <?php echo $password; ?>
+                                            </p>
+                                            <input id="PassInput" class="form-control d-none"
+                                                value="<?php echo $password; ?>" />
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Telefono</strong>
+                                            <p id="TelLabel" class="text-muted mb-0">
+                                                <?php echo $telefono; ?>
+                                            </p>
+                                            <input id="TelInput" type="number" class="form-control d-none"
+                                                value="<?php echo $telefono; ?>" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Programa</strong>
+                                            <p class="text-muted mb-0">
+                                                <?php echo $programa; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <strong><i class="fas fa-book mr-1"></i> Fecha de Nacimiento</strong>
+                                            <p id="FechaNacLabel" class="text-muted mb-0">
+                                                <?php echo $fechaNacimiento; ?>
+                                            </p>
+                                            <input id="FechaNacInput" type="date" class="form-control d-none"
+                                                value="<?php echo $fechaNacimiento; ?>" />
+                                        </div>
+                                    </div>
                                     <hr>
 
-                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Correo</strong>
-
-                                    <p class="text-muted"><?php echo $correo ?></p>
-
-                                    <hr>
-
-                                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Ciudad</strong>
-
-                                    <p class="text-muted">Bogota D.C</p>
-
-                                    <hr>
-
-                                    <strong><i class="far fa-file-alt mr-1"></i> Cedula</strong>
-
-                                    <p class="text-muted"><?php echo $cedula ?></p>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -335,185 +661,14 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
 
 
-        <div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Busqueda de usuarios</h4>
-                        <button id="idButtonCloseModal" type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <form id="idFormSearchUser">
-                        <div class="modal-body">
-
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <!-- text input -->
-
-                                    <div class="form-group">
-                                        <label>Nombre Usuario</label>
-                                        <input type="text" class="form-control" id="idNombreUsuario"
-                                            placeholder="Escriba Nombre" style="MozUserSelect:None;">
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6">
-                                    <!-- text input -->
-                                    <div class="form-group">
-                                        <label>Programa</label>
-                                        <!--  <select value="<?php echo $programa; ?>" class="form-control">
-                                        <option value="">-- Seleccione --</option>
-                                        <option value="Sistemas">Sistemas</option>
-                                        <option value="Industrial">Industrial</option>
-                                        <option value="Mecanica">Mecanica</option>
-                                        <option value="Ambiental">Ambiental</option>
-                                    </select>
-                                    -->
-                                        <input type="text" class="form-control" value="<?php echo $programa; ?>"
-                                            disabled>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="direct-chat" style="
-                         background: #343a40;
-                         bottom: 0;
-                         color: #fff;
-                         height: fit-content;
-                         overflow: auto;
-                         top: 0;
-                         width: 100%;
-                         max-height: 250px">
-                                <div class="direct-chat-messages" style="padding: 0px;height: fit-content;">
-                                    <ul id="idContactsSearch" class="contacts-list mb-0">
-
-                                    </ul>
-
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-default fade">Close</button>
-                            <button type="submit" class="btn btn-primary">Buscar</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-
-
-        <!-- Control Sidebar -->
-        <aside id="idAside" class="control-sidebar control-sidebar-dark position-fixed"
-            style="border-radius: .25rem; height: 90%;">
-            <!-- Control sidebar content goes here -->
-
-            <div id="idCard" class="card direct-chat direct-chat-primary direct-chat-contacts-open"
-                style="position: relative; left: 0px; top: 0px; height: 100%">
-                <div class="card-header ui-sortable-handle" style="">
-                    <h3 class="card-title">Direct Chat</h3>
-
-                    <div class="card-tools">
-                        <button id="idButtonUsers" type="button" class="btn btn-tool" data-toggle="modal"
-                            data-target="#modal-lg">
-                            <i class="fa fa-users"></i>
-                        </button>
-
-                        <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-                        Launch Large Modal
-                    </button>
-                        -->
-                        <button id="idButtonMessages" type="button" class="btn btn-tool" data-toggle="tooltip"
-                            title="Contacts" data-widget="chat-pane-toggle">
-                            <i class="fas fa-comments"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-tool" data-widget="control-sidebar" data-slide="true"><i
-                                class="fas fa-times"></i>
-                            <!-- 
-                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
-                    </a>
-                            -->
-                        </button>
-                    </div>
-
-                </div>
-
-                <div id="idCardNameChat" class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                          display: None;
-                         ">
-
-                    <h3 id="idNameChat" class="card-title" style="color: rgb(33, 37, 41); font-size: 14px;">
-                        Seleccione un Chat</h3>
-
-                </div>
-
-
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <!-- Conversations are loaded here -->
-                    <div id="idContainerFather" class="direct-chat-messages" style="height: 100%">
-                        <!-- <div class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                         ">
-                        <h3 id="idNameChat" class="card-title" style="color: black;">
-                            US-Visitors Report</h3>
-                    </div>
-                    -->
-                        <div id="idContainerMessages" class="ContainerMessages">
-
-                        </div>
-
-                    </div>
-                    <!--/.direct-chat-messages-->
-
-                    <!-- Contacts are loaded here -->
-                    <div class="direct-chat-contacts" style="height: 100%; border-radius: .25rem;">
-                        <ul id="idContactsList" class="contacts-list mb-0">
-
-                        </ul>
-                        <!-- /.contacts-list -->
-                    </div>
-                    <!-- /.direct-chat-pane -->
-                </div>
-                <!-- /.card-body -->
-                <div id="idFormChat" class="card-footer" style="display: none;">
-
-                    <form id="idFormSendMessage">
-
-                        <div id="idEnviarMensaje" class="input-group">
-                            <input id="idMessage_Content" type="text" name="message" placeholder="Escribe un mensaje"
-                                class="form-control">
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-primary send_chat">Enviar</button>
-                            </span>
-                        </div>
-                    </form>
-
-                </div>
-                <!-- /.card-footer-->
-            </div>
-
-
-        </aside>
-        <!-- /.control-sidebar -->
+        <?php include 'chat.php'; ?>
 
     </div>
     <!-- ./wrapper -->
 
 
 </body>
+
 
 <script type="text/javascript" src="chat/chat.js"></script>
 

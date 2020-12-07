@@ -29,6 +29,11 @@ while ($arreglo = mysqli_fetch_array($query)) {
     $fecha = date("d-m-Y H:i:s");
 
     $foto = $arreglo[14];
+
+    if ($arreglo[2] != 'Estudiante') {
+        require("../desconectar.php");
+        header("Location:../../index.html");
+    }
 }
 
 ?>
@@ -78,8 +83,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
     color: white;
 }
 </style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+<script src="LocalSources/js/jquery.min.js"></script>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+<script src="LocalSources/js/bootstrap.min.js"></script>
 
 <script>
 

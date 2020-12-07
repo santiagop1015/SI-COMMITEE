@@ -23,6 +23,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
     $coordir=$arreglo[4];
     $passd=$arreglo[8];
+
+    $foto = $arreglo[14];
     
     if ($arreglo[2] != 'Jurado') {
         require("../desconectar.php");
@@ -39,7 +41,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <title>SI-COMMITEE || Secretaria</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="LocalSources/css/ionicons.min.css">
 
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -51,8 +53,18 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <!-- -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link href="LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <script src="LocalSources/ajax/jquery/2.0.3/jquery.min.js"></script>
+
+    <script>
+  /*  $(document).ready(function() {
+        setTimeout(() => {
+          //  document.getElementById("IdIconLoad").classList.add("d-none");
+        }, 500);
+
+    });
+    */
+    </script>
 
 </head>
 <style>
@@ -129,16 +141,35 @@ while ($arreglo = mysqli_fetch_array($query)) {
                     </script>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="modal" data-target="#IdButtonLogout">
-                        <i class="fas fa-door-open white"></i>
+                <a id="idAnclaIconLogout" class="nav-link" data-toggle="modal" data-target="#idModalLogout">
+                        <i id="idIconLogout" class="fas fa-door-closed white"></i>
                     </a>
+                    <script>
+                    window.addEventListener('load', iniciar, false);
+
+                    function iniciar() {
+                        var AnclaLogout = document.getElementById('idAnclaIconLogout');
+                        AnclaLogout.addEventListener('mouseover', overLogout, false);
+                        AnclaLogout.addEventListener('mouseout', outLogout, false);
+                    }
+
+                    function overLogout() {
+                        var IconLogout = document.getElementById('idIconLogout');
+                        IconLogout.className = "fas fa-door-open white";
+                    }
+
+                    function outLogout() {
+                        var IconLogout = document.getElementById('idIconLogout');
+                        IconLogout.className = "fas fa-door-closed white";
+                    }
+                    </script>
                 </li>
 
             </ul>
         </nav>
 
         <!-- Modal cerrar sesion -->
-        <div class="modal fade" id="IdButtonLogout" tabindex="-1" role="dialog"
+        <div class="modal fade" id="idModalLogout" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -330,16 +361,16 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                     <div class="card-body">
                                         <center>
                                             <h5><b>Comite de proyectos de grado</b></h5>
-                                                
-                                                    <br>
-                                                    <b>Ambiental-Industrial-Mecanica-Sistemas</b>
-                                                    <br>
-                                                    Espacio creado para el manejo y colaboración de Proyectos de
-                                                    grado
-                                                    <br>
-                                                    en la
-                                                    Facultad de Ingeniería de la Universidad Libre
-                                                    
+
+                                            <br>
+                                            <b>Ambiental-Industrial-Mecanica-Sistemas</b>
+                                            <br>
+                                            Espacio creado para el manejo y colaboración de Proyectos de
+                                            grado
+                                            <br>
+                                            en la
+                                            Facultad de Ingeniería de la Universidad Libre
+
                                         </center>
 
 
@@ -411,7 +442,13 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                            <?php
+                        if(empty($foto)) {
+                            echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
+                          } else {
+                          echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" class="img-circle elevation-2" alt="User Image">';
+                          }
+                        ?>
                         </div>
 
                         <div class="info">
@@ -428,6 +465,12 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <div id="pestanas">
+                        <div class="overlay d-flex justify-content-center align-items-center">
+                            <div id="IdIconLoad" class="overlay dark"
+                                style="position: absolute; background-size: cover; background-color: rgba(0,0,0,0.6);">
+                                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                            </div>
+                        </div>
                         <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
                             <li id="pestana1" class="nav-item">
@@ -554,183 +597,12 @@ while ($arreglo = mysqli_fetch_array($query)) {
             <div class="float-right d-none d-sm-block">
                 <b><?php echo date('Y')?></b>
             </div>
-            <strong>Universidad Libre - <a href="../../index.html">SI-COMMITEE</a>.</strong>
-
-
+            <strong>
+                Copyright © <a href="../../index.html">SI-COMMITEE</a> 2019</strong>
         </footer>
 
-        <div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Busqueda de usuarios</h4>
-                        <button id="idButtonCloseModal" type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <form id="idFormSearchUser">
-                        <div class="modal-body">
-
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <!-- text input -->
-
-                                    <div class="form-group">
-                                        <label>Nombre Usuario</label>
-                                        <input type="text" class="form-control" id="idNombreUsuario"
-                                            placeholder="Escriba Nombre" style="MozUserSelect:None;">
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6">
-                                    <!-- text input -->
-                                    <div class="form-group">
-                                        <label>Programa</label>
-                                        <!--  <select value="<?php echo $programa; ?>" class="form-control">
-                                        <option value="">-- Seleccione --</option>
-                                        <option value="Sistemas">Sistemas</option>
-                                        <option value="Industrial">Industrial</option>
-                                        <option value="Mecanica">Mecanica</option>
-                                        <option value="Ambiental">Ambiental</option>
-                                    </select>
-                                    -->
-                                        <input type="text" class="form-control" value="<?php echo $programa; ?>"
-                                            disabled>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="direct-chat" style="
-                         background: #343a40;
-                         bottom: 0;
-                         color: #fff;
-                         height: fit-content;
-                         overflow: auto;
-                         top: 0;
-                         width: 100%;
-                         max-height: 250px">
-                                <div class="direct-chat-messages" style="padding: 0px;height: fit-content;">
-                                    <ul id="idContactsSearch" class="contacts-list mb-0">
-
-                                    </ul>
-
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn-default fade">Close</button>
-                            <button type="submit" class="btn btn-primary">Buscar</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-
-
         <!-- Control Sidebar -->
-        <aside id="idAside" class="control-sidebar control-sidebar-dark position-fixed"
-            style="border-radius: .25rem; height: 90%;">
-            <!-- Control sidebar content goes here -->
-
-            <div id="idCard" class="card direct-chat direct-chat-primary direct-chat-contacts-open"
-                style="position: relative; left: 0px; top: 0px; height: 100%">
-                <div class="card-header ui-sortable-handle" style="">
-                    <h3 class="card-title">Direct Chat</h3>
-
-                    <div class="card-tools">
-                        <button id="idButtonUsers" type="button" class="btn btn-tool" data-toggle="modal"
-                            data-target="#modal-lg">
-                            <i class="fa fa-users"></i>
-                        </button>
-
-                        <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-lg">
-                        Launch Large Modal
-                    </button>
-                        -->
-                        <button id="idButtonMessages" type="button" class="btn btn-tool" data-toggle="tooltip"
-                            title="Contacts" data-widget="chat-pane-toggle">
-                            <i class="fas fa-comments"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-tool" data-widget="control-sidebar" data-slide="true"><i
-                                class="fas fa-times"></i>
-                            <!-- 
-                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
-                    </a>
-                            -->
-                        </button>
-                    </div>
-
-                </div>
-
-                <div id="idCardNameChat" class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                          display: None;
-                         ">
-
-                    <h3 id="idNameChat" class="card-title" style="color: rgb(33, 37, 41); font-size: 14px;">
-                        Seleccione un Chat</h3>
-
-                </div>
-
-
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <!-- Conversations are loaded here -->
-                    <div id="idContainerFather" class="direct-chat-messages" style="height: 100%">
-                        <!-- <div class="card-header ui-sortable-handle" style="
-                          padding-left: 5px;
-                          padding-top: 5px;
-                         ">
-                        <h3 id="idNameChat" class="card-title" style="color: black;">
-                            US-Visitors Report</h3>
-                    </div>
-                    -->
-                        <div id="idContainerMessages" class="ContainerMessages">
-
-                        </div>
-
-                    </div>
-                    <!--/.direct-chat-messages-->
-
-                    <!-- Contacts are loaded here -->
-                    <div class="direct-chat-contacts" style="height: 100%; border-radius: .25rem;">
-                        <ul id="idContactsList" class="contacts-list mb-0">
-
-                        </ul>
-                        <!-- /.contacts-list -->
-                    </div>
-                    <!-- /.direct-chat-pane -->
-                </div>
-                <!-- /.card-body -->
-                <div id="idFormChat" class="card-footer" style="display: none;">
-
-                    <form id="idFormSendMessage">
-
-                        <div id="idEnviarMensaje" class="input-group">
-                            <input id="idMessage_Content" type="text" name="message" placeholder="Escribe un mensaje"
-                                class="form-control">
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-primary send_chat">Enviar</button>
-                            </span>
-                        </div>
-                    </form>
-
-                </div>
-                <!-- /.card-footer-->
-            </div>
-
-
-        </aside>
+        <?php include 'chat.php'; ?>
         <!-- /.control-sidebar -->
 
         <!-- modal-start -->
@@ -768,6 +640,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
 
 <script type="text/javascript" src="js/CardChange.js"></script>
+
 
 <script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

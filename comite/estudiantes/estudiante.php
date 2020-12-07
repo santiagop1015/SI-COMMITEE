@@ -82,12 +82,13 @@ $raiz = "../archivos";
     <!-- <script type="text/javascript" src="js/cambiarPestanna.js"></script> -->
 
     <script>
-    $(document).ready(function() {
+   /* $(document).ready(function() {
         setTimeout(() => {
-            document.getElementById("IdIconLoad").classList.add("d-none");
+         //   document.getElementById("IdIconLoad").classList.add("d-none");
         }, 500);
 
     });
+    */
     </script>
 
 
@@ -153,7 +154,7 @@ $raiz = "../archivos";
                 </li>
                 <li class="nav-item dropdown">
                     <a id="idAnclaIconLogout" class="nav-link" data-toggle="modal" data-target="#idModalLogout">
-                        <i id="idIconLogout" class="fas fa-door-open white"></i>
+                        <i id="idIconLogout" class="fas fa-door-closed white"></i>
                     </a>
                     <script>
                     window.addEventListener('load', iniciar, false);
@@ -166,12 +167,12 @@ $raiz = "../archivos";
 
                     function overLogout() {
                         var IconLogout = document.getElementById('idIconLogout');
-                        IconLogout.className = "fas fa-door-closed white";
+                        IconLogout.className = "fas fa-door-open white";
                     }
 
                     function outLogout() {
                         var IconLogout = document.getElementById('idIconLogout');
-                        IconLogout.className = "fas fa-door-open white";
+                        IconLogout.className = "fas fa-door-closed white";
                     }
                     </script>
 

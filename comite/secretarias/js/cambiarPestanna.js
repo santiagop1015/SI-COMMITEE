@@ -59,6 +59,7 @@ function cambiarPestanna(pestannas, pestanna) {
     });
 
     $(".loader").fadeOut("slow");
+    document.getElementById("IdIconLoad").classList.add("d-none");
 }
 
 function myfunction() {

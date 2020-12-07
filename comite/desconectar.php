@@ -1,8 +1,10 @@
 <?php 
 session_start();
-echo '<script>
+/*echo '<script>
 localStorage.removeItem("number");
 </script>';
+*/
+
 
 if($_SESSION['user']){	
 	session_destroy();
