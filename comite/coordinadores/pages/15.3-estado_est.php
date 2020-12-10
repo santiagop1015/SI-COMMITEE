@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <?php
 session_start();
 if (@!$_SESSION['user']) {
@@ -57,9 +56,9 @@ $nota=0;
 }
 </style>
 
-<body onresize="Evaluar()">
+<body id="idCard">
 
-    <div id="idCard" class="card card-warning" style="margin-bottom: 0px; ">
+    <div class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white;">
             <h3 class="card-title">
                 <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
@@ -224,6 +223,10 @@ $(document).ready(function() {
           Evaluar();
       });
       */
+      window.addEventListener('resize', function(event) {
+        // do stuff here
+        Evaluar();
+    });
 });
 
 function Evaluar(event) {

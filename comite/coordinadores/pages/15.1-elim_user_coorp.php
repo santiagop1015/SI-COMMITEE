@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php
-
 session_start();
 if (@!$_SESSION['user']) {
     header("Location:../../Login/index.html");

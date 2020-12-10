@@ -23,8 +23,8 @@ while($arreglo=mysqli_fetch_array($query)){
  $passd=$arreglo[8];
 
  if ($arreglo[2]!='Coordinador') {
-	require("../desconectar.php");
-	header("Location:../Login/index.html");
+	require("../../desconectar.php");
+	header("Location:../../../index.html");
 }
 }
 
@@ -52,9 +52,9 @@ while($arreglo=mysqli_fetch_array($query)){
 
 </head>
 
-<body>
+<body id="idCard">
 
-    <div id="idCard" class="card card-default" style="margin-bottom: 0px;">
+    <div class="card card-default" style="margin-bottom: 0px;">
 
         <div class="card-body">
             <div class="alert alert-info">
@@ -134,14 +134,19 @@ while($arreglo=mysqli_fetch_array($query)){
 
 $(document).ready(function() {
     Evaluar();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        Evaluar();
+    });
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
       });
       */
-    setTimeout(() => {
-        Evaluar();
-    }, 200);
+    /* setTimeout(() => {
+         Evaluar();
+     }, 200);
+     */
 });
 
 function Evaluar(event) {

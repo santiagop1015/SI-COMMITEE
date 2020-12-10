@@ -265,6 +265,14 @@ while($arreglo=mysqli_fetch_array($query)){
                                     </p>
                                 </a>
                             </li>
+                            <li id="pestana17" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana17);' class="nav-link">
+                                    <i class="nav-icon fa fa-users white"></i>
+                                    <p class="white">
+                                        Secretarios
+                                    </p>
+                                </a>
+                            </li>
                         </ul>
 
 
@@ -809,21 +817,29 @@ while($arreglo=mysqli_fetch_array($query)){
                                     onload="resizeIframe(this)"></iframe>
                             </div>
                         </div>
+                        <div id="cpestana17">
+                            <div class="card card-default">
+                            <iframe id="idFrameSecretari@s" src="pages/17-Secretari@s.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
         <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>2020</b>
+        <div class="float-right d-none d-sm-block">
+                <b><?php echo date('Y')?></b>
             </div>
-            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
+            <strong>
+                Copyright © <a href="../../index.html">SI-COMMITEE</a> 2019</strong>
         </footer>
 
 
 
         <!-- Control Sidebar -->
-
+        <?php include 'chat.php'; ?>
         <!-- /.control-sidebar -->
     </div>
 
@@ -876,7 +892,7 @@ $(document).ready(function() {
 });
 var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar', 'idFrameRechazar',
     'idFrameProximo', 'idFramePendientes', 'idFrameOtros', 'idFrameSemilleros', 'idFramePostgrado', 'idFrameAuxIn',
-    'idFrameCurso', 'idFrameActas', 'idFrameBuscar', 'idFrameEstudiantes', 'idFrameProfesores'
+    'idFrameCurso', 'idFrameActas', 'idFrameBuscar', 'idFrameEstudiantes', 'idFrameProfesores', 'idFrameSecretari@s'
 ];
 
 function ReloadsFrames() {
@@ -940,7 +956,7 @@ function resizeIframe(obj, px) {
         obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
     } else {
         if (px == 0) {
-            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
+          //  obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
         } else {
             obj.style.height = px + "px";
         }
@@ -975,5 +991,6 @@ function onResize(state) {
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script type="text/javascript" src="chat/chat.js"></script>
 
 </html>

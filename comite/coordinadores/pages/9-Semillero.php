@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
 <?php
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
+
 session_start();
 if (@!$_SESSION['user']) {
     header("Location:../Login/index.html");
@@ -47,7 +50,7 @@ $passd=$arreglo[8];
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body>
+<body id="idCard">
 
     <div id="idCard" class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white;">
@@ -180,6 +183,10 @@ $(document).ready(function() {
           Evaluar();
       });
       */
+      window.addEventListener('resize', function(event) {
+        // do stuff here
+        Evaluar();
+    });
 });
 
 function Evaluar(event) {

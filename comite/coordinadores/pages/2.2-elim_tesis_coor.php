@@ -37,9 +37,9 @@ $usuario=$_SESSION['user'];
 }
 </style>
 
-<body>
+<body id="idCardBorrar">
 
-    <div id="idCardBorrar" class="card card-warning" style="margin-bottom: 0px; ">
+    <div class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white; padding-left: 10px">
             <h3 class="card-title">
                 <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
@@ -273,6 +273,10 @@ $usuario=$_SESSION['user'];
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
     onSendHeight();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        Evaluar();
+    });
     onSubmitActualizar();
     localStorage.setItem("Mensaje2", null);
 });

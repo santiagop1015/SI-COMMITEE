@@ -7,7 +7,7 @@ function cambiarPestanna(pestannas, pestanna) {
     var cpestana2 = document.getElementById("cpestana2");
     var cpestana3 = document.getElementById("cpestana3");
     var cpestana4 = document.getElementById("cpestana4");
-    var cpestana = ["cpestana1", "cpestana2", "cpestana3", "cpestana4", "cpestana5", "cpestana6", "cpestana7", "cpestana8", "cpestana9", "cpestana10", "cpestana11", "cpestana12", "cpestana13", "cpestana14", "cpestana15", "cpestana16"];
+    var cpestana = ["cpestana1", "cpestana2", "cpestana3", "cpestana4", "cpestana5", "cpestana6", "cpestana7", "cpestana8", "cpestana9", "cpestana10", "cpestana11", "cpestana12", "cpestana13", "cpestana14", "cpestana15", "cpestana16", "cpestana17"];
     var Titulos = [
         "Generar Acta",
         "Documentos para Evaluar",
@@ -24,7 +24,8 @@ function cambiarPestanna(pestannas, pestanna) {
         "Ver Actas",
         "Buscar Documentos",
         "Estudiantes",
-        "Profesores"
+        "Profesores",
+        "Secretari@s"
     ];
 
     pestanna = document.getElementById(pestanna.id);
@@ -61,6 +62,8 @@ function cambiarPestanna(pestannas, pestanna) {
                 // guia.innerHTML = Titulos[cont];
 
                 // console.log(txt.innerHTML);
+                
+                
             }
         } else {
             cpestanna.style.display = "none";
@@ -73,9 +76,11 @@ function cambiarPestanna(pestannas, pestanna) {
         $(cpestanna).css("display", "");
         $(pestanna).css("background", "#B42A2A");
         //  $(pestanna).css("padding-bottom", "2px");
+        ReloadsFrames();
     });
 
     $(".loader").fadeOut("slow");
+    
 }
 
 function myfunction() {
@@ -132,6 +137,9 @@ function myfunction() {
                 break;
             case 16:
                 cambiarPestanna(pestanas, pestana16);
+                break;
+            case 17:
+                cambiarPestanna(pestanas, pestana17);
                 break;
             default: 1
                 cambiarPestanna(pestanas, pestana1);

@@ -342,6 +342,9 @@ if(!$_GET) {
 </body>
 
 <script>
+$(document).ready(function() {
+    Height();
+});
 function Height(event) {
     var card = document.getElementById("idCard");
     localStorage.setItem("height", card.clientHeight);

@@ -6,7 +6,7 @@ session_cache_limiter('private_no_expire'); // works
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../index.html");
+    header("Location:../Login/index.html");
 }
     //@$buscart=$_POST['buscart'];
     
@@ -38,7 +38,7 @@ $passd=$arreglo[8];
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Profesores</title>
+    <title>SI-COMMITEE || Secretari@s</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -66,7 +66,7 @@ $passd=$arreglo[8];
                         } else {
                           echo '';
                         }
-                        ?>" placeholder="Nombre Profesor ">
+                        ?>" placeholder="Nombre Secretari@">
 
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default" onclick="Evaluar();"><i
@@ -107,12 +107,12 @@ $passd=$arreglo[8];
         //echo $iniciar;
 
         if (@$_POST['buscar']) {
-            $sql=("SELECT * FROM login where user like '%$buscar%' and programa='$programa' and (tipoUsuario='Director' or tipoUsuario='Coordinador')
+            $sql=("SELECT * FROM login where user like '%$buscar%' and programa='$programa' and tipoUsuario='Jurado'
         ORDER BY Id DESC");
         //echo $sql;
         } else {
          //   @$buscar=$_POST['buscar'];
-         $sql=("SELECT * FROM login where programa='$programa' and (tipoUsuario='Director' or tipoUsuario='Coordinador')
+         $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='Jurado'
         ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina");
         }
        // echo $sql;

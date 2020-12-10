@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
 <?php
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
+
 session_start();
 if (@!$_SESSION['user']) {
     header("Location:../../Login/index.html");
@@ -59,10 +62,9 @@ $passd=$arreglo[8];
     <script src="../dist/js/demo.js"></script>
 </head>
 
-<body>
+<body id="idCard">
 
-
-    <div id="idCard" class="card card-primary card-tabs">
+    <div class="card card-primary card-tabs mb-0">
         <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                 <?php
@@ -180,8 +182,21 @@ $passd=$arreglo[8];
 <script>
 //window.addEventListener("storage", Evaluar);
 
+
 $(document).ready(function() {
+ /*   Evaluar();
+window.onload = Evaluar();
+window.onresize = Evaluar();
+*/
+//setTimeout(() => {
     Evaluar();
+//}, 2000);
+
+window.addEventListener('resize', function(event){
+  // do stuff here
+  Evaluar();
+});
+    
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
@@ -201,7 +216,7 @@ $(document).ready(function() {
 
 function Evaluar(event) {
     var card = document.getElementById("idCard");
-    console.log(card.clientHeight);
+    //console.log(card.clientHeight);
     localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
 }
