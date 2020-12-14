@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 
 <?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 session_start();
 if (@!$_SESSION['user']) {
     header("Location:../../index.html");
@@ -449,6 +453,14 @@ while($arreglo=mysqli_fetch_array($query)){
                     <div id="pestanas">
                         <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
+                            <li id="pestana16" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana16);' class="nav-link">
+                                    <i class="nav-icon fa fa-users white"></i>
+                                    <p class="white">
+                                        Inicio
+                                    </p>
+                                </a>
+                            </li>
                             <li id="pestana1" class="nav-item">
                                 <a href='javascript:cambiarPestanna(pestanas,pestana1);ReloadsFrames();'
                                     class="nav-link">
@@ -569,23 +581,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 <a href='javascript:cambiarPestanna(pestanas,pestana15);' class="nav-link">
                                     <i class="nav-icon fa fa-users white"></i>
                                     <p class="white">
-                                        Estudiantes
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana16" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana16);' class="nav-link">
-                                    <i class="nav-icon fa fa-users white"></i>
-                                    <p class="white">
-                                        Profesores
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana17" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana17);' class="nav-link">
-                                    <i class="nav-icon fa fa-users white"></i>
-                                    <p class="white">
-                                        Secretarios
+                                        Usuarios
                                     </p>
                                 </a>
                             </li>
@@ -621,7 +617,124 @@ while($arreglo=mysqli_fetch_array($query)){
                 <div class="container-fluid">
                     <div id="contenidopestanas">
                         <div id="cpestana1">
+                            <!-- <input value="1" /> -->
 
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <h3 class="card-title">Generar actas de Comite</h3>
+                                    <div class="card-tools">
+                                        <!--  <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left"
+                                                onclick="location.reload();"></i></button> -->
+                                        <!--- <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                                                class="fas fa-expand"></i></button> -->
+                                    </div>
+                                </div>
+                                <iframe id="idFrameGenerar" src="pages/1-GenerarActa.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+
+                            </div>
+                        </div>
+                        <div id="cpestana2">
+                            <div class="card card-default">
+
+                                <iframe id="idFrameEvaluar" src="pages/2-Evaluar.php" width="100%" style="border: none;"
+                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+
+                            </div>
+                        </div>
+                        <div id="cpestana3">
+                            <div class="card card-default">
+
+                                <iframe id="idFrameProceso" src="pages/3-Proceso.php" width="100%" style="border: none;"
+                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+
+                            </div>
+                        </div>
+                        <div id="cpestana4">
+                            <div class="card card-default">
+
+                                <iframe id="idFrameAplazar" src="pages/4-Aplazado.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+
+                            </div>
+                        </div>
+                        <div id="cpestana5">
+                            <div class="card card-default">
+                                <iframe id="idFrameRechazar" src="pages/5-Rechazado.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana6">
+                            <div class="card card-default">
+                                <iframe id="idFrameProximo" src="pages/6-ProximoVencer.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana7">
+                            <div class="card card-default">
+                                <iframe id="idFramePendientes" src="pages/7-VbDirector.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana8">
+                            <div class="card card-default">
+                                <iframe id="idFrameOtros" src="pages/8-OtrosDocumentos.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana9">
+                            <div class="card card-default">
+                                <iframe id="idFrameSemilleros" src="pages/9-Semillero.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana10">
+                            <div class="card card-default">
+                                <iframe id="idFramePostgrado" src="pages/10-Postgrado.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana11">
+                            <div class="card card-default">
+                                <iframe id="idFrameAuxIn" src="pages/11-AuxInvestigacion.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana12">
+                            <div class="card card-default">
+                                <iframe id="idFrameCurso" src="pages/12-EnCurso.php" width="100%" style="border: none;"
+                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana13">
+                            <div class="card card-default">
+                                <iframe id="idFrameActas" src="pages/13-Actas.php" width="100%" style="border: none;"
+                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana14">
+                            <div class="card card-default">
+                                <iframe id="idFrameBuscar" src="pages/14-Buscar.php" width="100%" style="border: none;"
+                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana15">
+                            <div class="card card-default">
+                                <iframe id="idFrameEstudiantes" src="pages/15-Estudiantes.php" width="100%"
+                                    style="border: none;" frameborder="0" scrolling="no"
+                                    onload="resizeIframe(this)"></iframe>
+                            </div>
+                        </div>
+                        <div id="cpestana16">
                             <?php
                         $contadorp=0;
                         $sql=("SELECT * FROM login where programa='$programa' ");
@@ -1005,140 +1118,22 @@ while($arreglo=mysqli_fetch_array($query)){
                                     </div>
                                     <!-- /.info-box -->
                                 </div>
-
-
                             </div>
 
-                            <!-- <input value="1" /> -->
+                            <!-- Start Frame -->
+                            <div class="col-12">
+                                <h5>¿Cómo manejo el SI-COMMITTEE?</h5>
+                            </div>
 
-                            <div class="card card-default">
-                                <div class="card-header">
-                                    <h3 class="card-title">Generar actas de Comite</h3>
-                                    <div class="card-tools">
-                                        <!--  <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left"
-                                                onclick="location.reload();"></i></button> -->
-                                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
-                                                class="fas fa-expand"></i></button>
-                                    </div>
-                                </div>
-                                <iframe id="idFrameGenerar" src="pages/1-GenerarActa.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
 
-                            </div>
-                        </div>
-                        <div id="cpestana2">
-                            <div class="card card-default">
 
-                                <iframe id="idFrameEvaluar" src="pages/2-Evaluar.php" width="100%" style="border: none;"
-                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+                            <iframe id="idFrameInicio" src="pages/16-Inicio.php" width="100%" style="border: none;"
+                                frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
 
-                            </div>
-                        </div>
-                        <div id="cpestana3">
-                            <div class="card card-default">
 
-                                <iframe id="idFrameProceso" src="pages/3-Proceso.php" width="100%" style="border: none;"
-                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
 
-                            </div>
-                        </div>
-                        <div id="cpestana4">
-                            <div class="card card-default">
+                            <!-- End Frame -->
 
-                                <iframe id="idFrameAplazar" src="pages/4-Aplazado.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-
-                            </div>
-                        </div>
-                        <div id="cpestana5">
-                            <div class="card card-default">
-                                <iframe id="idFrameRechazar" src="pages/5-Rechazado.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana6">
-                            <div class="card card-default">
-                                <iframe id="idFrameProximo" src="pages/6-ProximoVencer.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana7">
-                            <div class="card card-default">
-                                <iframe id="idFramePendientes" src="pages/7-VbDirector.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana8">
-                            <div class="card card-default">
-                                <iframe id="idFrameOtros" src="pages/8-OtrosDocumentos.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana9">
-                            <div class="card card-default">
-                                <iframe id="idFrameSemilleros" src="pages/9-Semillero.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana10">
-                            <div class="card card-default">
-                                <iframe id="idFramePostgrado" src="pages/10-Postgrado.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana11">
-                            <div class="card card-default">
-                                <iframe id="idFrameAuxIn" src="pages/11-AuxInvestigacion.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana12">
-                            <div class="card card-default">
-                                <iframe id="idFrameCurso" src="pages/12-EnCurso.php" width="100%" style="border: none;"
-                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana13">
-                            <div class="card card-default">
-                                <iframe id="idFrameActas" src="pages/13-Actas.php" width="100%" style="border: none;"
-                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana14">
-                            <div class="card card-default">
-                                <iframe id="idFrameBuscar" src="pages/14-Buscar.php" width="100%" style="border: none;"
-                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana15">
-                            <div class="card card-default">
-                                <iframe id="idFrameEstudiantes" src="pages/15-Estudiantes.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana16">
-                            <div class="card card-default">
-                                <iframe id="idFrameProfesores" src="pages/16-Profesores.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
-                        </div>
-                        <div id="cpestana17">
-                            <div class="card card-default">
-                                <iframe id="idFrameSecretari@s" src="pages/17-Secretari@s.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1208,7 +1203,7 @@ $(document).ready(function() {
 });
 var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar', 'idFrameRechazar',
     'idFrameProximo', 'idFramePendientes', 'idFrameOtros', 'idFrameSemilleros', 'idFramePostgrado', 'idFrameAuxIn',
-    'idFrameCurso', 'idFrameActas', 'idFrameBuscar', 'idFrameEstudiantes', 'idFrameProfesores', 'idFrameSecretari@s'
+    'idFrameCurso', 'idFrameActas', 'idFrameBuscar', 'idFrameEstudiantes', 'idFrameInicio'
 ];
 
 function ReloadsFrames() {
@@ -1216,8 +1211,10 @@ function ReloadsFrames() {
     //debugger;
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar'];
     //var iframe = document.getElementById(Frames[(id - 1)]);
-    var iframe = document.getElementById(Frames[ItemNow]);
-    iframe.src = iframe.src;
+    if (ItemNow != "15") {
+        var iframe = document.getElementById(Frames[ItemNow]);
+        iframe.src = iframe.src;
+    }
     //iframe.contentDocument.location.reload(true);
     // document.getElementById(idFrame).contentDocument.history.back(true);
 }
