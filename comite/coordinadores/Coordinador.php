@@ -65,17 +65,50 @@ while($arreglo=mysqli_fetch_array($query)){
     <link rel="stylesheet" href="css/frag.css">
     -->
     <!-- <link rel="stylesheet" href="css/frag.css">  -->
+    <script type="text/javascript" src="js/cambiarPestanna.js"></script>
 
 </head>
 <style>
 .white {
     color: white;
 }
+.loading {
+    position: fixed;
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+    background-color: #f4f6f9;
+}
+.loader1 {
+    left: 50%;
+    margin-left: -4em;
+    font-size: 10px;
+    border: .8em solid rgba(218, 219, 223, 1);
+    border-left: .8em solid #B42A2A;
+    animation: spin 1.1s infinite linear;
+}
+.loader1, .loader1:after {
+    border-radius: 50%;
+    width: 8em;
+    height: 8em;
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -4.05em;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 </style>
 
 <body class="hold-transition sidebar-mini" onload="myfunction()" onresize="onResize('disabled')">
 
-    <div class="loader"></div>
+    <!--<div class="loader"></div>-->
     <div id="idHeader" class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light"
             style="background-color:#B42A2A; color: white;">
@@ -594,7 +627,11 @@ while($arreglo=mysqli_fetch_array($query)){
             </div>
             <!-- /.sidebar -->
         </aside>
-        <div class="content-wrapper pb-2">
+        <div id="loadingIcon" class="loading">
+            <div class="loader1"></div>
+        </div>
+        
+        <div id="content" class="content-wrapper pb-2 d-none">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -1059,7 +1096,7 @@ while($arreglo=mysqli_fetch_array($query)){
 
                             <div class="row">
                                 <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="info-box">
+                                    <div class="info-box shadow-lg">
                                         <span class="info-box-icon bg-info elevation-1"><i
                                                 class="fas fa-cog"></i></span>
                                         <div class="info-box-content">
@@ -1073,7 +1110,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="info-box mb-3">
+                                    <div class="info-box mb-3 shadow-lg">
                                         <span class="info-box-icon bg-danger elevation-1"><i
                                                 class="fas fa-thumbs-up"></i></span>
 
@@ -1090,7 +1127,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 <div class="clearfix hidden-md-up"></div>
 
                                 <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="info-box mb-3">
+                                    <div class="info-box mb-3 shadow-lg">
                                         <span class="info-box-icon bg-success elevation-1"><i
                                                 class="fas fa-shopping-cart"></i></span>
 
@@ -1105,7 +1142,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </div>
 
                                 <div class="col-12 col-sm-6 col-md-3">
-                                    <div class="info-box mb-3">
+                                    <div class="info-box mb-3 shadow-lg">
                                         <span class="info-box-icon bg-warning elevation-1"><i
                                                 class="fas fa-users"></i></span>
 
@@ -1139,7 +1176,7 @@ while($arreglo=mysqli_fetch_array($query)){
                 </div>
             </section>
         </div>
-        <footer class="main-footer">
+        <footer id="footer" class="main-footer d-none">
             <div class="float-right d-none d-sm-block">
                 <b><?php echo date('Y')?></b>
             </div>
@@ -1180,7 +1217,7 @@ while($arreglo=mysqli_fetch_array($query)){
     <!-- modal-end -->
 
 </body>
-<script type="text/javascript" src="js/cambiarPestanna.js"></script>
+
 <script>
 $(document).ready(function() {
     window.addEventListener("storage", ChangeCard);

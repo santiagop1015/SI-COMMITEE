@@ -49,7 +49,32 @@ $passd=$arreglo[8];
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="../plugins/datatables/jquery.dataTables.js"></script>
+    <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    .nav-pills .nav-link {
+        color: black;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+        color: #fff;
+        background-color: #10707f;
+    }
+
+    .nav-pills .nav-link:not(.active):hover {
+        color: #10707f;
+    }
+    </style>
 </head>
 
 <body id="idCard" style="background-color: #f4f6f9;">
@@ -116,34 +141,33 @@ $passd=$arreglo[8];
     }
     </script>
     <div id="IdDivRegistrarInfo" class="mt-2 d-none">
-        <input value="Registrar" />
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="#tabEstudiante" data-toggle="tab">
+                                <a class="nav-link" href="#tabEstudiante" data-toggle="tab">
                                     <i class="fas fa-user-graduate"></i> Estudiante
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link text-dark" href="#tabProfesor" data-toggle="tab">
+                                <a class="nav-link" href="#tabProfesor" data-toggle="tab">
                                     <i class="fas fa-chalkboard-teacher"></i> Profesor
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link text-dark">
+                                <a class="nav-link" href="#tabAsistente" data-toggle="tab">
                                     <i class="fas fa-user-tie"></i> Asistente
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link text-dark">
+                                <a class="nav-link" href="#tabLinea" data-toggle="tab">
                                     <i class="fas fa-flask"></i> Linea Investigación
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link text-dark">
+                                <a class="nav-link" href="#tabEje" data-toggle="tab">
                                     <i class="fab fa-buffer"></i> Eje Tematico
                                 </a>
                             </li>
@@ -155,10 +179,31 @@ $passd=$arreglo[8];
             <div class="col-md-9">
                 <div class="tab-content">
                     <div class="tab-pane" id="tabEstudiante">
-                        <input value="Estudiante" />
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">Estudiante</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane" id="tabProfesor">
                         <input value="Profesor" />
+                    </div>
+                    <div class="tab-pane" id="tabAsistente">
+                        <input value="Asistente" />
+                    </div>
+                    <div class="tab-pane" id="tabLinea">
+                        <input value="Linea" />
+                    </div>
+                    <div class="tab-pane" id="tabEje">
+                        <input value="Eje" />
                     </div>
                 </div>
             </div>
