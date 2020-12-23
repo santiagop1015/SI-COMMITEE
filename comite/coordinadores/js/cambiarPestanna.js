@@ -143,13 +143,13 @@ function myfunction() {
                 cambiarPestanna(pestanas, pestana16);
                 break;
             default: 1
-                cambiarPestanna(pestanas, pestana1);
+                cambiarPestanna(pestanas, pestana16);
                 break;
         }
 
     } else {
 
-        cambiarPestanna(pestanas, pestana1);
+        cambiarPestanna(pestanas, pestana16);
     }
 }
 

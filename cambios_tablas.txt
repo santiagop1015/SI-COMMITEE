@@ -24,3 +24,23 @@ CREATE TABLE `tesis` (
   `nota` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
   `fecha_doc` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;  
+
+// Cambios estructura tabla login
+
+CREATE TABLE `login` (
+  `id` int(40) NOT NULL,
+  `Cedula` varchar(50) NOT NULL,
+  `TipoUsuario` varchar(30) NOT NULL,
+  `user` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `pasadmin` varchar(20) NOT NULL,
+  `pasdir` varchar(20) NOT NULL,
+  `pasjur` varchar(20) NOT NULL,
+  `pascor` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `programa` varchar(60) NOT NULL,
+  `fechadenacimiento` date NOT NULL,
+  `area` int(11) NOT NULL,
+  `foto` longblob NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
