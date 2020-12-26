@@ -171,6 +171,12 @@ $passd=$arreglo[8];
                                     <i class="fab fa-buffer"></i> Eje Tematico
                                 </a>
                             </li>
+                            <script>
+                            // Cuando hace click al algun elemento con nav-link
+                            $(document).on("click", ".nav-link", function() {
+                                Evaluar();
+                            });
+                            </script>
                         </ul>
                     </div>
                     <!-- /.card-body -->
@@ -188,9 +194,100 @@ $passd=$arreglo[8];
                                     </button>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <form id="idFormRegEst">
+                                <div class="card-body">
 
-                            </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Nombres y Apellidos</label>
+                                                <input type="text" class="form-control" name="user" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" class="form-control" name="email"
+                                                    placeholder="@unilibre.edu.co">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Cedula</label>
+                                                <input type="number" class="form-control" name="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Telefono</label>
+                                                <input type="number" class="form-control" name="email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Programa</label>
+                                                <input type="text" class="form-control" name="programa">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Fecha de nacimiento</label>
+                                                <input type="number" class="form-control" name="fechadenacimiento">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="callout callout-info">
+                                                <h5>Tener en cuenta que..</h5>
+                                                <p>es posible que el mensaje llegue a su bandeja de Spam</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div id="idBoxRegEst" class="alert alert-danger alert-dismissible mt-6"
+                                    style="Display: None;">
+                                    <h5>
+                                        <i id="idIConBoxRegEst" class="icon fas fa-ban"></i>
+
+                                    </h5>
+                                    <p id="idMessageComenRegEst"></p>
+
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary float-right">Registrar</button>
+                                </div>
+                            </form>
+                            <script>
+                            // var formRegEst = document.getElementById("idFormRegEst");
+
+                            $('#idFormRegEst').submit(function(e) {
+                                e.preventDefault();
+                               /* var other_data = $("#idFormActualEvalProyect")
+                                    .serializeArray();
+                                var paqueteDeDatos = new FormData();
+
+                                $.each(other_data, function(key, input) {
+                                    paqueteDeDatos.append(input.name, input
+                                        .value);
+                                });
+
+                                var Box = document.getElementById("idBox");
+                                Box.style.display = 'None';
+                                var iconBox = document.getElementById(
+                                    "idIConBox");
+                                var Mensaje = document.getElementById(
+                                    "idMessageComen");
+                                    */
+                            });
+                            </script>
                         </div>
                     </div>
                     <div class="tab-pane" id="tabProfesor">
