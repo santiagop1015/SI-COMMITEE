@@ -6,7 +6,7 @@ session_cache_limiter('private_no_expire'); // works
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../Login/index.html");
+    header("Location:../../../index.html");
 }
 	//@$buscart=$_POST['buscart'];
 	@$buscar=$_POST['buscar'];
@@ -26,7 +26,7 @@ $passd=$arreglo[8];
 
  if ($arreglo[2]!='Coordinador') {
 	require("../desconectar.php");
-	header("Location:../Login/index.html");
+	header("Location:../../../index.html");
 }
 }
 
@@ -42,7 +42,7 @@ $passd=$arreglo[8];
     <title>SI-COMMITEE || Generar Acta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -50,7 +50,7 @@ $passd=$arreglo[8];
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 </head>
 
 <body id="idCard">
@@ -186,7 +186,7 @@ $passd=$arreglo[8];
     </div>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 

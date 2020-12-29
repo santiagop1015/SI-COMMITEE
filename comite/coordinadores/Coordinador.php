@@ -37,7 +37,7 @@ while($arreglo=mysqli_fetch_array($query)){
     <title>SI-COMMITEE || Coordinador</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../LocalSources/css/ionicons/ionicons.min.css">
 
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -49,8 +49,8 @@ while($arreglo=mysqli_fetch_array($query)){
     <!-- -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <script src="../LocalSources/js/jQuery/2.0.3/jquery.min.js"></script>
     <!-- -->
 
     <!-- -->
@@ -765,11 +765,11 @@ while($arreglo=mysqli_fetch_array($query)){
                             </div>
                         </div>
                         <div id="cpestana15">
-                            <div class="card card-default">
-                                <iframe id="idFrameEstudiantes" src="pages/15-Estudiantes.php" width="100%"
+                           <!-- <div class="card card-default"> -->
+                                <iframe id="idFrameEstudiantes" src="pages/15-Usuarios.php" width="100%"
                                     style="border: none;" frameborder="0" scrolling="no"
                                     onload="resizeIframe(this)"></iframe>
-                            </div>
+                           <!-- </div> -->
                         </div>
                         <div id="cpestana16">
                             <?php
@@ -1161,7 +1161,6 @@ while($arreglo=mysqli_fetch_array($query)){
                             <div class="col-12">
                                 <h5>¿Cómo manejo el SI-COMMITTEE?</h5>
                             </div>
-
 
 
                             <iframe id="idFrameInicio" src="pages/16-Inicio.php" width="100%" style="border: none;"

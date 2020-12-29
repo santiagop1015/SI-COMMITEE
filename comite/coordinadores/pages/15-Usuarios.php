@@ -11,7 +11,7 @@ if(@!$_SESSION['user']) {
 // document.referrer;
 @$buscar=$_POST['buscar'];
 
-$corr=$_SESSION['user'];
+//$corr=$_SESSION['user'];
 date_default_timezone_set('America/Bogota');
 $fecha = date("d-m-Y H:i:s");
 $nuevafecha = date('Y-m-d', strtotime($fecha .'+3 month'));
@@ -29,7 +29,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     $coordir=$arreglo[4];
     $passd=$arreglo[8];
     
-    if ($arreglo[2] != 'Jurado') {
+    if ($arreglo[2] != 'Coordinador') {
         require("../../desconectar.php");
         header("Location:../../../index.html");
     }
@@ -44,7 +44,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <title>SI-COMMITEE || Secretaria</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../LocalSources/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
 
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -56,8 +56,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <!-- -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
-    <script src="../LocalSources/ajax/jquery/2.0.3/jquery.min.js"></script>
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+
 
 </head>
 <style>
@@ -65,7 +65,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     color: white;
 }
 </style>
-<script src="../LocalSources/ajax/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 /*
 // No hace falta llamar a la funcion cuando el documento este listo ya ue se llama cuando el body cambia su tamaño
@@ -79,19 +79,14 @@ $(document).ready(function() {
 <body id="idCard" style="background-color: #f4f6f9;" onresize="Height();">
 
     <!-- Start Content-wrapper -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row md-2">
-                <h1 id="Titulo">Usuarios</h1>
-            </div>
-        </div>
-    </section>
+
 
     <section class="content">
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
-            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i class="fa fa-plus-circle white"
-                        onclick="window.location.href='6-RegistrarUsuarios.php'"></i></button>
+                <!--   <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i
+                        class="fa fa-plus-circle white"
+                        onclick="window.location.href='6-RegistrarUsuarios.php'"></i></button> -->
                 <div class="card-tools">
                     <?php
 if(!$_GET) {
@@ -99,9 +94,13 @@ if(!$_GET) {
 } 
 //var_dump($_POST);
 //echo $_GET['user'];
-if($_POST && !$_POST['tipousuario']) {
-    header('Location:?pagina=1&user='.$tipousuario);
-}
+
+                            //echo $tipousuario;
+                            if($_POST && !$_POST['tipousuario']) {
+                                header('Location:?pagina=1&user='.$tipousuario);
+                            }
+                            
+
 
                 ?>
 
@@ -121,21 +120,16 @@ if($_POST && !$_POST['tipousuario']) {
                             
                                 ?>
                                 " class="form-control" name="tipousuario">
-                               <!-- <option <?php //if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
+                                <!-- <option <?php //if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
                                     Coordinador</option> -->
                                 <option <?php if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
                                     Estudiante</option>
                                 <option <?php if($tipousuario == "Director") echo 'selected'  ?> value="Director">
                                     Profesor</option>
-                               <!-- <option <?php //if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
-                                    Secretari@</option> -->
+                                <option <?php //if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
+                                    Secretari@</option>
                             </select>
-                            <?php
-                            //echo $tipousuario;
-                            if($_POST) {
-                               // header('Location:?pagina=1&user='.$tipousuario);
-                            }
-                            ?>
+
 
                             <input type="text" name="buscar" class="form-control float-right" value="<?php 
                         if (@$_POST['buscar']) {
@@ -241,19 +235,13 @@ if($_POST && !$_POST['tipousuario']) {
             </div>
             <div class="card-footer">
                 <div class="text-right">
-                ';
-                if($TipoUsuario == 'Estudiante') {
-                  echo '<a href="1.1-act_usuario.php?id='.$arreglo[0].'" class="btn btn-sm bg-navy">
-                  <i class="fa fa-edit"></i>
-              </a>';
-                }
-                 echo '
-
-                
-                    <a href="1.2-enviar_msg_jur.php?Correo='.$arreglo[4].'&programa='.$programa.'" class="btn btn-sm bg-teal">
+                <a href="15.1-elim_user_coorp.php?id='.$arreglo[0].'" class="btn btn-sm bg-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                    <a href="15.2-enviar_msg_coor.php?Correo='.$arreglo[4].'&programa='.$programa.'" class="btn btn-sm bg-teal">
                         <i class="fas fa-comments"></i>
                     </a>
-                    <a href="1.3-estado_est.php?est='.$arreglo[0].'" class="btn btn-sm btn-primary">
+                    <a href="15.3-estado_est.php?est='.$arreglo[0].'" class="btn btn-sm btn-primary">
                         <i class="fas fa-user"></i> 
                     </a>
                 </div>
@@ -347,10 +335,15 @@ if($_POST && !$_POST['tipousuario']) {
 $(document).ready(function() {
     Height();
 });
+
 function Height(event) {
     var card = document.getElementById("idCard");
     localStorage.setItem("height", card.clientHeight);
 }
+
+$(document).on("click", ".page-link", function() {
+    Height();
+});
 </script>
 
 

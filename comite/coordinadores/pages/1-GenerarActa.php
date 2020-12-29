@@ -40,7 +40,7 @@ while($arreglo=mysqli_fetch_array($query)){
     <title>SI-COMMITEE || Generar Acta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -48,7 +48,7 @@ while($arreglo=mysqli_fetch_array($query)){
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
 </head>
 
@@ -128,7 +128,7 @@ while($arreglo=mysqli_fetch_array($query)){
     </div>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 
@@ -138,15 +138,6 @@ $(document).ready(function() {
         // do stuff here
         Evaluar();
     });
-    /*  $("#idFormEvaluar").submit(function() {
-          //  alert("Submitted");
-          Evaluar();
-      });
-      */
-    /* setTimeout(() => {
-         Evaluar();
-     }, 200);
-     */
 });
 
 function Evaluar(event) {
