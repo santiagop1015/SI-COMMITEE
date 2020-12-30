@@ -84,8 +84,8 @@ $passd=$arreglo[8];
     <div class="btn-group w-100 mb-2">
         <a id="idAnclaReg" class="btn btn-info" href="javascript:onClickManejo(0)"> Registrar Información </a>
         <a id="idAnclaRep" class="btn btn-info" href="javascript:onClickManejo(1)"> Generar Reportes </a>
-        <!--<a id="idAnclaAct" class="btn btn-info" href="javascript:onClickManejo(2)"> Act. Mis Datos </a> -->
-        <a id="idAnclaDirJur" class="btn btn-info" href="javascript:onClickManejo(2)"> Dir/Jur </a>
+        <a id="idAnclaAct" class="btn btn-info" href="javascript:onClickManejo(2)"> Act. Mis Datos </a> 
+        <a id="idAnclaDirJur" class="btn btn-info" href="javascript:onClickManejo(3)"> Dir/Jur </a>
     </div>
     <script>
     function onClickManejo(value, ancla) {
@@ -94,48 +94,49 @@ $passd=$arreglo[8];
                 document.getElementById("idAnclaReg").classList.add("active");
                 document.getElementById("idAnclaRep").classList.remove("active");
                 //document.getElementById("idAnclaAct").classList.remove("active");
-                document.getElementById("idAnclaDirJur").classList.remove("active");
+                //document.getElementById("idAnclaDirJur").classList.remove("active");
 
                 document.getElementById("IdDivRegistrarInfo").classList.remove("d-none");
                 document.getElementById("IdDivGenerarReportes").classList.add("d-none");
                 //document.getElementById("IdDivActDatos").classList.add("d-none");
-                document.getElementById("IdDivDirJur").classList.add("d-none");
+                //document.getElementById("IdDivDirJur").classList.add("d-none");
                 break;
             case 1:
                 document.getElementById("idAnclaReg").classList.remove("active");
                 document.getElementById("idAnclaRep").classList.add("active");
                // document.getElementById("idAnclaAct").classList.remove("active");
-                document.getElementById("idAnclaDirJur").classList.remove("active");
+                //document.getElementById("idAnclaDirJur").classList.remove("active");
 
                 document.getElementById("IdDivRegistrarInfo").classList.add("d-none");
                 document.getElementById("IdDivGenerarReportes").classList.remove("d-none");
                 //document.getElementById("IdDivActDatos").classList.add("d-none");
-                document.getElementById("IdDivDirJur").classList.add("d-none");
+                //document.getElementById("IdDivDirJur").classList.add("d-none");
                 break;
-         /*   case 2:
-                document.getElementById("idAnclaReg").classList.remove("active");
+            case 2:
+               /* document.getElementById("idAnclaReg").classList.remove("active");
                 document.getElementById("idAnclaRep").classList.remove("active");
                 document.getElementById("idAnclaAct").classList.add("active");
                 document.getElementById("idAnclaDirJur").classList.remove("active");
 
                 document.getElementById("IdDivRegistrarInfo").classList.add("d-none");
                 document.getElementById("IdDivGenerarReportes").classList.add("d-none");
-                //document.getElementById("IdDivActDatos").classList.remove("d-none");
-                document.getElementById("IdDivDirJur").classList.add("d-none");
-                break; */
-            case 2:
-               /* document.getElementById("idAnclaReg").classList.remove("active");
-                document.getElementById("idAnclaRep").classList.remove("active");
-               // document.getElementById("idAnclaAct").classList.remove("active");
-                document.getElementById("idAnclaDirJur").classList.add("active");
+                document.getElementById("IdDivActDatos").classList.remove("d-none");
+                document.getElementById("IdDivDirJur").classList.add("d-none");*/
+                window.top.location.href = "../profile.php";
+                       break; 
+            case 3:
+                /* document.getElementById("idAnclaReg").classList.remove("active");
+                 document.getElementById("idAnclaRep").classList.remove("active");
+                // document.getElementById("idAnclaAct").classList.remove("active");
+                 document.getElementById("idAnclaDirJur").classList.add("active");
 
-                document.getElementById("IdDivRegistrarInfo").classList.add("d-none");
-                document.getElementById("IdDivGenerarReportes").classList.add("d-none");
-                //document.getElementById("IdDivActDatos").classList.add("d-none");
-                document.getElementById("IdDivDirJur").classList.remove("d-none");
-                */
-               //alert("123");
-               window.top.location.href = "https://www.google.com";
+                 document.getElementById("IdDivRegistrarInfo").classList.add("d-none");
+                 document.getElementById("IdDivGenerarReportes").classList.add("d-none");
+                 //document.getElementById("IdDivActDatos").classList.add("d-none");
+                 document.getElementById("IdDivDirJur").classList.remove("d-none");
+                 */
+                //alert("123");
+                window.top.location.href = "../directorcoord.php";
                 break;
             default:
                 1
@@ -951,7 +952,7 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar reporte por Director</h3>
                             </div>
-                            <form action="../../LocalSources/pdf/generarreportes.php" method="post">
+                            <form target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
@@ -991,13 +992,13 @@ $passd=$arreglo[8];
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>F. Ini:</label>
-                                                <input type="date" class="form-control" name="fini" value="">
+                                                <input type="date" class="form-control" name="fini" value="" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>F. Fin:</label>
-                                                <input type="date" class="form-control" name="ffin" value="">
+                                                <input type="date" class="form-control" name="ffin" value="" required>
                                             </div>
                                         </div>
                                     </div>
@@ -1011,9 +1012,9 @@ $passd=$arreglo[8];
                     <div class="tab-pane" id="tabRepEvaluador">
                         <div class="card card-default card-outline">
                             <div class="card-header">
-                                <h3 class="card-title">Generar Reporte por Jurado</h3>
+                                <h3 class="card-title">Generar Reporte por Evaluador</h3>
                             </div>
-                            <form action="../../LocalSources/pdf/generarreportes.php" method="post">
+                            <form target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
@@ -1053,13 +1054,13 @@ $passd=$arreglo[8];
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>F. Ini:</label>
-                                                <input type="date" class="form-control" name="fini" value="">
+                                                <input type="date" class="form-control" name="fini" value="" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>F. Fin:</label>
-                                                <input type="date" class="form-control" name="ffin" value="">
+                                                <input type="date" class="form-control" name="ffin" value="" required>
                                             </div>
                                         </div>
                                     </div>
@@ -1075,7 +1076,7 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Estado</h3>
                             </div>
-                            <form action="../../LocalSources/pdf/generarreportes.php" method="post">
+                            <form target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
@@ -1116,13 +1117,13 @@ $passd=$arreglo[8];
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>F. Ini:</label>
-                                                <input type="date" class="form-control" name="fini" value="">
+                                                <input type="date" class="form-control" name="fini" value="" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>F. Fin:</label>
-                                                <input type="date" class="form-control" name="ffin" value="">
+                                                <input type="date" class="form-control" name="ffin" value="" required>
                                             </div>
                                         </div>
                                     </div>
@@ -1134,27 +1135,27 @@ $passd=$arreglo[8];
                         </div>
                     </div>
                     <div class="tab-pane" id="tabRepLinea">
-                    <div class="card card-default card-outline">
+                        <div class="card card-default card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Línea de Investigación</h3>
                             </div>
-                            <form action="../../LocalSources/pdf/generarreportes.php" method="post">
+                            <form target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
                                         value="<?php echo $programa;?>" readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="ID_directores" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="ID_directores" value="" readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="terminado" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="terminado" value="" readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="id_eje" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="id_eje" value="" readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="Jurado" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="Jurado" value="" readonly="readonly">
 
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
@@ -1183,27 +1184,31 @@ $passd=$arreglo[8];
                         </div>
                     </div>
                     <div class="tab-pane" id="tabRepEje">
-                    <div class="card card-default card-outline">
+                        <div class="card card-default card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Eje Temático</h3>
                             </div>
-                            <form action="../../LocalSources/pdf/generarreportes.php" method="post">
+                            <form id="idFormRepEje" target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
                                         value="<?php echo $programa;?>" readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="ID_directores" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="ID_directores" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="terminado" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="terminado" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="id_area" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="id_area" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="Jurado" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="Jurado" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
@@ -1218,7 +1223,7 @@ $passd=$arreglo[8];
                                                        $query = $mysqli -> query ("SELECT * FROM ejes_tem where programa='$programa'");
                                                        while ($valores = mysqli_fetch_array($query))	{
                                                            echo '<option value="'.$valores[id_eje].'">'.$valores[nombre_eje].'</option>';
-                                                        }
+														}
                                                     ?>
                                                 </select>
                                             </div>
@@ -1229,6 +1234,14 @@ $passd=$arreglo[8];
                                     <button type="submit" class="btn btn-primary float-right">Generar</button>
                                 </div>
                             </form>
+                            <script>
+                            $('#idFormRepEje').submit(function(e) {
+                                //e.preventDefault();
+
+                                var data_repeje = $("#idFormRepEje").serializeArray();
+                                console.log(data_repeje);
+                            });
+                            </script>
                         </div>
                     </div>
                     <div class="tab-pane" id="tabRepOpcion">
@@ -1239,7 +1252,7 @@ $passd=$arreglo[8];
                         </div>
                     </div>
                     <div class="tab-pane" id="tabRepIngreso">
-                    <div class="card card-default card-outline">
+                        <div class="card card-default card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Ingreso a la Plataforma</h3>
                             </div>
