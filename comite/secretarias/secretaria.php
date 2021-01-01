@@ -550,7 +550,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 </div>
             </section>
             -->
-            <section class="content">
+            <section id="content" class="content d-none">
                 <div class="container-fluid pt-1">
                     <div id="contenidopestanas">
                         <div id="cpestana1">

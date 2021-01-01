@@ -199,6 +199,7 @@ if(!$_GET) {
                  $Telefono=$arreglo[10];
                  $Programa=$arreglo[11];
                  $FechaN=$arreglo[12];
+                 $foto = $arreglo[14];
 
         echo ' 
                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
@@ -207,6 +208,8 @@ if(!$_GET) {
         echo '<div class="card-header text-muted border-bottom-0">
                <strong>Id: </strong>'. $Id . '
             </div>';
+
+        
 
             echo '<div class="card-body pt-0">
                 <div class="row">
@@ -228,8 +231,14 @@ if(!$_GET) {
                                 <strong>Fec. Nacimiento:</strong> '. $FechaN .'</li>
                         </ul>
                     </div>
-                    <div class="col-5 text-center">
-                        <img src="../dist/img/avatar-user.jpg" alt="" class="img-circle img-fluid">
+                    <div class="col-5 text-center">';
+                    if(empty($foto)) {
+                      echo '<img src="../dist/img/avatar-user.jpg" alt="" class="img-circle img-fluid">';
+                    } else {
+                      echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" alt="" class="img-circle img-fluid">';
+                    }
+
+                echo '
                     </div>
                 </div>
             </div>
@@ -246,6 +255,9 @@ if(!$_GET) {
                     </a>
                 </div>
             </div>';
+        
+
+
 
             echo '
         </div>

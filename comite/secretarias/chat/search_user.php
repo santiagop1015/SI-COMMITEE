@@ -29,9 +29,15 @@ while ($arreglo = mysqli_fetch_array($query)) {
        if($arreglo[0] !== $id) {
 
         $output .= '<li>
-        <a class="idItemSearch" data-touserid="'.$arreglo[0].'" data-tousername="'.$arreglo[3].'" data-widget="chat-pane-toggle">
-            <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+        <a class="idItemSearch" data-touserid="'.$arreglo[0].'" data-tousername="'.$arreglo[3].'" data-widget="chat-pane-toggle">';
 
+        if(empty($arreglo[14])) {
+        $output .= '<img class="contacts-list-img" src="dist/img/user1-128x128.jpg">';
+        } else {
+        $output .= '<img class="contacts-list-img" src="data:image/jpg;base64,'.base64_encode($arreglo[14]).'">';
+        }
+
+        $output .= '
             <div class="contacts-list-info">
                 <span class="contacts-list-name">
                     '. $arreglo[3].'

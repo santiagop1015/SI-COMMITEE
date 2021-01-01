@@ -58,8 +58,11 @@ function cambiarPestanna(pestannas, pestanna) {
         //  $(pestanna).css("padding-bottom", "2px");
     });
 
-    $(".loader").fadeOut("slow");
+    //$(".loader").fadeOut("slow");
+    document.getElementById("content").classList.remove("d-none");
     document.getElementById("IdIconLoad").classList.add("d-none");
+    ReloadsFrames();
+    
 }
 
 function myfunction() {

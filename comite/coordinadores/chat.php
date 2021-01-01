@@ -179,3 +179,5 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<script type="text/javascript" src="chat/chat.js"></script>

@@ -34,7 +34,7 @@ $(document).ready(function () {
         },
         success: function (data) {
           $("#idContactsSearch").html(data);
-          console.log(data);
+          //console.log(data);
         },
       });
     }

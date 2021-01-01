@@ -81,10 +81,12 @@ function cambiarPestanna(pestannas, pestanna) {
     //$(".loading").fadeOut("slow");
 
   //  $(".content-wrapper").fadeIn("slow");
-  document.getElementById("loadingIcon").classList.add("d-none");
+  //document.getElementById("loadingIcon").classList.add("d-none");
+  document.getElementById("IdIconLoad").classList.add("d-none");
   document.getElementById("content").classList.remove("d-none");
-  document.getElementById("footer").classList.remove("d-none");
-    
+  //
+  document.getElementById("Titulo").classList.remove("d-none");
+  document.getElementById("idTextCargando").classList.add("d-none");
 }
 
 function myfunction() {
