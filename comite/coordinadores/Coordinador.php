@@ -22,6 +22,7 @@ while($arreglo=mysqli_fetch_array($query)){
  utf8_decode($programa=$arreglo[11]);
  $coordir=$arreglo[4];
  $passd=$arreglo[8];
+ $foto = $arreglo[14];
 
  if ($arreglo[2]!='Coordinador') {
 	require("../desconectar.php");
@@ -130,7 +131,13 @@ while($arreglo=mysqli_fetch_array($query)){
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                        <?php
+                        if(empty($foto)) {
+                            echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
+                          } else {
+                          echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" class="img-circle elevation-2" alt="User Image">';
+                          }
+                        ?>
                         </div>
 
                         <div class="info">

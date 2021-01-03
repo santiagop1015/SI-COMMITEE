@@ -33,8 +33,6 @@ date_default_timezone_set ('America/Bogota');
     <link rel="stylesheet" href="../css/frag.css">
     <script rel="stylesheet" src="../dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="../dist/css/Help/font-awesome.min.css">
-    <link rel="stylesheet" href="../dist/css/Help/ionicons.min.css">
-    <link rel="stylesheet" href="../dist/css/Help/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/Help/_all-skins.min.css">
 </head>
 <style>
@@ -62,7 +60,7 @@ date_default_timezone_set ('America/Bogota');
             </ul>
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
-                
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -70,7 +68,7 @@ date_default_timezone_set ('America/Bogota');
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
             <!-- Brand Logo -->
-            <a href="home.html" class="brand-link" style="background-color: #343a40; color: white">
+            <a href="../../../index.html" class="brand-link" style="background-color: #343a40; color: white">
                 <img src="../dist/img/unilibre-logo.png" alt="Unilibre Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">SI-COMMITEE</span>
@@ -82,7 +80,7 @@ date_default_timezone_set ('America/Bogota');
                 <a href="../profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="../dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                            <?php include 'img_profile.php'; ?>
                         </div>
                         <div class="info">
                             <?php 
@@ -675,11 +673,12 @@ date_default_timezone_set ('America/Bogota');
                 </section>
         </div>
 
-        <footer class="main-footer">
+        <footer id="footer" class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>2020</b>
+                <b><?php echo date('Y')?></b>
             </div>
-            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
+            <strong>
+                Copyright © <a href="../../../index.html">SI-COMMITEE</a></strong>
         </footer>
 
         <!-- Control Sidebar -->

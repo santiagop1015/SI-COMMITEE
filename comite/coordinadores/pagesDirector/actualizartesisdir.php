@@ -28,8 +28,6 @@ if (@!$_SESSION['user']) {
     <link rel="stylesheet" href="../css/frag.css">
     <script rel="stylesheet" src="../dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="../dist/css/Help/font-awesome.min.css">
-    <link rel="stylesheet" href="../dist/css/Help/ionicons.min.css">
-    <link rel="stylesheet" href="../dist/css/Help/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/Help/_all-skins.min.css">
 </head>
 <style>
@@ -57,7 +55,7 @@ if (@!$_SESSION['user']) {
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
-                
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -77,7 +75,7 @@ if (@!$_SESSION['user']) {
                 <a href="../profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="../dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                            <?php include 'img_profile.php'; ?>
                         </div>
                         <div class="info">
                             <?php 
@@ -439,7 +437,15 @@ if (@!$_SESSION['user']) {
                 <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        
+
+        <footer id="footer" class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b><?php echo date('Y')?></b>
+            </div>
+            <strong>
+                Copyright © <a href="../../../index.html">SI-COMMITEE</a></strong>
+        </footer>
+
     </div>
     <!-- ./wrapper -->
 

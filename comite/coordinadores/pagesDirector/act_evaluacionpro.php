@@ -50,12 +50,6 @@ date_default_timezone_set ('America/Bogota');
     <!-- Ayuda -- CSS -->
     <script rel="stylesheet" src="../dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="../dist/css/Help/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="../dist/css/Help/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/Help/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../dist/css/Help/_all-skins.min.css">
 
 
@@ -107,7 +101,7 @@ date_default_timezone_set ('America/Bogota');
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
-                
+
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -115,7 +109,7 @@ date_default_timezone_set ('America/Bogota');
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
             <!-- Brand Logo -->
-            <a href="home.html" class="brand-link" style="background-color: #343a40; color: white">
+            <a href="../../../index.html" class="brand-link" style="background-color: #343a40; color: white">
                 <img src="../dist/img/unilibre-logo.png" alt="Unilibre Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">SI-COMMITEE</span>
@@ -127,7 +121,7 @@ date_default_timezone_set ('America/Bogota');
                 <a href="../profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="../dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                            <?php include 'img_profile.php'; ?>
                         </div>
                         <div class="info">
                             <?php 
@@ -184,7 +178,7 @@ date_default_timezone_set ('America/Bogota');
                         <div class="col-sm-6">
                             <h1 id="Text">Actualizar Evaluación Proyecto</h1>
                         </div>
-                        
+
 
                     </div>
                 </div>
@@ -819,7 +813,14 @@ date_default_timezone_set ('America/Bogota');
                 <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        
+        <footer id="footer" class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b><?php echo date('Y')?></b>
+            </div>
+            <strong>
+                Copyright © <a href="../../../index.html">SI-COMMITEE</a></strong>
+        </footer>
+
 
     </div>
     <!-- ./wrapper -->
