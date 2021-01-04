@@ -219,7 +219,7 @@
                                                 url: "enviarmsgcoor.php",
                                                 data: paqueteDeDatos,
                                             }).done(function(info) {
-                                                //  console.log(info);
+                                                  //console.log(info);
 
                                                 if (info == 1) {
                                                     pharafComen.innerHTML =
@@ -231,11 +231,12 @@
                                                     document.getElementById("idTextAreaComen")
                                                         .value = "";
                                                 } else {
-                                                    pharaf.innerHTML = info;
-                                                    cardMessages.style.display = "Block";
-                                                    cardMessages.className =
+                                                    pharafComen.innerHTML = info;
+                                                    BoxComen.style.display = "Block";
+                                                    BoxComen.className =
                                                         "alert alert-danger alert-dismissible";
-                                                    iconBox.className = "icon fas fa-ban";
+                                                    iconBoxComen.className = "icon fas fa-ban";
+                                                    pharafComen.innerHTML = "No fue posible registrar su comentario, por favor contacte al administrador del sistema";
                                                 }
                                             });
                                         }
@@ -308,10 +309,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="col-sm-12">
-                                    <iframe
+                                    <!--<iframe
                                         src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
-                                        width="100%" height="600" style="border: none;"></iframe>
-
+                                        width="100%" height="600" style="border: none;"></iframe> -->
+                                        <a href="../modelo/committeees.pdf" style="color: blue;"
+                                        target="_blanck">Descargar..</a>
                                 </div>
                             </div>
                         </div>

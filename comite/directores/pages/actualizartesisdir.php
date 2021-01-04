@@ -2,7 +2,7 @@
 <?php
 session_start();
 if (@!$_SESSION['user']) {
-	header("Location:../Login/index.html");
+	header("Location:../../../index.html");
 }/*elseif ($_SESSION['rol']==2) {
 	header("Location:index2.php");
 }*/
@@ -15,10 +15,10 @@ if (@!$_SESSION['user']) {
     <title>Editar Proyectos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
     <script src="../plugins/jquery/jquery.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../plugins/datatables/jquery.dataTables.js"></script>
@@ -28,8 +28,6 @@ if (@!$_SESSION['user']) {
     <link rel="stylesheet" href="../css/frag.css">
     <script rel="stylesheet" src="../dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="../dist/css/Help/font-awesome.min.css">
-    <link rel="stylesheet" href="../dist/css/Help/ionicons.min.css">
-    <link rel="stylesheet" href="../dist/css/Help/AdminLTE.min.css">
     <link rel="stylesheet" href="../dist/css/Help/_all-skins.min.css">
 </head>
 <style>
@@ -57,17 +55,7 @@ if (@!$_SESSION['user']) {
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="../../desconectar.php">
-                        <i class="fas fa-door-open white"></i>
-                    </a>
 
-                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -87,7 +75,7 @@ if (@!$_SESSION['user']) {
                 <a href="../profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="../dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                            <?php include 'img_profile.php'; ?>
                         </div>
                         <div class="info">
                             <?php 
@@ -115,6 +103,14 @@ if (@!$_SESSION['user']) {
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="../director.php" class="nav-link">
+                                    <i class="nav-icon fa fa-arrow-left white"></i>
+                                    <p class="white">
+                                        Volver
+                                    </p>
+                                </a>
+                            </li>
 
 
                         </ul>
@@ -135,13 +131,6 @@ if (@!$_SESSION['user']) {
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 id="Text">Edición de Proyectos</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../director.php">Documentos por Visto Bueno</a>
-                                </li>
-                                <li class="breadcrumb-item active">Edición de Proyectos</li>
-                            </ol>
                         </div>
                     </div>
                 </div>
@@ -448,18 +437,15 @@ if (@!$_SESSION['user']) {
                 <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
+
+        <footer id="footer" class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>2020</b>
+                <b><?php echo date('Y')?></b>
             </div>
-            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
+            <strong>
+                Copyright © <a href="../../../index.html">SI-COMMITEE</a></strong>
         </footer>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 

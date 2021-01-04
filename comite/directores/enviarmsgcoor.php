@@ -1,10 +1,11 @@
 <?php
 date_default_timezone_set ('America/Bogota');
-echo"<meta charset='utf-8'><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>";
+//echo"<meta charset='utf-8'><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>";
 utf8_decode(extract($_POST));
 
  //$fecha=date("d-m-Y H:i:s");
     require("../connect_db.php");
+   // echo "respuesta exitosa";
 
 
 
@@ -21,14 +22,19 @@ utf8_decode(extract($_POST));
     //echo $fecha;
 //
 
+//echo $comen . "<br>";
+//echo $user . "<br>";
+//echo $programa . "<br>";
+//echo $fecha . "<br>";
 
 
 
-	mysqli_query($mysqli,"INSERT INTO comen VALUES('','$comen','$user','$programa','$fecha')");
+    mysqli_query($mysqli,"INSERT INTO comen VALUES('','$comen','$user','$programa','$fecha')");
+    echo "1";
 				//echo 'Se ha registrado con exito';
-                echo ' <script language="javascript">alert("Comentario registrado con éxito");</script> ';
-                header("location: director.php");
-                          //     echo "<script>window.open('coordinador.php', '_top')</script>";
+			//	echo ' <script language="javascript">alert("Comentario registrado con éxito");</script> ';
+                          //   echo "<script>window.open('coordinador.php', '_top')</script>";
+                          
 				
 			
 			

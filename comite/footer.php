@@ -3,5 +3,5 @@
                 <b><?php echo date('Y')?></b>
             </div>
             <strong>
-                Copyright © <a href="../../index.html">SI-COMMITEE</a> 2019</strong>
+                Copyright © <a href="../../index.html">SI-COMMITEE</a> 2019 - 2021</strong>
 </footer>

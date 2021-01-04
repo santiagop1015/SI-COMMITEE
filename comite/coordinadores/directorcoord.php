@@ -183,7 +183,6 @@ $dir = $_SESSION['user'];
             cambiarPestanna(pestanas, pestana1);
         }
     }
-
     </script>
     <script type="text/javascript">
     //var winglobal;
@@ -259,7 +258,7 @@ $dir = $_SESSION['user'];
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                        <?php
+                            <?php
                         if(empty($foto)) {
                             echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
                           } else {
@@ -463,12 +462,22 @@ $dir = $_SESSION['user'];
                                                     <td class="text-center">
                                                         <?php
                                                 if(strlen($arreglo[8]) > 1) {
-                                                    echo "
+                                                    
+                                                    if(strlen($arreglo[8]) > 15) {
+                                                        echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        ".substr($arreglo[8],0,15)."..."."
+                                                        </a>
+                                                        ";
+                                                    } else {
+                                                        echo "
                                                     <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                     target='_blank'>
                                                     $arreglo[8]
                                                     </a>
                                                     ";
+                                                    }
                                                     } else {
                                                     echo "";
                                                     }
@@ -595,12 +604,22 @@ $dir = $_SESSION['user'];
                                                     <td class="text-center">
                                                         <?php
                                                 if(strlen($arreglo[8]) > 1) {
-                                                    echo "
-                                                    <a class='btn btn-primary btn-sm' href='$alma/$arreglo[8]'
+                                                    
+                                                    if(strlen($arreglo[8]) > 15) {
+                                                        echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        ".substr($arreglo[8],0,15)."..."."
+                                                        </a>
+                                                        ";
+                                                    } else {
+                                                        echo "
+                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                     target='_blank'>
                                                     $arreglo[8]
                                                     </a>
                                                     ";
+                                                    }
                                                     } else {
                                                     echo "";
                                                     }
@@ -700,12 +719,22 @@ $dir = $_SESSION['user'];
                                                             <?php 
                                                             
                                                             if(strlen($arreglo[8]) > 1) {
-                                                                echo "
+                                                    
+                                                                if(strlen($arreglo[8]) > 15) {
+                                                                    echo "
+                                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                                    target='_blank'>
+                                                                    ".substr($arreglo[8],0,15)."..."."
+                                                                    </a>
+                                                                    ";
+                                                                } else {
+                                                                    echo "
                                                                 <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                                 target='_blank'>
                                                                 $arreglo[8]
                                                                 </a>
                                                                 ";
+                                                                }
                                                                 } else {
                                                                 echo "";
                                                                 }
@@ -865,12 +894,22 @@ $dir = $_SESSION['user'];
                                                         <td class="text-center">
                                                             <?php
                                                        if(strlen($arreglo[8]) > 1) {
-                                                        echo "
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
+                                                        }
                                                         } else {
                                                         echo "";
                                                         }
@@ -978,10 +1017,25 @@ $dir = $_SESSION['user'];
                                                         <td class="text-center">
                                                             <?php
                                                             if(strlen($arreglo[8]) > 1) {
-                                                            echo "<a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; 
-                                                            } else {
+                                                    
+                                                                if(strlen($arreglo[8]) > 15) {
+                                                                    echo "
+                                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                                    target='_blank'>
+                                                                    ".substr($arreglo[8],0,15)."..."."
+                                                                    </a>
+                                                                    ";
+                                                                } else {
+                                                                    echo "
+                                                                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                                target='_blank'>
+                                                                $arreglo[8]
+                                                                </a>
+                                                                ";
+                                                                }
+                                                                } else {
                                                                 echo "";
-                                                            }
+                                                                }
                                                             ?>
                                                         </td>
                                                         <td>
@@ -1122,10 +1176,25 @@ $dir = $_SESSION['user'];
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                        echo "<a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; 
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
                                                         } else {
-                                                            echo "";
-                                                        } 
+                                                            echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        $arreglo[8]
+                                                        </a>
+                                                        ";
+                                                        }
+                                                        } else {
+                                                        echo "";
+                                                        }
                                                     ?>
                                                                 </td>
                                                                 <td class="text-center">
@@ -1246,12 +1315,22 @@ $dir = $_SESSION['user'];
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                        echo "
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
+                                                        }
                                                         } else {
                                                         echo "";
                                                         }
@@ -1373,12 +1452,22 @@ $dir = $_SESSION['user'];
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                        echo "
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
+                                                        }
                                                         } else {
                                                         echo "";
                                                         }

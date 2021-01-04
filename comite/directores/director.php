@@ -17,6 +17,7 @@ $query = mysqli_query($mysqli, $sql);
 
 while ($arreglo = mysqli_fetch_array($query)) {
     $programa = $arreglo[11];
+    $foto = $arreglo[14];
     if ($arreglo[2] != 'Director') {
         require("../desconectar.php");
         header("Location:../../index.html");
@@ -34,21 +35,19 @@ $dir = $_SESSION['user'];
     <title>SI-COMMITEE || Director</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="plugins/datatables/jquery.dataTables.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
     <script src="dist/js/adminlte.min.js"></script>
     <script src="dist/js/demo.js"></script>
-    <link rel="stylesheet" href="css/frag.css">
+    <!--<link rel="stylesheet" href="css/frag.css"> -->
     <script rel="stylesheet" src="dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="dist/css/Help/font-awesome.min.css">
-    <link rel="stylesheet" href="dist/css/Help/ionicons.min.css">
-    <link rel="stylesheet" href="dist/css/Help/AdminLTE.min.css">
     <link rel="stylesheet" href="dist/css/Help/_all-skins.min.css">
     <script type="text/javascript" src="js/cambiarPestanna.js"></script>
     <script type="text/javascript" src="js/EditarTesis.js"></script>
@@ -60,7 +59,6 @@ $dir = $_SESSION['user'];
 </style>
 
 <body class="hold-transition sidebar-mini" onload="myfunction()">
-    <div class="loader"></div>
 
     <!--Formulario Start-->
 
@@ -68,36 +66,7 @@ $dir = $_SESSION['user'];
     <!--FormularioEnd-->
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light"
-            style="background-color:#B42A2A; color: white;">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars white"></i></a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-
-                    <!--   <a class="nav-link" href="../desconectar.php">  -->
-                    <a class="nav-link"
-                        href="javascript:localStorage.removeItem('number');location.replace('../desconectar.php');">
-
-                        <i class="fas fa-door-open white"></i>
-
-                    </a>
-
-
-                </li>
-            </ul>
-        </nav>
+        <?php require '../header.php'; ?>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -115,7 +84,13 @@ $dir = $_SESSION['user'];
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                        <?php
+                        if(empty($foto)) {
+                            echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
+                          } else {
+                          echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" class="img-circle elevation-2" alt="User Image">';
+                          }
+                        ?>
                         </div>
                         <div class="info">
                             <?php 
@@ -128,6 +103,12 @@ $dir = $_SESSION['user'];
                 </a>
                 <nav class="mt-2">
                     <div id="pestanas">
+                        <div class="overlay d-flex justify-content-center align-items-center">
+                            <div id="IdIconLoad" class="overlay dark"
+                                style="position: absolute; background-size: cover; background-color: rgba(0,0,0,0.6);">
+                                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                            </div>
+                        </div>
                         <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
                             <li id="pestana1" class="nav-item">
@@ -186,23 +167,6 @@ $dir = $_SESSION['user'];
                                     </p>
                                 </a>
                             </li>
-                            <li id="pestana8" class="nav-item">
-                                <a href="javascript:cambiarPestanna(pestanas,pestana8);" class="nav-link">
-                                    <i class="nav-icon fa fa-edit white"></i>
-                                    <p class="white">
-                                        Act. Datos
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana9" class="nav-item">
-                                <a href="javascript:cambiarPestanna(pestanas,pestana9);" class="nav-link">
-                                    <i class="nav-icon fa fa-user-md white"></i>
-                                    <p class="white">
-                                        Ayuda
-                                    </p>
-                                </a>
-                            </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -214,13 +178,14 @@ $dir = $_SESSION['user'];
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 id="Text">Monografías/Poster para Evaluar</h1>
+                            <h1 id="Text" class="d-none">Monografías/Poster para Evaluar</h1>
+                            <h1 id="idTextCargando">Cargando...</h1>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="content">
+            <section id="content" class="content d-none">
 
 
 
@@ -240,7 +205,7 @@ $dir = $_SESSION['user'];
                                            $query = mysqli_query($mysqli, $sql);
                                            ?>
                                     <div class="box-body table-responsive no-padding">
-                                        <table class="table table-striped projects">
+                                        <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 50%">
@@ -308,13 +273,23 @@ $dir = $_SESSION['user'];
                                                     </td>
                                                     <td class="text-center">
                                                         <?php
-                                                if(strlen($arreglo[8]) > 1) {
-                                                    echo "
+                                                 if(strlen($arreglo[8]) > 1) {
+                                                    
+                                                    if(strlen($arreglo[8]) > 15) {
+                                                        echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        ".substr($arreglo[8],0,15)."..."."
+                                                        </a>
+                                                        ";
+                                                    } else {
+                                                        echo "
                                                     <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                     target='_blank'>
                                                     $arreglo[8]
                                                     </a>
                                                     ";
+                                                    }
                                                     } else {
                                                     echo "";
                                                     }
@@ -384,7 +359,7 @@ $dir = $_SESSION['user'];
                                 //var_dump($query);
                                 ?>
                                     <div class="box-body table-responsive no-padding">
-                                        <table class="table table-striped projects">
+                                        <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th style="width: 50%">Titulo</th>
@@ -441,12 +416,22 @@ $dir = $_SESSION['user'];
                                                     <td class="text-center">
                                                         <?php
                                                 if(strlen($arreglo[8]) > 1) {
-                                                    echo "
-                                                    <a class='btn btn-primary btn-sm' href='$alma/$arreglo[8]'
+                                                    
+                                                    if(strlen($arreglo[8]) > 15) {
+                                                        echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        ".substr($arreglo[8],0,15)."..."."
+                                                        </a>
+                                                        ";
+                                                    } else {
+                                                        echo "
+                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                     target='_blank'>
                                                     $arreglo[8]
                                                     </a>
                                                     ";
+                                                    }
                                                     } else {
                                                     echo "";
                                                     }
@@ -463,7 +448,7 @@ $dir = $_SESSION['user'];
                                                             $name = '"name"';
                                                             $img = "<img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>";
 
-                                                            echo "<button onclick='CenterWindow($direccion, $complemento+$parametro);'>$img</button>";
+                                                            //echo "<button onclick='CenterWindow($direccion, $complemento+$parametro);'>$img</button>";
                                                             //  <img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>
                                                             ?>
                                                         </td>-->
@@ -502,7 +487,7 @@ $dir = $_SESSION['user'];
                                     <div class="box">
 
                                         <div class="box-body table-responsive no-padding">
-                                            <table class="table table-striped projects">
+                                            <table class="table table-bordered table-striped">
                                                 <thead>
 
                                                     <tr>
@@ -546,12 +531,22 @@ $dir = $_SESSION['user'];
                                                             <?php 
                                                             
                                                             if(strlen($arreglo[8]) > 1) {
-                                                                echo "
+                                                    
+                                                                if(strlen($arreglo[8]) > 15) {
+                                                                    echo "
+                                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                                    target='_blank'>
+                                                                    ".substr($arreglo[8],0,15)."..."."
+                                                                    </a>
+                                                                    ";
+                                                                } else {
+                                                                    echo "
                                                                 <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                                 target='_blank'>
                                                                 $arreglo[8]
                                                                 </a>
                                                                 ";
+                                                                }
                                                                 } else {
                                                                 echo "";
                                                                 }
@@ -652,7 +647,7 @@ $dir = $_SESSION['user'];
                                 ?>
                                     <div class="box">
                                         <div class="box-body table-responsive no-padding">
-                                            <table class="table table-striped projects">
+                                            <table class="table table-bordered table-striped">
                                                 <thead>
 
                                                     <tr>
@@ -711,12 +706,22 @@ $dir = $_SESSION['user'];
                                                         <td class="text-center">
                                                             <?php
                                                        if(strlen($arreglo[8]) > 1) {
-                                                        echo "
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
+                                                        }
                                                         } else {
                                                         echo "";
                                                         }
@@ -773,7 +778,7 @@ $dir = $_SESSION['user'];
                                 ?>
                                     <div class="box">
                                         <div class="box-body table-responsive no-padding">
-                                            <table class="table table-striped projects">
+                                            <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th style="width: 40%">Titulo</th>
@@ -824,10 +829,25 @@ $dir = $_SESSION['user'];
                                                         <td class="text-center">
                                                             <?php
                                                             if(strlen($arreglo[8]) > 1) {
-                                                            echo "<a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; 
-                                                            } else {
+                                                    
+                                                                if(strlen($arreglo[8]) > 15) {
+                                                                    echo "
+                                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                                    target='_blank'>
+                                                                    ".substr($arreglo[8],0,15)."..."."
+                                                                    </a>
+                                                                    ";
+                                                                } else {
+                                                                    echo "
+                                                                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                                target='_blank'>
+                                                                $arreglo[8]
+                                                                </a>
+                                                                ";
+                                                                }
+                                                                } else {
                                                                 echo "";
-                                                            }
+                                                                }
                                                             ?>
                                                         </td>
                                                         <td>
@@ -906,7 +926,7 @@ $dir = $_SESSION['user'];
                                             role="tabpanel" aria-labelledby="custom-tabs-proyectos-tab">
                                             <div class="box">
                                                 <div class="box-body table-responsive no-padding">
-                                                    <table class="table table-striped projects">
+                                                    <table class="table table-bordered table-striped">
                                                         <thead>
 
                                                             <tr>
@@ -922,7 +942,7 @@ $dir = $_SESSION['user'];
 
                                                         <tbody>
                                                             <?php
-                                                
+                                                $proyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     $id = $arreglo[1];
                                                     $titu = $arreglo[3];
@@ -952,7 +972,8 @@ $dir = $_SESSION['user'];
 
                                                             $state = 1;
                                                         }
-                                                        if($state == 1) {
+                                                        if($state != 1) {
+                                                            $proyectos_exist = true;
                                                         ?>
                                                                 <td><?php echo "$arreglo[3] "; ?></td>
 
@@ -961,15 +982,31 @@ $dir = $_SESSION['user'];
 
                                                                 <td class="text-center"><?php echo "$arreglo[6]"; ?>
                                                                 </td>
-                                                                <td class="text-center"><?php echo str_replace("-","/",$arreglo[9]); ?>
+                                                                <td class="text-center">
+                                                                    <?php echo str_replace("-","/",$arreglo[9]); ?>
                                                                 </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
-                                                    if(strlen($arreglo[8]) > 1) {
-                                                        echo "<a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8] ' target='_blank'>$arreglo[8] </a> "; 
-                                                        } else {
-                                                            echo "";
-                                                        } 
+                                                   if(strlen($arreglo[8]) > 1) {
+                                                    
+                                                    if(strlen($arreglo[8]) > 15) {
+                                                        echo "
+                                                        <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        ".substr($arreglo[8],0,15)."..."."
+                                                        </a>
+                                                        ";
+                                                    } else {
+                                                        echo "
+                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                    target='_blank'>
+                                                    $arreglo[8]
+                                                    </a>
+                                                    ";
+                                                    }
+                                                    } else {
+                                                    echo "";
+                                                    }
                                                     ?>
                                                                 </td>
                                                                 <td class="text-center">
@@ -994,7 +1031,8 @@ $dir = $_SESSION['user'];
                                                                 <?php
                                                         } else {
                                                             $state = 0;
-                                                            $totalpeval = $totalpeval - 1; 
+                                                            $totalpeval = $totalpeval - 1;
+                                                            $proyectos_exist = false; 
                                                         }
                                                     ?>
                                                             </tr>
@@ -1027,7 +1065,7 @@ $dir = $_SESSION['user'];
                                             aria-labelledby="custom-tabs-anteproyectos">
                                             <div class="box">
                                                 <div class="box-body table-responsive no-padding">
-                                                    <table class="table table-striped projects">
+                                                    <table class="table table-bordered table-striped">
                                                         <thead>
 
                                                             <tr>
@@ -1046,6 +1084,7 @@ $dir = $_SESSION['user'];
                                                             $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                                             $query = mysqli_query($mysqli, $sql);
                                                             $totalanteval = 0;
+                                                            $otros_exist = false;
                                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                                 if ($arreglo[6] == "Entrega Propuesta") {
                                                                     $alma = "./propuestas";
@@ -1077,20 +1116,33 @@ $dir = $_SESSION['user'];
                                                         ?>
                                                                 <td><?php echo "$arreglo[3] "; ?></td>
 
-                                                                <td class="text-center"><?php echo "$arreglo[4]"; ?></td>
+                                                                <td class="text-center"><?php echo "$arreglo[4]"; ?>
+                                                                </td>
 
-                                                                <td class="text-center"><?php echo "$arreglo[6]"; ?></td>
-                                                                <td class="text-center"><?php echo str_replace("-","/",$arreglo[11]); ?>
+                                                                <td class="text-center"><?php echo "$arreglo[6]"; ?>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <?php echo str_replace("-","/",$arreglo[11]); ?>
                                                                 </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                        echo "
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
+                                                        }
                                                         } else {
                                                         echo "";
                                                         }
@@ -1150,7 +1202,7 @@ $dir = $_SESSION['user'];
                                             aria.labelledby="custom-tabs-otros">
                                             <div class="box">
                                                 <div class="box-body table-responsive no-padding">
-                                                    <table class="table table-striped projects">
+                                                    <table class="table table-bordered table-striped">
                                                         <thead>
                                                             <tr>
                                                                 <th style="width: 40%">Titulo</th>
@@ -1166,6 +1218,7 @@ $dir = $_SESSION['user'];
                                                             $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado!='Entrega Anteproyecto' and ID_estado!='Correccion Anteproyecto') and (ID_estado!='Entrega Proyecto' and ID_estado!='Correccion Proyecto') ORDER BY id_tesis DESC");
                                                             $query = mysqli_query($mysqli, $sql);
                                                             $totalotroseval = 0;
+                                                            $otros_exist = false;
                                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                                 if($arreglo[6]=="Entrega Propuesta" or $arreglo[6]=="Correccion Propuesta"){
                                                                     $alma="./propuestas";
@@ -1200,26 +1253,39 @@ $dir = $_SESSION['user'];
                                                         ?>
                                                                 <td><?php echo "$arreglo[3] "; ?></td>
 
-                                                                <td class="text-center"><?php echo "$arreglo[4]"; ?></td>
+                                                                <td class="text-center"><?php echo "$arreglo[4]"; ?>
+                                                                </td>
 
-                                                                <td class="text-center"><?php echo "$arreglo[6]"; ?></td>
-                                                                <td class="text-center"><?php echo str_replace("-","/",$arreglo[9]); ?>
+                                                                <td class="text-center"><?php echo "$arreglo[6]"; ?>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <?php echo str_replace("-","/",$arreglo[9]); ?>
                                                                 </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                        echo "
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
+                                                        }
                                                         } else {
                                                         echo "";
                                                         }
                                                     ?>
                                                                 </td>
-                                                                
+
                                                                 <?php
                                                         } else {
                                                             $totalotroseval = $totalotroseval - 1;
@@ -1344,18 +1410,18 @@ $dir = $_SESSION['user'];
         echo '<table class="table table-bordered table-striped">';
         echo '<thead>';
         echo '<tr>';
-        echo '<th>Acta No.</th>';
-        echo '<th>Fecha Publicacion</th>';
-        echo '<th>Ver Acta</th>';
+        echo '<th class="text-center">Acta No.</th>';
+        echo '<th class="text-center">Fecha Publicacion</th>';
+        echo '<th class="text-center">Ver Acta</th>';
         echo '</tr>';
         echo '</thead>';
         echo '<tbody>';
                             while ($arreglo = mysqli_fetch_array($query)) {
                                 echo "<tr>";
-                                echo "<td>$arreglo[1]</td>";
-                                echo "<td>$arreglo[4]</td>";
+                                echo "<td class='text-center'>$arreglo[1]</td>";
+                                echo "<td class='text-center'>$arreglo[4]</td>";
                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                echo "<td><a href='../archivos/pdf/$arreglo[6]'><i class='nav-icon fas fa-download'></i></td>";
+                                echo "<td class='text-center'><a href='../archivos/pdf/$arreglo[6]'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 
@@ -1385,316 +1451,17 @@ $dir = $_SESSION['user'];
 
                     </div>
                     <!--Termina pestana7-->
-                    <!--Empieza pestana8-->
-                    <div id="cpestana8">
-
-
-                        <div class="card card-warning">
-                            <div class="card-body">
-                                <?php
-                                require("../connect_db.php");
-                                $pr = $_SESSION['id'];
-                                $sql = "SELECT * FROM login WHERE id=$pr";
-                                $ressql = mysqli_query($mysqli, $sql);
-
-                                while ($row = mysqli_fetch_row($ressql)) {
-                                    $id = $row[0];
-                                    $cedula = $row[1];
-                                    $TipoUsuario = $row[2];
-                                    $user = $row[3];
-                                    $email = $row[4];
-                                    $pasdir = $row[6];
-                                    $telefono = $row[10];
-                                    $programa = $row[11];
-                                    $fechadenacimiento = $row[12];
-                                }
-
-                                ?>
-                                <form id="loginForm2" action="pages/ejecu_act_datos_dir.php" method="post"
-                                    enctype="multipart/form-data" role="form">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <!-- text input -->
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Id</label>
-                                                    <input type="text" name="id" class="form-control" placeholder="id"
-                                                        value="<?php echo $id ?>" style="width: 50%"
-                                                        readonly="readonly">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Cedula</label>
-                                                    <input type="text" name="cedula" value="<?php echo $cedula ?>"
-                                                        class="form-control" placeholder="Id Estudiante.."
-                                                        readonly="readonly" style="width: 50%">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Nombre</label>
-                                                    <input type="text" name="user" value="<?php echo $user ?>"
-                                                        class="form-control" placeholder="Id Estudiante.."
-                                                        style="width: 50%" readonly="readonly">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Usuario</label>
-                                                    <input type="text" name="email" value="<?php echo $email ?>"
-                                                        class="form-control" placeholder="Id Estudiante.."
-                                                        readonly="readonly" style="width: 50%">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Password</label>
-                                                    <input type="text" name="pasdir" value="<?php echo $pasdir ?>"
-                                                        class="form-control" style="width: 50%">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Tipo de Usuario</label>
-                                                    <input type="text" name="TipoUsuario"
-                                                        value="<?php echo $TipoUsuario ?>" class="form-control"
-                                                        readonly="readonly" style="width: 50%">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Telefono</label>
-                                                    <input type="text" name="telefono" value="<?php echo $telefono ?>"
-                                                        class="form-control" style="width: 50%">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Programa</label>
-                                                    <input type="text" name="programa" value="<?php echo $programa ?>"
-                                                        class="form-control" placeholder="Id Estudiante.."
-                                                        readonly="readonly" style="width: 50%">
-                                                </div>
-                                            </center>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <center>
-                                                <div class="form-group">
-                                                    <label>Fecha de Nacimiento</label>
-                                                    <input type="text" name="fechadenacimiento"
-                                                        value="<?php echo $fechadenacimiento ?>" class="form-control"
-                                                        style="width: 50%">
-                                                </div>
-                                            </center>
-                                        </div>
-                                    </div>
-                            </div>
-
-                            <div class="card-footer">
-
-
-                                <center> <button type="submit" id="login1" class="btn btn-primary mr-2"
-                                        style="background-color: green; margin-bottom: 10px ">Guardar</button>
-                                </center>
-
-
-
-
-                            </div>
-
-
-                            </form>
-                        </div>
-                    </div>
-                    <!--Termina pestana8-->
-                    <!--Empieza pestana9-->
-                    <div id="cpestana9">
-
-
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card card-warning">
-                                        <div class="card-header" style="background-color: #B42A2A; color: white">
-                                            <h5 class="card-title">Envianos un comentario</h5>
-                                        </div>
-
-                                        <div class="card-body">
-                                            <form id="idFormComen">
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <!-- text input -->
-                                                        <?php
-                                                        $hoy = date("Y-m-d");;
-                                                        ?>
-                                                        <div class="form-group">
-                                                            <label>Fecha</label>
-                                                            <input type="text" name="fecha" class="form-control"
-                                                                value="<?php echo $hoy; ?>" readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <!-- text input -->
-                                                        <div class="form-group">
-                                                            <label>Usuario</label>
-                                                            <input type="text" name="user" class="form-control"
-                                                                placeholder="Nombre Estudiante.."
-                                                                value="<?php echo utf8_decode($_SESSION['user']); ?>"
-                                                                readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <!-- text input -->
-                                                        <div class="form-group">
-                                                            <label>Carrera</label>
-                                                            <input type="text" name="programa" class="form-control"
-                                                                placeholder="Nombre Estudiante.."
-                                                                value="<?php echo utf8_decode($programa); ?>"
-                                                                readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <!-- text input -->
-                                                        <div class="form-group">
-
-                                                            <textarea id="idTextAreaComen" class="form-control" rows="6"
-                                                                name="comen" cols="29"
-                                                                placeholder="Escriba su comentario"
-                                                                aria-required="true"></textarea>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="box-footer">
-                                                    <!--  <button type="submit" class="btn btn-default"
-                                                    name="enviar">Enviar</button>
-                                                    -->
-                                                    <div id="idBoxComen"
-                                                        class="alert alert-danger alert-dismissible mt-6"
-                                                        style="Display: None;">
-                                                        <h5>
-                                                            <i id="idIConBoxComen" class="icon fas fa-ban"></i>
-                                                            Alerta
-                                                        </h5>
-                                                        <p id="idMessageComen"></p>
-
-                                                    </div>
-                                                    <button id="idButtonEnviarComen" type="button"
-                                                        class="btn btn-primary float-right">Enviar</button>
-                                                </div>
-
-
-                                                <script>
-
-                                                </script>
-
-                                            </form>
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card card-warning">
-                                        <div class="card-body">
-                                            <div class="callout callout-info">
-
-                                                Para solicitudes y/o casos especiales, por favor enviar correo
-                                                electronico
-                                                al comite de su programa, para ayuda con el SI-COMMITTEE, envie un
-                                                correo a
-                                                pabloe.carrenoh@unilibre.edu.co.
-
-                                            </div>
-                                            <div class="callout callout-info">
-
-                                                Este es un recurso para estar informado de lo que esta sucediendo en
-                                                el
-                                                comite, por favor solo comentarios académicos
-
-                                            </div>
-                                            <div class="callout callout-info">
-
-                                                Documentos: <br><br>
-                                                <li>
-                                                    <a style="color: blue;">Reglamento v3.0</a>
-                                                </li>
-                                                <li>
-                                                    <a style="color: blue;">Reglamento
-                                                        v4.0 2019</a>
-                                                </li>
-                                                <li>
-                                                    <a style="color: blue;">Formato
-                                                        presentacion Propuesta</a>
-                                                </li>
-                                                <li>
-                                                    <a style="color: blue;">Guia
-                                                        Elaboracion documento Final</a>
-                                                </li>
-                                                <li>
-                                                    <a style="color: blue;">Rubrica
-                                                        - Presentación de Póster</a>
-                                                </li>
-
-
-                                            </div>
-
-                                            <!-- /.box -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="card card-warning">
-                                        <div class="card-header" style="background-color: #B42A2A; color: white">
-                                            <h5 class="card-title">Documentacion</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="col-sm-12">
-                                                <iframe
-                                                    src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
-                                                    width="100%" height="600" style="border: none;"></iframe>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!--Termina pestana9-->
                 </div>
             </section>
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>2020</b>
-            </div>
-            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
-        </footer>
+
+        <!-- Footer -->
+        <?php include '../footer.php'; ?>
+        <!-- /. Footer -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-
-        </aside>
+        <?php include 'chat.php'; ?>
         <!-- /.control-sidebar -->
     </div>
 
