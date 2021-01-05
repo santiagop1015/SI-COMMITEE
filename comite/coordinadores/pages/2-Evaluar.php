@@ -130,17 +130,28 @@ $passd=$arreglo[8];
 
               echo "<td class='text-center'>$arreglo[6]</td>";
               //echo "<td class='text-center'> <a href='../../archivos/$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a></td>"; 
+              echo "<td class='text-center'>";
               if(strlen($arreglo[8]) > 1) {
-                echo "<td class='text-center'>
-                <a class='btn btn-primary btn-sm' href='../../archivos/$alma/$arreglo[8]'
+                                                    
+                if(strlen($arreglo[8]) > 15) {
+                    echo "
+                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                    target='_blank'>
+                    ".substr($arreglo[8],0,15)."..."."
+                    </a>
+                    ";
+                } else {
+                    echo "
+                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                 target='_blank'>
                 $arreglo[8]
                 </a>
-                </td>
                 ";
-                } else {
-                echo "<td class='text-center'> </td>";
                 }
+                } else {
+                echo "";
+                }
+            echo "</td>";
              // echo "<td><a href='act_tesis_coor?id=$arreglo[0]' target='contenido'><img src='../images/actualizar.png' width='30'  height='30' class='img-rounded'></td>";
              echo "<td class='text-center'>
              <a class='btn btn-info btn-sm' href='2.1-act_tesis_coor.php?id=$arreglo[0]'>

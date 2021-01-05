@@ -23,8 +23,8 @@ function cambiarPestanna(pestannas, pestanna) {
         "Documentos en Curso",
         "Ver Actas",
         "Buscar Documentos",
-        "Estudiantes",
-        "Profesores"
+        "Usuarios",
+        "Inicio"
     ];
 
     pestanna = document.getElementById(pestanna.id);
@@ -73,9 +73,16 @@ function cambiarPestanna(pestannas, pestanna) {
         $(cpestanna).css("display", "");
         $(pestanna).css("background", "#B42A2A");
         //  $(pestanna).css("padding-bottom", "2px");
+        ReloadsFrames();
     });
 
-    $(".loader").fadeOut("slow");
+    //$(".loader").fadeOut("slow");
+    document.getElementById("IdIconLoad").classList.add("d-none");   
+    document.getElementById("content").classList.remove("d-none");
+    
+    //
+    document.getElementById("Titulo").classList.remove("d-none");
+    document.getElementById("idTextCargando").classList.add("d-none");
 }
 
 function myfunction() {
@@ -134,13 +141,13 @@ function myfunction() {
                 cambiarPestanna(pestanas, pestana16);
                 break;
             default: 1
-                cambiarPestanna(pestanas, pestana1);
+                cambiarPestanna(pestanas, pestana16);
                 break;
         }
 
     } else {
 
-        cambiarPestanna(pestanas, pestana1);
+        cambiarPestanna(pestanas, pestana16);
     }
 }
 

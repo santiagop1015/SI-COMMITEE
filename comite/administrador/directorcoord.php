@@ -18,7 +18,7 @@ $query = mysqli_query($mysqli, $sql);
 while ($arreglo = mysqli_fetch_array($query)) {
     $programa = $arreglo[11];
     $foto = $arreglo[14];
-    if ($arreglo[2] != 'Director') {
+    if ($arreglo[2] != 'Administrador') {
         require("../desconectar.php");
         header("Location:../../index.html");
     }
@@ -32,12 +32,13 @@ $dir = $_SESSION['user'];
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Director</title>
+    <title>SI-COMMITEE || Dir/Jur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
     <script src="plugins/jquery/jquery.min.js"></script>
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -49,8 +50,182 @@ $dir = $_SESSION['user'];
     <script rel="stylesheet" src="dist/css/Help/bootstrap.min.css"></script>
     <link rel="stylesheet" href="dist/css/Help/font-awesome.min.css">
     <link rel="stylesheet" href="dist/css/Help/_all-skins.min.css">
-    <script type="text/javascript" src="js/cambiarPestanna.js"></script>
-    <script type="text/javascript" src="js/EditarTesis.js"></script>
+    <script type="text/javascript">
+    // Dadas la division que contiene todas las pestañas y la de la pestaña que se
+    // quiere mostrar, la funcion oculta todas las pestañas a excepcion de esa.
+    function cambiarPestanna(pestannas, pestanna) {
+        // Obtiene los elementos con los identificadores pasados.
+
+        var cpestana1 = document.getElementById("cpestana1");
+        var cpestana2 = document.getElementById("cpestana2");
+        var cpestana3 = document.getElementById("cpestana3");
+        var cpestana4 = document.getElementById("cpestana4");
+        var cpestana = [
+            "cpestana1",
+            "cpestana2",
+            "cpestana3",
+            "cpestana4",
+            "cpestana5",
+            "cpestana6",
+            "cpestana7",
+        ];
+        var Titulos = [
+            "Documentos por Visto Bueno..",
+            "Documentos bajo su Dirección...",
+            "Monografías/Poster para Evaluar",
+            "Anteproyectos para Evaluar...",
+            "Proyectos para Evaluar",
+            "Documentos Evaluados...",
+            "Actas de Comité",
+        ];
+
+        pestanna = document.getElementById(pestanna.id);
+        listaPestannas = document.getElementById(pestannas.id);
+
+        // Obtiene las divisiones que tienen el contenido de las pestañas.
+        cpestanna = document.getElementById("c" + pestanna.id);
+        var pestanaid = "c" + pestanna.id;
+        listacPestannas = document.getElementById("contenido" + pestannas.id);
+        localStorage.setItem("number", 1);
+
+        i = 0;
+        // Recorre la lista ocultando todas las pestañas y restaurando el fondo
+        // y el padding de las pestañas.
+        while (typeof listacPestannas.getElementsByTagName("div")[i] != "undefined") {
+            //  $(document).ready(function() {
+            //cpestanna
+
+            //  $(listacPestannas.getElementsByTagName("div")[i]).css("display", "none");
+            $(listaPestannas.getElementsByTagName("li")[i]).css("background", "");
+            $(listaPestannas.getElementsByTagName("li")[i]).css("padding-bottom", "");
+            i += 1;
+            // });
+        }
+
+        //  if ((cpestanna.style.display = "none")) {
+        for (var cont = 0; cont < cpestana.length; cont++) {
+            var petananone = document.getElementById(cpestana[cont]);
+            if (pestanaid == cpestana[cont]) {
+                localStorage.setItem("number", cont);
+                if ((petananone.style.display = "none")) {
+                    cpestanna.style.display = "block";
+
+                    var txt = document.getElementById("Text");
+                    txt.innerHTML = Titulos[cont];
+
+                    // console.log(txt.innerHTML);
+                }
+            } else {
+                cpestanna.style.display = "none";
+
+                petananone.style.display = "none";
+            }
+        }
+        //  } else {
+        //     cpestanna.style.display = "none";
+        // }
+
+        $(document).ready(function() {
+            // Muestra el contenido de la pestaña pasada como parametro a la funcion,
+            // cambia el color de la pestaña y aumenta el padding para que tape el
+            // borde superior del contenido que esta juesto debajo y se vea de este
+            // modo que esta seleccionada.
+            $(cpestanna).css("display", "");
+            $(pestanna).css("background", "#B42A2A");
+
+            //  $(pestanna).css("padding-bottom", "2px");
+        });
+
+        // $(".loader").fadeOut("slow");
+        document.getElementById("IdIconLoad").classList.add("d-none");
+        document.getElementById("content").classList.remove("d-none");
+        //
+        document.getElementById("Text").classList.remove("d-none");
+        document.getElementById("idTextCargando").classList.add("d-none");
+
+    }
+
+    function myfunction() {
+        var Local = localStorage.getItem("number");
+        if (Local !== null) {
+            Local = parseInt(Local);
+            Local = Local + 1;
+
+            switch (Local) {
+                case 1:
+                    cambiarPestanna(pestanas, pestana1);
+                    break;
+                case 2:
+                    cambiarPestanna(pestanas, pestana2);
+                    break;
+                case 3:
+                    cambiarPestanna(pestanas, pestana3);
+                    break;
+                case 4:
+                    cambiarPestanna(pestanas, pestana4);
+                    break;
+                case 5:
+                    cambiarPestanna(pestanas, pestana5);
+                    break;
+                case 6:
+                    cambiarPestanna(pestanas, pestana6);
+                    break;
+                case 7:
+                    cambiarPestanna(pestanas, pestana7);
+                    break;
+                default:
+                    cambiarPestanna(pestanas, pestana1);
+                    break;
+            }
+            // console.log(Local);
+        } else {
+            // Local = pestana2;
+            cambiarPestanna(pestanas, pestana1);
+        }
+    }
+
+    </script>
+    <script type="text/javascript">
+    //var winglobal;
+
+    function CenterWindow(url, id, Iwidth, Iheigth, features) {
+        var width = Iwidth;
+        var heigth = Iheigth;
+
+        var wname = "name";
+
+        var centerLeft = parseInt((window.screen.availWidth - width) / 2);
+        var centerTop = parseInt((window.screen.availHeight - heigth) / 2 - 50);
+
+        var misc_features;
+        if (features) {
+            misc_features = ", " + features;
+        } else {
+            misc_features = ", status=no, location=no, scrollbars=yes, resizable=yes";
+        }
+        var windowFeatures =
+            "width=" +
+            width +
+            ",height=" +
+            heigth +
+            ",left=" +
+            centerLeft +
+            ",top=" +
+            centerTop +
+            misc_features;
+
+        // console.log(url);
+        var win = window.open(url + id, wname, windowFeatures);
+        win.focus();
+
+        //winglobal = win;
+        return win;
+    }
+
+    function myFunction(NUMBER) {
+        alert(NUMBER);
+    }
+    </script>
 </head>
 <style>
 .white {
@@ -59,6 +234,7 @@ $dir = $_SESSION['user'];
 </style>
 
 <body class="hold-transition sidebar-mini" onload="myfunction()">
+    <!--  <div class="loader"></div> -->
 
     <!--Formulario Start-->
 
@@ -67,7 +243,6 @@ $dir = $_SESSION['user'];
     <div class="wrapper">
         <!-- Navbar -->
         <?php require '../header.php'; ?>
-        <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
@@ -111,6 +286,20 @@ $dir = $_SESSION['user'];
                         </div>
                         <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
+                            <li class="nav-item">
+                                <a href="javascript:toAdministrador();" class="nav-link">
+                                    <i class="nav-icon fa fa-arrow-left white"></i>
+                                    <p class="white">
+                                        Administrador
+                                    </p>
+                                </a>
+                                <script>
+                                function toAdministrador() {
+                                    localStorage.removeItem("number");
+                                    location.replace("administrador.php");
+                                }
+                                </script>
+                            </li>
                             <li id="pestana1" class="nav-item">
                                 <a href='javascript:cambiarPestanna(pestanas,pestana1);' class="nav-link">
                                     <i class="nav-icon fa fa-user-md white"></i>
@@ -273,7 +462,7 @@ $dir = $_SESSION['user'];
                                                     </td>
                                                     <td class="text-center">
                                                         <?php
-                                                 if(strlen($arreglo[8]) > 1) {
+                                                if(strlen($arreglo[8]) > 1) {
                                                     
                                                     if(strlen($arreglo[8]) > 15) {
                                                         echo "
@@ -301,7 +490,7 @@ $dir = $_SESSION['user'];
                                                     <td class="text-center">
                                                         <?php
                                                          echo "
-                                                         <a class='btn btn-info btn-sm' href='pages/actualizartesisdir.php?id=$arreglo[0]'>
+                                                         <a class='btn btn-info btn-sm' href='pagesDirector/actualizartesisdir.php?id=$arreglo[0]'>
                                                          <i class='fas fa-pencil-alt'>
                                                          
                                                          </i>
@@ -442,13 +631,13 @@ $dir = $_SESSION['user'];
                                                             ?>
                                                             <?php
 
-                                                            $direccion = '"pages/actualizartesisdir.php?"';
+                                                            $direccion = '"pagesDirector/actualizartesisdir.php?"';
                                                             $complemento = '"id="';
                                                             $parametro = $arreglo[0];
                                                             $name = '"name"';
                                                             $img = "<img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>";
 
-                                                            //echo "<button onclick='CenterWindow($direccion, $complemento+$parametro);'>$img</button>";
+                                                            echo "<button onclick='CenterWindow($direccion, $complemento+$parametro);'>$img</button>";
                                                             //  <img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>
                                                             ?>
                                                         </td>-->
@@ -571,7 +760,7 @@ $dir = $_SESSION['user'];
                                                             <?php
 
                                                                 echo "
-                                                                <a class='btn btn-info btn-sm' href='pages/act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                                <a class='btn btn-info btn-sm' href='pagesDirector/act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
                                                                 <i class='fas fa-pencil-alt'>
                                                                 
                                                                 </i>
@@ -600,7 +789,7 @@ $dir = $_SESSION['user'];
 
                                                             if ($asd !== $ide) {
                                                                 echo "
-                                                                <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                                <a class='btn btn-warning btn-sm' href='pagesDirector/evaluartesis.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
                                                                 <i class='fas fa-spell-check'></i>
                                                                 Evaluar
                                                                 </i>
@@ -664,7 +853,7 @@ $dir = $_SESSION['user'];
 
                                                 <tbody>
                                                     <?php
-                                                $anteproyectos_exist = false; 
+                                                $anteproyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
 
                                                     if ($arreglo[6] == "Entrega Propuesta") {
@@ -696,7 +885,7 @@ $dir = $_SESSION['user'];
                                                         }
 
                                                         if($state != 1) {
-                                                           $anteproyectos_exist = true;
+                                                            $anteproyectos_exist = true;
                                                         ?>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
@@ -730,7 +919,7 @@ $dir = $_SESSION['user'];
                                                         <td class="text-center">
                                                             <?php
                                                               echo "
-                                                              <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$arreglo[0]&jur=$dir'>
+                                                              <a class='btn btn-warning btn-sm' href='pagesDirector/evaluartesis.php?id=$arreglo[0]&jur=$dir'>
                                                               <i class='fas fa-spell-check'></i>
                                                               </i>
                                                               </a>
@@ -792,7 +981,7 @@ $dir = $_SESSION['user'];
 
                                                 <tbody>
                                                     <?php
-                                                $proyectos_exist = false;
+                                                    $proyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     if ($arreglo[6] == "Entrega Propuesta") {
                                                         $alma = "./propuestas";
@@ -854,7 +1043,7 @@ $dir = $_SESSION['user'];
                                                         <td>
                                                             <?php
                                                             echo "
-                                                            <a class='btn btn-warning btn-sm' href='pages/evaluartesispro.php?id=$arreglo[0]&jurado=$dir'>
+                                                            <a class='btn btn-warning btn-sm' href='pagesDirector/evaluartesispro.php?id=$arreglo[0]&jurado=$dir'>
                                                             <i class='fas fa-spell-check'></i>
                                                             
                                                             </i>
@@ -986,32 +1175,32 @@ $dir = $_SESSION['user'];
                                                                 </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
-                                                   if(strlen($arreglo[8]) > 1) {
+                                                    if(strlen($arreglo[8]) > 1) {
                                                     
-                                                    if(strlen($arreglo[8]) > 15) {
-                                                        echo "
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
-                                                        ".substr($arreglo[8],0,15)."..."."
+                                                        $arreglo[8]
                                                         </a>
                                                         ";
-                                                    } else {
-                                                        echo "
-                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
-                                                    target='_blank'>
-                                                    $arreglo[8]
-                                                    </a>
-                                                    ";
-                                                    }
-                                                    } else {
-                                                    echo "";
-                                                    }
+                                                        }
+                                                        } else {
+                                                        echo "";
+                                                        }
                                                     ?>
                                                                 </td>
                                                                 <td class="text-center">
                                                                     <?php
                                                         echo "
-                                                        <a class='btn btn-info btn-sm' href='pages/act_evaluacionpro.php?id=$id_Eval&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                        <a class='btn btn-info btn-sm' href='pagesDirector/act_evaluacionpro.php?id=$id_Eval&jurado=$dir&ID_tesis=$arreglo[0]'>
                                                         <i class='fas fa-pencil-alt'></i>
                                                         Editar
                                                         </a>
@@ -1081,7 +1270,8 @@ $dir = $_SESSION['user'];
                                                             require("../connect_db.php");
                                                             $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                                             $query = mysqli_query($mysqli, $sql);
-                                                            $totalanteval = 0; 
+                                                            $totalanteval = 0;
+
                                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                                 if ($arreglo[6] == "Entrega Propuesta") {
                                                                     $alma = "./propuestas";
@@ -1148,7 +1338,7 @@ $dir = $_SESSION['user'];
                                                                 <td class="text-center">
                                                                     <?php
                                                         echo "
-                                                        <a class='btn btn-info btn-sm' href='pages/act_evaluacion.php?id=$id_Eval&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                        <a class='btn btn-info btn-sm' href='pagesDirector/act_evaluacion.php?id=$id_Eval&jurado=$dir&ID_tesis=$arreglo[0]'>
                                                         <i class='fas fa-pencil-alt'></i>
                                                         Editar
                                                         </a>
@@ -1261,22 +1451,12 @@ $dir = $_SESSION['user'];
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                    
-                                                        if(strlen($arreglo[8]) > 15) {
-                                                            echo "
-                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
-                                                            target='_blank'>
-                                                            ".substr($arreglo[8],0,15)."..."."
-                                                            </a>
-                                                            ";
-                                                        } else {
-                                                            echo "
+                                                        echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
-                                                        }
                                                         } else {
                                                         echo "";
                                                         }
@@ -1472,5 +1652,7 @@ $dir = $_SESSION['user'];
     });
     </script>
 </body>
+
+
 
 </html>

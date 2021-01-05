@@ -6,7 +6,7 @@
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../Login/index.html");
+    header("Location:../../../index.html");
 }
 $nombre_area=0;
 $nombre_eje=0;
@@ -24,7 +24,7 @@ $nombre_eje=0;
     <title>SI-COMMITEE || Generar Acta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -32,7 +32,7 @@ $nombre_eje=0;
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
     <!-- -->
 
 
@@ -44,9 +44,9 @@ $nombre_eje=0;
 }
 </style>
 
-<body onload="getWidth();">
+<body id="idCardAct" onload="getWidth();">
 
-    <div id="idCardAct" class="card card-warning" style="margin-bottom: 0px; ">
+    <div class="card card-warning" style="margin-bottom: 0px;">
         <div class="card-header" style="background-color:#B42A2A; color: white; padding-left: 10px">
             <h3 class="card-title">
                 <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
@@ -333,7 +333,7 @@ $nombre_eje=0;
                                 function getWidth() {
                                     var elements = document.getElementsByClassName("input-group-text");
 
-                                    console.log(elements.length);
+                                    //console.log(elements.length);
 
                                     //  console.log(typeof(elements));
                                     //console.log(elemens[0].clientWidth);
@@ -532,7 +532,7 @@ $nombre_eje=0;
 
     </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
@@ -576,7 +576,7 @@ var onSubmitActualizar = function() {
             url: "2.1.1-ejec_act_tesis_coor.php",
             data: paqueteDeDatos,
         }).done(function(info) {
-            console.log(info);
+           // console.log(info);
             if (info === "1") {
                 localStorage.setItem("Mensaje2", 1);
                 localStorage.setItem("Mensaje2-Title", "Actualizar Evaluación");

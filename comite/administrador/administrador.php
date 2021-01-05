@@ -18,10 +18,11 @@ while($arreglo=mysqli_fetch_array($query)){
  utf8_decode($programa=$arreglo[11]);
  $coordir=$arreglo[4];
  $passd=$arreglo[8];
+ $foto = $arreglo[14];
 
  if ($arreglo[2]!='Administrador') {
 	require("../desconectar.php");
-	header("Location:../Login/index.html");
+	header("Location:../../index.html");
 }
 }
 ?>
@@ -33,7 +34,7 @@ while($arreglo=mysqli_fetch_array($query)){
     <title>SI-COMMITEE || Administrador</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../LocalSources/css/ionicons/ionicons.min.css">
 
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -45,8 +46,10 @@ while($arreglo=mysqli_fetch_array($query)){
     <!-- -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <script src="../LocalSources/js/jQuery/2.0.3/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/cambiarPestanna.js"></script>
 
     <!-- -->
 
@@ -72,36 +75,9 @@ while($arreglo=mysqli_fetch_array($query)){
 
 <body class="hold-transition sidebar-mini" onload="myfunction()" onresize="onResize('disabled')">
 
-    <div class="loader"></div>
     <div id="idHeader" class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light"
-            style="background-color:#B42A2A; color: white;">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars white"></i></a>
-                </li>
+        <?php include "../header.php" ?>
 
-            </ul>
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="far fa-comments white"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link"
-                        href="javascript:localStorage.removeItem('number');location.replace('../desconectar.php');">
-                        <i class="fas fa-door-open white"></i>
-                    </a>
-
-                </li>
-
-            </ul>
-        </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #343a40; color: white">
             <a href="../../index.html" class="brand-link" style="background-color: #343a40; color: white">
                 <img src="dist/img/unilibre-logo.png" alt="Unilibre Logo" class="brand-image img-circle elevation-3"
@@ -113,7 +89,13 @@ while($arreglo=mysqli_fetch_array($query)){
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">
+                        <?php
+                        if(empty($foto)) {
+                            echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
+                          } else {
+                          echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" class="img-circle elevation-2" alt="User Image">';
+                          }
+                        ?>
                         </div>
 
                         <div class="info">
@@ -132,8 +114,22 @@ while($arreglo=mysqli_fetch_array($query)){
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <div id="pestanas">
+                        <div class="overlay d-flex justify-content-center align-items-center">
+                            <div id="IdIconLoad" class="overlay dark"
+                                style="position: absolute; background-size: cover; background-color: rgba(0,0,0,0.6);">
+                                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                            </div>
+                        </div>
                         <ul id="listas" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
+                            <li id="pestana16" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana16);' class="nav-link">
+                                    <i class="nav-icon fa fa-users white"></i>
+                                    <p class="white">
+                                        Inicio
+                                    </p>
+                                </a>
+                            </li>
                             <li id="pestana1" class="nav-item">
                                 <a href='javascript:cambiarPestanna(pestanas,pestana1);ReloadsFrames();'
                                     class="nav-link">
@@ -171,7 +167,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana5" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana5);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana5);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-times-circle white"></i>
                                     <p class="white">
                                         Rechazado
@@ -179,7 +175,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana6" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana6);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana6);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-calendar-times white"></i>
                                     <p class="white">
                                         Proximo a Vencer
@@ -187,7 +183,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana7" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana7);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana7);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-calendar-times white"></i>
                                     <p class="white">
                                         VB Director
@@ -195,7 +191,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana8" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana8);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana8);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-file-archive white"></i>
                                     <p class="white">
                                         Otros Documentos
@@ -203,7 +199,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana9" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana9);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana9);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-suitcase white"></i>
                                     <p class="white">
                                         Semillero
@@ -211,7 +207,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana10" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana10);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana10);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-graduation-cap white"></i>
                                     <p class="white">
                                         Postgrado
@@ -219,7 +215,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana11" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana11);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana11);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-flask white"></i>
                                     <p class="white">
                                         Aux Investigación
@@ -227,7 +223,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana12" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana12);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana12);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-file white"></i>
                                     <p class="white">
                                         Documentos en Curso
@@ -235,7 +231,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana13" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana13);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana13);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-book white"></i>
                                     <p class="white">
                                         Actas
@@ -243,7 +239,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana14" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana14);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana14);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-search white"></i>
                                     <p class="white">
                                         Buscar
@@ -251,18 +247,10 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana15" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana15);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana15);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-users white"></i>
                                     <p class="white">
-                                        Estudiantes
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana16" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana16);' class="nav-link">
-                                    <i class="nav-icon fa fa-users white"></i>
-                                    <p class="white">
-                                        Profesores
+                                        Usuarios
                                     </p>
                                 </a>
                             </li>
@@ -281,7 +269,8 @@ while($arreglo=mysqli_fetch_array($query)){
                     <div class="row mb-2">
 
                         <div class="col-sm-6">
-                            <h1 id="Titulo">Documentos Registrados</h1>
+                            <h1 id="Titulo" class="d-none">Documentos Registrados</h1>
+                            <h1 id="idTextCargando">Cargando...</h1>
                         </div>
                         <button id="idButtonSuccess" type="button" class="btn btn-success fade" data-toggle="modal"
                             data-target="#modal-success">
@@ -293,22 +282,21 @@ while($arreglo=mysqli_fetch_array($query)){
 
                 </div>
             </section>
-            <section class="content">
+            <section id="content" class="content d-none">
 
                 <div class="container-fluid">
                     <div id="contenidopestanas">
                         <div id="cpestana1">
-
                             <!-- <input value="1" /> -->
 
                             <div class="card card-default">
                                 <div class="card-header">
                                     <h3 class="card-title">Generar actas de Comite</h3>
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left"
-                                                onclick="location.reload();"></i></button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
-                                                class="fas fa-expand"></i></button>
+                                        <!--  <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left"
+                                                onclick="location.reload();"></i></button> -->
+                                        <!--- <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                                                class="fas fa-expand"></i></button> -->
                                     </div>
                                 </div>
                                 <iframe id="idFrameGenerar" src="pages/1-GenerarActa.php" width="100%"
@@ -410,32 +398,423 @@ while($arreglo=mysqli_fetch_array($query)){
                             </div>
                         </div>
                         <div id="cpestana15">
-                            <div class="card card-default">
-                                <iframe id="idFrameEstudiantes" src="pages/15-Estudiantes.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
-                            </div>
+                            <!-- <div class="card card-default"> -->
+                            <iframe id="idFrameEstudiantes" src="pages/15-Usuarios.php" width="100%"
+                                style="border: none;" frameborder="0" scrolling="no"
+                                onload="resizeIframe(this)"></iframe>
+                            <!-- </div> -->
                         </div>
                         <div id="cpestana16">
-                            <div class="card card-default">
-                                <iframe id="idFrameProfesores" src="pages/16-Profesores.php" width="100%"
-                                    style="border: none;" frameborder="0" scrolling="no"
-                                    onload="resizeIframe(this)"></iframe>
+                            <?php
+                        $contadorp=0;
+                        $sql=("SELECT * FROM login");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorp++;
+                        
+                        }
+                        $contadorpro=0;
+                        $sql=("SELECT * FROM tesis where ID_estado='Entrega Proyecto'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorpro++;
+                        
+                        }
+                        $contadorante=0;
+                        $sql=("SELECT * FROM tesis where ID_estado='Entrega Anteproyecto'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorante++;
+                        
+                        }
+                        $contadorprop=0;
+                        $sql=("SELECT * FROM tesis where ID_estado='Entrega Propuesta'");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorprop++;
+                        
+                        }
+                        $contadorprot=0;
+                        $sql=("SELECT * FROM tesis where ID_estado='Entrega Proyecto' and nota>0");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadorprot++;
+                        
+                        }
+                        $contadorse=0;$contadorset=0;
+                        $sql=("SELECT * FROM tesis where id_estudiante2=1 and nota>0 ");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                          $nota=$arreglo[20];
+                          if($nota>0){
+                            $contadorset++;
+                          }
+                        $contadorse++;
+                        
+                        }
+                        $contadoraux=0;
+                        $sql=("SELECT * FROM tesis where id_estudiante2=3 and nota>0");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $contadoraux++;
+                        
+                        }
+                        $evaluardoc=0;
+                                $sql=("SELECT * FROM tesis  where (terminado=0 or terminado=6) and observaciones='Por definir' and (aprob_dir='SI' or ID_directores='No aplica' or ID_directores='Por definir')");
+                                $query=mysqli_query($mysqli,$sql);
+                                while($arreglo=mysqli_fetch_array($query)){
+                                $evaluardoc++;
+                        
+                        }
+                        $totaldoc=0;
+                        $sql=("SELECT * FROM tesis");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $totaldoc++;
+                        
+                        }
+                        $totalactas=0;
+                        $sql=("SELECT * FROM actas");
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $totalactas++;
+                        
+                        }
+                        $totalvb=0;
+                        $sql=("SELECT * FROM tesis  where aprob_dir='' and ID_directores!='No aplica'" );
+                                $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $totalvb++;
+                        
+                        }
+                        $entradast=0;
+                        $ff=date('Y-m-d');
+                        $fi=date('Y-m-d',strtotime($ff.'- 3 month'));
+                        $sql=("SELECT * FROM entradas where fecha between '$fi' and '$ff'");
+                        $query=mysqli_query($mysqli,$sql);
+                        while($arreglo=mysqli_fetch_array($query)){
+                        $entradast++;
+                        
+                        }
+                        $aux=0;
+                        $totald=($contadorprop+$contadorante+$contadorpro)
+                        ?>
+
+                            <div class="row">
+
+                                <div class="col-lg-3 col-6">
+                                    <div class="small-box bg-warning">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorp ?></h3>
+                                            <p>Usuarios Registrados</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-person-add"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal"
+                                            data-target="#usuariosRegistradosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box  bg-success">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorpro ?></h3>
+                                            <p>Proyectos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#proyectosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-success">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorante ?></h3>
+
+                                            <p>Anteproyectos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal"
+                                            data-target="#anteproyectosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box  bg-success">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorprop ?></h3>
+
+                                            <p>Propuestas</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#propuestasModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-danger">
+                                        <div class="inner">
+                                            <h3><?php echo $totaldoc ?></h3>
+
+                                            <p>Total de Documentos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#documentosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-info">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorprot ?></h3>
+
+                                            <p>Proyectos</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-bag"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal"
+                                            data-target="#proyectostermModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-info">
+                                        <div class="inner">
+                                            <h3><?php echo $contadorset?></h3>
+
+                                            <p>Semilleros</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#semillerosModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-info">
+                                        <div class="inner">
+                                            <h3><?php echo $aux ?></h3>
+
+                                            <p>Auxiliares de Inv</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a class="small-box-footer" data-toggle="modal" data-target="#auxiliaresModal">
+                                            Más información
+                                            <i class="fas fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Modals container -->
+                            <div class="modal fade" id="usuariosRegistradosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-warning">
+                                        <div class="modal-body">
+                                            La cantidad corresponde a todos lo usuarios registrados desde julio de
+                                            2016...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="proyectosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-success">
+                                        <div class="modal-body">
+                                            Estos proyectos son los que estan actualmente en proceso...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="anteproyectosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-success">
+                                        <div class="modal-body">
+                                            Estos Anteproyectos son los que estan actualmente en proceso...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="propuestasModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-success">
+                                        <div class="modal-body">
+                                            Estas propuestas son las que estan actualmente en proceso...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="documentosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-danger">
+                                        <div class="modal-body">
+                                            Corresponde a todos los documentos procesados desde julio de 2016...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="proyectostermModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-info">
+                                        <div class="modal-body">
+                                            Estos proyectos son los que estan terminados...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="semillerosModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-info">
+                                        <div class="modal-body">
+                                            Proyectos inscritos con opcion de grado por semillero...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="auxiliaresModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-info">
+                                        <div class="modal-body">
+                                            Estudiantes con opcion de grado auxiliares investigacion...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End modals container -->
+
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box shadow-lg">
+                                        <span class="info-box-icon bg-info elevation-1"><i
+                                                class="fas fa-cog"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Documentos por Evaluar...</span>
+                                            <span class="info-box-number">
+                                                <?php echo $evaluardoc ?>
+                                                <small>A hoy</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box mb-3 shadow-lg">
+                                        <span class="info-box-icon bg-danger elevation-1"><i
+                                                class="fas fa-thumbs-up"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Actas</span>
+                                            <span class="info-box-number"><?php echo $totalactas ?><small>
+                                                    Publicadas</small></span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+
+                                <div class="clearfix hidden-md-up"></div>
+
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box mb-3 shadow-lg">
+                                        <span class="info-box-icon bg-success elevation-1"><i
+                                                class="fas fa-shopping-cart"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Documentos por VoBo</span>
+                                            <span class="info-box-number"><?php echo $totalvb ?><small> A
+                                                    hoy</small></span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-3">
+                                    <div class="info-box mb-3 shadow-lg">
+                                        <span class="info-box-icon bg-warning elevation-1"><i
+                                                class="fas fa-users"></i></span>
+
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Visitas</span>
+                                            <span class="info-box-number"><?php echo $entradast?><small> Ultimo
+                                                    mes</small></span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                            </div>
+
+                            <!-- Start Frame -->
+                            <div class="col-12">
+                                <h5>¿Cómo manejo el SI-COMMITTEE?</h5>
+                            </div>
+
+
+                            <iframe id="idFrameInicio" src="pages/16-Inicio.php" width="100%" style="border: none;"
+                                frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+
+
+
+                            <!-- End Frame -->
+
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>2020</b>
-            </div>
-            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
-        </footer>
+
+        <!-- Footer -->
+        <?php include '../footer.php'; ?>
+        <!-- /. Footer -->
 
         <!-- Control Sidebar -->
-
+        <?php include 'chat.php'; ?>
         <!-- /.control-sidebar -->
     </div>
 
@@ -465,12 +844,10 @@ while($arreglo=mysqli_fetch_array($query)){
     <!-- modal-end -->
 
 </body>
-<script type="text/javascript" src="js/cambiarPestanna.js"></script>
+
 <script>
 $(document).ready(function() {
     window.addEventListener("storage", ChangeCard);
-
-
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar'];
     //for (var i = 0; i < Frames.length; i++) {
     //    ReloadsFrames(Frames[i]);
@@ -488,7 +865,7 @@ $(document).ready(function() {
 });
 var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar', 'idFrameRechazar',
     'idFrameProximo', 'idFramePendientes', 'idFrameOtros', 'idFrameSemilleros', 'idFramePostgrado', 'idFrameAuxIn',
-    'idFrameCurso', 'idFrameActas', 'idFrameBuscar', 'idFrameEstudiantes', 'idFrameProfesores'
+    'idFrameCurso', 'idFrameActas', 'idFrameBuscar', 'idFrameEstudiantes', 'idFrameInicio'
 ];
 
 function ReloadsFrames() {
@@ -496,8 +873,10 @@ function ReloadsFrames() {
     //debugger;
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar'];
     //var iframe = document.getElementById(Frames[(id - 1)]);
-    var iframe = document.getElementById(Frames[ItemNow]);
-    iframe.src = iframe.src;
+    if (ItemNow != "15") {
+        var iframe = document.getElementById(Frames[ItemNow]);
+        iframe.src = iframe.src;
+    }
     //iframe.contentDocument.location.reload(true);
     // document.getElementById(idFrame).contentDocument.history.back(true);
 }
@@ -548,16 +927,18 @@ function ChangeCard(event) {
 function resizeIframe(obj, px) {
 
     //obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
+    
     if (!px) {
         obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
     } else {
         if (px == 0) {
-            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
+            //  obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
         } else {
             obj.style.height = px + "px";
         }
 
     }
+
 }
 
 function onResize(state) {
@@ -587,5 +968,6 @@ function onResize(state) {
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script type="text/javascript" src="chat/chat.js"></script>
 
 </html>

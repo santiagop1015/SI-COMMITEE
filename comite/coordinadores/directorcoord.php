@@ -183,6 +183,7 @@ $dir = $_SESSION['user'];
             cambiarPestanna(pestanas, pestana1);
         }
     }
+
     </script>
     <script type="text/javascript">
     //var winglobal;
@@ -258,7 +259,7 @@ $dir = $_SESSION['user'];
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <?php
+                        <?php
                         if(empty($foto)) {
                             echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
                           } else {
@@ -852,7 +853,7 @@ $dir = $_SESSION['user'];
 
                                                 <tbody>
                                                     <?php
-
+                                                $anteproyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
 
                                                     if ($arreglo[6] == "Entrega Propuesta") {
@@ -980,6 +981,7 @@ $dir = $_SESSION['user'];
 
                                                 <tbody>
                                                     <?php
+                                                    $proyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     if ($arreglo[6] == "Entrega Propuesta") {
                                                         $alma = "./propuestas";
@@ -1130,7 +1132,6 @@ $dir = $_SESSION['user'];
 
                                                         <tbody>
                                                             <?php
-                                                $proyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     $id = $arreglo[1];
                                                     $titu = $arreglo[3];
@@ -1161,7 +1162,6 @@ $dir = $_SESSION['user'];
                                                             $state = 1;
                                                         }
                                                         if($state != 1) {
-                                                            $proyectos_exist = true;
                                                         ?>
                                                                 <td><?php echo "$arreglo[3] "; ?></td>
 
@@ -1220,7 +1220,6 @@ $dir = $_SESSION['user'];
                                                         } else {
                                                             $state = 0;
                                                             $totalpeval = $totalpeval - 1;
-                                                            $proyectos_exist = false; 
                                                         }
                                                     ?>
                                                             </tr>
@@ -1272,7 +1271,6 @@ $dir = $_SESSION['user'];
                                                             $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                                             $query = mysqli_query($mysqli, $sql);
                                                             $totalanteval = 0;
-                                                            $otros_exist = false;
                                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                                 if ($arreglo[6] == "Entrega Propuesta") {
                                                                     $alma = "./propuestas";
@@ -1452,22 +1450,12 @@ $dir = $_SESSION['user'];
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                    
-                                                        if(strlen($arreglo[8]) > 15) {
-                                                            echo "
-                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
-                                                            target='_blank'>
-                                                            ".substr($arreglo[8],0,15)."..."."
-                                                            </a>
-                                                            ";
-                                                        } else {
-                                                            echo "
+                                                        echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
-                                                        }
                                                         } else {
                                                         echo "";
                                                         }
