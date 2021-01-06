@@ -185,7 +185,7 @@ $passd=$arreglo[8];
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
@@ -198,10 +198,11 @@ $(document).ready(function() {
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

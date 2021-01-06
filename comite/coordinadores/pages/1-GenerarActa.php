@@ -133,7 +133,7 @@ while($arreglo=mysqli_fetch_array($query)){
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
@@ -141,9 +141,10 @@ $(document).ready(function() {
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

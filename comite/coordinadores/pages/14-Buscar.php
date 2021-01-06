@@ -25,7 +25,7 @@ $coordir=$arreglo[4];
 $passd=$arreglo[8];
 
  if ($arreglo[2]!='Coordinador') {
-	require("../desconectar.php");
+	require("../../desconectar.php");
 	header("Location:../../../index.html");
 }
 }
@@ -168,7 +168,7 @@ $passd=$arreglo[8];
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
@@ -176,15 +176,16 @@ $(document).ready(function() {
       */
       window.addEventListener('resize', function(event) {
         // do stuff here
-        Evaluar();
+         Evaluar();  
     });
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

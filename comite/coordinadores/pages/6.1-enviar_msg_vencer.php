@@ -38,7 +38,7 @@ extract($_GET);
 }
 </style>
 
-<body onload="getWidth();">
+<body>
 
     <div id="idCardAct" class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white; padding-left: 10px">
@@ -112,15 +112,20 @@ extract($_GET);
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
-    onSendHeight();
+    //onSendHeight();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        onSendHeight();
+    });
     onSubmitActualizar();
     localStorage.setItem("Mensaje2", null);
 });
 
 function onSendHeight(event) {
-    var card = document.getElementById("idCardAct");
+    //var card = document.getElementById("idCardAct");
     //console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 
 var onSubmitActualizar = function() {

@@ -182,9 +182,17 @@ $(document).on("click", "#idButtonMessages", function () {
     }, 450);
   } else {
     //ocultar el formulario del chat
-    document.getElementById("idFormChat").style.display = "none";
+    //setTimeout(() => {
+      document.getElementById("idFormChat").style.display = "None";
+    //}, 100);
+    setTimeout(() => {
+      document.getElementById("idFormChat").style.display = "None";
+    }, 500);
+    //setTimeout(() => {
+      document.getElementById("idCardNameChat").style.display = "None";
+    //}, 100);
     setTimeout(() => {
       document.getElementById("idCardNameChat").style.display = "None";
-    }, 100);
+    }, 450);
   }
 });

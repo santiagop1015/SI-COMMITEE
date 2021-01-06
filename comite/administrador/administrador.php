@@ -863,7 +863,7 @@ while($arreglo=mysqli_fetch_array($query)){
 
 <script>
 $(document).ready(function() {
-    window.addEventListener("storage", ChangeCard);
+    //window.addEventListener("storage", ChangeCard);
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar'];
     //for (var i = 0; i < Frames.length; i++) {
     //    ReloadsFrames(Frames[i]);

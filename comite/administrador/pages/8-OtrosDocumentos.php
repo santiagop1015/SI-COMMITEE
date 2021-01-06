@@ -50,9 +50,9 @@ $passd=$arreglo[8];
     <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="idCard">
 
-    <div id="idCard" class="card card-warning" style="margin-bottom: 0px; ">
+    <div class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white;">
 
             <div class="card-tools">

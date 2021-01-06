@@ -26,8 +26,8 @@ $coordir=$arreglo[4];
 $passd=$arreglo[8];
 
  if ($arreglo[2]!='Coordinador') {
-	require("../desconectar.php");
-	header("Location:../../index.html");
+	require("../../desconectar.php");
+	header("Location:../../../index.html");
 }
 }
 
@@ -100,6 +100,7 @@ $passd=$arreglo[8];
                 document.getElementById("IdDivGenerarReportes").classList.add("d-none");
                 //document.getElementById("IdDivActDatos").classList.add("d-none");
                 //document.getElementById("IdDivDirJur").classList.add("d-none");
+                window.parent.ReloadsFrames("non-reaload");
                 break;
             case 1:
                 document.getElementById("idAnclaReg").classList.remove("active");
@@ -111,6 +112,7 @@ $passd=$arreglo[8];
                 document.getElementById("IdDivGenerarReportes").classList.remove("d-none");
                 //document.getElementById("IdDivActDatos").classList.add("d-none");
                 //document.getElementById("IdDivDirJur").classList.add("d-none");
+                window.parent.ReloadsFrames("non-reaload");
                 break;
             case 2:
                /* document.getElementById("idAnclaReg").classList.remove("active");
@@ -1271,7 +1273,7 @@ $passd=$arreglo[8];
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
@@ -1279,11 +1281,11 @@ $(document).ready(function() {
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
-
+    window.parent.ReloadsFrames("non-reaload");
     //var elmnt = document.getElementById("idHeader");
     // card.scrollIntoView();
 }

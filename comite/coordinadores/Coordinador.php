@@ -131,7 +131,7 @@ while($arreglo=mysqli_fetch_array($query)){
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                        <?php
+                            <?php
                         if(empty($foto)) {
                             echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
                           } else {
@@ -339,8 +339,8 @@ while($arreglo=mysqli_fetch_array($query)){
                                 <div class="card-header">
                                     <h3 class="card-title">Generar actas de Comite</h3>
                                     <div class="card-tools">
-                                        <!--  <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left"
-                                                onclick="location.reload();"></i></button> -->
+                                    <button type="button" class="btn btn-tool"><i class="fas fa-sync-alt"
+                                                onclick="ReloadsFrames()"></i></button>
                                         <!--- <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
                                                 class="fas fa-expand"></i></button> -->
                                     </div>
@@ -918,17 +918,22 @@ var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameApla
     'idFrameCurso', 'idFrameActas', 'idFrameBuscar', 'idFrameEstudiantes', 'idFrameInicio'
 ];
 
-function ReloadsFrames() {
+function ReloadsFrames(param) {
     var ItemNow = localStorage.getItem("number");
     //debugger;
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar'];
     //var iframe = document.getElementById(Frames[(id - 1)]);
-    if (ItemNow != "15") {
+    if(!param) {
+   // if (ItemNow != "15") {
         var iframe = document.getElementById(Frames[ItemNow]);
         iframe.src = iframe.src;
+   // }
+    } else if(param == "non-reaload") {
+        resizeIframe(document.getElementById(Frames[ItemNow]), 1);
     }
     //iframe.contentDocument.location.reload(true);
     // document.getElementById(idFrame).contentDocument.history.back(true);
+    
 }
 
 function ChangeCard(event) {
@@ -944,7 +949,7 @@ function ChangeCard(event) {
         // var FrameEvaluar = document.getElementById("idFrameAplazar");
         var FrameEvaluar = document.getElementById(Frames[ItemNow]);
         //  console.log(FrameEvaluar);
-        resizeIframe(FrameEvaluar, localStorage.getItem("evaluar"));
+        //resizeIframe(FrameEvaluar, localStorage.getItem("evaluar"));
     }
 
     if (event.key == "Mensaje2") {
@@ -978,14 +983,15 @@ function resizeIframe(obj, px) {
 
     //obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
     if (!px) {
-        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
+        obj.style.height = obj.contentDocument.body.clientHeight + "px";
     } else {
-        if (px == 0) {
+        obj.style.height = obj.contentDocument.body.clientHeight + "px";
+        /*   if (px == 0) {
             //  obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + "px";
         } else {
             obj.style.height = px + "px";
         }
-
+*/
     }
 }
 
@@ -1001,7 +1007,7 @@ function onResize(state) {
         FrameEvaluar.src = FrameEvaluar.src;
     }
     //console.log(FrameEvaluar);
-    resizeIframe(FrameEvaluar, localStorage.getItem("evaluar"));
+    //  resizeIframe(FrameEvaluar, localStorage.getItem("evaluar"));
 }
 </script>
 

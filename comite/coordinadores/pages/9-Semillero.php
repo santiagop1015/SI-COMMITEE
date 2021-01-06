@@ -52,7 +52,7 @@ $passd=$arreglo[8];
 
 <body id="idCard">
 
-    <div id="idCard" class="card card-warning" style="margin-bottom: 0px; ">
+    <div class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white;">
 
             <div class="card-tools">
@@ -187,7 +187,7 @@ $passd=$arreglo[8];
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
@@ -200,10 +200,11 @@ $(document).ready(function() {
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

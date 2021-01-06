@@ -76,7 +76,7 @@ $(document).ready(function() {
 */
 </script>
 
-<body id="idCard" style="background-color: #f4f6f9;" onresize="Height();">
+<body id="idCard" style="background-color: #f4f6f9;">
 
     <!-- Start Content-wrapper -->
 

@@ -189,7 +189,7 @@ window.onload = Evaluar();
 window.onresize = Evaluar();
 */
 //setTimeout(() => {
-    Evaluar();
+    //Evaluar();
 //}, 2000);
 
 window.addEventListener('resize', function(event){
@@ -215,10 +215,11 @@ window.addEventListener('resize', function(event){
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     //console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

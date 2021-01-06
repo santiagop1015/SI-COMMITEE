@@ -535,15 +535,20 @@ $nombre_eje=0;
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
-    onSendHeight();
+    //onSendHeight();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        onSendHeight();
+    });
     onSubmitActualizar();
     localStorage.setItem("Mensaje2", null);
 });
 
 function onSendHeight(event) {
-    var card = document.getElementById("idCardAct");
+    //var card = document.getElementById("idCardAct");
     //console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 
 var onSubmitActualizar = function() {

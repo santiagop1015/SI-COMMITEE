@@ -76,7 +76,7 @@ $(document).ready(function() {
 */
 </script>
 
-<body id="idCard" style="background-color: #f4f6f9;" onresize="Height();">
+<body id="idCard" style="background-color: #f4f6f9;">
 
     <!-- Start Content-wrapper -->
 
@@ -345,7 +345,7 @@ if(!$_GET) {
 
 <script>
 $(document).ready(function() {
-    Height();
+    //Height();
     window.addEventListener('resize', function(event) {
         // do stuff here
         Height();
@@ -353,8 +353,9 @@ $(document).ready(function() {
 });
 
 function Height(event) {
-    var card = document.getElementById("idCard");
-    localStorage.setItem("height", card.clientHeight);
+    //var card = document.getElementById("idCard");
+    //localStorage.setItem("height", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 
 $(document).on("click", ".page-link", function() {

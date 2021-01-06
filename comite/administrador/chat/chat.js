@@ -169,7 +169,6 @@ $("#idFormSendMessage").on("submit", function (e) {
 $(document).on("click", "#idButtonMessages", function () {
   var Card = $("#idCard");
   //control-sidebar control-sidebar-dark position-fixed
-  //console.log(Card[0].className);
   if (Card[0].className == "card direct-chat direct-chat-primary") {
     var TitleChat = $("#idNameChat")[0].innerHTML.trim();
     if (TitleChat !== "Seleccione un Chat") {
@@ -177,11 +176,10 @@ $(document).on("click", "#idButtonMessages", function () {
       setTimeout(() => {
         document.getElementById("idFormChat").style.display = "Block";
       }, 500);
-    } 
-      setTimeout(() => {
-        document.getElementById("idCardNameChat").style.display = "Block";
-      }, 450);
-
+    }
+    setTimeout(() => {
+      document.getElementById("idCardNameChat").style.display = "Block";
+    }, 450);
   } else {
     //ocultar el formulario del chat
     //setTimeout(() => {

@@ -56,7 +56,7 @@ $nota=0;
 }
 </style>
 
-<body id="idCard" style="background-color: #f4f6f9;" onresize="Evaluar();">
+<body id="idCard" style="background-color: #f4f6f9;">
 
     <div class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white;">
@@ -239,23 +239,24 @@ $nota=0;
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
       });
       */
-  /*    window.addEventListener('resize', function(event) {
+    window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
-    });*/
+    });
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("height", card.clientHeight);
+    //localStorage.setItem("height", card.clientHeight);
     //  console.log(card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

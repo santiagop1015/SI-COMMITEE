@@ -107,15 +107,20 @@ require("../../connect_db.php");
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
-    onSendHeight();
+    //onSendHeight();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        onSendHeight();
+    });
     onSubmitActualizar();
     localStorage.setItem("Mensaje2", null);
 });
 
 function onSendHeight(event) {
-    var card = document.getElementById("idCardBorrar");
+    //var card = document.getElementById("idCardBorrar");
     //console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 
 var onSubmitActualizar = function() {
