@@ -124,7 +124,7 @@ if (@!$_SESSION['user']) {
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper pb-2">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">

@@ -4,7 +4,7 @@
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../index.html");
+    header("Location:../../../index.html");
 }
     //@$buscart=$_POST['buscart'];
     
@@ -26,8 +26,8 @@ $coordir=$arreglo[4];
 $passd=$arreglo[8];
 
  if ($arreglo[2]!='Administrador') {
-	require("../desconectar.php");
-	header("Location:../../index.html");
+	require("../../desconectar.php");
+	header("Location:../../../index.html");
 }
 }
 
@@ -84,7 +84,7 @@ $passd=$arreglo[8];
     <div class="btn-group w-100 mb-2">
         <a id="idAnclaReg" class="btn btn-info" href="javascript:onClickManejo(0)"> Registrar Información </a>
         <a id="idAnclaRep" class="btn btn-info" href="javascript:onClickManejo(1)"> Generar Reportes </a>
-        <a id="idAnclaAct" class="btn btn-info" href="javascript:onClickManejo(2)"> Act. Mis Datos </a> 
+        <a id="idAnclaAct" class="btn btn-info" href="javascript:onClickManejo(2)"> Act. Mis Datos </a>
         <a id="idAnclaDirJur" class="btn btn-info" href="javascript:onClickManejo(3)"> Dir/Jur </a>
     </div>
     <script>
@@ -100,30 +100,32 @@ $passd=$arreglo[8];
                 document.getElementById("IdDivGenerarReportes").classList.add("d-none");
                 //document.getElementById("IdDivActDatos").classList.add("d-none");
                 //document.getElementById("IdDivDirJur").classList.add("d-none");
+                window.parent.ReloadsFrames("non-reaload");
                 break;
             case 1:
                 document.getElementById("idAnclaReg").classList.remove("active");
                 document.getElementById("idAnclaRep").classList.add("active");
-               // document.getElementById("idAnclaAct").classList.remove("active");
+                // document.getElementById("idAnclaAct").classList.remove("active");
                 //document.getElementById("idAnclaDirJur").classList.remove("active");
 
                 document.getElementById("IdDivRegistrarInfo").classList.add("d-none");
                 document.getElementById("IdDivGenerarReportes").classList.remove("d-none");
                 //document.getElementById("IdDivActDatos").classList.add("d-none");
                 //document.getElementById("IdDivDirJur").classList.add("d-none");
+                window.parent.ReloadsFrames("non-reaload");
                 break;
             case 2:
-               /* document.getElementById("idAnclaReg").classList.remove("active");
-                document.getElementById("idAnclaRep").classList.remove("active");
-                document.getElementById("idAnclaAct").classList.add("active");
-                document.getElementById("idAnclaDirJur").classList.remove("active");
+                /* document.getElementById("idAnclaReg").classList.remove("active");
+                 document.getElementById("idAnclaRep").classList.remove("active");
+                 document.getElementById("idAnclaAct").classList.add("active");
+                 document.getElementById("idAnclaDirJur").classList.remove("active");
 
-                document.getElementById("IdDivRegistrarInfo").classList.add("d-none");
-                document.getElementById("IdDivGenerarReportes").classList.add("d-none");
-                document.getElementById("IdDivActDatos").classList.remove("d-none");
-                document.getElementById("IdDivDirJur").classList.add("d-none");*/
+                 document.getElementById("IdDivRegistrarInfo").classList.add("d-none");
+                 document.getElementById("IdDivGenerarReportes").classList.add("d-none");
+                 document.getElementById("IdDivActDatos").classList.remove("d-none");
+                 document.getElementById("IdDivDirJur").classList.add("d-none");*/
                 window.top.location.href = "../profile.php";
-                       break; 
+                break;
             case 3:
                 /* document.getElementById("idAnclaReg").classList.remove("active");
                  document.getElementById("idAnclaRep").classList.remove("active");
@@ -240,8 +242,14 @@ $passd=$arreglo[8];
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Programa</label>
-                                                <input type="text" class="form-control" name="programa"
-                                                    value="<?php echo $programa;?>" readonly="readonly">
+                                                <!--<input type="text" class="form-control" name="programa"
+                                                    value="<?php //echo $programa;?>" readonly="readonly"> -->
+                                                <select class="form-control" name="programa">
+                                                    <option>Sistemas</option>
+                                                    <option>Industrial</option>
+                                                    <option>Mecanica</option>
+                                                    <option>Ambiental</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -390,8 +398,14 @@ $passd=$arreglo[8];
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Programa</label>
-                                                <input type="text" class="form-control" name="programa"
-                                                    value="<?php echo $programa;?>" readonly="readonly">
+                                                <!-- <input type="text" class="form-control" name="programa"
+                                                    value="<?php //echo $programa;?>" readonly="readonly"> -->
+                                                <select class="form-control" name="programa">
+                                                    <option>Sistemas</option>
+                                                    <option>Industrial</option>
+                                                    <option>Mecanica</option>
+                                                    <option>Ambiental</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -556,8 +570,14 @@ $passd=$arreglo[8];
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Programa</label>
-                                                <input type="text" class="form-control" name="programa"
-                                                    value="<?php echo $programa;?>" readonly="readonly">
+                                                <!-- <input type="text" class="form-control" name="programa"
+                                                    value="<?php //echo $programa;?>" readonly="readonly"> -->
+                                                <select class="form-control" name="programa">
+                                                    <option>Sistemas</option>
+                                                    <option>Industrial</option>
+                                                    <option>Mecanica</option>
+                                                    <option>Ambiental</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -685,8 +705,14 @@ $passd=$arreglo[8];
                                             <!-- text input -->
                                             <div class="form-group">
                                                 <label>Programa</label>
-                                                <input type="text" class="form-control" name="programa"
-                                                    value="<?php echo $programa;?>" readonly="readonly" required>
+                                                <!-- <input type="text" class="form-control" name="programa"
+                                                    value="<?php //echo $programa;?>" readonly="readonly"> -->
+                                                <select class="form-control" name="programa">
+                                                    <option>Sistemas</option>
+                                                    <option>Industrial</option>
+                                                    <option>Mecanica</option>
+                                                    <option>Ambiental</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -796,8 +822,14 @@ $passd=$arreglo[8];
                                             <!-- text input -->
                                             <div class="form-group">
                                                 <label>Programa</label>
-                                                <input type="text" class="form-control" name="programa"
-                                                    value="<?php echo $programa;?>" readonly="readonly" required>
+                                                <!-- <input type="text" class="form-control" name="programa"
+                                                    value="<?php //echo $programa;?>" readonly="readonly"> -->
+                                                <select class="form-control" name="programa">
+                                                    <option>Sistemas</option>
+                                                    <option>Industrial</option>
+                                                    <option>Mecanica</option>
+                                                    <option>Ambiental</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -1146,16 +1178,20 @@ $passd=$arreglo[8];
                                         value="<?php echo $programa;?>" readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="ID_directores" value="" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="ID_directores" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="terminado" value="" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="terminado" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="id_eje" value="" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="id_eje" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
-                                    <input type="HIDDEN" class="form-control" name="Jurado" value="" readonly="readonly">
+                                    <input type="HIDDEN" class="form-control" name="Jurado" value=""
+                                        readonly="readonly">
 
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
@@ -1271,7 +1307,7 @@ $passd=$arreglo[8];
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
@@ -1279,11 +1315,11 @@ $(document).ready(function() {
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
-
+    window.parent.ReloadsFrames("non-reaload");
     //var elmnt = document.getElementById("idHeader");
     // card.scrollIntoView();
 }

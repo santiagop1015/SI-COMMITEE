@@ -247,7 +247,7 @@ if(!$_GET) {
                 <a href="15.1-elim_user_coorp.php?id='.$arreglo[0].'" class="btn btn-sm bg-danger">
                         <i class="fa fa-trash"></i>
                     </a>
-                    <a href="15.2-enviar_msg_coor.php?Correo='.$arreglo[4].'&programa='.$programa.'" class="btn btn-sm bg-teal">
+                    <a href="15.2-enviar_msg_coor.php?Correo='.$arreglo[4].'&programa='.$Programa.'" class="btn btn-sm bg-teal">
                         <i class="fas fa-comments"></i>
                     </a>
                     <a href="15.3-estado_est.php?est='.$arreglo[0].'" class="btn btn-sm btn-primary">
@@ -346,6 +346,10 @@ if(!$_GET) {
 <script>
 $(document).ready(function() {
     Height();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        Height();
+    });
 });
 
 function Height(event) {

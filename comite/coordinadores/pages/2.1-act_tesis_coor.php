@@ -6,7 +6,7 @@
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../Login/index.html");
+    header("Location:../../../index.html");
 }
 $nombre_area=0;
 $nombre_eje=0;

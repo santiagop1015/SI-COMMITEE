@@ -552,13 +552,39 @@ while ($arreglo = mysqli_fetch_array($query)) {
                with font-awesome or any other icon font library -->
 
                             <li class="nav-item">
-                                <a href='administrador.php' class="nav-link">
+                                <a class="nav-link active">
                                     <i class="nav-icon fa fa-arrow-left white"></i>
                                     <p class="white">
-                                    Volver
+                                        Volver
+                                        <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
-                                
+                                <ul class="nav nav-treeview" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href='javascript:toAdministrador();' class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Administrador</p>
+                                        </a>
+                                    </li>
+                                    <script>
+                                    function toAdministrador() {
+                                        localStorage.removeItem("number");
+                                        location.replace("administrador.php");
+                                    }
+                                    </script>
+                                    <li class="nav-item">
+                                        <a href='javascript:toDirectJur();' class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Dir/Jur</p>
+                                        </a>
+                                    </li>
+                                    <script>
+                                    function toDirectJur() {
+                                        localStorage.removeItem("number");
+                                        location.replace("directorcoord.php");
+                                    }
+                                    </script>
+                                </ul>
                             </li>
                         </ul>
                     </div>

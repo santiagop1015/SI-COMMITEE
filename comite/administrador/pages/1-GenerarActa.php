@@ -23,8 +23,8 @@ while($arreglo=mysqli_fetch_array($query)){
  $passd=$arreglo[8];
 
  if ($arreglo[2]!='Administrador') {
-	require("../desconectar.php");
-	header("Location:../Login/index.html");
+	require("../../desconectar.php");
+	header("Location:../../../index.html");
 }
 }
 
@@ -93,8 +93,14 @@ while($arreglo=mysqli_fetch_array($query)){
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Programa</label>
-                                    <input type="text" class="form-control" name="programa" class="programa"
-                                        value="<?php echo $programa;?>" readonly="readonly">
+                                  <!--  <input type="text" class="form-control" name="programa" class="programa"
+                                        value="<?php //echo $programa;?>" readonly="readonly"> -->
+                                    <select class="form-control" name="programa">
+                                        <option>Sistemas</option>
+                                        <option>Industrial</option>
+                                        <option>Mecanica</option>
+                                        <option>Ambiental</option>
+                                    </select>
                                 </div>
 
 
@@ -133,22 +139,23 @@ while($arreglo=mysqli_fetch_array($query)){
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
       });
       */
-      window.addEventListener('resize', function(event) {
+    window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
     });
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

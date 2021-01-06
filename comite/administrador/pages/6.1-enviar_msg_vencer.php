@@ -3,7 +3,7 @@
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../Login/index.html");
+    header("Location:../../../index.html");
 }
 
 $usuario=$_SESSION['user'];
@@ -18,7 +18,7 @@ extract($_GET);
     <title>SI-COMMITEE || Enviar Mensaje</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -26,7 +26,7 @@ extract($_GET);
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
     <!-- -->
 
 
@@ -38,7 +38,7 @@ extract($_GET);
 }
 </style>
 
-<body onload="getWidth();">
+<body>
 
     <div id="idCardAct" class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white; padding-left: 10px">
@@ -68,7 +68,7 @@ extract($_GET);
                         <div class="form-group">
                             <label>De: </label>
                             <input type="text" class="form-control" name="Nombre"
-                                value="<?php echo 'Comité proyectos '.$programa;?>" readonly="readonly">
+                                value="<?php echo 'Comité proyectos Admin'//$programa;?>" readonly="readonly">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -86,7 +86,7 @@ extract($_GET);
                                 aria-required="true">Notificación para <?php echo $estu;?></textarea>
                         </div>
                         <div class="alert alert-warning" style="padding-left: 10px;">
-                            <strong>Señor coordinador </strong> este mensaje es una notificacion de recordatorio de
+                            <strong>Señor Administrador </strong> este mensaje es una notificacion de recordatorio de
                             vencimiento del documento registrado, por parte del estudiante en mención. <br> Haga clic en
                             Enviar para hacer efectiva la notificación...
                         </div>
@@ -108,19 +108,24 @@ extract($_GET);
 
     </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
-    onSendHeight();
+    //onSendHeight();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        onSendHeight();
+    });
     onSubmitActualizar();
     localStorage.setItem("Mensaje2", null);
 });
 
 function onSendHeight(event) {
-    var card = document.getElementById("idCardAct");
+    //var card = document.getElementById("idCardAct");
     //console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 
 var onSubmitActualizar = function() {

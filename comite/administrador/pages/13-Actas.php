@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 
 <?php
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
+
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../Login/index.html");
+    header("Location:../../../index.html");
 }
 	//@$buscart=$_POST['buscart'];
 	@$buscar=$_POST['buscar'];
@@ -22,8 +25,8 @@ $coordir=$arreglo[4];
 $passd=$arreglo[8];
 
  if ($arreglo[2]!='Administrador') {
-	require("../desconectar.php");
-	header("Location:../Login/index.html");
+	require("../../desconectar.php");
+	header("Location:../../../index.html");
 }
 }
 
@@ -36,7 +39,7 @@ $passd=$arreglo[8];
     <title>SI-COMMITEE || Aux Investigacion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -44,7 +47,7 @@ $passd=$arreglo[8];
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
@@ -59,14 +62,13 @@ $passd=$arreglo[8];
     <script src="../dist/js/demo.js"></script>
 </head>
 
-<body>
+<body id="idCard">
 
-
-    <div id="idCard" class="card card-primary card-tabs">
+    <div class="card card-primary card-tabs mb-0">
         <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                 <?php
-                        $raiz = "../../archivos";
+                        $raiz = "../archivos";
                         $año = date("Y");
                        // $año = gettype($año);
                         $año = (int)$año;
@@ -153,8 +155,12 @@ $passd=$arreglo[8];
                                                 echo "<td class='text-center'>$arreglo[1]</td>";
                                                 echo "<td class='text-center'>$arreglo[4]</td>";
                                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
-                                                echo "<td class='text-center'><a class='btn btn-danger btn-sm' href='13.1-elim_acta_coor.php?numero=$arreglo[1]&id=$arreglo[0]&programa=$programa'><i class='nav-icon fa fa-trash'></i></td>";
+                                                if(!empty($arreglo[6])) {
+                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='../$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                } else {
+                                                    echo "<td class='text-center'>No disponible</td>";
+                                                }
+                                                echo "<td class='text-center'><a class='btn btn-danger btn-sm' href='13.1-elim_acta_coor.php?numero=$arreglo[1]&id=$arreglo[0]&programa=$arreglo[5]'><i class='nav-icon fa fa-trash'></i></td>";
                                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 
@@ -176,12 +182,25 @@ $passd=$arreglo[8];
 
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 
+
 $(document).ready(function() {
-    Evaluar();
+ /*   Evaluar();
+window.onload = Evaluar();
+window.onresize = Evaluar();
+*/
+//setTimeout(() => {
+    //Evaluar();
+//}, 2000);
+
+window.addEventListener('resize', function(event){
+  // do stuff here
+  Evaluar();
+});
+    
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
@@ -200,10 +219,10 @@ $(document).ready(function() {
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
-    //  console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
-    //  console.log(card.clientHeight);
+    //var card = document.getElementById("idCard");
+    //console.log(card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

@@ -3,7 +3,7 @@
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../Login/index.html");
+    header("Location:../../../index.html");
 }
 $usuario=$_SESSION['user'];
 ?>

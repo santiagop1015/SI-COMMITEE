@@ -33,7 +33,6 @@ $te=$id;
 		//header("location: coordinador.php");
 		//echo "<script>location.href='coordinador.php'</script>";
 	}else {
-	   echo '1';
 	   $escudo = "http://sicomite.unilibre.edu.co/comite/LocalSources/images/escudo.jpg";
 	   $inicio = "http://sicomite.unilibre.edu.co/";
        $email = $correo;
@@ -108,7 +107,8 @@ $te=$id;
                           Equipo Comité proyectos de grado UL<br></body></html>";
                 mail($email,"Nuevas Asignaciones", $msg, $headers);
                 //final envio director
-                //echo "<script>location.href='coordinador.php'</script>";
+				//echo "<script>location.href='coordinador.php'</script>";
+				echo '1';
 }
 
     

@@ -33,13 +33,14 @@ $te=$id;
 		//header("location: coordinador.php");
 		//echo "<script>location.href='coordinador.php'</script>";
 	}else {
-       echo '1';
+	   $escudo = "http://sicomite.unilibre.edu.co/comite/LocalSources/images/escudo.jpg";
+	   $inicio = "http://sicomite.unilibre.edu.co/";
        $email = $correo;
 				$headers ='From: Comité Proyectos UL <webmaster@comiteul.edu.co> ' . "\r\n" . 
     						'Content-type:text/html;charset=UTF-8' . "\r\n" . 
     						'X-Mailer: PHP/' . phpversion();  
-							$msg = "<html><body><center> <img src='http://sicomite.unilibre.edu.co/comite/LocalSources/images/escudo.jpg' border='0' WIDTH='100' HEIGHT='100'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
-							<br><br></center>Hola, $user  el sistema ha detectado cambios en sus registros en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='http://sicomite.unilibre.edu.co/'> Haga Clic aquí!!!</a> <br><br>Si aún no tiene registros, entonces simplemente puede ignorar este correo electrónico.<br><br>
+							$msg = "<html><body><center> <img src='".$escudo."' border='0' WIDTH='100' HEIGHT='100'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
+							<br><br></center>Hola, $user  el sistema ha detectado cambios en sus registros en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='".$inicio."'> Haga Clic aquí!!!</a> <br><br>Si aún no tiene registros, entonces simplemente puede ignorar este correo electrónico.<br><br>
 								<b>Nota:</b> Para radicar su propuesta de proyecto de grado, los estudiantes deben haber cursado y aprobado como mínimo el 60% de los créditos de su plan de estudios. <br><br>
 								<b>PARA TENER EN CUENTA !!!</b><br>
 									$fecha_ent_anteproyectomas $proyectomas<br>
@@ -60,8 +61,8 @@ $te=$id;
                 $headers ='From: Comité Proyectos UL <webmaster@comiteul.edu.co> ' . "\r\n" . 
                           'Content-type:text/html;charset=UTF-8' . "\r\n" . 
                           'X-Mailer: PHP/' . phpversion();  
-                          $msg = "<html><body><center> <img src='../images/escudo.jpg' border='0' WIDTH='100' HEIGHT='97'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
-                          <br><br></center>Hola, señor profesor,  el SI COMMITTEE ha detectado nuevas asignaciones y/o modificaciones en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='http://sicomite.unilibre.edu.co/'> Haga Clic aquí!!!</a>, de lo contrario, entonces simplemente puede ignorar este correo electrónico.<br><br>
+                          $msg = "<html><body><center> <img src='".$escudo."' border='0' WIDTH='100' HEIGHT='97'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
+                          <br><br></center>Hola, señor profesor,  el SI COMMITTEE ha detectado nuevas asignaciones y/o modificaciones en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='".$inicio."'> Haga Clic aquí!!!</a>, de lo contrario, entonces simplemente puede ignorar este correo electrónico.<br><br>
                           <b>Nota:</b> Para el <b>anteproyecto </b>tenga en cuenta que, - los evaluadores tendrán un plazo máximo de quince (15) días hábiles para hacer lectura completa del mismo, y diligenciar el formato de concepto de evaluación que se encuentra disponible en el SI COMMITTEE.<br><br>
                           <b>Nota:</b> Para el <b>anteproyecto </b> - Los evaluadores deben solicitar una sola corrección del documento sin posibilidad de agregar otras correcciones diferentes a las ya solicitadas por escrito en el documento o en un documento aparte de correcciones.<br><br>
                 
@@ -80,8 +81,8 @@ $te=$id;
                 $headers ='From: Comité Proyectos UL <webmaster@comiteul.edu.co> ' . "\r\n" . 
                           'Content-type:text/html;charset=UTF-8' . "\r\n" . 
                           'X-Mailer: PHP/' . phpversion();  
-                          $msg = "<html><body><center> <img src='../images/escudo.jpg' border='0' WIDTH='100' HEIGHT='100'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
-                          <br><br></center>Hola, señor profesor,  el SI COMMITTEE ha detectado nuevas asignaciones y/o modificaciones en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='http://sicomite.unilibre.edu.co/'> Haga Clic aquí!!!</a>, de lo contrario, entonces simplemente puede ignorar este correo electrónico.<br><br>
+                          $msg = "<html><body><center> <img src='".$escudo."' border='0' WIDTH='100' HEIGHT='100'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
+                          <br><br></center>Hola, señor profesor,  el SI COMMITTEE ha detectado nuevas asignaciones y/o modificaciones en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='".$inicio."'> Haga Clic aquí!!!</a>, de lo contrario, entonces simplemente puede ignorar este correo electrónico.<br><br>
                               <b>Nota:</b> Para el <b>anteproyecto </b>tenga en cuenta que, - los evaluadores tendrán un plazo máximo de quince (15) días hábiles para hacer lectura completa del mismo, y diligenciar el formato de concepto de evaluación que se encuentra disponible en el SI COMMITTEE.<br><br>
                               <b>Nota:</b> Para el <b>anteproyecto </b> - Los evaluadores deben solicitar una sola corrección del documento sin posibilidad de agregar otras correcciones diferentes a las ya solicitadas por escrito en el documento o en un documento aparte de correcciones.<br><br>
                           En el Comité utilizamos esta dirección de correo electrónico únicamente para envíos automáticos de información y por seguridad, la cuenta no está habilitada para recibir respuestas o consultas.<br><br>
@@ -99,14 +100,15 @@ $te=$id;
                 $headers ='From: Comité Proyectos UL <webmaster@comiteul.edu.co> ' . "\r\n" . 
                           'Content-type:text/html;charset=UTF-8' . "\r\n" . 
                           'X-Mailer: PHP/' . phpversion();  
-                          $msg = "<html><body><center> <img src='../images/escudo.jpg' border='0' WIDTH='100' HEIGHT='100'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
-                          <br><br></center>Hola, señor Director de Proyecto,  el SI COMMITTEE ha detectado nuevas asignaciones o solicitudes en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='http://sicomite.unilibre.edu.co/'> Haga Clic aquí!!!</a>, de lo contrario, entonces simplemente puede ignorar este correo electrónico.<br><br>
+                          $msg = "<html><body><center> <img src='".$escudo."' border='0' WIDTH='100' HEIGHT='100'><br><font color='#B40431' size='6' face='Times New Roman'>Facultad de Ingeniería</FONT><br><font color='#B40431' size='5' face='Times New Roman'>Comité de Proyectos de Grado</FONT><br>
+                          <br><br></center>Hola, señor Director de Proyecto,  el SI COMMITTEE ha detectado nuevas asignaciones o solicitudes en el <b>Comité de Proyectos de Grado UL</b>. <br> Para ingresar al Comité <a href='".$inicio."'> Haga Clic aquí!!!</a>, de lo contrario, entonces simplemente puede ignorar este correo electrónico.<br><br>
                           <b>Nota:</b> El docente director dará la aprobación del documento subido por el estudiante (Propuesta, Anteproyecto y Proyecto), desde el mismo SI COMMITTEE. Sin dicha aprobación, el documento queda subido en la plataforma, pero no se discute en las reuniones de Comité de Proyectos de Grado.<br><br>
                           En el Comité utilizamos esta dirección de correo electrónico únicamente para envíos automáticos de información y por seguridad, la cuenta no está habilitada para recibir respuestas o consultas.<br><br>
                           Equipo Comité proyectos de grado UL<br></body></html>";
                 mail($email,"Nuevas Asignaciones", $msg, $headers);
                 //final envio director
-                //echo "<script>location.href='coordinador.php'</script>";
+				//echo "<script>location.href='coordinador.php'</script>";
+				echo '1';
 }
 
     

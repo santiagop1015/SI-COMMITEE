@@ -462,7 +462,7 @@ $dir = $_SESSION['user'];
                                                     </td>
                                                     <td class="text-center">
                                                         <?php
-                                                if(strlen($arreglo[8]) > 1) {
+                                                 if(strlen($arreglo[8]) > 1) {
                                                     
                                                     if(strlen($arreglo[8]) > 15) {
                                                         echo "
@@ -637,7 +637,7 @@ $dir = $_SESSION['user'];
                                                             $name = '"name"';
                                                             $img = "<img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>";
 
-                                                            echo "<button onclick='CenterWindow($direccion, $complemento+$parametro);'>$img</button>";
+                                                            //echo "<button onclick='CenterWindow($direccion, $complemento+$parametro);'>$img</button>";
                                                             //  <img src='images/actualizar.png' width='30' height='30' class='img-rounded'></img>
                                                             ?>
                                                         </td>-->
@@ -667,7 +667,7 @@ $dir = $_SESSION['user'];
                                 $total = 0;
                                 $totalm = 0;
                                 $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Monografia' or ID_estado='Entrega Poster' or ID_estado='Correccion Monografia') and terminado!=2 ORDER BY id_tesis DESC ");
-                             // prueba// $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') ORDER BY id_tesis DESC ");
+                                // prueba// $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') ORDER BY id_tesis DESC ");
 
                                 $query = mysqli_query($mysqli, $sql);
                                 //var_dump($sql);
@@ -745,6 +745,7 @@ $dir = $_SESSION['user'];
                                                         <?php
                                                         require("../connect_db.php");
                                                         $sql = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                        $sql = ("SELECT * FROM evaluacion");
                                                         //var_dump($sql);
                                                         $ressql = mysqli_query($mysqli, $sql);
                                                         while ($row = mysqli_fetch_row($ressql)) {
@@ -853,7 +854,7 @@ $dir = $_SESSION['user'];
 
                                                 <tbody>
                                                     <?php
-                                                $anteproyectos_exist = false;
+                                                $anteproyectos_exist = false; 
                                                 while ($arreglo = mysqli_fetch_array($query)) {
 
                                                     if ($arreglo[6] == "Entrega Propuesta") {
@@ -885,7 +886,7 @@ $dir = $_SESSION['user'];
                                                         }
 
                                                         if($state != 1) {
-                                                            $anteproyectos_exist = true;
+                                                           $anteproyectos_exist = true;
                                                         ?>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
@@ -981,7 +982,7 @@ $dir = $_SESSION['user'];
 
                                                 <tbody>
                                                     <?php
-                                                    $proyectos_exist = false;
+                                                $proyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
                                                     if ($arreglo[6] == "Entrega Propuesta") {
                                                         $alma = "./propuestas";
@@ -1175,26 +1176,26 @@ $dir = $_SESSION['user'];
                                                                 </td>
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
-                                                    if(strlen($arreglo[8]) > 1) {
+                                                   if(strlen($arreglo[8]) > 1) {
                                                     
-                                                        if(strlen($arreglo[8]) > 15) {
-                                                            echo "
-                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
-                                                            target='_blank'>
-                                                            ".substr($arreglo[8],0,15)."..."."
-                                                            </a>
-                                                            ";
-                                                        } else {
-                                                            echo "
+                                                    if(strlen($arreglo[8]) > 15) {
+                                                        echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
-                                                        $arreglo[8]
+                                                        ".substr($arreglo[8],0,15)."..."."
                                                         </a>
                                                         ";
-                                                        }
-                                                        } else {
-                                                        echo "";
-                                                        }
+                                                    } else {
+                                                        echo "
+                                                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                    target='_blank'>
+                                                    $arreglo[8]
+                                                    </a>
+                                                    ";
+                                                    }
+                                                    } else {
+                                                    echo "";
+                                                    }
                                                     ?>
                                                                 </td>
                                                                 <td class="text-center">
@@ -1270,8 +1271,7 @@ $dir = $_SESSION['user'];
                                                             require("../connect_db.php");
                                                             $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY  id_tesis DESC ");
                                                             $query = mysqli_query($mysqli, $sql);
-                                                            $totalanteval = 0;
-
+                                                            $totalanteval = 0; 
                                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                                 if ($arreglo[6] == "Entrega Propuesta") {
                                                                     $alma = "./propuestas";
@@ -1451,12 +1451,22 @@ $dir = $_SESSION['user'];
                                                                 <?php //echo "$arreglo[12]"; ?>
                                                                 <td class="text-center"><?php 
                                                     if(strlen($arreglo[8]) > 1) {
-                                                        echo "
+                                                    
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a>
+                                                            ";
+                                                        } else {
+                                                            echo "
                                                         <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                                                         target='_blank'>
                                                         $arreglo[8]
                                                         </a>
                                                         ";
+                                                        }
                                                         } else {
                                                         echo "";
                                                         }
@@ -1581,7 +1591,7 @@ $dir = $_SESSION['user'];
             aria-labelledby="custom-tabs-one-5-tab">';
         }
         
-        $sql = ("SELECT * FROM actas where programa='$programa' AND YEAR(fecha_inicial) = $año ORDER BY numero DESC");
+        $sql = ("SELECT * FROM actas where YEAR(fecha_inicial) = $año ORDER BY numero DESC");
         $query = mysqli_query($mysqli, $sql);
 
         echo '<table class="table table-bordered table-striped">';
@@ -1598,7 +1608,11 @@ $dir = $_SESSION['user'];
                                 echo "<td class='text-center'>$arreglo[1]</td>";
                                 echo "<td class='text-center'>$arreglo[4]</td>";
                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                echo "<td class='text-center'><a href='../archivos/pdf/$arreglo[6]'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                if(!empty($arreglo[6])) {
+                                    echo "<td class='text-center'><a href='../archivos/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                } else {
+                                    echo "<td class='text-center'>No disponible</td>";
+                                }
                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 
 <?php
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
+
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../Login/index.html");
+    header("Location:../../../index.html");
 }
 	//@$buscart=$_POST['buscart'];
 	@$buscar=$_POST['buscar'];
@@ -22,8 +25,8 @@ $coordir=$arreglo[4];
 $passd=$arreglo[8];
 
  if ($arreglo[2]!='Administrador') {
-	require("../desconectar.php");
-	header("Location:../Login/index.html");
+	require("../../desconectar.php");
+	header("Location:../../../index.html");
 }
 }
 
@@ -127,17 +130,27 @@ $passd=$arreglo[8];
 
               echo "<td class='text-center'>$arreglo[6]</td>";
               //echo "<td class='text-center'> <a href='../../archivos/$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a></td>"; 
-              if(strlen($arreglo[8]) > 1) {
-                echo "<td class='text-center'>
-                <a class='btn btn-primary btn-sm' href='../../archivos/$alma/$arreglo[8]'
+              echo "<td class='text-center'>";
+              if(strlen($arreglo[8]) > 1) {                         
+                if(strlen($arreglo[8]) > 15) {
+                    echo "
+                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                    target='_blank'>
+                    ".substr($arreglo[8],0,15)."..."."
+                    </a>
+                    ";
+                } else {
+                    echo "
+                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                 target='_blank'>
                 $arreglo[8]
                 </a>
-                </td>
                 ";
-                } else {
-                echo "<td class='text-center'> </td>";
                 }
+                } else {
+                echo "";
+                }
+            echo "</td>";
              // echo "<td><a href='act_tesis_coor?id=$arreglo[0]' target='contenido'><img src='../images/actualizar.png' width='30'  height='30' class='img-rounded'></td>";
              echo "<td class='text-center'>
              <a class='btn btn-info btn-sm' href='2.1-act_tesis_coor.php?id=$arreglo[0]'>
@@ -169,12 +182,12 @@ $passd=$arreglo[8];
     </div>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
@@ -187,9 +200,10 @@ $(document).ready(function() {
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

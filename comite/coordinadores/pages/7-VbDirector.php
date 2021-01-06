@@ -25,7 +25,7 @@ $coordir=$arreglo[4];
 $passd=$arreglo[8];
 
  if ($arreglo[2]!='Coordinador') {
-	require("../desconectar.php");
+	require("../../desconectar.php");
 	header("Location:../../../index.html");
 }
 }
@@ -81,7 +81,7 @@ $passd=$arreglo[8];
                         <?php
                 $total4=0;
 
-                 $sql=("SELECT * FROM tesis  where titulo_tesis like '%$buscar%'  and programa='$programa' and (terminado=6 or terminado=0) and observaciones='Por definir' and aprob_dir='' and ID_directores!='No aplica' and (ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto' or ID_estado='Entrega Monografia' or ID_estado='Entrega Proyecto' or ID_estado='Correccion Propuesta' or ID_estado='Correccion Anteproyecto' or ID_estado='Correccion Proyecto' or ID_estado='Correccion Monografia') ORDER BY  ID_tesis DESC");
+                 $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and programa='$programa' and (terminado=6 or terminado=0) and observaciones='Por definir' and aprob_dir='' and ID_directores!='No aplica' and (ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto' or ID_estado='Entrega Monografia' or ID_estado='Entrega Proyecto' or ID_estado='Correccion Propuesta' or ID_estado='Correccion Anteproyecto' or ID_estado='Correccion Proyecto' or ID_estado='Correccion Monografia') ORDER BY  ID_tesis DESC");
               // $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
                $query=mysqli_query($mysqli,$sql);
                 
@@ -126,17 +126,28 @@ $passd=$arreglo[8];
              echo "<td class='text-center'>$arreglo[5]</td>";
              echo "<td class='text-center'>$arreglo[6]</td>";
               //echo "<td class='text-center'> <a href='../../archivos/$alma/$arreglo[8]  ' target='_blank'>$arreglo[8]</a></td>"; 
+              echo "<td class='text-center'>";
               if(strlen($arreglo[8]) > 1) {
-                echo "<td class='text-center'>
-                <a class='btn btn-primary btn-sm' href='../../archivos/$alma/$arreglo[8]'
+                                                    
+                if(strlen($arreglo[8]) > 15) {
+                    echo "
+                    <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                    target='_blank'>
+                    ".substr($arreglo[8],0,15)."..."."
+                    </a>
+                    ";
+                } else {
+                    echo "
+                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
                 target='_blank'>
                 $arreglo[8]
                 </a>
-                </td>
                 ";
-                } else {
-                echo "<td class='text-center'> </td>";
                 }
+                } else {
+                echo "";
+                }
+            echo "</td>";
 
                 echo "<td class='text-center'>$arreglo[9]</td>";
              
