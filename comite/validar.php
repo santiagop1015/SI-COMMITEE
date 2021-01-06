@@ -134,7 +134,12 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
         }
         //echo '<script>alert("BIENVENIDO ESTUDIANTE")</script> ';
         //echo "<script>location.href='estudiantes/estudiante.php'</script>";
-        echo "<script>location.href='Delayed.php?estudiante'</script>";
+        if($f2['TipoUsuario'] == "Estudiante") {
+            echo "<script>location.href='Delayed.php?estudiante'</script>";
+        } else if($f2['TipoUsuario'] == "Sec_academica") {
+            echo "<script>location.href='Delayed.php?sec_academica'</script>";
+        }
+        
     } else {
         //echo '<script>alert("CONTRASEÑA INCORRECTA")</script> ';
         //echo "<script>location.href='Login/index.html'</script>";

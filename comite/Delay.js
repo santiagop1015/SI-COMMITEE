@@ -23,6 +23,9 @@ switch (user) {
     case "estudiante":
         div.innerHTML = "<h1>Bienvenido Estudiante</h1>";
         break;
+    case "sec_academica":
+        div.innerHTML = "<h1>Bienvenido Secretari@ Academica</h1>";
+        break;
     case "incorrecta":
         div.innerHTML = "<h1>Contraseña Incorrecta</h1>";
         break;
@@ -60,17 +63,18 @@ function onRedirect() {
             console.log("Estudiante");
             location.href = 'estudiantes/estudiante.php';
             break;
+        case "sec_academica":
+            //console.log("Estudiante");
+            location.href = 'sec_academicas/sec_academica.php';
+            break;
         case "incorrecta":
             console.log("Contraseña Incorrecta");
             onIncorrect();
-
             break;
         case "noex":
             console.log("El Usuario no existe dentro del sistema");
             onIncorrect();
-
             break;
-
         default:
             onIncorrect();
     }
@@ -79,5 +83,5 @@ function onRedirect() {
 }
 
 function onIncorrect() {
-    location.href = 'Login/index.html';
+    location.href = '../index.html';
 }

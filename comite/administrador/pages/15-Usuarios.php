@@ -248,6 +248,9 @@ if(!$_GET) {
             </div>
             <div class="card-footer">
                 <div class="text-right">
+                <a href="15.4-act_usuario.php?id='.$arreglo[0].'" class="btn btn-sm bg-navy">
+                        <i class="fa fa-edit"></i>
+                    </a>
                 <a href="15.1-elim_user_coorp.php?id='.$arreglo[0].'" class="btn btn-sm bg-danger">
                         <i class="fa fa-trash"></i>
                     </a>

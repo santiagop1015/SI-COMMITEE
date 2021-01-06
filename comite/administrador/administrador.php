@@ -863,7 +863,7 @@ while($arreglo=mysqli_fetch_array($query)){
 
 <script>
 $(document).ready(function() {
-    //window.addEventListener("storage", ChangeCard);
+    window.addEventListener("storage", ChangeCard);
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar'];
     //for (var i = 0; i < Frames.length; i++) {
     //    ReloadsFrames(Frames[i]);
@@ -893,6 +893,11 @@ function ReloadsFrames(param) {
    // if (ItemNow != "15") {
         var iframe = document.getElementById(Frames[ItemNow]);
         iframe.src = iframe.src;
+        if (ItemNow == "14") {
+            setTimeout(() => {
+                iframe.contentWindow.location.reload();
+            }, 100);
+        }
    // }
     } else if(param == "non-reaload") {
         resizeIframe(document.getElementById(Frames[ItemNow]), 1);

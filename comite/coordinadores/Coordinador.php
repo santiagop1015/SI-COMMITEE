@@ -209,7 +209,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana5" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana5);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana5);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-times-circle white"></i>
                                     <p class="white">
                                         Rechazado
@@ -217,7 +217,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana6" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana6);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana6);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-calendar-times white"></i>
                                     <p class="white">
                                         Proximo a Vencer
@@ -225,7 +225,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana7" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana7);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana7);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-calendar-times white"></i>
                                     <p class="white">
                                         VB Director
@@ -233,7 +233,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana8" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana8);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana8);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-file-archive white"></i>
                                     <p class="white">
                                         Otros Documentos
@@ -241,7 +241,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana9" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana9);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana9);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-suitcase white"></i>
                                     <p class="white">
                                         Semillero
@@ -249,7 +249,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana10" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana10);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana10);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-graduation-cap white"></i>
                                     <p class="white">
                                         Postgrado
@@ -257,7 +257,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana11" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana11);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana11);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-flask white"></i>
                                     <p class="white">
                                         Aux Investigación
@@ -265,7 +265,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana12" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana12);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana12);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-file white"></i>
                                     <p class="white">
                                         Documentos en Curso
@@ -273,7 +273,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana13" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana13);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana13);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-book white"></i>
                                     <p class="white">
                                         Actas
@@ -281,7 +281,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana14" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana14);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana14);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-search white"></i>
                                     <p class="white">
                                         Buscar
@@ -289,7 +289,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 </a>
                             </li>
                             <li id="pestana15" class="nav-item">
-                                <a href='javascript:cambiarPestanna(pestanas,pestana15);' class="nav-link">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana15);ReloadsFrames();' class="nav-link">
                                     <i class="nav-icon fa fa-users white"></i>
                                     <p class="white">
                                         Usuarios
@@ -339,7 +339,7 @@ while($arreglo=mysqli_fetch_array($query)){
                                 <div class="card-header">
                                     <h3 class="card-title">Generar actas de Comite</h3>
                                     <div class="card-tools">
-                                    <button type="button" class="btn btn-tool"><i class="fas fa-sync-alt"
+                                        <button type="button" class="btn btn-tool"><i class="fas fa-sync-alt"
                                                 onclick="ReloadsFrames()"></i></button>
                                         <!--- <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
                                                 class="fas fa-expand"></i></button> -->
@@ -923,17 +923,22 @@ function ReloadsFrames(param) {
     //debugger;
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar'];
     //var iframe = document.getElementById(Frames[(id - 1)]);
-    if(!param) {
-   // if (ItemNow != "15") {
+    if (!param) {
+        // if (ItemNow != "15") {
         var iframe = document.getElementById(Frames[ItemNow]);
         iframe.src = iframe.src;
-   // }
-    } else if(param == "non-reaload") {
+        if (ItemNow == "14") {
+            setTimeout(() => {
+                iframe.contentWindow.location.reload();
+            }, 100);
+        }
+        // }
+    } else if (param == "non-reaload") {
         resizeIframe(document.getElementById(Frames[ItemNow]), 1);
     }
     //iframe.contentDocument.location.reload(true);
     // document.getElementById(idFrame).contentDocument.history.back(true);
-    
+
 }
 
 function ChangeCard(event) {
