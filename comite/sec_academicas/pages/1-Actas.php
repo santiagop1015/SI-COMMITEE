@@ -134,13 +134,14 @@ $passd=$arreglo[8];
                             aria-labelledby="custom-tabs-one-5-tab">';
                         }
                         
-                        $sql = ("SELECT * FROM actas where programa='$programa' AND YEAR(fecha_inicial) = $año ORDER BY numero DESC");
+                        $sql = ("SELECT * FROM actas where YEAR(fecha_inicial) = $año ORDER BY numero DESC");
                         $query = mysqli_query($mysqli, $sql);
 
                         echo '<table class="table table-bordered table-striped">';
                         echo '<thead>';
                         echo '<tr>';
                         echo '<th class="text-center">Acta No.</th>';
+                        echo '<th class="text-center">Programa</th>';
                         echo '<th class="text-center">Fecha Publicacion</th>';
                         echo '<th class="text-center">Ver Acta</th>';
                         echo '<th class="text-center">Borrar</th>';
@@ -150,10 +151,15 @@ $passd=$arreglo[8];
                                             while ($arreglo = mysqli_fetch_array($query)) {
                                                 echo "<tr>";
                                                 echo "<td class='text-center'>$arreglo[1]</td>";
+                                                echo "<td class='text-center'>$arreglo[5]</td>";
                                                 echo "<td class='text-center'>$arreglo[4]</td>";
                                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
-                                                echo "<td class='text-center'><a class='btn btn-danger btn-sm' href='13.1-elim_acta_coor.php?numero=$arreglo[1]&id=$arreglo[0]&programa=$programa'><i class='nav-icon fa fa-trash'></i></td>";
+                                                if(!empty($arreglo[6])) {
+                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='../$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                } else {
+                                                    echo "<td class='text-center'>No disponible</td>";
+                                                }
+                                                echo "<td class='text-center'><a class='btn btn-danger btn-sm' href='1.1-elim_acta_coor.php?numero=$arreglo[1]&id=$arreglo[0]&programa=$arreglo[5]'><i class='nav-icon fa fa-trash'></i></td>";
                                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 
@@ -215,7 +221,6 @@ function Evaluar(event) {
     //var card = document.getElementById("idCard");
     //console.log(card.clientHeight);
     //localStorage.setItem("evaluar", card.clientHeight);
-    //  console.log(card.clientHeight);
     window.parent.ReloadsFrames("non-reaload");
 }
 </script>

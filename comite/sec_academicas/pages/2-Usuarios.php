@@ -124,10 +124,6 @@ if(!$_GET) {
                                     Coordinador</option> -->
                                 <option <?php if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
                                     Estudiante</option>
-                                <option <?php if($tipousuario == "Director") echo 'selected'  ?> value="Director">
-                                    Profesor</option>
-                                <option <?php //if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
-                                    Secretari@</option>
                             </select>
 
 
@@ -165,26 +161,16 @@ if(!$_GET) {
 
                  if (@$_POST['buscar']) {
                      $limpio = preg_replace('([^A-Za-z0-9])', '', $buscar);
-                     if($programa == 'Sistemas') {
-                        $sql=("SELECT * FROM login where user like '%$limpio%' and (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
+                        $sql=("SELECT * FROM login where user like '%$limpio%' and tipoUsuario='$tipousuario'
                         ORDER BY Id DESC");
-                     } else {
-                        $sql=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
-                        ORDER BY Id DESC");
-                     }
+                     
                   /*   $sql=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
                  ORDER BY Id DESC"); */
                  } else {
                 /*  $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
                  ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina"); */
-                 if($programa == 'Sistemas') {
-                    $sql=("SELECT * FROM login where (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
-                    ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina");
-                 } else {
-                    $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
+                    $sql=("SELECT * FROM login where tipoUsuario='$tipousuario'
                  ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina");
-                 }
-
                  }
 
                  $query=mysqli_query($mysqli,$sql);
@@ -244,18 +230,8 @@ if(!$_GET) {
             </div>
             <div class="card-footer">
                 <div class="text-right">
-
-                <a href="15.4-act_usuario.php?id='.$arreglo[0].'" class="btn btn-sm bg-navy">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                <a href="15.1-elim_user_coorp.php?id='.$arreglo[0].'" class="btn btn-sm bg-danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <a href="15.2-enviar_msg_coor.php?Correo='.$arreglo[4].'&programa='.$Programa.'" class="btn btn-sm bg-teal">
+                    <a href="2.2-enviar_msg_coor.php?Correo='.$arreglo[4].'&programa='.$Programa.'" class="btn btn-sm bg-teal">
                         <i class="fas fa-comments"></i>
-                    </a>
-                    <a href="15.3-estado_est.php?est='.$arreglo[0].'" class="btn btn-sm btn-primary">
-                        <i class="fas fa-user"></i> 
                     </a>
                 </div>
             </div>';
@@ -273,26 +249,18 @@ if(!$_GET) {
                 <?php
         if (@$_POST['buscar']) {
             $limpio = preg_replace('([^A-Za-z0-9])', '', $buscar);
-            if($programa == 'Sistemas') {
-                $sql2=("SELECT * FROM login where user like '%$limpio%' and (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
+
+            $sql2=("SELECT * FROM login where user like '%$limpio%' and tipoUsuario='$tipousuario'
                 ORDER BY Id DESC");
-             } else {
-                $sql2=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
-                ORDER BY Id DESC");
-             }
+             
 
           /*  $sql2=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
                 ORDER BY Id DESC"); */
         } else {
         /*    $sql2=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
                 ORDER BY Id DESC"); */
-                if($programa == 'Sistemas') {
-                    $sql2=("SELECT * FROM login where (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
+                    $sql2=("SELECT * FROM login where tipoUsuario='$tipousuario'
                     ORDER BY Id DESC");
-                 } else {
-                    $sql2=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
-                    ORDER BY Id DESC");
-                 }
         }
 
         $query2=mysqli_query($mysqli,$sql2);

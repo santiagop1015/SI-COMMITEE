@@ -31,7 +31,7 @@ while($arreglo=mysqli_fetch_array($query)){
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Coordinador</title>
+    <title>SI-COMMITEE || Sec. Académica</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../LocalSources/css/ionicons/ionicons.min.css">
@@ -272,7 +272,7 @@ $(document).ready(function() {
 
 
 });
-var Frames = ['idFrameActas', 'idFrameEstudiantes'];
+var Frames = ['idFrameActas', 'idFrameUsuarios'];
 
 function ReloadsFrames(param) {
     var ItemNow = localStorage.getItem("number");

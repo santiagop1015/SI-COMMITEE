@@ -141,7 +141,7 @@ var onSubmitActualizar = function() {
             contentType: false,
             processData: false,
             cache: false,
-            url: "15.2.1-enviarmsgcoor.php",
+            url: "2.2.1-enviarmsgcoor.php",
             data: paqueteDeDatos,
         }).done(function(info) {
             // console.log(info);

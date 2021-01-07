@@ -147,7 +147,7 @@ var onSubmitActualizar = function() {
             contentType: false,
             processData: false,
             cache: false,
-            url: "13.1.1-ejec_eli_acta_coor.php",
+            url: "1.1.1-ejec_eli_acta_coor.php",
             data: paqueteDeDatos,
         }).done(function(info) {
             // console.log(info);
