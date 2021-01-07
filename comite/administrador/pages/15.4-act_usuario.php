@@ -43,6 +43,9 @@ else if($tipousuario == 'Jurado')//Asignar pass para secreteari@
 {
 $pass = $pasjur;
 }
+else if($tipousuario == 'Secretaria') {
+    $pass = $row[9];
+}
 $telefono=$row[10];
 $programa=$row[11];
 $fechadenacimiento=$row[12];
@@ -109,14 +112,28 @@ $tipousuario="Secretari@";
                             <select class="form-control" name="tipousuario" value="<?php
                             // TipoUsuario
                             ?>">
-                                <option <?php if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
+                            <?php
+                                    $sql=("SELECT distinct TipoUsuario FROM login ORDER BY Id DESC");
+                                     $query=mysqli_query($mysqli,$sql);
+                                     while($arreglo=mysqli_fetch_array($query)){
+                                   // echo '<option>'.$arreglo[0].'</option>';
+                                   if($arreglo[0] != "Administrador") {
+                                    echo '<option value="'.$arreglo[0].'"';
+                                    if($tipousuario == $arreglo[0]){
+                                        echo 'selected';
+                                    }
+                                    echo '>'.$arreglo[0].'</option>';
+                                   }
+                                }
+                                ?>
+                              <!--  <option <?php //if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
                                     Estudiante</option>
-                                <option <?php if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
+                                <option <?php //if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
                                     Coordinador</option>
-                                <option <?php if($tipousuario == "Director") echo 'selected'  ?> value="Director">
+                                <option <?php //if($tipousuario == "Director") echo 'selected'  ?> value="Director">
                                     Profesor</option>
-                                <option <?php if($tipousuario == "Secretari@") echo 'selected'  ?> value="Jurado">
-                                    Secretari@</option>
+                                <option <?php //if($tipousuario == "Secretari@") echo 'selected'  ?> value="Jurado">
+                                    Secretari@</option> -->
                             </select>
                         </div>
                         <div class="col-sm-6">

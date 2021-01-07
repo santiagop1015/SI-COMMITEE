@@ -122,12 +122,26 @@ if(!$_GET) {
                                 " class="form-control" name="tipousuario">
                                 <!-- <option <?php //if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
                                     Coordinador</option> -->
-                                <option <?php if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
+                                <?php
+                                    $sql=("SELECT distinct TipoUsuario FROM login ORDER BY Id DESC");
+                                     $query=mysqli_query($mysqli,$sql);
+                                     while($arreglo=mysqli_fetch_array($query)){
+                                   // echo '<option>'.$arreglo[0].'</option>';
+                                   if($arreglo[0] != "Administrador") {
+                                    echo '<option value="'.$arreglo[0].'"';
+                                    if($tipousuario == $arreglo[0]){
+                                        echo 'selected';
+                                    }
+                                    echo '>'.$arreglo[0].'</option>';
+                                   }
+                                }
+                                ?>
+                                <!-- <option <?php //if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
                                     Estudiante</option>
-                                <option <?php if($tipousuario == "Director") echo 'selected'  ?> value="Director">
+                                <option <?php //if($tipousuario == "Director") echo 'selected'  ?> value="Director">
                                     Profesor</option>
                                 <option <?php //if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
-                                    Secretari@</option>
+                                    Secretari@</option> -->
                             </select>
 
 

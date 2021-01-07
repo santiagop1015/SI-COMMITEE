@@ -535,9 +535,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         <a href="#" class="d-block" style="color: white;">
                             <?php 
                         $usuario = $_SESSION['user'];
-                        $posicion_espacio = strpos($usuario, " ");
-                        $usuario=substr($usuario,0,$posicion_espacio);
-                        echo $usuario;?>
+                        //$posicion_espacio = strpos($usuario, " ");
+                        //$usuario=substr($usuario,0,$posicion_espacio);
+                        $recortarUsuario = explode(' ',$usuario);
+                        echo $recortarUsuario[0];?>
                         </a>
                     </div>
 

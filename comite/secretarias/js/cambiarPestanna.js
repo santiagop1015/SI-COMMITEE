@@ -7,11 +7,10 @@ function cambiarPestanna(pestannas, pestanna) {
     var cpestana2 = document.getElementById("cpestana2");
     var cpestana3 = document.getElementById("cpestana3");
     var cpestana4 = document.getElementById("cpestana4");
-    var cpestana = ["cpestana1", "cpestana2", "cpestana3"];
+    var cpestana = ["cpestana1", "cpestana2"];
     var Titulos = [
         "Generar Acta",
         "Documentos para Evaluar",
-        "Documentos en Proceso"
     ];
 
     pestanna = document.getElementById(pestanna.id);
@@ -38,31 +37,42 @@ function cambiarPestanna(pestannas, pestanna) {
             localStorage.setItem("number", cont);
             if ((petananone.style.display = "none")) {
                 cpestanna.style.display = "block";
-                // var Titulo = document.getElementById("Titulo");
+
+                var Titulo = document.getElementById("Titulo");
                 //  var guia = document.getElementById("Guia");
-                // Titulo.innerHTML = Titulos[cont];
+
+                Titulo.innerHTML = Titulos[cont];
+
+
                 // guia.innerHTML = Titulos[cont];
+
                 // console.log(txt.innerHTML);
+                
+                
             }
         } else {
             cpestanna.style.display = "none";
 
             petananone.style.display = "none";
         }
-
     }
 
     $(document).ready(function () {
         $(cpestanna).css("display", "");
         $(pestanna).css("background", "#B42A2A");
         //  $(pestanna).css("padding-bottom", "2px");
+        ReloadsFrames();
     });
 
-    //$(".loader").fadeOut("slow");
-    document.getElementById("content").classList.remove("d-none");
-    document.getElementById("IdIconLoad").classList.add("d-none");
-    ReloadsFrames();
-    
+    //$(".loading").fadeOut("slow");
+
+  //  $(".content-wrapper").fadeIn("slow");
+  //document.getElementById("loadingIcon").classList.add("d-none");
+  document.getElementById("IdIconLoad").classList.add("d-none");
+  document.getElementById("content").classList.remove("d-none");
+  //
+  document.getElementById("Titulo").classList.remove("d-none");
+  document.getElementById("idTextCargando").classList.add("d-none");
 }
 
 function myfunction() {
@@ -78,9 +88,6 @@ function myfunction() {
             case 2:
                 cambiarPestanna(pestanas, pestana2);
                 break;
-            case 3:
-                cambiarPestanna(pestanas, pestana3);
-                break;
             default: 1
                 cambiarPestanna(pestanas, pestana1);
                 break;
@@ -91,7 +98,6 @@ function myfunction() {
         cambiarPestanna(pestanas, pestana1);
     }
 }
-
 
 
 

@@ -54,7 +54,7 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
         $_SESSION['id'] = $f2['id'];
         $_SESSION['user'] = $f2['user'];
         $id_user = $_SESSION['id'];
-        $TipoUsuario = $_SESSION['TipoUsuario'];
+        //$TipoUsuario = $_SESSION['TipoUsuario'];
         $total = 1;
         $sql3 = mysqli_query($mysqli, "SELECT * FROM entradas WHERE id_user='$id_user' ");
         while ($row = mysqli_fetch_row($sql3)) {
@@ -136,8 +136,8 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
         //echo "<script>location.href='estudiantes/estudiante.php'</script>";
         if($f2['TipoUsuario'] == "Estudiante") {
             echo "<script>location.href='Delayed.php?estudiante'</script>";
-        } else if($f2['TipoUsuario'] == "Sec_academica") {
-            echo "<script>location.href='Delayed.php?sec_academica'</script>";
+        } else if($f2['TipoUsuario'] == "Secretaria") {
+            echo "<script>location.href='Delayed.php?secretaria'</script>";
         }
         
     } else {

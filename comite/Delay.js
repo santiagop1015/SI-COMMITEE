@@ -23,7 +23,7 @@ switch (user) {
     case "estudiante":
         div.innerHTML = "<h1>Bienvenido Estudiante</h1>";
         break;
-    case "sec_academica":
+    case "secretaria":
         div.innerHTML = "<h1>Bienvenido Secretari@ Academica</h1>";
         break;
     case "incorrecta":
@@ -49,7 +49,7 @@ function onRedirect() {
             break;
         case "jurado":
             console.log("Jurado");
-            location.href = 'secretarias/secretaria.php';
+            location.href = 'jurados/jurado.php';
             break;
         case "dinvestigar":
             console.log("Jurado");
@@ -63,9 +63,9 @@ function onRedirect() {
             console.log("Estudiante");
             location.href = 'estudiantes/estudiante.php';
             break;
-        case "sec_academica":
+        case "secretaria":
             //console.log("Estudiante");
-            location.href = 'sec_academicas/sec_academica.php';
+            location.href = 'secretarias/secretaria.php';
             break;
         case "incorrecta":
             console.log("Contraseña Incorrecta");

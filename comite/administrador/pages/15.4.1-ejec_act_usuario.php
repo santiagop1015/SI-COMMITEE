@@ -50,6 +50,12 @@ $pascor= "";
 		$pasdir= "";
 		$pasjur= $password;
 		$pascor= "";
+	} else if($tipousuario == 'Secretaria') {
+		$passest = $password;
+		$pasadmin= "";
+		$pasdir= "";
+		$pasjur= "";
+		$pascor= "";
 	}
 
 	$sentencia="update login set cedula='$cedula',user='$user', email='$email',pasdir='$pasdir',pasjur='$pasjur',pascor='$pascor', password='$passest', tipousuario='$tipousuario', telefono='$telefono', programa='$programa', fechadenacimiento='$fechadenacimiento', area='$area' where id='$id' ";
