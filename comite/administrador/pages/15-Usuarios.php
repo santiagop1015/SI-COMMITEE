@@ -84,9 +84,16 @@ $(document).ready(function() {
     <section class="content">
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
-                <!--   <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i
+                <?php
+if($_POST) {
+    $tipousuario = $_POST['tipousuario'];
+} else if($_GET['user']){
+    $tipousuario = $_GET['user'];
+}
+            ?>
+                <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i
                         class="fa fa-plus-circle white"
-                        onclick="window.location.href='6-RegistrarUsuarios.php'"></i></button> -->
+                        onclick="window.location.href='15.5-RegistrarUsuarios.php?tipousuario=<?php echo $tipousuario; ?>'"></i></button>
                 <div class="card-tools">
                     <?php
 if(!$_GET) {
@@ -108,11 +115,6 @@ if(!$_GET) {
                         <div class="input-group input-group-sm">
 
                             <select value="<?php 
-                            if($_POST) {
-                                $tipousuario = $_POST['tipousuario'];
-                            } else if($_GET['user']){
-                                $tipousuario = $_GET['user'];
-                            }
                             
                             echo $tipousuario;
                         

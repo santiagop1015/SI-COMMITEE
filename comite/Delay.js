@@ -26,6 +26,9 @@ switch (user) {
     case "secretaria":
         div.innerHTML = "<h1>Bienvenido Secretari@ Academica</h1>";
         break;
+    case "decano":
+        div.innerHTML = "<h1>Bienvenido Decan@</h1>";
+        break;
     case "incorrecta":
         div.innerHTML = "<h1>Contraseña Incorrecta</h1>";
         break;
@@ -66,6 +69,10 @@ function onRedirect() {
         case "secretaria":
             //console.log("Estudiante");
             location.href = 'secretarias/secretaria.php';
+            break;
+        case "decano":
+            //console.log("Estudiante");
+            location.href = 'decanatura/decano.php';
             break;
         case "incorrecta":
             console.log("Contraseña Incorrecta");
