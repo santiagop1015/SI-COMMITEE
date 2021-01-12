@@ -851,7 +851,7 @@ while($arreglo=mysqli_fetch_array($query)){
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal"
-                        onclick="ReloadsFrames()">Cerrar</button>
+                        >Cerrar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -875,7 +875,7 @@ $(document).ready(function() {
         // do something...
         //var ItemNow = localStorage.getItem("number");
         //ReloadsFrames(parseInt(ItemNow) + 1);
-        ReloadsFrames();
+        ReloadsFrames("non-reaload");
     });
 
 
@@ -897,6 +897,7 @@ function ReloadsFrames(param) {
         if (ItemNow == "14") {
             setTimeout(() => {
                 iframe.contentWindow.location.reload();
+                resizeIframe(document.getElementById(Frames[ItemNow]), 1);
             }, 100);
         }
    // }

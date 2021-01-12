@@ -60,7 +60,7 @@ extract($_GET);
                         <div class="form-group">
                             <label>De:</label>
                             <input type="text" class="form-control" name="user"
-                                value="<?php echo 'Comité proyectos '. $programa; ?>" readonly="readonly">
+                                value="<?php echo 'Comité proyectos Administrador' ?>" readonly="readonly">
                         </div>
                     </div>
                     <div class="col-sm-6">

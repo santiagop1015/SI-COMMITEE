@@ -10,23 +10,46 @@
 	$tipousuario=$_POST['tipousuario'];
 	$telefono=$_POST['telefono'];
 	$programa=$_POST['programa'];
-    $fechadenacimiento= $_POST['fechadenacimiento'];
-    if($tipousuario == "Director") {
+	$fechadenacimiento= $_POST['fechadenacimiento'];
+	$Cedula=$_POST['password'];
+	if($tipousuario == "Director") {
         $area=$_POST['area'];
-    }
+    } else {
+		$area=0;
+	}
    
     
     require("../../connect_db.php");
-    //la variable  $mysqli viene de connect_db que lo traigo con el require("../../connect_db.php");
-	$checkemail=mysqli_query($mysqli,"SELECT * FROM login WHERE email='$email'");
+	//la variable  $mysqli viene de connect_db que lo traigo con el require("../../connect_db.php");
+	$checkemail=mysqli_query($mysqli,"SELECT * FROM login WHERE email='$email' or Cedula='$password'");
     $check_mail=mysqli_num_rows($checkemail);
-   // echo $check_mail;
-		if($password==$password){
+		if($password==$password || $password==$Cedula){
 			if($check_mail>0){
            // $mensajeRespuesta = 'Atencion, ya existe un usuario con estos caracteres, verifique sus datos';
             echo 2;
             } else {
-                
+
+				if($tipousuario == "Administrador") {
+					$sql = "INSERT INTO login (`Cedula`,`TipoUsuario`,`user`,`email`,`pasadmin`,`pasdir`,`pasjur`,`pascor`,`password`,`telefono`,`programa`,`fechadenacimiento`,`area`) VALUES('$password','$tipousuario','$user','$email','$password','','','','','$telefono','$programa','$fechadenacimiento','$area')";
+				} else if($tipousuario == "Director") {
+					$sql = "INSERT INTO login (`Cedula`,`TipoUsuario`,`user`,`email`,`pasadmin`,`pasdir`,`pasjur`,`pascor`,`password`,`telefono`,`programa`,`fechadenacimiento`,`area`) VALUES('$password','$tipousuario','$user','$email','','$password','','','','$telefono','$programa','$fechadenacimiento','$area')";
+				} else if($tipousuario == "Jurado") {
+				    $sql = "INSERT INTO login (`Cedula`,`TipoUsuario`,`user`,`email`,`pasadmin`,`pasdir`,`pasjur`,`pascor`,`password`,`telefono`,`programa`,`fechadenacimiento`,`area`) VALUES('$password','$tipousuario','$user','$email','','','$password','','','$telefono','$programa','$fechadenacimiento','$area')";
+				} else if($tipousuario == "Coordinador") {
+				    $sql = "INSERT INTO login (`Cedula`,`TipoUsuario`,`user`,`email`,`pasadmin`,`pasdir`,`pasjur`,`pascor`,`password`,`telefono`,`programa`,`fechadenacimiento`,`area`) VALUES('$password','$tipousuario','$user','$email','','','','$password','','$telefono','$programa','$fechadenacimiento','$area')";
+				} else {
+				    $sql = "INSERT INTO login (`Cedula`,`TipoUsuario`,`user`,`email`,`pasadmin`,`pasdir`,`pasjur`,`pascor`,`password`,`telefono`,`programa`,`fechadenacimiento`,`area`) VALUES('$password','$tipousuario','$user','$email','','','','','$password','$telefono','$programa','$fechadenacimiento','$area')";
+				}
+				$resent=mysqli_query($mysqli,$sql);
+
+				if ($resent==null) {
+				echo 0;
+				} else {
+				echo 1;
+				}
+
+				
+/*
                 if($tipousuario == 'Estudiante')//Creacion para Estudiante
 				{
 					$passest = $password;
@@ -42,13 +65,15 @@
 					$pasdir= $password;
 					$pasjur= "";
 					$pascor= "";
-                }
+				}
+				
                 
                 if($tipousuario == "Director") {
                     mysqli_query($mysqli,"INSERT INTO login (`Cedula`,`TipoUsuario`,`user`,`email`,`pasadmin`,`pasdir`,`pasjur`,`pascor`,`password`,`telefono`,`programa`,`fechadenacimiento`,`area`) VALUES('$password','$tipousuario','$user','$email','','$pasdir','$pasjur','$pascor','$passest','$telefono','$programa','$fechadenacimiento','$area')");
                 } else {
                     mysqli_query($mysqli,"INSERT INTO login (`Cedula`,`TipoUsuario`,`user`,`email`,`pasadmin`,`pasdir`,`pasjur`,`pascor`,`password`,`telefono`,`programa`,`fechadenacimiento`,`area`) VALUES('$password','$tipousuario','$user','$email','','$pasdir','$pasjur','$pascor','$passest','$telefono','$programa','$fechadenacimiento','0')");
-                }
+				}
+				*/
                 
 				$email = $_POST['email'];
 				$escudo = "http://sicomite.unilibre.edu.co/comite/LocalSources/images/escudo.jpg";
@@ -61,7 +86,7 @@
                 mail($email, "Registro Comite de Proyectos UL", $msg, $headers);
                 
 
-            echo 1;
+            //echo 1;
             }
         } else {
             echo 3;

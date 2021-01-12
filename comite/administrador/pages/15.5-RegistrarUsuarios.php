@@ -77,22 +77,21 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 <form id="FormRegistrar" autocomplete="off">
                     <div class="row">
                         <div class="col-12">
-                            <label>Tipo de Usuario: </label>
+                            <label>Tipo de Usuario: (Seleccionar primero)</label>
                             <select id="TipoUsuario" class="form-control" name="tipousuario" required>
                                 <?php
-                            $sql=("SELECT distinct TipoUsuario FROM login ORDER BY Id DESC");
+                            $sql=("SELECT distinct TipoUsuario FROM usuarios ORDER BY id DESC");
                             $query=mysqli_query($mysqli,$sql);
                             while($arreglo=mysqli_fetch_array($query)){
                           // echo '<option>'.$arreglo[0].'</option>';
-                          if($arreglo[0] != "Administrador") {
+                        //  if($arreglo[0] != "Administrador") {
                            echo '<option value="'.$arreglo[0].'"';
                            if($tipousuario == $arreglo[0]){
                                echo 'selected';
                            }
                            echo '>'.$arreglo[0].'</option>';
-                          }
+                        //  }
                        }
-
                             ?>
                                 <!--<option value="Estudiante">Estudiante</option>
                                 <option value="Director">Profesor</option>-->
@@ -104,12 +103,17 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                 var selectItem = event.target.value;
                                 var LineaInvestigacion = document.getElementById("DivLineaInves");
                                 if (selectItem == "Director") {
-                                    //  LineaInvestigacion.classList.remove("disabled");
-                                    LineaInvestigacion.disabled = false;
-                                } else if (selectItem == "Estudiante") {
                                     //  LineaInvestigacion.classList.add("disabled");
-                                    LineaInvestigacion.disabled = true;
+                                    //  LineaInvestigacion.disabled = true;
+                                    //   location.replace("15.5-RegistrarUsuarios.php?tipousuario=Director");
+                                    $('#DivLineaInves').attr("disabled", false);
+                                } else {
+                                    // location.replace("15.5-RegistrarUsuarios.php?tipousuario="+selectItem);
+                                    $('#DivLineaInves').attr("disabled", true);
+                                    //$("#DivLineaInves").val($("#DivLineaInves option:first").val());
+                                    $("#DivLineaInves option[value='0']").attr("selected",true);
                                 }
+
                             });
                             </script>
 
@@ -122,69 +126,65 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
                         <div class="col-6">
                             <label>Email:</label>
-                            <input type="text" class="form-control" name="email" class="Usuario"
+                            <input type="email" class="form-control" name="email" class="Usuario"
                                 placeholder="Email @unilibre.edu.co" required>
                         </div>
 
                         <div class="col-6">
                             <label>Contraseña</label>
-                            <input type="text" class="form-control" name="password" class="Contraseña"
+                            <input type="number" class="form-control" name="password" class="Contraseña"
                                 placeholder="Contraseña/Cedula" required>
                         </div>
 
                         <div class="col-6">
                             <label>Teléfono</label>
-                            <input type="text" class="form-control" name="telefono" class="telefono"
-                                placeholder="Telefono" required>
+                            <input type="number" class="form-control" name="telefono" class="telefono"
+                                placeholder="Telefono">
                         </div>
 
                         <div class="col-6">
                             <label>Programa: </label>
                             <select class="form-control" name="programa" required>
-                                <?php
-                                    if($programa=='Sistemas'){
-                                ?>
-
                                 <option value="Industrial">Industrial</option>
                                 <option value="Sistemas">Sistemas</option>
-
-                                <?php
-                                } else if($programa=='Ambiental'){
-                                ?>
-
-                                <option value="Ambiental">Ambiental</option>
-
-                                <?php
-                                } else if($programa=='Mecanica'){
-                                ?>
-
                                 <option value="Mecanica">Mecanica</option>
-
-                                <?php
-                                }
-                                ?>
-
+                                <option value="Ambiental">Sistemas</option>
                             </select>
                         </div>
 
                         <div class="col-6">
                             <label>Fecha Nacimiento</label>
                             <input type="date" class="form-control" name="fechadenacimiento" id="fechadenacimiento"
-                                placeholder="Fec_nacimiento" required>
+                                placeholder="Fec_nacimiento">
                         </div>
 
                         <div class="col-12">
                             <label>Linea de Investigación: </label>
-                            <select id="DivLineaInves" class="form-control" name="area" required disabled>
-                                <option value="0">No Aplica</option>
+                            <?php if($tipousuario == "Director") {   ?>
+                            <select id="DivLineaInves" class="form-control" name="area" required>
                                 <?php
+                                } else {
+                                ?>
+                                <select id="DivLineaInves" class="form-control" name="area" disabled required>
+                                    <?php
+                                }  
+                                ?>
+                                        <option value="0">No Aplica</option>
+                                        <?php
                                     $query = $mysqli -> query ("SELECT * FROM area_inves ORDER BY  id_area ASC ");
                                     while ($valores = mysqli_fetch_array($query)) {
                                     if($nombre_area==''){ $nombre_area=0;}
                                     echo '<option value="'.$valores[id_area].'">'.$valores[id_area].': '.$valores[nombre_area].'</option>';
                                     } 
                                 ?>
-                            </select>
+                                    </select>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="callout callout-danger mt-3">
+                                <h5>Atención!</h5>
+                                <p>Tenga en cuenta que es posible que el mensaje llegue a su bandeja de Spam</p>
+                            </div>
                         </div>
 
 
@@ -240,33 +240,34 @@ var onSubmitRegistrar = function() {
             url: "15.5.1-ejec_registrar_usuario.php",
             data: paqueteDeDatos,
         }).done(function(info) {
-            //  console.log(info);
+            console.log(info);
             if (info === "1") {
-                localStorage.setItem("Mensaje", 1);
-                localStorage.setItem("Mensaje-Title", "Registrar Usuario");
-                localStorage.setItem("Mensaje-Message",
+                localStorage.setItem("Mensaje2", 1);
+                localStorage.setItem("Mensaje2-Title", "Registrar Usuario");
+                localStorage.setItem("Mensaje2-Message",
                     "El usuario ha sido registrado con éxito!");
+                $('#idRegistrar').attr("disabled", true);
             } else if (info === "0") {
-                localStorage.setItem("Mensaje", 0);
-                localStorage.setItem("Mensaje-Title", "Registrar Usuario");
-                localStorage.setItem("Mensaje-Message",
+                localStorage.setItem("Mensaje2", 0);
+                localStorage.setItem("Mensaje2-Title", "Registrar Usuario");
+                localStorage.setItem("Mensaje2-Message",
                     "Error en el procesamiento, el Usuario no fue registrado");
                 $('#idRegistrar').attr("disabled", false);
             } else if (info === "2") {
-                localStorage.setItem("Mensaje", 0);
-                localStorage.setItem("Mensaje-Title", "Registrar Usuario");
-                localStorage.setItem("Mensaje-Message",
+                localStorage.setItem("Mensaje2", 0);
+                localStorage.setItem("Mensaje2-Title", "Registrar Usuario");
+                localStorage.setItem("Mensaje2-Message",
                     "Atencion, ya existe un usuario con estos caracteres, verifique sus datos");
                 $('#idRegistrar').attr("disabled", false);
             } else if (info === "3") {
-                localStorage.setItem("Mensaje", 0);
-                localStorage.setItem("Mensaje-Title", "Registrar Usuario");
-                localStorage.setItem("Mensaje-Message",
+                localStorage.setItem("Mensaje2", 0);
+                localStorage.setItem("Mensaje2-Title", "Registrar Usuario");
+                localStorage.setItem("Mensaje2-Message",
                     "Las contraseñas son incorrectas");
                 $('#idRegistrar').attr("disabled", false);
             }
             setTimeout(() => {
-                localStorage.setItem("Mensaje", null);
+                localStorage.setItem("Mensaje2", null);
             }, 500);
 
             setTimeout(() => {

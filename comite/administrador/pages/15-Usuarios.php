@@ -125,17 +125,17 @@ if(!$_GET) {
                                 <!-- <option <?php //if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
                                     Coordinador</option> -->
                                 <?php
-                                    $sql=("SELECT distinct TipoUsuario FROM login ORDER BY Id DESC");
+                                    $sql=("SELECT distinct TipoUsuario FROM usuarios ORDER BY id DESC");
                                      $query=mysqli_query($mysqli,$sql);
                                      while($arreglo=mysqli_fetch_array($query)){
                                    // echo '<option>'.$arreglo[0].'</option>';
-                                   if($arreglo[0] != "Administrador") {
+                                  // if($arreglo[0] != "Administrador") {
                                     echo '<option value="'.$arreglo[0].'"';
                                     if($tipousuario == $arreglo[0]){
                                         echo 'selected';
                                     }
                                     echo '>'.$arreglo[0].'</option>';
-                                   }
+                                 //  }
                                 }
                                 ?>
                                 <!-- <option <?php //if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
