@@ -32,6 +32,9 @@ switch (user) {
     case "postgrado":
         div.innerHTML = "<h1>Bienvenido Postgrados</h1>";
         break;
+    case "cifi":
+        div.innerHTML = "<h1>Bienvenido Dir. Investigad@r</h1>";
+        break;
     case "incorrecta":
         div.innerHTML = "<h1>Contraseña Incorrecta</h1>";
         break;
@@ -80,6 +83,10 @@ function onRedirect() {
         case "postgrado":
             //console.log("Estudiante");
             location.href = 'postgrados/postgrado.php';
+            break;
+        case "cifi":
+            //console.log("Estudiante");
+            location.href = 'cifi/dinvestigar.php';
             break;
         case "incorrecta":
             console.log("Contraseña Incorrecta");

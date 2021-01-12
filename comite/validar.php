@@ -142,6 +142,8 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
             echo "<script>location.href='Delayed.php?decanatura'</script>";
         } else if($f2['TipoUsuario'] == "Postgrado") {
             echo "<script>location.href='Delayed.php?postgrado'</script>";
+        } else if($f2['TipoUsuario'] == "Cifi") {
+            echo "<script>location.href='Delayed.php?cifi'</script>";
         }
         
     } else {
