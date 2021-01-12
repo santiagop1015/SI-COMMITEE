@@ -883,7 +883,7 @@ while($arreglo=mysqli_fetch_array($query)){
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal"
-                        onclick="ReloadsFrames()">Cerrar</button>
+                        onclick="ReloadsFrames("non-reaload")">Cerrar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -909,7 +909,7 @@ $(document).ready(function() {
         // do something...
         //var ItemNow = localStorage.getItem("number");
         //ReloadsFrames(parseInt(ItemNow) + 1);
-        ReloadsFrames();
+        ReloadsFrames("non-reaload");
     });
 
 

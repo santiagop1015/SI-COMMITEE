@@ -30,7 +30,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
     $foto = $arreglo[14];
 
-    if ($arreglo[2] != 'Administrador') {
+    if ($arreglo[2] != 'Decanatura') {
         require("../desconectar.php");
         header("Location:../../index.html");
     }
@@ -561,15 +561,15 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href='javascript:toAdministrador();' class="nav-link">
+                                        <a href='javascript:toUser();' class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Administrador</p>
+                                            <p>Decanatura</p>
                                         </a>
                                     </li>
                                     <script>
-                                    function toAdministrador() {
+                                    function toUser() {
                                         localStorage.removeItem("number");
-                                        location.replace("administrador.php");
+                                        location.replace("decanatura.php");
                                     }
                                     </script>
                                     <li class="nav-item">

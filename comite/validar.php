@@ -138,8 +138,10 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
             echo "<script>location.href='Delayed.php?estudiante'</script>";
         } else if($f2['TipoUsuario'] == "Secretaria") {
             echo "<script>location.href='Delayed.php?secretaria'</script>";
-        } else if($f2['TipoUsuario'] == "Decano") {
-            echo "<script>location.href='Delayed.php?decano'</script>";
+        } else if($f2['TipoUsuario'] == "Decanatura") {
+            echo "<script>location.href='Delayed.php?decanatura'</script>";
+        } else if($f2['TipoUsuario'] == "Postgrado") {
+            echo "<script>location.href='Delayed.php?postgrado'</script>";
         }
         
     } else {

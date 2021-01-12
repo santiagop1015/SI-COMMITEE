@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
 <?php
-
-
 //session_destroy();
 session_start();
+if(@!$_SESSION['user']) {
+    header("Location: ../../../index.html");
+}
 	@$buscart=$_POST['buscart'];
 	@$buscar=$_POST['buscar'];
 

@@ -27,9 +27,9 @@ $pasdir=$row[6];
 $pasjur=$row[7];
 $pascor=$row[8];
 
-if($tipousuario == 'Estudiante')//Asignar pass para Estudiante
+if($tipousuario == 'Administrador')//Asignar pass para director
 {
-$pass = $row[9];
+$pass = $row[5];
 }
 else if($tipousuario == 'Director')//Asignar pass para director
 {
@@ -43,15 +43,20 @@ else if($tipousuario == 'Jurado')//Asignar pass para secreteari@
 {
 $pass = $pasjur;
 }
+else if($tipousuario == 'Secretaria') {
+    $pass = $row[9];
+} else {
+$pass = $row[9];
+}
 $telefono=$row[10];
 $programa=$row[11];
 $fechadenacimiento=$row[12];
 $area=$row[13];
 }
 
-if($tipousuario=="Jurado"){
+/*if($tipousuario=="Jurado"){
 $tipousuario="Secretari@";
-}
+}*/
 ?>
 <html>
 
@@ -84,143 +89,180 @@ $tipousuario="Secretari@";
 
 <body id="idCard" style="background-color: #f4f6f9;">
 
-        <div class="card card-default">
-            <div class="card-header" style="background-color:#B42A2A; color: white; padding-left: 10px">
-                <h3 class="card-title">
-                    <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
-                            onclick="history.back();"></i></button>
-                    Actualizar Usuario</h3>
-                <!-- <div class="card-tools">
+    <div class="card card-default">
+        <div class="card-header" style="background-color:#B42A2A; color: white; padding-left: 10px">
+            <h3 class="card-title">
+                <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
+                        onclick="history.back();"></i></button>
+                Actualizar Usuario
+            </h3>
+            <!-- <div class="card-tools">
             </div> -->
-            </div>
-            <?php $fecha=date("Y-m-d");?>
-            <div class="card-body">
-                <form id="idFormActUser" autocomplete="off">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Id.</label>
-                                <input type="text" class="form-control" name="id" value="<?php echo $id?>"
-                                    readonly="readonly">
-                            </div>
+        </div>
+        <?php $fecha=date("Y-m-d");?>
+        <div class="card-body">
+            <form id="idFormActUser" autocomplete="off">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Id.</label>
+                            <input type="text" class="form-control" name="id" value="<?php echo $id?>"
+                                readonly="readonly">
                         </div>
-                        <div class="col-6">
-                            <label>Tipo de Usuario: </label>
-                            <select class="form-control" name="tipousuario" value="<?php
+                    </div>
+                    <div class="col-6">
+                        <label>Tipo de Usuario: </label>
+                        <select class="form-control" name="tipousuario" value="<?php
                             // TipoUsuario
                             ?>">
-                                <option <?php if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
-                                    Estudiante</option>
-                                <option <?php if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
-                                    Coordinador</option>
-                                <option <?php if($tipousuario == "Director") echo 'selected'  ?> value="Director">
-                                    Profesor</option>
-                                <option <?php if($tipousuario == "Secretari@") echo 'selected'  ?> value="Jurado">
-                                    Secretari@</option>
+                            <?php
+                            $sql=("SELECT distinct TipoUsuario FROM usuarios ORDER BY id DESC");
+                            $query=mysqli_query($mysqli,$sql);
+                            while($arreglo=mysqli_fetch_array($query)){
+                          // echo '<option>'.$arreglo[0].'</option>';
+                          if($arreglo[0] == "Estudiante" || $arreglo[0] == "Director") {
+                           echo '<option value="'.$arreglo[0].'"';
+                           if($tipousuario == $arreglo[0]){
+                               echo 'selected';
+                           }
+                           echo '>'.$arreglo[0].'</option>';
+                          }
+                       }
+                            ?>
+
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Nombre: </label>
+                            <input type="text" class="form-control" name="user" value="<?php echo $user?>" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Cedula: </label>
+                            <input type="number" class="form-control" name="cedula" value="<?php echo $cedula?>"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Usuario: </label>
+                            <input type="text" class="form-control" name="email" value="<?php echo $email?>" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Password: </label>
+                            <input type="text" class="form-control" name="password" value="<?php echo $pass?>" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Telefono: </label>
+                            <input type="number" class="form-control" name="telefono" value="<?php echo $telefono?>"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Programa: </label>
+                            <select class="form-control" name="programa" required>
+                                <?php
+                            $sql=("SELECT distinct programa FROM programas ORDER BY id ASC");
+                            $query=mysqli_query($mysqli,$sql);
+                            while($arreglo=mysqli_fetch_array($query)){
+                             //   echo '<option value="'.$arreglo[0].'">'.$arreglo[0].'</option>';
+                          // echo '<option>'.$arreglo[0].'</option>';
+                        //  if($arreglo[0] != "Administrador") {
+                            if($programa == 'Sistemas' || $programa == 'Industrial') {
+
+                                if($arreglo[0] == "Sistemas" || $arreglo[0] == "Industrial") {
+                                echo '<option value="'.$arreglo[0].'"';
+                                if($programa == $arreglo[0]){
+                                    echo 'selected';
+                                }
+                                echo '>'.$arreglo[0].'</option>';
+                            }
+
+                            } else {
+
+                                if($arreglo[0] == $programa) {
+                                echo '<option value="'.$arreglo[0].'"';
+                                 if($programa == $arreglo[0]){
+                                   echo 'selected';
+                                   }
+                                echo '>'.$arreglo[0].'</option>';
+                                }
+
+                            }
+                           
+                           }
+                            
+                            ?>
+                                <!--     <option <?php //if($programa == "Industrial") echo 'selected'  ?> value="Industrial">
+                                    Industrial</option>
+                                <option <?php //if($programa == "Sistemas") echo 'selected'  ?> value="Sistemas">
+                                    Sistemas</option>
+                                <option <?php //if($programa == "Ambiental") echo 'selected'  ?> value="Ambiental">
+                                    Ambiental</option>
+                                <option <?php //if($programa == "Mecanica") echo 'selected'  ?> value="Mecanica">
+                                    Mecanica</option> -->
                             </select>
                         </div>
-                        <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Nombre: </label>
-                                <input type="text" class="form-control" name="user" value="<?php echo $user?>" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Cedula: </label>
-                                <input type="number" class="form-control" name="cedula" value="<?php echo $cedula?>"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Usuario: </label>
-                                <input type="text" class="form-control" name="email" value="<?php echo $email?>"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Password: </label>
-                                <input type="text" class="form-control" name="password" value="<?php echo $pass?>"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Telefono: </label>
-                                <input type="number" class="form-control" name="telefono" value="<?php echo $telefono?>"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Programa: </label>
-                                <select class="form-control" name="programa" required>
-                                    <option <?php if($programa == "Industrial") echo 'selected'  ?> value="Industrial">
-                                        Industrial</option>
-                                    <option <?php if($programa == "Sistemas") echo 'selected'  ?> value="Sistemas">
-                                        Sistemas</option>
-                                    <option <?php if($programa == "Ambiental") echo 'selected'  ?> value="Ambiental">
-                                        Ambiental</option>
-                                    <option <?php if($programa == "Mecanica") echo 'selected'  ?> value="Mecanica">
-                                        Mecanica</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <label>Linea de Investigación: </label>
-                            <select class="form-control" name="area" required>
-                                <?php
+                    </div>
+                    <div class="col-6">
+                        <label>Linea de Investigación: </label>
+                        <select class="form-control" name="area" required>
+                            <?php
 									$querya = $mysqli -> query ("SELECT * FROM area_inves where  id_area = '$area'  and programa='$programa' limit 1");
 									while ($valoresa = mysqli_fetch_array($querya)) {
 									if($nombre_area==''){ $nombre_area=0;}
 									echo '<option value="'.$valoresa[id_area].'">'.$valoresa[id_area].': '.$valoresa[nombre_area].'</option>';
                                     } 
                                 ?>
-                                <option value="0">No Aplica</option>
-                                <?php
+                            <option value="0">No Aplica</option>
+                            <?php
 									$query = $mysqli -> query ("SELECT * FROM area_inves where  id_area <> '$area'  ORDER BY  id_area ASC ");
 									while ($valores = mysqli_fetch_array($query)) {
 									if($nombre_area==''){ $nombre_area=0;}
 									echo '<option value="'.$valores[id_area].'">'.$valores[id_area].': '.$valores[nombre_area].'</option>';
                                     } 
                                 ?>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Fecha de Nacimiento: </label>
-                                <input type="date" class="form-control" name="fechadenacimiento" value="<?php 
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Fecha de Nacimiento: </label>
+                            <input type="date" class="form-control" name="fechadenacimiento" value="<?php 
                                     echo $fechadenacimiento
                                     ?>" <?php if($fechadenacimiento !== "0000-00-00") echo 'required' ?>>
-                            </div>
                         </div>
                     </div>
+                </div>
 
 
-                    <div class="card-footer mt-3">
-                        
-                        <button id="idActualUser" type="submit"
-                            class="btn btn-primary float-right mr-2">Actualizar</button>
+                <div class="card-footer mt-3">
 
-                        <div id="idSpinner" class="spinner-border text-danger" role="status" style="display: None;">
-                            <span class="sr-only">Loading...</span>
-                        </div>
+                    <button id="idActualUser" type="submit" class="btn btn-primary float-right mr-2">Actualizar</button>
+
+                    <div id="idSpinner" class="spinner-border text-danger" role="status" style="display: None;">
+                        <span class="sr-only">Loading...</span>
                     </div>
+                </div>
 
-                </form>
-
-            </div>
+            </form>
 
         </div>
+
+    </div>
 
 </body>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->

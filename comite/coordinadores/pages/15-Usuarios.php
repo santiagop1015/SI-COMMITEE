@@ -84,6 +84,16 @@ $(document).ready(function() {
     <section class="content">
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
+                <?php
+if($_POST) {
+    $tipousuario = $_POST['tipousuario'];
+} else if($_GET['user']){
+    $tipousuario = $_GET['user'];
+}
+            ?>
+            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i
+                        class="fa fa-plus-circle white"
+                        onclick="window.location.href='15.5-RegistrarUsuarios.php?tipousuario=<?php echo $tipousuario; ?>'"></i></button>
                 <!--   <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i
                         class="fa fa-plus-circle white"
                         onclick="window.location.href='6-RegistrarUsuarios.php'"></i></button> -->
@@ -127,7 +137,7 @@ if(!$_GET) {
                                      $query=mysqli_query($mysqli,$sql);
                                      while($arreglo=mysqli_fetch_array($query)){
                                    // echo '<option>'.$arreglo[0].'</option>';
-                                   if($arreglo[0] != "Administrador") {
+                                   if($arreglo[0] == "Estudiante" || $arreglo[0] == "Director") {
                                     echo '<option value="'.$arreglo[0].'"';
                                     if($tipousuario == $arreglo[0]){
                                         echo 'selected';

@@ -155,7 +155,7 @@ $passd=$arreglo[8];
                 <div class="card">
                     <div class="card-body p-0">
                         <ul class="nav nav-pills flex-column">
-                            <li class="nav-item">
+                           <!-- <li class="nav-item">
                                 <a class="nav-link" href="#tabEstudiante" data-toggle="tab">
                                     <i class="fas fa-user-graduate"></i> Estudiante
                                 </a>
@@ -169,7 +169,7 @@ $passd=$arreglo[8];
                                 <a class="nav-link" href="#tabAsistente" data-toggle="tab">
                                     <i class="fas fa-user-tie"></i> Asistente
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link" href="#tabLinea" data-toggle="tab">
                                     <i class="fas fa-flask"></i> Linea Investigación

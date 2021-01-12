@@ -233,6 +233,9 @@ if(!$_GET) {
                     <a href="2.2-enviar_msg_coor.php?Correo='.$arreglo[4].'&programa='.$Programa.'" class="btn btn-sm bg-teal">
                         <i class="fas fa-comments"></i>
                     </a>
+                    <a href="3-estado_est.php?est='.$arreglo[0].'" class="btn btn-sm btn-primary">
+                        <i class="fas fa-user"></i> 
+                    </a>
                 </div>
             </div>';
         

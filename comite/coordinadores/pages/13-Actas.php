@@ -155,7 +155,11 @@ $passd=$arreglo[8];
                                                 echo "<td class='text-center'>$arreglo[1]</td>";
                                                 echo "<td class='text-center'>$arreglo[4]</td>";
                                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                if(!empty($arreglo[6])) {
+                                                    echo "<td class='text-center'><a class='btn btn-default btn-sm' href='../$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                    } else {
+                                                        echo "<td class='text-center'>No disponible</td>";
+                                                    }
                                                 echo "<td class='text-center'><a class='btn btn-danger btn-sm' href='13.1-elim_acta_coor.php?numero=$arreglo[1]&id=$arreglo[0]&programa=$programa'><i class='nav-icon fa fa-trash'></i></td>";
                                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";

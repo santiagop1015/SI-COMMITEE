@@ -27,7 +27,11 @@ $pasdir=$row[6];
 $pasjur=$row[7];
 $pascor=$row[8];
 
-if($tipousuario == 'Director')//Asignar pass para director
+if($tipousuario == 'Administrador')//Asignar pass para director
+{
+$pass = $row[5];
+}
+else if($tipousuario == 'Director')//Asignar pass para director
 {
 $pass = $pasdir;
 }

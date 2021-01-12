@@ -6,7 +6,7 @@ session_cache_limiter('private_no_expire'); // works
 
 session_start();
 if(@!$_SESSION['user']) {
-    header("Location: .../../../index.html");
+    header("Location: ../../../index.html");
 }
 
 date_default_timezone_set('America/Bogota');

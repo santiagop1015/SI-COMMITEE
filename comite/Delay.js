@@ -26,8 +26,11 @@ switch (user) {
     case "secretaria":
         div.innerHTML = "<h1>Bienvenido Secretari@ Academica</h1>";
         break;
-    case "decano":
+    case "decanatura":
         div.innerHTML = "<h1>Bienvenido Decan@</h1>";
+        break;
+    case "postgrado":
+        div.innerHTML = "<h1>Bienvenido Postgrados</h1>";
         break;
     case "incorrecta":
         div.innerHTML = "<h1>Contraseña Incorrecta</h1>";
@@ -70,9 +73,13 @@ function onRedirect() {
             //console.log("Estudiante");
             location.href = 'secretarias/secretaria.php';
             break;
-        case "decano":
+        case "decanatura":
             //console.log("Estudiante");
-            location.href = 'decanatura/decano.php';
+            location.href = 'decanatura/decanatura.php';
+            break;
+        case "postgrado":
+            //console.log("Estudiante");
+            location.href = 'postgrados/postgrado.php';
             break;
         case "incorrecta":
             console.log("Contraseña Incorrecta");
