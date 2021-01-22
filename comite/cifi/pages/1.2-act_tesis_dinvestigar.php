@@ -184,7 +184,7 @@ if (@!$_SESSION['user']) {
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Cargar archivo del certificado:</label>
-                            <input type="file" name="archivo" accept=".pdf">
+                            <input id="archivo" type="file" name="archivo" accept=".pdf">
                         </div>
                     </div>
                     <?php 
@@ -210,6 +210,15 @@ if (@!$_SESSION['user']) {
                     <input type="HIDDEN" name="oti" value="<?php echo $oti?>">
 
                 </div>
+                <!-- Div Alertas -->
+                <div id="idBoxAlert" class="alert alert-danger alert-dismissible" style="Display: None;">
+                    <h5>
+                        <i id="idIConBox" class="icon fas fa-ban"></i>
+                        Alerta
+                    </h5>
+                    <p id="idMessageRegistrarDoc"></p>
+                </div>
+                <!-- /Div Alertas -->
                 <div class="card-footer mt-3">
                     <button type="button" class="btn btn-danger float-right" onclick="history.back();">Volver</button>
                     <button id="idActualEval" type="submit" class="btn btn-primary float-right mr-2">Guardar</button>
@@ -249,11 +258,11 @@ function onSendHeight(event) {
 var onSubmitActualizar = function() {
     $("#idFormActEval").on("submit", function(e) {
         e.preventDefault();
-        alert("eprevent");
-        $('#idActualEval').attr("disabled", true);
+        //alert("eprevent");
+        //$('#idActualEval').attr("disabled", true);
         //$("#idSpinner").css("display") = 'Block';
         //document.getElementById("idSpinner").display = "Block";
-        document.getElementById("idSpinner").style.display = "block";
+        //document.getElementById("idSpinner").style.display = "block";
         //alert('evento submit');
 
         // ejec_act_tesis_coor
@@ -265,107 +274,95 @@ var onSubmitActualizar = function() {
             paqueteDeDatos.append(input.name, input.value);
         });
 
-        console.log(other_data);
+        //console.log(other_data);
         //console.log(paqueteDeDatos);
 
-        $.ajax({
-            type: "POST",
-            contentType: false,
-            processData: false,
-            cache: false,
-            url: "1.2.1-ejec_act_tesis_dinvestigar.php",
-            data: paqueteDeDatos,
-        }).done(function(info) {
-            console.log(info);
-            if (info === "1") {
-                localStorage.setItem("Mensaje2", 1);
-                localStorage.setItem("Mensaje2-Title", "Dar VoBo");
-                localStorage.setItem("Mensaje2-Message", "Edición terminada");
-                $('#idActualEval').attr("disabled", true);
-            } else if (info === "2"){
-                localStorage.setItem("Mensaje2", 0);
-                localStorage.setItem("Mensaje2-Title", "Dar VoBo");
-                localStorage.setItem("Mensaje2-Message",
-                    "Solo se permiten archivos menores de 5MB");
-                $('#idActualEval').attr("disabled", false);
+        //-------Archivo
+        var file = $("#archivo").prop("files")[0];
+        var pharaf = document.getElementById("idMessageRegistrarDoc");
+        var cardMessages = document.getElementById("idBoxAlert");
+        var iconBox = document.getElementById("idIConBox");
+        if (file !== undefined) {
+            var validationArchive = fileValidation();
+            if (validationArchive === 1) {
+                cardMessages.style.display = "None";
+                paqueteDeDatos.append("archivo", file);
+                onSendHeight();
+                alert("enviar datos");
+                //EnviarDatos();
             } else {
-                localStorage.setItem("Mensaje2", 0);
-                localStorage.setItem("Mensaje2-Title", "Dar VoBo");
-                localStorage.setItem("Mensaje2-Message",
-                    "Error en el procesamiento, no se realizo la operación");
+                pharaf.innerHTML = "Suba un archivo pdf";
+                cardMessages.className = "alert alert-danger alert-dismissible";
+                iconBox.className = "icon fas fa-ban";
+                cardMessages.style.display = "Block";
+                onSendHeight();
                 $('#idActualEval').attr("disabled", false);
             }
-            setTimeout(() => {
-                localStorage.setItem("Mensaje2", null);
-            }, 500);
+        } else {
+            onSendHeight();
+            alert("enviar datos");
+            //EnviarDatos();
+        }
+        //-------Fin req archivo
 
-            setTimeout(() => {
-                document.getElementById("idSpinner").style.display = "none";
-            }, 1000);
-        });
+        function EnviarDatos() {
+            document.getElementById("idSpinner").style.display = "block";
+            $.ajax({
+                type: "POST",
+                contentType: false,
+                processData: false,
+                cache: false,
+                url: "1.2.1-ejec_act_tesis_dinvestigar.php",
+                data: paqueteDeDatos,
+            }).done(function(info) {
+                console.log(info);
+                if (info === "1") {
+                    localStorage.setItem("Mensaje2", 1);
+                    localStorage.setItem("Mensaje2-Title", "Dar VoBo");
+                    localStorage.setItem("Mensaje2-Message", "Edición terminada");
+                    $('#idActualEval').attr("disabled", true);
+                } else if (info === "2") {
+                    localStorage.setItem("Mensaje2", 0);
+                    localStorage.setItem("Mensaje2-Title", "Dar VoBo");
+                    localStorage.setItem("Mensaje2-Message",
+                        "Solo se permiten archivos menores de 5MB");
+                    $('#idActualEval').attr("disabled", false);
+                } else {
+                    localStorage.setItem("Mensaje2", 0);
+                    localStorage.setItem("Mensaje2-Title", "Dar VoBo");
+                    localStorage.setItem("Mensaje2-Message",
+                        "Error en el procesamiento, no se realizo la operación");
+                    $('#idActualEval').attr("disabled", false);
+                }
+                setTimeout(() => {
+                    localStorage.setItem("Mensaje2", null);
+                }, 500);
 
+                setTimeout(() => {
+                    document.getElementById("idSpinner").style.display = "none";
+                }, 1000);
+            });
 
-        /*
-
-                                    $(document).ready(function() {
-                                        ActualizarProyect();
-                                    });
-
-
-                                    var ActualizarProyect = function() {
-                                        $('#idButtonActualizar').on("click", function(e) {
-                                            e.preventDefault();
-
-                                            var other_data = $("#idFormEdit").serializeArray();
-
-                                            var paqueteDeDatos = new FormData();
-
-                                            $.each(other_data, function(key, input) {
-                                                paqueteDeDatos.append(input.name, input.value);
-                                            });
-
-                                            var Box = document.getElementById("idBox");
-                                            var iconBox = document.getElementById("idIConBox");
-
-                                            $.ajax({
-                                                type: "POST",
-                                                contentType: false,
-                                                processData: false,
-                                                cache: false,
-                                                url: "ejecu_act_tesisdir.php",
-                                                data: paqueteDeDatos,
-                                            }).done(function(info) {
-                                                console.log(info);
-                                                if (info === "1") {
-                                                    Box.style.display = 'Block';
-                                                    Box.className =
-                                                        "alert alert-success alert-dismissible";
-                                                    iconBox.className = "icon fas fa-check";
-                                                    iconBox.innerHTML = "   Edición Completada";
-                                                    $('#idButtonActualizar').prop('disabled', true);
-                                                } else {
-                                                    Box.style.display = 'Block';
-                                                    Box.className =
-                                                        "alert alert-danger alert-dismissible";
-                                                    iconBox.className = "icon fas fa-ban";
-                                                    iconBox.innerHTML =
-                                                        "   Error en el procesamiento, no se actualizaron los datos";
-                                                    $('#idButtonActualizar').prop('disabled',
-                                                        false);
-                                                }
-                                            });
-
-                                        })
-                                    }
-                                    
-
-
-        */
-
-
-
+        }
 
     });
+}
+
+function fileValidation() {
+    var fileInput = document.getElementById("archivo");
+    var filePath = fileInput.value,
+        exit;
+    var allowedExtensions = /(.pdf)$/i;
+
+    if (!allowedExtensions.exec(filePath)) {
+        exit = 0;
+    } else {
+        exit = 1;
+
+        //console.log(filePath);
+    }
+    returnn = exit;
+    return returnn;
 }
 </script>
 <script src="../plugins/jquery/jquery.min.js"></script>

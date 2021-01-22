@@ -210,7 +210,7 @@ var registerMessages = function () {
   $("#idButtonRegistrarDoc").on("click", function (e) {
     e.preventDefault();
     var file = $("#archivo").prop("files")[0];
-    console.log(file);
+    //console.log(file);
     //idNameFileRegistrarDoc
 
     //file.name;

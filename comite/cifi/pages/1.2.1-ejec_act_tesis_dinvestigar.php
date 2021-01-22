@@ -24,7 +24,6 @@ if($tipo_archivo=='application/pdf'){
     move_uploaded_file($_FILES['archivo']['tmp_name'],"$alma/$nombre_archivo");
   
 }else{
-
 $nombre_archivo=$id_tesis.'.doc';
 move_uploaded_file($_FILES['archivo']['tmp_name'],"$alma/$nombre_archivo"); 
 }
