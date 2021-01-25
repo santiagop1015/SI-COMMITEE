@@ -50,7 +50,7 @@ $pr=$_SESSION['id'];
             <h3 class="card-title">
                 <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
                         onclick="history.back();"></i></button>
-                VoBo
+                Dar VoBo
             </h3>
             <!-- <div class="card-tools">
             </div> -->

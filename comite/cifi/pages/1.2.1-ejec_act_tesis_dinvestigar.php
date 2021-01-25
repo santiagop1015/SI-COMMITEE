@@ -9,16 +9,16 @@ date_default_timezone_set ('America/Bogota');
 require("../../connect_db.php");
 $id_tesis=$_POST['id_tesis'];
 
-if($_FILES["archivo"]["size"]>10000000){
+/*if($_FILES["archivo"]["size"]>10000000){
 //echo "Solo se permiten archivos menores de 5MB";
 echo "2";
-}else{
+}else{*/
 
 $nombre_archivo = $_FILES['archivo']['name'];
 $tipo_archivo= $_FILES['archivo']['type'];
 $tamano_archivo = $_FILES["archivo"]['size'];
 $direccion_temporar = $_FILES['archivo']['tmp_name'];
-	 $alma="./cifi";	
+	 $alma="../../archivos/cifi";	
 if($tipo_archivo=='application/pdf'){
     $nombre_archivo=$id_tesis.'.pdf';
     move_uploaded_file($_FILES['archivo']['tmp_name'],"$alma/$nombre_archivo");
@@ -29,10 +29,10 @@ move_uploaded_file($_FILES['archivo']['tmp_name'],"$alma/$nombre_archivo");
 }
 
 
-}
+//}
 $act=$nombre_archivo;
 
-	$sentencia="update cifi set   id_tesis='$id_tesis', carta='$carta', id_proyecto='$id_proyecto', actas='$actas' , certi_CIFI='$certi_CIFI', ponencia_fac='$ponencia_fac' , ponencia_nal='$ponencia_nal' , ponencia_int='$ponencia_int' , articulo='$articulo' , cap_libro='$cap_libro',fecha='$fecha',act='$act',oti='$oti' where id='$te' ";
+	$sentencia="update cifi set id_tesis='$id_tesis', carta='$carta', id_proyecto='$id_proyecto', actas='$actas' , certi_CIFI='$certi_CIFI', ponencia_fac='$ponencia_fac' , ponencia_nal='$ponencia_nal' , ponencia_int='$ponencia_int' , articulo='$articulo' , cap_libro='$cap_libro',fecha='$fecha',act='$act',oti='$oti' where id='$te' ";
 	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
 	$resent=mysqli_query($mysqli,$sentencia);
 

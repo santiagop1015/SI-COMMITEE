@@ -47,7 +47,7 @@ if (@!$_SESSION['user']) {
             <h3 class="card-title">
                 <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
                         onclick="history.back();"></i></button>
-                Dar VoBo - Información del Proyecto
+                Actualizar VoBo - Información del Proyecto
             </h3>
             <!-- <div class="card-tools">
             </div> -->
@@ -184,7 +184,7 @@ if (@!$_SESSION['user']) {
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Cargar archivo del certificado:</label>
-                            <input id="archivo" type="file" name="archivo" accept=".pdf">
+                            <input id="archivo" type="file" name="archivo" accept=".pdf" required>
                         </div>
                     </div>
                     <?php 
@@ -277,33 +277,45 @@ var onSubmitActualizar = function() {
         //console.log(other_data);
         //console.log(paqueteDeDatos);
 
-        //-------Archivo
-        var file = $("#archivo").prop("files")[0];
-        var pharaf = document.getElementById("idMessageRegistrarDoc");
-        var cardMessages = document.getElementById("idBoxAlert");
-        var iconBox = document.getElementById("idIConBox");
-        if (file !== undefined) {
-            var validationArchive = fileValidation();
-            if (validationArchive === 1) {
-                cardMessages.style.display = "None";
-                paqueteDeDatos.append("archivo", file);
-                onSendHeight();
-                alert("enviar datos");
-                //EnviarDatos();
-            } else {
-                pharaf.innerHTML = "Suba un archivo pdf";
-                cardMessages.className = "alert alert-danger alert-dismissible";
-                iconBox.className = "icon fas fa-ban";
-                cardMessages.style.display = "Block";
-                onSendHeight();
-                $('#idActualEval').attr("disabled", false);
+        if (document.querySelectorAll("input#archivo").length !== 0) {
+
+            //-------Archivo
+            var file = $("#archivo").prop("files")[0];
+            var pharaf = document.getElementById("idMessageRegistrarDoc");
+            var cardMessages = document.getElementById("idBoxAlert");
+            var iconBox = document.getElementById("idIConBox");
+
+            if (file !== undefined) {
+                var validationArchive = fileValidation();
+                if (validationArchive === 1) {
+                    if (file.size <= 5000000) {
+                        cardMessages.style.display = "None";
+                        paqueteDeDatos.append("archivo", file);
+                        onSendHeight();
+                        //alert("enviar datos");
+                        EnviarDatos();
+                    } else {
+                        pharaf.innerHTML = "Solo se permiten archivos menores de 5MB";
+                        cardMessages.className = "alert alert-danger alert-dismissible";
+                        iconBox.className = "icon fas fa-ban";
+                        cardMessages.style.display = "Block";
+                        onSendHeight();
+                        $('#idActualEval').attr("disabled", false);
+                        localStorage.setItem("Mensaje2", null);
+                    }
+                } else {
+                    pharaf.innerHTML = "Suba un archivo pdf o word";
+                    cardMessages.className = "alert alert-danger alert-dismissible";
+                    iconBox.className = "icon fas fa-ban";
+                    cardMessages.style.display = "Block";
+                    onSendHeight();
+                    $('#idActualEval').attr("disabled", false);
+                    localStorage.setItem("Mensaje2", null);
+                }
             }
-        } else {
-            onSendHeight();
-            alert("enviar datos");
-            //EnviarDatos();
+            //-------Fin req archivo
+
         }
-        //-------Fin req archivo
 
         function EnviarDatos() {
             document.getElementById("idSpinner").style.display = "block";
@@ -315,18 +327,12 @@ var onSubmitActualizar = function() {
                 url: "1.2.1-ejec_act_tesis_dinvestigar.php",
                 data: paqueteDeDatos,
             }).done(function(info) {
-                console.log(info);
+                //console.log(info);
                 if (info === "1") {
                     localStorage.setItem("Mensaje2", 1);
                     localStorage.setItem("Mensaje2-Title", "Dar VoBo");
                     localStorage.setItem("Mensaje2-Message", "Edición terminada");
                     $('#idActualEval').attr("disabled", true);
-                } else if (info === "2") {
-                    localStorage.setItem("Mensaje2", 0);
-                    localStorage.setItem("Mensaje2-Title", "Dar VoBo");
-                    localStorage.setItem("Mensaje2-Message",
-                        "Solo se permiten archivos menores de 5MB");
-                    $('#idActualEval').attr("disabled", false);
                 } else {
                     localStorage.setItem("Mensaje2", 0);
                     localStorage.setItem("Mensaje2-Title", "Dar VoBo");
@@ -352,7 +358,7 @@ function fileValidation() {
     var fileInput = document.getElementById("archivo");
     var filePath = fileInput.value,
         exit;
-    var allowedExtensions = /(.pdf)$/i;
+    var allowedExtensions = /(.pdf|.docx)$/i;
 
     if (!allowedExtensions.exec(filePath)) {
         exit = 0;

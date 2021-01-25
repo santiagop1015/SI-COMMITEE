@@ -79,8 +79,8 @@ $dir=$_SESSION['user'];
                         <?php
                 $totalp=0;
                 require("../../connect_db.php");
-              //  $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and id_estudiante2=1  ORDER BY  programa DESC");
-                 $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
+                 $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and id_estudiante2=1 ORDER BY programa DESC");
+                // prueba $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
                $query=mysqli_query($mysqli,$sql);
                 
                 ?>
@@ -122,17 +122,18 @@ $dir=$_SESSION['user'];
              echo "<td class='text-center'>$arreglo[12]</td>";
               
              echo "<td class='text-center'>";
+             $raiz = "../../archivos";
              if(strlen($arreglo[8]) > 1) {                         
                if(strlen($arreglo[8]) > 15) {
                    echo "
-                   <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                   <a class='btn btn-primary btn-sm' href='$raiz/$alma/$arreglo[8]'
                    target='_blank'>
                    ".substr($arreglo[8],0,15)."..."."
                    </a>
                    ";
                } else {
                    echo "
-               <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+               <a class='btn btn-primary btn-sm' href='$raiz/$alma/$arreglo[8]'
                target='_blank'>
                $arreglo[8]
                </a>
@@ -152,7 +153,7 @@ $dir=$_SESSION['user'];
 		   	$asd++;
            }
            
-           if($asd!==0){
+           if($asd==0){
              
              echo "<td class='text-center'>
              <a class='btn btn-info btn-sm' href='1.1-vobodinvestigar.php?id=$arreglo[0]'>
@@ -166,6 +167,8 @@ $dir=$_SESSION['user'];
 
            } else {
 
+            echo "<td class='text-center'>Procesado</td>";
+
             echo "<td class='text-center'>
              <a class='btn btn-info btn-sm' href='1.2-act_tesis_dinvestigar.php?ide=$arreglo[0]&Titulo_tesis=$arreglo[3]'>
              <i class='fas fa-pencil-alt'>
@@ -173,8 +176,6 @@ $dir=$_SESSION['user'];
              </a>
              </td>
              ";
-
-             echo "<td class='text-center'>Procesado</td>";
 
            }
 

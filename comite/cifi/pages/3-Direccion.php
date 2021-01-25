@@ -12,31 +12,29 @@ if (@!$_SESSION['user']) {
 	@$buscar=$_POST['buscar'];
 
 date_default_timezone_set ('America/Bogota');
-$fecha=date("Y-m-d");
-$nuevafecha = date('Y-m-d', strtotime($fecha .'+3 month'));
+$fecha=date("d-m-Y H:i:s");
 $pr=$_SESSION['id'];
+$jur=$_SESSION['user'];
+$asd=0;
 extract($_GET);
 require("../../connect_db.php");
 $sql=("SELECT * FROM login where id='$pr'");
 $query=mysqli_query($mysqli,$sql);
 while($arreglo=mysqli_fetch_array($query)){
-utf8_decode($programa=$arreglo[11]);
-$coordir=$arreglo[4];
-$passd=$arreglo[8];
-
+$programa=$arreglo[11];
  if ($arreglo[2]!='Cifi') {
 	require("../../desconectar.php");
 	header("Location:../../../index.html");
 }
 }
-
+$dir=$_SESSION['user'];
 ?>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Aux Investigacion</title>
+    <title>SI-COMMITEE || Semillero</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
@@ -79,102 +77,107 @@ $passd=$arreglo[8];
                 <table class="table table-bordered table-striped">
                     <thead>
                         <?php
+                $totalp=0;
+                require("../../connect_db.php");
                 $total=0;
-
-                $sql=("SELECT * FROM tesis  where titulo_tesis like '%$buscar%' and programa='$programa' and ID_Estudiante2=3 and (ID_estado='Entrega Monografia' or ID_estado='Entrega Propuesta' or ID_estado='Correccion Propuesta' or ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto' or ID_estado='Entrega Anteproyecto' or ID_estado='Solicitud opción de grado') and (terminado=1 or terminado=3 or terminado=4 or terminado=6) ORDER BY  ID_tesis DESC");
-               //$sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
-               $query=mysqli_query($mysqli,$sql);
-               $certi_CIFI = ""; //ToDo   
+                 $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and ID_directores='$dir' ORDER BY id_tesis DESC");
+                // $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
+                 $query=mysqli_query($mysqli,$sql);
                 ?>
                         <tr>
-                            <th style="width: 40%">Título</th>
-                            <th class="text-center">Tipo</th>
-                            <th class="text-center">Disposiciones</th>
-                            <th class="text-center">CIFI</th>
+                            <th style="width: 30%">Título</th>
+                            <th class="text-center">Aprob_Dir</th>
+                            <th class="text-center">Documento</th>
+                            <th class="text-center">Fecha_Entrega</th>
                             <th class="text-center">Archivo</th>
                             <th class="text-center">Editar</th>
-                            <th class="text-center">Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-               while($arreglo=mysqli_fetch_array($query)){
-                $titu=$arreglo[3];
-                $ID_tesis=$arreglo[0];
+                        $total1=0;
+                        $atencion = 0;
+              while($arreglo=mysqli_fetch_array($query)){
+                $ide=$arreglo[1]; 
+				$titu=$arreglo[3];
 
-            /*	$sql=("SELECT * FROM cifi where id_tesis='$ID_tesis'");
-        $query=mysqli_query($mysqli,$sql);
-        while($arreglo1=mysqli_fetch_array($query)){
-         $certi_CIFI=$arreglo1[5];
-         
-        }*/
                 if($arreglo[6]=="Entrega Propuesta" or $arreglo[6]=="Correccion Propuesta"){
-                 $alma="./propuestas";
-            }else if($arreglo[6]=="Entrega Anteproyecto" or $arreglo[6]=="Correccion Anteproyecto")
-            {
-                 $alma="./anteproyectos";
-            }else if($arreglo[6]=="Entrega Proyecto" or $arreglo[6]=="Correccion Proyecto")
-            {
-                 $alma="./proyectos";
-            }else {
-                    $alma="./otros";	
-                }	
+                    $alma="./propuestas";
+                   }else if($arreglo[6]=="Entrega Anteproyecto" or $arreglo[6]=="Correccion Anteproyecto")
+                   {
+                        $alma="./anteproyectos";
+                   }else if($arreglo[6]=="Entrega Proyecto" or $arreglo[6]=="Correccion Proyecto")
+                   {
+                        $alma="./proyectos";
+                   }else {
+                            $alma="./otros";	
+                         }	
+                           $total1++;
                 
              echo "<tr>";
 
              echo "<td>$arreglo[3]</td>";
+             if($arreglo[4]!="" and $total==0) {
+                 ++$total1;
+
+                 echo "<td class='text-center'>$arreglo[4]</td>";
+                 
+                 $atencion++;
+
+                 
+             } else {
+                echo "<td class='text-center'>$arreglo[4]</td>";
+             }
+
              echo "<td class='text-center'>$arreglo[6]</td>";
-             echo "<td class='text-center'>$arreglo[7]</td>";
-             echo "<td class='text-center'>$certi_CIFI</td>";
+             echo "<td class='text-center'>$arreglo[9]</td>";
               
              echo "<td class='text-center'>";
+             $raiz = "../../archivos";
              if(strlen($arreglo[8]) > 1) {                         
                if(strlen($arreglo[8]) > 15) {
                    echo "
-                   <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                   <a class='btn btn-primary btn-sm' href='$raiz/$alma/$arreglo[8]'
                    target='_blank'>
                    ".substr($arreglo[8],0,15)."..."."
                    </a>
                    ";
                } else {
                    echo "
-               <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+               <a class='btn btn-primary btn-sm' href='$raiz/$alma/$arreglo[8]'
                target='_blank'>
                $arreglo[8]
                </a>
                ";
                }
                } else {
-               echo "";
+               echo "Archivo no disponible";
                }
            echo "</td>";
 
-            
-             
-             echo "<td class='text-center'>
-             <a class='btn btn-info btn-sm' href='2.1-act_tesis_coor.php?id=$arreglo[0]'>
+           echo "<td class='text-center'>
+             <a class='btn btn-info btn-sm' href='1.1-vobodinvestigar.php?id=$arreglo[0]'>
              <i class='fas fa-pencil-alt'>
              </i>
              </a>
              </td>
              ";
 
-             echo "<td class='text-center'>
-             <a class='btn btn-danger btn-sm' href='2.2-elim_tesis_coor.php?id=$arreglo[0]'>
-             <i class='fas fa-trash'>
-             </i>
-             </a>
-             </td>
-             "; 
-             
-             $total++;
+            // $totalp++;
              echo "</tr>";
+            }
+
+            if($atencion > 0) {
+                echo "<div class='alert alert-info'><strong>¡Atención!</strong> usted
+                 tiene <strong>direcciones</strong> por aprobar y
+                 <strong>documentos</strong> por evaluar...
+                 </div>";
             }
             ?>
 
                     </tbody>
                 </table>
-                <?php echo "<center><font color='red' size='3'>Total registros: $total</font><br></center>"; ?>
+                <?php echo "<center><font color='red' size='3'>Total registros: $total1</font><br></center>"; ?>
             </div>
         </div>
     </div>
@@ -191,7 +194,7 @@ $(document).ready(function() {
           Evaluar();
       });
       */
-      window.addEventListener('resize', function(event) {
+    window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
     });
