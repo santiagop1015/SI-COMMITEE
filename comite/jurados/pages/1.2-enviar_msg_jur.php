@@ -3,7 +3,7 @@
 
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../Login/index.html");
+    header("Location:../../../index.html");
 }
 
 $usuario=$_SESSION['user'];
@@ -19,7 +19,7 @@ extract($_GET);
     <title>SI-COMMITEE || Enviar mensaje</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../LocalSources/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -27,7 +27,7 @@ extract($_GET);
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
     <!-- -->
 </head>
 <style>
@@ -102,19 +102,24 @@ extract($_GET);
     </div>
 </body>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<script src="../LocalSources/ajax/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 $(document).ready(function() {
-    onSendHeight();
+    //onSendHeight();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        onSendHeight();
+    });
     onSubmitActualizar();
     localStorage.setItem("Mensaje", null);
 });
 
 function onSendHeight(event) {
-    var card = document.getElementById("idCardBorrar");
+    //var card = document.getElementById("idCardBorrar");
     //console.log(card.clientHeight);
-    localStorage.setItem("height", card.clientHeight);
+    //localStorage.setItem("height", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 
 var onSubmitActualizar = function() {

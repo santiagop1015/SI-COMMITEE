@@ -57,7 +57,7 @@ $nota=0;
 }
 </style>
 
-<body id="idCard" style="background-color: #f4f6f9;">
+<body style="background-color: #f4f6f9;">
 
     <div id="idCard" class="card card-warning" style="margin-bottom: 0px;">
         <div class="card-header" style="background-color:#B42A2A; color: white;">

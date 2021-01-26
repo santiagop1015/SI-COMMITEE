@@ -44,7 +44,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <title>SI-COMMITEE || Secretaria</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../LocalSources/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
 
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -56,8 +56,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <!-- -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
-    <script src="../LocalSources/ajax/jquery/2.0.3/jquery.min.js"></script>
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <script src="../../LocalSources/js/jQuery/2.0.3/jquery.min.js"></script>
 
 </head>
 <style>
@@ -65,7 +65,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     color: white;
 }
 </style>
-<script src="../LocalSources/ajax/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 /*
 // No hace falta llamar a la funcion cuando el documento este listo ya ue se llama cuando el body cambia su tamaño
@@ -76,7 +76,7 @@ $(document).ready(function() {
 */
 </script>
 
-<body id="idCard" style="background-color: #f4f6f9;" onresize="Height();">
+<body id="idCard" style="background-color: #f4f6f9;">
 
     <!-- Start Content-wrapper -->
     <section class="content-header">
@@ -90,8 +90,15 @@ $(document).ready(function() {
     <section class="content">
         <div class="card card-default">
             <div class="card-header" style="background-color:#B42A2A;color: white;">
+            <?php
+if($_POST) {
+    $tipousuario = $_POST['tipousuario'];
+} else if($_GET['user']){
+    $tipousuario = $_GET['user'];
+}
+            ?>
             <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Registrar Usuario"><i class="fa fa-plus-circle white"
-                        onclick="window.location.href='6-RegistrarUsuarios.php'"></i></button>
+                        onclick="window.location.href='6-RegistrarUsuarios.php?tipousuario=<?php echo $tipousuario; ?>'"></i></button>
                 <div class="card-tools">
                     <?php
 if(!$_GET) {
@@ -108,12 +115,7 @@ if($_POST && !$_POST['tipousuario']) {
                     <form id="idFormBusqueda" autocomplete="off" method="post">
                         <div class="input-group input-group-sm">
 
-                            <select value="<?php 
-                            if($_POST) {
-                                $tipousuario = $_POST['tipousuario'];
-                            } else if($_GET['user']){
-                                $tipousuario = $_GET['user'];
-                            }
+                        <select value="<?php 
                             
                             echo $tipousuario;
                         
@@ -123,10 +125,20 @@ if($_POST && !$_POST['tipousuario']) {
                                 " class="form-control" name="tipousuario">
                                <!-- <option <?php //if($tipousuario == "Coordinador") echo 'selected'  ?> value="Coordinador">
                                     Coordinador</option> -->
-                                <option <?php if($tipousuario == "Estudiante") echo 'selected'  ?> value="Estudiante">
-                                    Estudiante</option>
-                                <option <?php if($tipousuario == "Director") echo 'selected'  ?> value="Director">
-                                    Profesor</option>
+                                    <?php
+                                    $sql=("SELECT distinct TipoUsuario FROM usuarios ORDER BY id DESC");
+                                     $query=mysqli_query($mysqli,$sql);
+                                     while($arreglo=mysqli_fetch_array($query)){
+                                   // echo '<option>'.$arreglo[0].'</option>';
+                                   if($arreglo[0] == "Estudiante" || $arreglo[0] == "Director") {
+                                    echo '<option value="'.$arreglo[0].'"';
+                                    if($tipousuario == $arreglo[0]){
+                                        echo 'selected';
+                                    }
+                                    echo '>'.$arreglo[0].'</option>';
+                                   }
+                                }
+                                ?>
                                <!-- <option <?php //if($tipousuario == "Jurado") echo 'selected'  ?> value="Jurado">
                                     Secretari@</option> -->
                             </select>
@@ -205,6 +217,7 @@ if($_POST && !$_POST['tipousuario']) {
                  $Telefono=$arreglo[10];
                  $Programa=$arreglo[11];
                  $FechaN=$arreglo[12];
+                 $foto = $arreglo[14];
 
         echo ' 
                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
@@ -234,8 +247,14 @@ if($_POST && !$_POST['tipousuario']) {
                                 <strong>Fec. Nacimiento:</strong> '. $FechaN .'</li>
                         </ul>
                     </div>
-                    <div class="col-5 text-center">
-                        <img src="../dist/img/avatar-user.jpg" alt="" class="img-circle img-fluid">
+                    <div class="col-5 text-center">';
+                    if(empty($foto)) {
+                        echo '<img src="../dist/img/avatar-user.jpg" alt="" class="img-circle img-fluid">';
+                      } else {
+                        echo '<img src="data:image/jpg;base64,'.base64_encode($foto).'" alt="" class="img-circle img-fluid">';
+                      }
+                    
+                    echo '
                     </div>
                 </div>
             </div>
@@ -345,12 +364,21 @@ if($_POST && !$_POST['tipousuario']) {
 
 <script>
 $(document).ready(function() {
-    Height();
+    //Height();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        Height();
+    });
 });
 function Height(event) {
-    var card = document.getElementById("idCard");
-    localStorage.setItem("height", card.clientHeight);
+    //var card = document.getElementById("idCard");
+    //localStorage.setItem("height", card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
+
+$(document).on("click", ".page-link", function() {
+    Height();
+});
 </script>
 
 

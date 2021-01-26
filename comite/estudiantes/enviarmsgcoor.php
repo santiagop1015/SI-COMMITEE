@@ -4,7 +4,7 @@ date_default_timezone_set ('America/Bogota');
 utf8_decode(extract($_POST));
 
  //$fecha=date("d-m-Y H:i:s");
-    require("../../connect_db.php");
+    require("../connect_db.php");
    // echo "respuesta exitosa";
 
 

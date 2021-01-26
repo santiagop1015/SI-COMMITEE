@@ -10,9 +10,8 @@ function cambiarPestanna(pestannas, pestanna) {
   var cpestana2 = document.getElementById("cpestana2");
   var cpestana3 = document.getElementById("cpestana3");
   var cpestana4 = document.getElementById("cpestana4");
-  var cpestana = ["cpestana1", "cpestana2", "cpestana3", "cpestana4"];
+  var cpestana = ["cpestana2", "cpestana3", "cpestana4"];
   var Titulos = [
-    "Ayuda",
     "Registrar Documentos",
     "Documentos Registrados",
     "Actas",
@@ -79,7 +78,6 @@ function cambiarPestanna(pestannas, pestanna) {
     //  $(pestanna).css("padding-bottom", "2px");
 
     //
-    enviarComen();
   });
 
   //  $(".loader").fadeOut("slow");
@@ -95,9 +93,6 @@ function myfunction() {
     // Local = Local.toString();
     // Local = "pestana" + Local;
     switch (Local) {
-      case 1:
-        cambiarPestanna(pestanas, pestana1);
-        break;
       case 2:
         cambiarPestanna(pestanas, pestana2);
         break;
@@ -118,58 +113,6 @@ function myfunction() {
     cambiarPestanna(pestanas, pestana2);
   }
 }
-
-var enviarComen = function () {
-  $("#idButtonEnviarComen").on("click", function (e) {
-    e.preventDefault();
-    //alert("123");
-
-    var pharafComen = document.getElementById("idMessageComen");
-    var BoxComen = document.getElementById("idBoxComen");
-    var iconBoxComen = document.getElementById("idIConBoxComen");
-    var paqueteDeDatos = new FormData();
-    var other_data = $("#idFormComen").serializeArray();
-
-    $.each(other_data, function (key, input) {
-      paqueteDeDatos.append(input.name, input.value);
-    });
-
-    // console.log(other_data);
-    //other_data.
-
-    if (other_data[3].value.length <= 0) {
-      //   alert("Comentario vacio");
-      pharafComen.innerHTML = "Ingrese un comentario";
-      BoxComen.style.display = "Block";
-      BoxComen.className = "alert alert-danger alert-dismissible mt-6";
-      iconBoxComen.className = "icon fas fa-ban";
-    } else {
-      $.ajax({
-        type: "POST",
-        contentType: false,
-        processData: false,
-        cache: false,
-        url: "pages/enviarmsgcoor.php",
-        data: paqueteDeDatos,
-      }).done(function (info) {
-        //  console.log(info);
-
-        if (info == 1) {
-          pharafComen.innerHTML = "Comentario Registrado Correctamente";
-          BoxComen.style.display = "Block";
-          BoxComen.className = "alert alert-success alert-dismissible";
-          iconBoxComen.className = "icon fas fa-check";
-          document.getElementById("idTextAreaComen").value = "";
-        } else {
-          pharaf.innerHTML = info;
-          cardMessages.style.display = "Block";
-          cardMessages.className = "alert alert-danger alert-dismissible";
-          iconBox.className = "icon fas fa-ban";
-        }
-      });
-    }
-  });
-};
 
 $(document).on("ready", function () {
   registerMessages();

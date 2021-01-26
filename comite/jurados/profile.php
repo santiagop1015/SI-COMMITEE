@@ -54,7 +54,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link href="LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -84,9 +84,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
 }
 </style>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
-<script src="LocalSources/js/jquery.min.js"></script>
+<script src="../LocalSources/js/jQuery/2.0.3/jquery.min.js"></script>
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
-<script src="LocalSources/js/bootstrap.min.js"></script>
+<script src="../LocalSources/js/bootstrap.min.js"></script>
 
 <script>
 
@@ -98,83 +98,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <div class="loader"></div>
     <div class="wrapper">
 
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light"
-            style="background-color:#B42A2A; color: white;">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars white"></i></a>
-                </li>
-
-            </ul>
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item">
-                    <a id="idChatIcon" class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
-                        role="button">
-                        <i id="idIconClassChat" class="far fa-comments white"></i>
-                    </a>
-                    <script>
-                    $(document).on("click", "#idChatIcon", function() {
-                        var iconChatBar = document.getElementById("idIconClassChat");
-                        if (iconChatBar.className == "far fa-comments white") {
-                            iconChatBar.className = "fas fa-comments white";
-                        } else {
-                            iconChatBar.className = "far fa-comments white";
-                        }
-                    });
-                    </script>
-                </li>
-                <li class="nav-item dropdown">
-                    <a id="idAnclaIconLogout" class="nav-link" data-toggle="modal" data-target="#idModalLogout">
-                        <i id="idIconLogout" class="fas fa-door-closed white"></i>
-                    </a>
-                    <script>
-                    window.addEventListener('load', iniciar, false);
-
-                    function iniciar() {
-                        var AnclaLogout = document.getElementById('idAnclaIconLogout');
-                        AnclaLogout.addEventListener('mouseover', overLogout, false);
-                        AnclaLogout.addEventListener('mouseout', outLogout, false);
-                    }
-
-                    function overLogout() {
-                        var IconLogout = document.getElementById('idIconLogout');
-                        IconLogout.className = "fas fa-door-open white";
-                    }
-
-                    function outLogout() {
-                        var IconLogout = document.getElementById('idIconLogout');
-                        IconLogout.className = "fas fa-door-closed white";
-                    }
-                    </script>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Modal cerrar sesion -->
-        <div class="modal fade" id="idModalLogout" tabindex="-1" role="dialog" aria-labelledby="idModalLogoutTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">¿Seguro que quieres salir?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success"
-                            onclick="window.location.href='../desconectar.php'">Si</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Modal cerrar sesion-->
+    <?php include "../header.php" ?>
 
 
         <!-- /.navbar -->
@@ -207,10 +131,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         <a href="#" class="d-block" style="color: white;">
                             <?php 
                         $usuario = $_SESSION['user'];
-                        //$posicion_espacio = strpos($usuario, " ");
-                        //$usuario=substr($usuario,0,$posicion_espacio);
-                        $recortarUsuario = explode(' ',$usuario);
-                        echo $recortarUsuario[0];?>
+                        $posicion_espacio = strpos($usuario, " ");
+                        $usuario=substr($usuario,0,$posicion_espacio);
+                        echo $usuario;?>
                         </a>
                     </div>
 
@@ -224,8 +147,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                            <li id="pestana2" class="nav-item">
-                                <a href='jurado.php' class="nav-link">
+                            <li class="nav-item">
+                                <a href="jurado.php" class="nav-link">
                                     <i class="nav-icon fa fa-arrow-left white"></i>
                                     <p class="white">
                                         Volver
@@ -235,14 +158,6 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         </ul>
                     </div>
                 </nav>
-
-                <script>
-               /* function toEstudiante(numero) {
-                    location.replace("secretaria.php");
-                }*/
-                </script>
-
-
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -652,12 +567,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
         <!-- /.content -->
 
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>2020</b>
-            </div>
-            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
-        </footer>
+
+        <!-- Footer -->
+        <?php include '../footer.php'; ?>
+        <!-- /. Footer -->
 
 
 

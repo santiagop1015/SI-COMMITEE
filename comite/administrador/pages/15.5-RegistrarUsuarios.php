@@ -145,10 +145,23 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         <div class="col-6">
                             <label>Programa: </label>
                             <select class="form-control" name="programa" required>
-                                <option value="Industrial">Industrial</option>
-                                <option value="Sistemas">Sistemas</option>
-                                <option value="Mecanica">Mecanica</option>
-                                <option value="Ambiental">Sistemas</option>
+                            <?php
+                            $sql=("SELECT distinct programa FROM programas ORDER BY id ASC");
+                            $query=mysqli_query($mysqli,$sql);
+                            while($arreglo=mysqli_fetch_array($query)){
+                             //   echo '<option value="'.$arreglo[0].'">'.$arreglo[0].'</option>';
+                          // echo '<option>'.$arreglo[0].'</option>';
+                            
+                                
+                           echo '<option value="'.$arreglo[0].'"';
+                           if($programa == $arreglo[0]){
+                               echo 'selected';
+                           }
+                           echo '>'.$arreglo[0].'</option>';
+                        
+                          
+                       }
+                            ?>
                             </select>
                         </div>
 

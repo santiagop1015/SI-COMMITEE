@@ -3,7 +3,7 @@
 <?php
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../../Login/index.html");
+    header("Location:../../../index.html");
 }
 	//@$buscart=$_POST['buscart'];
 //	@$buscar=$_POST['buscar'];
@@ -23,7 +23,7 @@ $passd=$arreglo[8];
 
  if ($arreglo[2]!='Jurado') {
 	require("../../desconectar.php");
-	header("Location:../../Login/index.html");
+	header("Location:../../../index.html");
 }
 }
 ?>
@@ -35,7 +35,7 @@ $passd=$arreglo[8];
     <title>SI-COMMITEE || Actas de Sistemas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../LocalSources/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -43,7 +43,7 @@ $passd=$arreglo[8];
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="../plugins/jquery/jquery.min.js"></script>
@@ -63,14 +63,68 @@ $passd=$arreglo[8];
     <section class="content-header">
         <div class="container-fluid">
             <div class="row md-2">
-                <h1 id="Titulo">Actas Sistemas</h1>
+                <h1 id="Titulo">Actas</h1>
             </div>
         </div>
     </section>
+    <?php
+      if(!$_GET) {
+          header('Location:?programa='.$programa);
+      } else {
+          if($programa == "Sistemas") {
+              if($_GET['programa'] !== "Sistemas" && $_GET['programa'] !== "Industrial") {
+                header('Location:?programa='.$programa);
+              }
+          } else {
+            if($_GET['programa'] !== $programa) {
+                header('Location:?programa='.$programa);
+            }
+          }
+      $acta_program = $_GET['programa'];
+      }
+    ?>
 
+    <select class="form-control mb-3" onchange="OnSelectedProgram(this)" value="<?php 
+                            echo $acta_program;
+                                ?>">
+        <?php
+                $sql=("SELECT distinct programa FROM programas ORDER BY id DESC");
+                 $query=mysqli_query($mysqli,$sql);
+                 while($arreglo=mysqli_fetch_array($query)){
+               // echo '<option>'.$arreglo[0].'</option>';
+                if($programa == "Sistemas") {
+                    if($arreglo[0] == "Sistemas" || $arreglo[0] == "Industrial") {
+                       echo '<option value="'.$arreglo[0].'"';
+                       if($acta_program == $arreglo[0]){
+                           echo 'selected';
+                       }
+                       echo '>'.$arreglo[0].'</option>';
+                    }
+                } else {
+                    if($arreglo[0] == $programa) {
+                        echo '<option value="'.$arreglo[0].'"';
+                        if($acta_program == $arreglo[0]){
+                            echo 'selected';
+                        }
+                        echo '>'.$arreglo[0].'</option>';
+                     }
+                }
+            }
+            ?>
+    </select>
+    <script>
+    function OnSelectedProgram(param) {
+        var select = param;
+
+        //console.log(select);
+        //console.log(select.value);
+        window.location.href = '?programa=' + select.value;
+    }
+    </script>
 
     <div class="card card-primary card-tabs">
         <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
+
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                 <?php
                         $raiz = "../../archivos";
@@ -142,7 +196,7 @@ $passd=$arreglo[8];
                             aria-labelledby="custom-tabs-one-5-tab">';
                         }
                         
-                        $sql = ("SELECT * FROM actas where programa='Sistemas' AND YEAR(fecha_inicial) = $año ORDER BY numero DESC");
+                        $sql = ("SELECT * FROM actas where programa='$acta_program' AND YEAR(fecha_inicial) = $año ORDER BY numero DESC");
                         $query = mysqli_query($mysqli, $sql);
 
                         echo '<table class="table table-bordered table-striped">';
@@ -159,7 +213,11 @@ $passd=$arreglo[8];
                                                 echo "<td class='text-center'>$arreglo[1]</td>";
                                                 echo "<td class='text-center'>$arreglo[4]</td>";
                                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                if(!empty($arreglo[6])) {
+                                                    echo "<td class='text-center'><a class='btn btn-default btn-sm' href='../$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                    } else {
+                                                        echo "<td class='text-center'>No disponible</td>";
+                                                    }
                                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 
@@ -182,12 +240,16 @@ $passd=$arreglo[8];
 </body>
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<script src="../LocalSources/ajax/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Height();
+    //Height();
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        Height();
+    });
 
     $("#custom-tabs-one-tab").click(function() {
         setTimeout(() => {
@@ -198,8 +260,9 @@ $(document).ready(function() {
 });
 
 function Height(event) {
-    var Card = document.getElementById("idCard");
-    localStorage.setItem("height", Card.clientHeight);
+    //var Card = document.getElementById("idCard");
+    //localStorage.setItem("height", Card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 

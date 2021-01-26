@@ -7,7 +7,7 @@ function cambiarPestanna(pestannas, pestanna) {
     var cpestana2 = document.getElementById("cpestana2");
     var cpestana3 = document.getElementById("cpestana3");
     var cpestana4 = document.getElementById("cpestana4");
-    var cpestana = ["cpestana1", "cpestana2", "cpestana3"];
+    var cpestana = ["cpestana1", "cpestana2"];
     var Titulos = [
         "Generar Acta",
         "Documentos para Evaluar",
@@ -61,7 +61,7 @@ function cambiarPestanna(pestannas, pestanna) {
     //$(".loader").fadeOut("slow");
     document.getElementById("content").classList.remove("d-none");
     document.getElementById("IdIconLoad").classList.add("d-none");
-    ReloadsFrames();
+    //ReloadsFrames();
     
 }
 
@@ -77,9 +77,6 @@ function myfunction() {
                 break;
             case 2:
                 cambiarPestanna(pestanas, pestana2);
-                break;
-            case 3:
-                cambiarPestanna(pestanas, pestana3);
                 break;
             default: 1
                 cambiarPestanna(pestanas, pestana1);

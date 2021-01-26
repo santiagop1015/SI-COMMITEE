@@ -3,7 +3,7 @@
 <?php
 session_start();
 if (@!$_SESSION['user']) {
-    header("Location:../Login/index.html");
+    header("Location:../../index.html");
 }
 
 date_default_timezone_set ('America/Bogota');
@@ -41,7 +41,7 @@ $nota=0;
     <title>SI-COMMITEE || Estado Actual</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../LocalSources/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
@@ -49,7 +49,7 @@ $nota=0;
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
-    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <link href="../../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 </head>
 <style>
 .white {
@@ -57,7 +57,7 @@ $nota=0;
 }
 </style>
 
-<body style="background-color: #f4f6f9;" onresize="Evaluar()">
+<body id="idCard" style="background-color: #f4f6f9;">
 
     <section class="content-header">
         <div class="container-fluid">
@@ -67,7 +67,7 @@ $nota=0;
         </div>
     </section>
 
-    <div id="idCard" class="card card-warning" style="margin-bottom: 0px; ">
+    <div class="card card-warning" style="margin-bottom: 0px; ">
         <div class="card-header" style="background-color:#B42A2A; color: white;">
             <h3 class="card-title">
                 <button type="button" class="btn btn-tool"><i class="fa fa-arrow-circle-left white"
@@ -135,17 +135,29 @@ $nota=0;
 				    	//echo "<td>$arreglo[5]</td>";
 				    	echo "<td class='text-center'>$arreglo[6]</td>";
 				    	echo "<td class='text-center'>$arreglo[7]</td>";
-				    	if(strlen($arreglo[8]) > 1) {
-                            echo "<td class='text-center'>
-                            <a class='btn btn-primary btn-sm' href='../../archivos/$alma/$arreglo[8]'
-                            target='_blank'>
-                            $arreglo[8]
-                            </a>
-                            </td>
-                            ";
-                            } else {
-                            echo "<td class='text-center'> </td>";
-                            }
+                        echo "<td class='text-center'>";
+                        $raiz = "../../archivos/$alma/$arreglo[8]";
+                        if(strlen($arreglo[8]) > 1) {
+                                                              
+                          if(strlen($arreglo[8]) > 15) {
+                              echo "
+                              <a class='btn btn-primary btn-sm' href='$raiz'
+                              target='_blank'>
+                              ".substr($arreglo[8],0,15)."..."."
+                              </a>
+                              ";
+                          } else {
+                              echo "
+                          <a class='btn btn-primary btn-sm' href='$raiz'
+                          target='_blank'>
+                          $arreglo[8]
+                          </a>
+                          ";
+                          }
+                          } else {
+                          echo "No disponible";
+                          }
+                          echo "</td>";
 				    	echo "<td class='text-center'>$arreglo[9]</td>";
 				    	echo "<td class='text-center'>En Proceso </td>";
                        /* echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";
@@ -157,17 +169,29 @@ $nota=0;
 				    	//echo "<td>$arreglo[5]</td>";
 				    	echo "<td class='text-center'>$arreglo[6]</td>";
 				    	echo "<td class='text-center'>$arreglo[7]</td>";
-				    	if(strlen($arreglo[8]) > 1) {
-                            echo "<td class='text-center'>
-                            <a class='btn btn-primary btn-sm' href='../../archivos/$alma/$arreglo[8]'
-                            target='_blank'>
-                            $arreglo[8]
-                            </a>
-                            </td>
-                            ";
-                            } else {
-                            echo "<td class='text-center'> </td>";
-                            }
+				    	echo "<td class='text-center'>";
+                        $raiz = "../../archivos/$alma/$arreglo[8]";
+                        if(strlen($arreglo[8]) > 1) {
+                                                              
+                          if(strlen($arreglo[8]) > 15) {
+                              echo "
+                              <a class='btn btn-primary btn-sm' href='$raiz'
+                              target='_blank'>
+                              ".substr($arreglo[8],0,15)."..."."
+                              </a>
+                              ";
+                          } else {
+                              echo "
+                          <a class='btn btn-primary btn-sm' href='$raiz'
+                          target='_blank'>
+                          $arreglo[8]
+                          </a>
+                          ";
+                          }
+                          } else {
+                          echo "No disponible";
+                          }
+                          echo "</td>";
 				    	echo "<td class='text-center'>$arreglo[9]</td>";
 				    	echo "<td class='text-center'>No Aplica </td>";
                         /*echo "<td><a href='res_eval.php?id=$arreglo[0]'><img src='images/html.png' width='30'  height='30' class='img-rounded'></td>";
@@ -222,24 +246,29 @@ $nota=0;
 </body>
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<script src="../LocalSources/ajax/jquery/3.5.1/jquery.min.js"></script>
+<script src="../../LocalSources/js/jQuery/3.5.1/jquery.min.js"></script>
 <script>
 //window.addEventListener("storage", Evaluar);
 
 $(document).ready(function() {
-    Evaluar();
+    //Evaluar();
     /*  $("#idFormEvaluar").submit(function() {
           //  alert("Submitted");
           Evaluar();
       });
       */
+    window.addEventListener('resize', function(event) {
+        // do stuff here
+        Evaluar();
+    });
 });
 
 function Evaluar(event) {
-    var card = document.getElementById("idCard");
+    //var card = document.getElementById("idCard");
     // console.log(card.clientHeight);
-    localStorage.setItem("evaluar", card.clientHeight);
+    //localStorage.setItem("evaluar", card.clientHeight);
     //  console.log(card.clientHeight);
+    window.parent.ReloadsFrames("non-reaload");
 }
 </script>
 
