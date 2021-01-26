@@ -127,18 +127,19 @@ $nota=0;
 				    	echo "<td class='text-center'>$arreglo[6]</td>";
                         echo "<td class='text-center'>$arreglo[7]</td>";
                         echo "<td class='text-center'>";
+                        $raiz = "../../archivos/$alma/$arreglo[8]";
 				    	if(strlen($arreglo[8]) > 1) {
                                                     
                             if(strlen($arreglo[8]) > 15) {
                                 echo "
-                                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                <a class='btn btn-primary btn-sm' href='$raiz'
                                 target='_blank'>
                                 ".substr($arreglo[8],0,15)."..."."
                                 </a>
                                 ";
                             } else {
                                 echo "
-                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                            <a class='btn btn-primary btn-sm' href='$raiz'
                             target='_blank'>
                             $arreglo[8]
                             </a>
@@ -159,19 +160,20 @@ $nota=0;
 				    	//echo "<td>$arreglo[5]</td>";
 				    	echo "<td class='text-center'>$arreglo[6]</td>";
 				    	echo "<td class='text-center'>$arreglo[7]</td>";
-				    	echo "<td class='text-center'>";
+                        echo "<td class='text-center'>";
+                        $raiz = "../../archivos/$alma/$arreglo[8]";
 				    	if(strlen($arreglo[8]) > 1) {
                                                     
                             if(strlen($arreglo[8]) > 15) {
                                 echo "
-                                <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                                <a class='btn btn-primary btn-sm' href='$raiz'
                                 target='_blank'>
                                 ".substr($arreglo[8],0,15)."..."."
                                 </a>
                                 ";
                             } else {
                                 echo "
-                            <a class='btn btn-primary btn-sm' href='../archivos/$alma/$arreglo[8]'
+                            <a class='btn btn-primary btn-sm' href='$raiz'
                             target='_blank'>
                             $arreglo[8]
                             </a>
