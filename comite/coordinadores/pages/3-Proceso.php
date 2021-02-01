@@ -81,7 +81,7 @@ $passd=$arreglo[8];
                         <?php
                 $total1=0;
 
-               $sql=("SELECT * FROM tesis  where titulo_tesis like '%$buscar%'  and programa='$programa' and terminado=1 and (ID_estado='Entrega Poster' or ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto'  or ID_estado='Entrega Proyecto' or ID_estado='Correccion Propuesta' or ID_estado='Correccion Anteproyecto' or ID_estado='Correccion Proyecto' or ID_estado='Solicitud opción de grado' or ID_estado='Certificado de Notas')  ORDER BY  ID_tesis DESC");
+               $sql=("SELECT * FROM tesis  where titulo_tesis like '%$buscar%'  and programa='$programa' and terminado=1 and (ID_estado='Entrega Poster' or ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto'  or ID_estado='Entrega Proyecto' or ID_estado='Correccion Propuesta' or ID_estado='Correccion Anteproyecto' or ID_estado='Correccion Proyecto' or ID_estado='Solicitud opción de grado')  ORDER BY  ID_tesis DESC");
               // $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
                $query=mysqli_query($mysqli,$sql);
                 

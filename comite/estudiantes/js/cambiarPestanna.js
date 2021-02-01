@@ -10,12 +10,14 @@ function cambiarPestanna(pestannas, pestanna) {
   var cpestana2 = document.getElementById("cpestana2");
   var cpestana3 = document.getElementById("cpestana3");
   var cpestana4 = document.getElementById("cpestana4");
-  var cpestana = ["cpestana1", "cpestana2", "cpestana3", "cpestana4"];
+  var cpestana5 = document.getElementById("cpestana5");
+  var cpestana = ["cpestana1", "cpestana2", "cpestana3", "cpestana4", "cpestana5"];
   var Titulos = [
     "Ayuda",
     "Registrar Documentos",
     "Documentos Registrados",
     "Actas",
+    "Aplazamiento Semestre",
   ];
 
   pestanna = document.getElementById(pestanna.id);
@@ -107,10 +109,13 @@ function myfunction() {
       case 4:
         cambiarPestanna(pestanas, pestana4);
         break;
-
+        case 4:
+      cambiarPestanna(pestanas, pestana5);
+          break;
       default: 2
         cambiarPestanna(pestanas, pestana2);
         break;
+      
     }
     // console.log(Local);
   } else {
@@ -256,6 +261,7 @@ var registerMessages = function () {
           // $("#message").val("");
           // var altura = $("#conversation").prop("scrollHeight");
           // $("#conversation").scrollTop(altura);
+          console.log("paquetedatos",paqueteDeDatos);
           console.log(info);
 
           if (info == 1) {

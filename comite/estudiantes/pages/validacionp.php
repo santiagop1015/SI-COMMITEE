@@ -119,13 +119,19 @@ $pr=$_SESSION['id'];
             $alma="/otros";	
             $nombre_archivo=$nombre_archivo;
        }
-
+       $nombre_archivo = $_REQUEST['ID_estado'].'_'.date("YmdHis").'_'.$nombre_archivo;  
        $raiz = "../../archivos";
       // echo "Guardado <br>";
 
        if($tipo_archivo=='application/pdf'){
         //$nombre_archivo=$ced.'.pdf';
+         echo ' <script language="javascript">console.log("' + $_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo" + '");</script> ';
+
         move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo");
+       
+        //ToDo: Prueba Local
+        //move_uploaded_file($_FILES['archivo']['tmp_name'],"D:/Documents/TestDocuments/$nombre_archivo");
+
     }else{
     //$nombre_archivo=$ced.'.doc';
     move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo"); 
@@ -203,9 +209,9 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
     
     //var_dump($_REQUEST);
 
-    
-         mysqli_query($conexion,"insert into tesis(fecha_doc, Titulo_tesis, ID_estudiante,ID_estado,archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado ) values
-          ($fecha_actual,'$_REQUEST[Titulo_tesis]','$_REQUEST[ID_estudiante]','$_REQUEST[ID_estado]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante1]', $id_estudiante2, '$_REQUEST[terminado]')") 
+        
+         mysqli_query($conexion,"insert into tesis(proyecto, Titulo_tesis, ID_estudiante,ID_estado,archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota  ) values
+          ($fecha_actual,'$_REQUEST[Titulo_tesis]','$_REQUEST[ID_estudiante]','$_REQUEST[ID_estado]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'')") 
           or die("Problemas en el select".mysqli_error($conexion));
           
           mysqli_close($conexion);
@@ -217,11 +223,10 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
 
     } else {
 
-
-          mysqli_query($conexion,"insert into tesis(fecha_doc, Titulo_tesis, ID_estudiante, ID_estado, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado ) values
-          ($fecha_actual, '$_REQUEST[Titulo_tesis]', '$_REQUEST[ID_estudiante]', '$_REQUEST[ID_estado]', '$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante1]', $id_estudiante2, '$_REQUEST[terminado]')") 
+          mysqli_query($conexion,"insert into tesis(proyecto, Titulo_tesis, ID_estudiante, ID_estado, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota  ) values
+          ($fecha_actual, '$_REQUEST[Titulo_tesis]', '$_REQUEST[ID_estudiante]', '$_REQUEST[ID_estado]', '$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'')") 
           or die("Problemas en el select".mysqli_error($conexion));
-          echo $fecha_actual;
+          //echo $fecha_actual;
         //  echo date('Y') . '-' . date('m') . '-' . date('d'); 
           
           mysqli_close($conexion);
