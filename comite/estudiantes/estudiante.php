@@ -204,6 +204,14 @@ $raiz = "../archivos";
                                     </p>
                                 </a>
                             </li>
+                            <li id="pestana5" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana5);' class="nav-link">
+                                    <i class="nav-icon fa fa-user-md white"></i>
+                                    <p class="white">
+                                        Aplazamiento Semestre
+                                    </p>
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
