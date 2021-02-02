@@ -10,11 +10,13 @@ function cambiarPestanna(pestannas, pestanna) {
   var cpestana2 = document.getElementById("cpestana2");
   var cpestana3 = document.getElementById("cpestana3");
   var cpestana4 = document.getElementById("cpestana4");
-  var cpestana = ["cpestana2", "cpestana3", "cpestana4"];
+  var cpestana = ["cpestana2", "cpestana3", "cpestana4", "cpestana5"];
+  var cpestana5 = document.getElementById("cpestana5");
   var Titulos = [
     "Registrar Documentos",
     "Documentos Registrados",
     "Actas",
+    "Aplazamiento Semestre",
   ];
 
   pestanna = document.getElementById(pestanna.id);
@@ -101,6 +103,9 @@ function myfunction() {
         break;
       case 2:
         cambiarPestanna(pestanas, pestana4);
+        break;
+      case 3:
+        cambiarPestanna(pestanas, pestana5);
         break;
     }
     // console.log(Local);
@@ -195,6 +200,7 @@ var registerMessages = function () {
           // $("#message").val("");
           // var altura = $("#conversation").prop("scrollHeight");
           // $("#conversation").scrollTop(altura);
+          console.log("paquetedatos",paqueteDeDatos);
           console.log(info);
 
           if (info == 1) {

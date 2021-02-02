@@ -283,7 +283,7 @@ $raiz = "../archivos";
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
                                                             <label>Id</label>
-                                                            <input type="text" name="ID_estudiante"
+                                                            <input type="text" id="ID_estudiante" name="ID_estudiante"
                                                                 value="<?php echo '' . $_SESSION['id'] . ''; ?>"
                                                                 class="form-control" placeholder="Id Estudiante.."
                                                                 readonly="readonly">
@@ -417,7 +417,7 @@ $raiz = "../archivos";
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tipo de documento:</label>
-                                                <select name="ID_estado" class="form-control select2"
+                                                <select onchange="fValidarFechasDocumento(idFormRegistrarDoc)" name="ID_estado" id="ID_estado" class="form-control select2"
                                                     style="width: 100%;" required>
                                                     <option></option>
                                                     <?php
@@ -944,6 +944,130 @@ $raiz = "../archivos";
         </div>
         <!--TPestana4-->
 
+        <!-- Pestana5 ---------------------------------------------------------------------------------------------------------- -->
+
+        <div id="cpestana5">
+                        <div class="container-fluid">
+                            <form id="idFormAplazamiento" action="pages/registraraplazamiento.php" method="post">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="card card-warning">
+                                            <?php
+                                        require("../connect_db.php");
+                                        $sql = ("SELECT * FROM login where id='$pr'");
+                                        $query = mysqli_query($mysqli, $sql);
+                                        while ($arreglo = mysqli_fetch_array($query)) {
+                                            $programa = $arreglo[11];
+                                        }
+
+                                        ?>
+                                            <div class="card-body">
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <!-- text input -->
+                                                        <div class="form-group">
+                                                            <label>Nombre</label>
+                                                            <input type="text" id="Nombre_estudiante" name="Nombre_estudiante" class="form-control"
+                                                                placeholder="Nombre Estudiante.."
+                                                                value="<?php echo '' . $_SESSION['user'] . ''; ?>"
+                                                                readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Id</label>
+                                                            <input type="text" id="IdEstudianteSeleccionado" name="IdEstudianteSeleccionado"
+                                                                value="<?php echo '' . $_SESSION['id'] . ''; ?>"
+                                                                class="form-control" placeholder="Id Estudiante.."
+                                                                readonly="readonly">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- Año Aplazamiento -->
+                                                <div class="row">
+                                                <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label>Año</label>
+                                                            <select id="AnioSeleccionado" name="AnioSeleccionado" class="form-control select2"
+                                                                style="width: 100%;" required>
+                                                                <?php
+                                                    $contador = 0;
+                                                    require("../connect_db.php");
+
+                                                    $query = $mysqli->query("call committee.Constulta_Anios_Aplazamiento();");
+                                                    while ($valores = mysqli_fetch_array($query)) {
+                                                        echo '<option value="' . $valores[Anio] . '">' . $valores[Anio] . '</option>';
+                                                    }
+                                                    ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                <!-- Año Aplazamiento -->     
+
+                                                <!-- Semestre -->       
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Semestre:</label>
+                                                        <select id="SemestreSeleccionado"  name="SemestreSeleccionado" class="form-control select2"
+                                                            style="width: 100%;">
+                                                            <option selected value="1">1</option>
+                                                            <option value="2">2</option>
+
+                                                        </select>
+                                                    </div>
+                                                     </div>
+                                                </div>    
+
+
+                                                <div class="form-group">
+                                                        <label>Razón aplazamiento</label>
+                                                        <textarea id="Descripcion" name="Descripcion" class="form-control" rows="3"
+                                                            placeholder="Escriba el motivo de aplazamiento..." required></textarea>
+                                                </div>
+
+
+
+                                                <div class="row">
+                                                    <div class="col-12"  style="text-align:right;">
+                                                    <button type="button" onclick="fregistrarAplazamiento(idFormAplazamiento)" class="btn btn-success">Guardar</button>
+
+                                                </div>
+                                                
+
+                                                <div class="col-12 pt-2" >
+                                                <div id="idMensajeAplazamiento"
+                                                        class="alert alert-danger alert-dismissible mt-6"
+                                                        style="Display: None;">
+                                                        <h5>
+                                                            <i id="idIConBoxComenAplazamiento" class="icon fas fa-ban"></i>
+                                                            Alerta
+                                                        </h5>
+                                                        <p id="idMessageAplazamientoBody"></p>
+
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <!-- /.card-body -->
+                                            </div>
+      
+                                </div>
+
+                        </div>
+
+                        </form>
+
+                    </div>
+
+        <!-- Pestana5 ---------------------------------------------------------------------------------------------------------- -->
+        
+        
+
+
     </div>
 
 
@@ -970,5 +1094,6 @@ $raiz = "../archivos";
 </body>
 
 <script type="text/javascript" src="js/cambiarPestanna.js"></script>
+<script type="text/javascript" src="js/postfunctions.js"></script>
 
 </html>

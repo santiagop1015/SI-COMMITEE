@@ -643,7 +643,7 @@ $dir = $_SESSION['user'];
                                 $total_anteproyects = 0;
                                 //echo $total2;
                                 require("../connect_db.php");
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto' or ID_estado='Correccion Anteproyecto') ORDER BY id_tesis DESC ");
+                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto') ORDER BY id_tesis DESC ");
                                 $query = mysqli_query($mysqli, $sql);
                                 ?>
                                     <div class="box">
@@ -774,7 +774,7 @@ $dir = $_SESSION['user'];
                                     <?php
                                 $total_proyects = 0;
                                 require("../connect_db.php");
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC");
+                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto') ORDER BY  id_tesis DESC");
                                 $query = mysqli_query($mysqli, $sql);
                                 ?>
                                     <div class="box">
@@ -918,7 +918,8 @@ $dir = $_SESSION['user'];
                                     <?php
                                       $totalpeval = 0;
                                       require("../connect_db.php");
-                                      $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC ");
+                                      $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and Aprob_Dir='SI' 
+                                      and (ID_estado='Entrega Proyecto' or ID_estado='Correccion Proyecto') ORDER BY  id_tesis DESC ");
                                       $query = mysqli_query($mysqli, $sql);
                                       ?>
                                     <div class="tab-content" id="custom-tabs-evaluados-tabContent">
