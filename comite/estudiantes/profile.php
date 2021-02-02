@@ -18,7 +18,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     $id = $arreglo[0];
     $cedula = $arreglo[1];
     $correo = $arreglo[4];
-    $password = $arreglo[9];
+    $password = $arreglo[7];
     $tipoUsuario = $arreglo[2];
     $telefono = $arreglo[10];
     $programa = $arreglo[11];
@@ -43,7 +43,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Estudiante</title>
+    <title>SI-COMMITEE || Secretaria</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -54,7 +54,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -84,9 +84,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
 }
 </style>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
-<script src="LocalSources/js/jquery.min.js"></script>
+<script src="../LocalSources/js/jQuery/2.0.3/jquery.min.js"></script>
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
-<script src="LocalSources/js/bootstrap.min.js"></script>
+<script src="../LocalSources/js/bootstrap.min.js"></script>
 
 <script>
 
@@ -131,10 +131,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         <a href="#" class="d-block" style="color: white;">
                             <?php 
                         $usuario = $_SESSION['user'];
-                        //$posicion_espacio = strpos($usuario, " ");
-                        //$usuario=substr($usuario,0,$posicion_espacio);
-                        $recortarUsuario = explode(' ',$usuario);
-                        echo $recortarUsuario[0];?>
+                        $posicion_espacio = strpos($usuario, " ");
+                        $usuario=substr($usuario,0,$posicion_espacio);
+                        echo $usuario;?>
                         </a>
                     </div>
 
@@ -148,50 +147,17 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                            <li id="pestana2" class="nav-item">
-                                <a href='javascript:toEstudiante(1);' class="nav-link">
-                                    <i class="nav-icon fa fa-edit white"></i>
+                            <li class="nav-item">
+                                <a href="estudiante.php" class="nav-link">
+                                    <i class="nav-icon fa fa-arrow-left white"></i>
                                     <p class="white">
-                                        Registrar Documento
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana3" class="nav-item">
-                                <a href="javascript:toEstudiante(2);" class="nav-link">
-                                    <i class="nav-icon fas fa-copy white"></i>
-                                    <p class="white">
-                                        Documentos Registrados
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana4" class="nav-item">
-                                <a href="javascript:toEstudiante(3);" class="nav-link">
-                                    <i class="nav-icon fa fa-book white"></i>
-                                    <p class="white">
-                                        Actas
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana1" class="nav-item">
-                                <a href='javascript:toEstudiante(0);' class="nav-link">
-                                    <i class="nav-icon fa fa-user-md white"></i>
-                                    <p class="white">
-                                        Ayuda
+                                        Volver
                                     </p>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </nav>
-
-                <script>
-                function toEstudiante(numero) {
-                    localStorage.setItem("number", numero);
-                    location.replace("estudiante.php");
-                }
-                </script>
-
-
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -601,12 +567,10 @@ while ($arreglo = mysqli_fetch_array($query)) {
         <!-- /.content -->
 
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>2020</b>
-            </div>
-            <strong>Universidad Libre - <a href="Universidad Libre">SI-COMMITEE</a>.</strong>
-        </footer>
+
+        <!-- Footer -->
+        <?php include '../footer.php'; ?>
+        <!-- /. Footer -->
 
 
 
@@ -618,6 +582,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
 
 </body>
+
+
+<script type="text/javascript" src="chat/chat.js"></script>
 
 
 </html>

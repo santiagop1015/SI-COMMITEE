@@ -89,22 +89,18 @@ function myfunction() {
   if (Local !== null) {
     //  Local = localStorage.getItem("number");
     Local = parseInt(Local);
-    Local = Local + 1;
+    //Local = Local + 1;
     // Local = Local.toString();
     // Local = "pestana" + Local;
     switch (Local) {
-      case 2:
+      case 0:
         cambiarPestanna(pestanas, pestana2);
         break;
-      case 3:
+      case 1:
         cambiarPestanna(pestanas, pestana3);
         break;
-      case 4:
+      case 2:
         cambiarPestanna(pestanas, pestana4);
-        break;
-
-      default: 2
-        cambiarPestanna(pestanas, pestana2);
         break;
     }
     // console.log(Local);

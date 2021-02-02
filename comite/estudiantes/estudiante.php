@@ -46,13 +46,13 @@ $raiz = "../archivos";
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="LocalSources/css/ionicons.min.css">
+    <link rel="stylesheet" href="../LocalSources/css/ionicons/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link href="LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
+    <link href="../LocalSources/css/fontsgoogleapis.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -106,9 +106,9 @@ $raiz = "../archivos";
 */
 </style>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
-<script src="LocalSources/js/jquery.min.js"></script>
+<script src="../LocalSources/js/jQuery/2.0.3/jquery.min.js"></script>
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
-<script src="LocalSources/js/bootstrap.min.js"></script>
+<!--<script src="LocalSources/js/bootstrap.min.js"></script>-->
 
 <script>
 
@@ -910,7 +910,11 @@ $raiz = "../archivos";
                                                 echo "<td class='text-center'>$arreglo[1]</td>";
                                                 echo "<td class='text-center'>$arreglo[4]</td>";
                                                 //echo "<td bgcolor='797D7F' align='center'><a href='./pdf/veracta.php?numero=$arreglo[1]&programaa=$programa&idc=$pr' target='_blanck'><img src='images/pdf.png' width='40'  height='30' class='img-rounded'></td>";
-                                                echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/$arreglo[6]'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                if(!empty($arreglo[6])) {
+                                                    echo "<td class='text-center'><a class='btn btn-default btn-sm' href='$raiz/pdf/$arreglo[6]' target='_blank'><i class='nav-icon fa fa-file-pdf' style='color: red;'></i></td>";
+                                                    } else {
+                                                        echo "<td class='text-center'>No disponible</td>";
+                                                    }
                                                 //echo "<td><a href='./pdf/veracta.php?numero=$arreglo[1]' target='_blank'><img src='images/pdf.png' width='50'  height='50' class='img-rounded'></td>";
                                                 //echo "<td><a href='admin.php?id=$arreglo[0]&idborrar=2'><img src='images/eliminar.png' width='38'  height='38' class='img-rounded'/></a></td>";
 
