@@ -1,3 +1,19 @@
+<?php
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+if (@!$_SESSION['user']) {
+    header("Location:../index.html");
+}
+require("connect_db.php");
+$sql = ("SELECT * FROM login where id='$pr'");
+$query = mysqli_query($mysqli, $sql);
+while ($arreglo = mysqli_fetch_array($query)) {
+    $tipoUser = $arreglo[2];
+} 
+?>
+
 <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color:#B42A2A; color: white;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -7,6 +23,80 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
+        <!-- Alerts Student -->
+        <?php
+    if($tipoUser == "Estudiante") {
+    ?>
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                <i class="far fa-bell white"></i>
+                <span id="IdNumberofAlerts" class="badge badge-danger navbar-badge">3</span>
+            </a>
+            <?php
+            $outAlerts;
+            $count_rows = 0;
+            $querytesis = $mysqli->query("SELECT * FROM tesis where ID_estudiante=$pr");
+            while ($arregloIdTesistoEval = mysqli_fetch_array($querytesis)) {
+                //$contador=$contador+1;
+                  //var_dump($arregloIdTesistoEval);
+                $Id_tesistoEval = $arregloIdTesistoEval[0];
+               // echo "SELECT * FROM evaluacion where Id_tesis=$Id_tesistoEval";
+               //$queryevaluacion = $mysqli->query("SELECT * FROM evaluacion where Id_tesis=$Id_tesistoEval"); 1-1927-1926-1950
+               $queryevaluacion = $mysqli->query("SELECT * FROM evaluacion where Id_tesis=$Id_tesistoEval and (concepto != 0 or concepto != '')");
+               while ($arregloEval = mysqli_fetch_array($queryevaluacion)) {
+                //$contador=$contador+1;
+                //  var_dump($valores);
+                $concepto = $arregloEval[13];
+                $fecha_evaluacion = $arregloEval[16];
+                $outAlerts = '<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                <a href="../archivos/pdf/vereval.php?id='.$Id_tesistoEval.'" class="dropdown-item" target="_blank">
+                    <!-- Message Start -->
+                    <div class="media" title="'.$arregloIdTesistoEval[3].'">
+
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Evaluacion Realizada
+                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">'.substr($arregloIdTesistoEval[3], 0, 30).'...'.'</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>'.$fecha_evaluacion.'</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+            </div>';
+
+            $count_rows = $count_rows + 1;
+              }
+            }
+
+        echo '<script>
+          document.getElementById("IdNumberofAlerts").innerHTML = "'.$count_rows.'";
+        </script>';
+           // $queryevaluacion = $mysqli->query("SELECT * FROM evaluacion where Id_tesis=$Id_tesistoEval");
+           
+           //$output .=
+           /* while ($arregloConcept = mysqli_fetch_array($queryevaluacion)) {
+                //$contador=$contador+1;
+                //  var_dump($valores);
+                //$concepto = $arregloConcept[14];
+                //var_dump($arregloConcept);
+               /* if(strpos($concepto, 'aprobado')){
+                    echo "encontrado aprobado";
+                }*/
+                
+          //  }
+          echo $outAlerts;
+            ?>
+            
+        </li>
+
+
+        <?php    
+    }
+    ?>
+        <!-- Close Alerts Student -->
         <!-- Messages Dropdown Menu -->
         <li class="nav-item">
             <a id="idAnclaIconHelp" class="nav-link" data-toggle="modal" data-target="#IdButtonHelp">
@@ -200,7 +290,7 @@
                                             paqueteDeDatos.append(input.name, input.value);
                                         });
 
-                                       // console.log(other_data);
+                                        // console.log(other_data);
                                         //other_data.
 
                                         if (other_data[3].value.length <= 0) {
@@ -219,7 +309,7 @@
                                                 url: "enviarmsgcoor.php",
                                                 data: paqueteDeDatos,
                                             }).done(function(info) {
-                                                  //console.log(info);
+                                                //console.log(info);
 
                                                 if (info == 1) {
                                                     pharafComen.innerHTML =
@@ -236,7 +326,8 @@
                                                     BoxComen.className =
                                                         "alert alert-danger alert-dismissible";
                                                     iconBoxComen.className = "icon fas fa-ban";
-                                                    pharafComen.innerHTML = "No fue posible registrar su comentario, por favor contacte al administrador del sistema";
+                                                    pharafComen.innerHTML =
+                                                        "No fue posible registrar su comentario, por favor contacte al administrador del sistema";
                                                 }
                                             });
                                         }
@@ -312,7 +403,7 @@
                                     <!--<iframe
                                         src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
                                         width="100%" height="600" style="border: none;"></iframe> -->
-                                        <a href="../modelo/committeees.pdf" style="color: blue;"
+                                    <a href="../modelo/committeees.pdf" style="color: blue;"
                                         target="_blanck">Descargar..</a>
                                 </div>
                             </div>

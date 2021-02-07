@@ -187,7 +187,7 @@ var registerMessages = function () {
         });
 
         paqueteDeDatos.append("archivo", file);
-        console.log(paqueteDeDatos);
+        //console.log(paqueteDeDatos);
 
         $.ajax({
           type: "POST",
@@ -200,8 +200,8 @@ var registerMessages = function () {
           // $("#message").val("");
           // var altura = $("#conversation").prop("scrollHeight");
           // $("#conversation").scrollTop(altura);
-          console.log("paquetedatos",paqueteDeDatos);
-          console.log(info);
+          //console.log("paquetedatos",paqueteDeDatos);
+          //console.log(info);
 
           if (info == 1) {
             pharaf.innerHTML = "Documento Registrado Correctamente";
@@ -211,6 +211,7 @@ var registerMessages = function () {
 
             //idButtonRegistrarDoc
             document.getElementById("idButtonRegistrarDoc").disabled = true;
+            document.getElementById("archivo").disabled = true;
 
             setTimeout(function () {
               // location.reload();

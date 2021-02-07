@@ -125,7 +125,7 @@ $pr=$_SESSION['id'];
 
        if($tipo_archivo=='application/pdf'){
         //$nombre_archivo=$ced.'.pdf';
-         echo ' <script language="javascript">console.log("' + $_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo" + '");</script> ';
+        // echo ' <script language="javascript">console.log("' + $_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo" + '");</script> ';
 
         move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo");
        

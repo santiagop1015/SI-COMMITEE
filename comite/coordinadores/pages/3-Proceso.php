@@ -84,12 +84,13 @@ $passd=$arreglo[8];
                         <?php
                 $total1=0;
 
-               $sql=("SELECT * FROM tesis  where titulo_tesis like '%$buscar%'  and programa='$programa' and terminado=1 and (ID_estado='Entrega Poster' or ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto'  or ID_estado='Entrega Proyecto' or ID_estado='Correccion Propuesta' or ID_estado='Correccion Anteproyecto' or ID_estado='Correccion Proyecto' or ID_estado='Solicitud opción de grado')  ORDER BY  ID_tesis DESC");
+               $sql=("SELECT * FROM tesis  where (titulo_tesis like '%$buscar%' or ID_tesis like '%$buscar%' or ID_estudiante like '%$buscar%') and programa='$programa' and terminado=1 and (ID_estado='Entrega Poster' or ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto'  or ID_estado='Entrega Proyecto' or ID_estado='Correccion Propuesta' or ID_estado='Correccion Anteproyecto' or ID_estado='Correccion Proyecto' or ID_estado='Solicitud opción de grado')  ORDER BY  ID_tesis DESC");
               // $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
                $query=mysqli_query($mysqli,$sql);
                 
                 ?>
                         <tr>
+                            <th style="text-center">Id Tesis</th>
                             <th style="width: 40%">Título</th>
                             <th class="text-center">Id Est</th>
                             <th class="text-center">Tipo</th>
@@ -126,7 +127,7 @@ $passd=$arreglo[8];
             }	
                 
              echo "<tr>";
-
+             echo "<td>$arreglo[0]</td>";
              echo "<td>$arreglo[3]</td>";
              echo "<td class='text-center'>$arreglo[1]</td>";
              echo "<td class='text-center'>$arreglo[6]</td>";

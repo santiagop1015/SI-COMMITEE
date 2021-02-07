@@ -29,7 +29,6 @@ while ($valores = mysqli_fetch_array($query)) {
 
 $raiz = "../archivos";
 ?>
-
 <html>
 
 <head>
