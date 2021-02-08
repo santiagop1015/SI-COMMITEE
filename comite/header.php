@@ -87,7 +87,9 @@ while ($arreglo = mysqli_fetch_array($query)) {
                 }*/
                 
           //  }
+          if(isset($outAlerts)){
           echo $outAlerts;
+          }
             ?>
             
         </li>

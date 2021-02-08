@@ -149,13 +149,14 @@ function fileValidation() {
   returnn = exit;
   return returnn;
 }
-
+var Accept = false;
 var registerMessages = function () {
   $("#idButtonRegistrarDoc").on("click", function (e) {
     e.preventDefault();
     var file = $("#archivo").prop("files")[0];
     //console.log(file);
     //idNameFileRegistrarDoc
+    
 
     //file.name;
     var pharaf = document.getElementById("idMessageRegistrarDoc");
@@ -188,6 +189,10 @@ var registerMessages = function () {
 
         paqueteDeDatos.append("archivo", file);
         //console.log(paqueteDeDatos);
+        if(Accept){
+          paqueteDeDatos.append("reemplazar", 1);
+          //alert("aceptar funciona");
+        }
 
         $.ajax({
           type: "POST",
@@ -201,7 +206,7 @@ var registerMessages = function () {
           // var altura = $("#conversation").prop("scrollHeight");
           // $("#conversation").scrollTop(altura);
           //console.log("paquetedatos",paqueteDeDatos);
-          //console.log(info);
+          console.log(info);
 
           if (info == 1) {
             pharaf.innerHTML = "Documento Registrado Correctamente";
@@ -212,17 +217,36 @@ var registerMessages = function () {
             //idButtonRegistrarDoc
             document.getElementById("idButtonRegistrarDoc").disabled = true;
             document.getElementById("archivo").disabled = true;
+            document.getElementById("idMenuReplaceArchive").style.display = "none";
 
             setTimeout(function () {
               // location.reload();
               //clearForm();
             }, 3000);
             // $('#idFormRegistrarDoc')
+          } else if(info == 2){
+            pharaf.innerHTML = "Ya existe un documento con estas caracteristicas, desea reemplazarlo?";
+            cardMessages.style.display = "Block";
+            cardMessages.className = "alert alert-danger alert-dismissible";
+            iconBox.className = "icon fas fa-ban";
+            document.getElementById("idButtonRegistrarDoc").disabled = true;
+            document.getElementById("archivo").disabled = true;
+            document.getElementById("idMenuReplaceArchive").style.display = "block";
+          } else if(info == 3){
+            pharaf.innerHTML = "Documento Actualizado Correctamente";
+            cardMessages.style.display = "Block";
+            cardMessages.className = "alert alert-success alert-dismissible";
+            iconBox.className = "icon fas fa-check";
+            //idButtonRegistrarDoc
+            document.getElementById("idButtonRegistrarDoc").disabled = true;
+            document.getElementById("archivo").disabled = true;
+            document.getElementById("idMenuReplaceArchive").style.display = "none";
           } else {
             pharaf.innerHTML = info;
             cardMessages.style.display = "Block";
             cardMessages.className = "alert alert-danger alert-dismissible";
             iconBox.className = "icon fas fa-ban";
+            document.getElementById("idMenuReplaceArchive").style.display = "none";
           }
         });
       } else {

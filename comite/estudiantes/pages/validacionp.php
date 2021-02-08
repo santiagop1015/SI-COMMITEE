@@ -2,7 +2,7 @@
 session_start();
 
 if (@!$_SESSION['user']) {
-    header("Location:index.php");
+    header("Location:../index.tml");
 }/*elseif ($_SESSION['rol']==2) {
     header("Location:index2.php");
 }*/
@@ -32,7 +32,7 @@ $pr=$_SESSION['id'];
    //  $_FILES["archivo"]["type"]
 
    if($_FILES["archivo"]["size"]>5000000){
-     echo "Solo se permiten archivos menores de 5MB <br>";
+     echo "Solo se permiten archivos menores a 5MB <br>";
    } else {
 
 
@@ -92,50 +92,34 @@ $pr=$_SESSION['id'];
      // echo $carp;
     if($carp=="Entrega Propuesta" or $carp=="Correccion Propuesta"){
         $alma="./propuestas";
-        $nombre_archivo=$ced.'.pdf';
+        //$nombre_archivo=$ced.'.pdf';
     }
        else if($carp=="Entrega Anteproyecto" or $carp=="Correccion Anteproyecto")
        {
             $alma="./anteproyectos";
-            $nombre_archivo=$ced.'.pdf';
+            //$nombre_archivo=$ced.'.pdf';
        }else if($carp=="Entrega Proyecto" or $carp=="Correccion Proyecto")
        {
             $alma="/proyectos";
-            $nombre_archivo=$ced.'.pdf';
+            //$nombre_archivo=$ced.'.pdf';
        }
        else if($carp=="Certificado de Notas")
        {
             $alma="/certinotas";
-            $nombre_archivo=$ced.'.pdf';
+            //$nombre_archivo=$ced.'.pdf';
        }else if($carp=="Certificado terminacion Materias")
        {
             $alma="/certimat";
-            $nombre_archivo=$ced.'.pdf';
+            //$nombre_archivo=$ced.'.pdf';
        }else if($carp=="Prorroga")
        {
             $alma="/prorrogas";
-            $nombre_archivo=$ced.'.pdf';
+            //$nombre_archivo=$ced.'.pdf';
        }else {
             $alma="/otros";	
-            $nombre_archivo=$nombre_archivo;
+            //$nombre_archivo=$nombre_archivo;
        }
-       $nombre_archivo = $_REQUEST['ID_estado'].'_'.date("YmdHis").'_'.$nombre_archivo;  
-       $raiz = "../../archivos";
-      // echo "Guardado <br>";
-
-       if($tipo_archivo=='application/pdf'){
-        //$nombre_archivo=$ced.'.pdf';
-        // echo ' <script language="javascript">console.log("' + $_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo" + '");</script> ';
-
-        move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo");
        
-        //ToDo: Prueba Local
-        //move_uploaded_file($_FILES['archivo']['tmp_name'],"D:/Documents/TestDocuments/$nombre_archivo");
-
-    }else{
-    //$nombre_archivo=$ced.'.doc';
-    move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo"); 
-    }
     
 }
 }
@@ -203,15 +187,54 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
         echo "El usuario no existe";
        // echo $DatosIntegrante;
     } else {
-        
-       // echo $DatosIntegrante;
+       $querytesis = $mysqli->query("SELECT * FROM tesis where ID_estudiante=$pr and id_estudiante2=$id_estudiante2");
+       while ($arregloOpciondeGrado = mysqli_fetch_array($querytesis)) {
+          $EstadoDB = $arregloOpciondeGrado[6];
+       }
+       $row_count = $querytesis->num_rows;
+       if($row_count > 0 && $EstadoDB == $_REQUEST['ID_estado']){
+           if(isset($_POST['reemplazar'])) {
+             //echo "Existe";
+             $nombre_archivo = $_REQUEST['ID_estado'].'_'.$id_estudiante2.'_'.$ced.'.pdf';
+             $raiz = "../../archivos";
+             move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo");
+             mysqli_query($conexion, "update tesis set Titulo_tesis='$_REQUEST[Titulo_tesis]', ID_estudiante=$_REQUEST[ID_estudiante], ID_estado='$_REQUEST[ID_estado]', archivo='$nombre_archivo', Observaciones='$Observaciones', fecha_propuesta=$fecha_propuesta, fecha_aprob_propuesta=$fecha_aprob_propuesta, ID_directores='$ID_directores', programa='$_REQUEST[programa]', ID_estudiante1='$_POST[ID_estudiante1]', id_estudiante2=$id_estudiante2, terminado=$_REQUEST[terminado], fecha_doc=$fecha_actual where ID_estudiante=$pr and id_estudiante2=$id_estudiante2 and ID_estado='$_REQUEST[ID_estado]'");
+             echo 3;
+            } else {
+             echo 2;
+           }
+       } else {
+          //$nombre_archivo = $_REQUEST['ID_estado'].'_'.date("YmdHis").'_'.$nombre_archivo;
+          $nombre_archivo = $_REQUEST['ID_estado'].'_'.$id_estudiante2.'_'.$ced.'.pdf';  
+         /* if($nombre_archivo) {
 
-    
-    //var_dump($_REQUEST);
+          }*/
+          $raiz = "../../archivos";
+          // echo "Guardado <br>";
+       
+          if($tipo_archivo=='application/pdf'){
+           //$nombre_archivo=$ced.'.pdf';
+           // echo ' <script language="javascript">console.log("' + $_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo" + '");</script> ';
+       
+           move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo");
+          
+           //ToDo: Prueba Local
+           //move_uploaded_file($_FILES['archivo']['tmp_name'],"D:/Documents/TestDocuments/$nombre_archivo");
+       
+           }
+           //else{
+           //$nombre_archivo=$ced.'.doc';
+           /*
+           move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo"); 
+       
+           }*/
 
-        
-         mysqli_query($conexion,"insert into tesis(proyecto, Titulo_tesis, ID_estudiante,ID_estado,archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota  ) values
+         /*  mysqli_query($conexion,"insert into tesis(proyecto, Titulo_tesis, ID_estudiante,ID_estado,archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota  ) values
           ($fecha_actual,'$_REQUEST[Titulo_tesis]','$_REQUEST[ID_estudiante]','$_REQUEST[ID_estado]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'')") 
+          or die("Problemas en el select".mysqli_error($conexion));*/
+
+          mysqli_query($conexion,"insert into tesis(Titulo_tesis, ID_estudiante,ID_estado,archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota, fecha_doc) values
+          ('$_REQUEST[Titulo_tesis]','$_REQUEST[ID_estudiante]','$_REQUEST[ID_estado]','$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'',$fecha_actual)") 
           or die("Problemas en el select".mysqli_error($conexion));
           
           mysqli_close($conexion);
@@ -221,29 +244,78 @@ if(empty($ID_directores) || empty($_POST['Titulo_tesis']) || strlen($id_estudian
 
         }
 
+      } 
+            
     } else {
 
-          mysqli_query($conexion,"insert into tesis(proyecto, Titulo_tesis, ID_estudiante, ID_estado, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota  ) values
-          ($fecha_actual, '$_REQUEST[Titulo_tesis]', '$_REQUEST[ID_estudiante]', '$_REQUEST[ID_estado]', '$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'')") 
-          or die("Problemas en el select".mysqli_error($conexion));
-          //echo $fecha_actual;
-        //  echo date('Y') . '-' . date('m') . '-' . date('d'); 
-          
-          mysqli_close($conexion);
+      $querytesis = $mysqli->query("SELECT * FROM tesis where ID_estudiante=$pr and id_estudiante2=$id_estudiante2");
+        while ($arregloOpciondeGrado = mysqli_fetch_array($querytesis)) {
+           $EstadoDB = $arregloOpciondeGrado[6];
+        }
+        $row_count = $querytesis->num_rows;
+        if($row_count > 0 && $EstadoDB == $_REQUEST['ID_estado']){
+            if(isset($_POST['reemplazar'])) {
+              //echo "Existe";
+              $nombre_archivo = $_REQUEST['ID_estado'].'_'.$id_estudiante2.'_'.$ced.'.pdf';
+              $raiz = "../../archivos";
+              move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo");
+              //"update tesis set Titulo_tesis=$_REQUEST[Titulo_tesis], ID_estudiante=$_REQUEST[ID_estudiante], ID_estado=$_REQUEST[ID_estado], archivo=$nombre_archivo, Observaciones=$Observaciones, fecha_propuesta=$fecha_propuesta, fecha_aprob_propuesta=$fecha_aprob_propuesta, ID_directores=$ID_directores, programa=$_REQUEST[programa], ID_estudiante1=$_REQUEST[ID_estudiante], id_estudiante2=$id_estudiante2, terminado=$_REQUEST[terminado]";
+              /*mysqli_query($conexion,"insert into tesis(proyecto, Titulo_tesis, ID_estudiante, ID_estado, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota  ) values
+              ($fecha_actual, '$_REQUEST[Titulo_tesis]', '$_REQUEST[ID_estudiante]', '$_REQUEST[ID_estado]', '$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'')") 
+              or die("Problemas en el select".mysqli_error($conexion));*/
+              mysqli_query($conexion, "update tesis set Titulo_tesis='$_REQUEST[Titulo_tesis]', ID_estudiante=$_REQUEST[ID_estudiante], ID_estado='$_REQUEST[ID_estado]', archivo='$nombre_archivo', Observaciones='$Observaciones', fecha_propuesta=$fecha_propuesta, fecha_aprob_propuesta=$fecha_aprob_propuesta, ID_directores='$ID_directores', programa='$_REQUEST[programa]', ID_estudiante1='', id_estudiante2=$id_estudiante2, terminado=$_REQUEST[terminado], fecha_doc=$fecha_actual where ID_estudiante=$pr and id_estudiante2=$id_estudiante2 and ID_estado='$_REQUEST[ID_estado]'");
+              //echo "update tesis set Titulo_tesis='$_REQUEST[Titulo_tesis]', ID_estudiante=$_REQUEST[ID_estudiante], ID_estado='$_REQUEST[ID_estado]', archivo='$nombre_archivo', Observaciones='$Observaciones', fecha_propuesta=$fecha_propuesta, fecha_aprob_propuesta=$fecha_aprob_propuesta, ID_directores='$ID_directores', programa='$_REQUEST[programa]', ID_estudiante1='', id_estudiante2=$id_estudiante2, terminado=$_REQUEST[terminado], fecha_doc=$fecha_actual where ID_estudiante=$pr and id_estudiante2=$id_estudiante2 and ID_estado='$_REQUEST[ID_estado]'";
+              //update tesis set Titulo_tesis="Nuevo postgrado 111111", ID_estudiante=5, ID_estado="Solicitud opción de grado", archivo="Solicitud opción de grado_4_66091058.pdf", Observaciones="Por definir", fecha_propuesta=2021-02-07, fecha_aprob_propuesta=0000-00-00, ID_directores="Pablo Carreno H", programa="Sistemas", ID_estudiante1='', id_estudiante2=4, terminado=0, fecha_doc="2021-02-07" where ID_estudiante=5 and id_estudiante2=4 and ID_estado="Solicitud opción de grado"
 
-          echo 1;
-         
+              echo 3;
+            } else {
+              echo 2;
+            }
+        } else {
+        //$nombre_archivo = $_REQUEST['ID_estado'].'_'.date("YmdHis").'_'.$nombre_archivo;  
+        $nombre_archivo = $_REQUEST['ID_estado'].'_'.$id_estudiante2.'_'.$ced.'.pdf';
+        $raiz = "../../archivos";
+  
+     if($tipo_archivo=='application/pdf'){
+      //$nombre_archivo=$ced.'.pdf';
+      // echo ' <script language="javascript">console.log("' + $_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo" + '");</script> ';
+  
+      move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo");
+     
+      //ToDo: Prueba Local
+      //move_uploaded_file($_FILES['archivo']['tmp_name'],"D:/Documents/TestDocuments/$nombre_archivo");
+  
+      }//else{
+      //$nombre_archivo=$ced.'.doc';
+      /*move_uploaded_file($_FILES['archivo']['tmp_name'],"$raiz$alma/$nombre_archivo"); 
+  
+      }*/
+
+    /*  mysqli_query($conexion,"insert into tesis(proyecto, Titulo_tesis, ID_estudiante, ID_estado, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota  ) values
+        ($fecha_actual, '$_REQUEST[Titulo_tesis]', '$_REQUEST[ID_estudiante]', '$_REQUEST[ID_estado]', '$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'')") 
+        or die("Problemas en el select".mysqli_error($conexion));*/
+        //echo $fecha_actual;
+      //  echo date('Y') . '-' . date('m') . '-' . date('d'); 
+
+      mysqli_query($conexion,"insert into tesis(Titulo_tesis, ID_estudiante, ID_estado, archivo, Observaciones,fecha_propuesta,fecha_aprob_propuesta, ID_directores,  programa, ID_estudiante1, id_estudiante2, terminado, aprob_dir, fecha_ent_anteproyecto, jurado1, jurado2, id_area, id_eje, nota, fecha_doc) values
+        ('$_REQUEST[Titulo_tesis]', '$_REQUEST[ID_estudiante]', '$_REQUEST[ID_estado]', '$nombre_archivo ','$Observaciones ', '$fecha_propuesta', '$fecha_aprob_propuesta', '$ID_directores', '$_REQUEST[programa]', '$_REQUEST[ID_estudiante]', $id_estudiante2, '$_REQUEST[terminado]','','0000-00-00','','',0,0,'',$fecha_actual)") 
+        or die("Problemas en el select".mysqli_error($conexion));
         
-    }
+        mysqli_close($conexion);
+
+        echo 1;
+
+   }
+
+    
     
 
 } 
 
-} else {
-    echo "Error Inesperado. Por favor contacte al administrador";
+} 
+
 
 }
-
 
 
 }

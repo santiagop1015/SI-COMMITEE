@@ -81,7 +81,7 @@ $raiz = "../archivos";
     <!-- <script type="text/javascript" src="js/cambiarPestanna.js"></script> -->
 
     <script>
-   /* $(document).ready(function() {
+    /* $(document).ready(function() {
         setTimeout(() => {
          //   document.getElementById("IdIconLoad").classList.add("d-none");
         }, 500);
@@ -122,7 +122,7 @@ $raiz = "../archivos";
     <!--<div id="user_model_details"></div>  -->
     <div class="wrapper">
 
-    <?php include "../header.php" ?>
+        <?php include "../header.php" ?>
 
 
         <!-- /.navbar -->
@@ -252,7 +252,7 @@ $raiz = "../archivos";
                 <!--   <div class="row">
                         <div class="col-12"> -->
                 <div id="contenidopestanas">
-                    
+
                     <!--Pestana2-->
                     <div id="cpestana2">
                         <div class="container-fluid">
@@ -424,7 +424,8 @@ $raiz = "../archivos";
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Tipo de documento:</label>
-                                                <select onchange="fValidarFechasDocumento(idFormRegistrarDoc)" name="ID_estado" id="ID_estado" class="form-control select2"
+                                                <select onchange="fValidarFechasDocumento(idFormRegistrarDoc)"
+                                                    name="ID_estado" id="ID_estado" class="form-control select2"
                                                     style="width: 100%;" required>
                                                     <option></option>
                                                     <?php
@@ -649,6 +650,34 @@ $raiz = "../archivos";
                                             Alerta
                                         </h5>
                                         <p id="idMessageRegistrarDoc"></p>
+                                        <div id="idMenuReplaceArchive" class="btn-group btn-group-toggle" data-toggle="buttons" style="display='none'">
+                                            <label id="idAcceptUpdateArchive" class="btn btn-success">
+                                                <input type="radio"
+                                                    > Reemplazar
+                                            </label>
+                                            <label id="idCancelarUpdateArchive" class="btn btn-default">
+                                                <input type="radio">
+                                                Cancelar
+                                            </label>
+                                            <script>
+                                            $("#idAcceptUpdateArchive").on("click", function (e) {
+                                                //alert("Accept");
+                                                //debugger;
+                                                Accept = true;
+                                                document.getElementById("idButtonRegistrarDoc").disabled = false;
+                                                document.getElementById("idButtonRegistrarDoc").click();
+                                            });
+                                            $("#idCancelarUpdateArchive").on("click", function (e) {
+                                                //alert("Cancel");
+                                                location.reload();
+                                                //Accept = true;
+                                            });
+                                            /*function AcceptFunction() {
+                                               
+                                            }*/
+                                            //document.getE
+                                            </script>
+                                        </div>
 
                                     </div>
 
@@ -765,12 +794,31 @@ $raiz = "../archivos";
                                                     echo "<td class='text-center'>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
-                                                    $namefile_reducer = substr($arreglo[8], 0, 12).'...';
+                                                   /* $namefile_reducer = substr($arreglo[8], 0, 12).'...';
                                                     if(strlen($arreglo[8]) > 13) {
                                                         echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$namefile_reducer</a></td>";
                                                     } else {
                                                         echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
-                                                    }
+                                                    }*/
+                                                    if(strlen($arreglo[8]) > 1) {                         
+                                                        if(strlen($arreglo[8]) > 15) {
+                                                            echo "
+                                                            <td><a class='btn btn-primary btn-sm' href='$raiz$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,15)."..."."
+                                                            </a></td>
+                                                            ";
+                                                        } else {
+                                                            echo "
+                                                            <td><a class='btn btn-primary btn-sm' href='$raiz$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        $arreglo[8]
+                                                        </a></td>
+                                                        ";
+                                                        }
+                                                        } else {
+                                                        echo "No disponible";
+                                                        }
                                                     echo "<td class='text-center'>$arreglo[21]</td>";
                                                     echo "<td class='text-center'>$arreglo[9]</td>";
                                                     echo "<td class='text-center'></td>";
@@ -783,12 +831,31 @@ $raiz = "../archivos";
                                                     echo "<td class='text-center'>$arreglo[5]</td>";
                                                     echo "<td>$arreglo[6]</td>";
                                                     echo "<td>$arreglo[7]</td>";
-                                                    $namefile_reducer = substr($arreglo[8], 0, 12).'...';
+                                                 /*   $namefile_reducer = substr($arreglo[8], 0, 12).'...';
                                                     if(strlen($arreglo[8]) > 13) {
                                                         echo "<td><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$namefile_reducer</a></td>";
                                                     } else {
                                                         echo "<td class='text-center'><a class='btn btn-primary' href=$raiz$alma/$arreglo[8]>$arreglo[8]</a></td>";
-                                                    }
+                                                    }*/
+                                                    if(strlen($arreglo[8]) > 1) {                         
+                                                        if(strlen($arreglo[8]) > 13) {
+                                                            echo "
+                                                            <td><a class='btn btn-primary btn-sm' href='$raiz$alma/$arreglo[8]'
+                                                            target='_blank'>
+                                                            ".substr($arreglo[8],0,13)."..."."
+                                                            </a></td>
+                                                            ";
+                                                        } else {
+                                                            echo "
+                                                            <td><a class='btn btn-primary btn-sm' href='$raiz$alma/$arreglo[8]'
+                                                        target='_blank'>
+                                                        $arreglo[8]
+                                                        </a></td>
+                                                        ";
+                                                        }
+                                                        } else {
+                                                        echo "No disponible";
+                                                        }
                                                     echo "<td class='text-center'>$arreglo[21]</td>";
                                                     echo "<td class='text-center'>$arreglo[9]</td>";
                                                     echo "<td class='text-center'>No Aplica</td>";
@@ -954,13 +1021,13 @@ $raiz = "../archivos";
         <!-- Pestana5 ---------------------------------------------------------------------------------------------------------- -->
 
         <div id="cpestana5">
-                        <div class="container-fluid">
-                            <form id="idFormAplazamiento" action="pages/registraraplazamiento.php" method="post">
-                                <div class="row">
+            <div class="container-fluid">
+                <form id="idFormAplazamiento" action="pages/registraraplazamiento.php" method="post">
+                    <div class="row">
 
-                                    <div class="col-md-12">
-                                        <div class="card card-warning">
-                                            <?php
+                        <div class="col-md-12">
+                            <div class="card card-warning">
+                                <?php
                                         require("../connect_db.php");
                                         $sql = ("SELECT * FROM login where id='$pr'");
                                         $query = mysqli_query($mysqli, $sql);
@@ -969,39 +1036,40 @@ $raiz = "../archivos";
                                         }
 
                                         ?>
-                                            <div class="card-body">
+                                <div class="card-body">
 
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <!-- text input -->
-                                                        <div class="form-group">
-                                                            <label>Nombre</label>
-                                                            <input type="text" id="Nombre_estudiante" name="Nombre_estudiante" class="form-control"
-                                                                placeholder="Nombre Estudiante.."
-                                                                value="<?php echo '' . $_SESSION['user'] . ''; ?>"
-                                                                readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>Id</label>
-                                                            <input type="text" id="IdEstudianteSeleccionado" name="IdEstudianteSeleccionado"
-                                                                value="<?php echo '' . $_SESSION['id'] . ''; ?>"
-                                                                class="form-control" placeholder="Id Estudiante.."
-                                                                readonly="readonly">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <!-- text input -->
+                                            <div class="form-group">
+                                                <label>Nombre</label>
+                                                <input type="text" id="Nombre_estudiante" name="Nombre_estudiante"
+                                                    class="form-control" placeholder="Nombre Estudiante.."
+                                                    value="<?php echo '' . $_SESSION['user'] . ''; ?>"
+                                                    readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Id</label>
+                                                <input type="text" id="IdEstudianteSeleccionado"
+                                                    name="IdEstudianteSeleccionado"
+                                                    value="<?php echo '' . $_SESSION['id'] . ''; ?>"
+                                                    class="form-control" placeholder="Id Estudiante.."
+                                                    readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-                                                <!-- Año Aplazamiento -->
-                                                <div class="row">
-                                                <div class="col-6">
-                                                        <div class="form-group">
-                                                            <label>Año</label>
-                                                            <select id="AnioSeleccionado" name="AnioSeleccionado" class="form-control select2"
-                                                                style="width: 100%;" required>
-                                                                <?php
+                                    <!-- Año Aplazamiento -->
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Año</label>
+                                                <select id="AnioSeleccionado" name="AnioSeleccionado"
+                                                    class="form-control select2" style="width: 100%;" required>
+                                                    <?php
                                                     $contador = 0;
                                                     require("../connect_db.php");
 
@@ -1010,76 +1078,77 @@ $raiz = "../archivos";
                                                         echo '<option value="' . $valores[Anio] . '">' . $valores[Anio] . '</option>';
                                                     }
                                                     ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                <!-- Año Aplazamiento -->     
-
-                                                <!-- Semestre -->       
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Semestre:</label>
-                                                        <select id="SemestreSeleccionado"  name="SemestreSeleccionado" class="form-control select2"
-                                                            style="width: 100%;">
-                                                            <option selected value="1">1</option>
-                                                            <option value="2">2</option>
-
-                                                        </select>
-                                                    </div>
-                                                     </div>
-                                                </div>    
-
-
-                                                <div class="form-group">
-                                                        <label>Razón aplazamiento</label>
-                                                        <textarea id="Descripcion" name="Descripcion" class="form-control" rows="3"
-                                                            placeholder="Escriba el motivo de aplazamiento..." required></textarea>
-                                                </div>
-
-
-
-                                                <div class="row">
-                                                    <div class="col-12"  style="text-align:right;">
-                                                    <button type="button" onclick="fregistrarAplazamiento(idFormAplazamiento)" class="btn btn-success">Guardar</button>
-
-                                                </div>
-                                                
-
-                                                <div class="col-12 pt-2" >
-                                                <div id="idMensajeAplazamiento"
-                                                        class="alert alert-danger alert-dismissible mt-6"
-                                                        style="Display: None;">
-                                                        <h5>
-                                                            <i id="idIConBoxComenAplazamiento" class="icon fas fa-ban"></i>
-                                                            Alerta
-                                                        </h5>
-                                                        <p id="idMessageAplazamientoBody"></p>
-
-                                                    </div>
-                                                </div>
-
-                                                
-                                                <!-- /.card-body -->
+                                                </select>
                                             </div>
-      
+                                        </div>
+                                        <!-- Año Aplazamiento -->
+
+                                        <!-- Semestre -->
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Semestre:</label>
+                                                <select id="SemestreSeleccionado" name="SemestreSeleccionado"
+                                                    class="form-control select2" style="width: 100%;">
+                                                    <option selected value="1">1</option>
+                                                    <option value="2">2</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Razón aplazamiento</label>
+                                        <textarea id="Descripcion" name="Descripcion" class="form-control" rows="3"
+                                            placeholder="Escriba el motivo de aplazamiento..." required></textarea>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-12" style="text-align:right;">
+                                            <button type="button" onclick="fregistrarAplazamiento(idFormAplazamiento)"
+                                                class="btn btn-success">Guardar</button>
+
+                                        </div>
+
+
+                                        <div class="col-12 pt-2">
+                                            <div id="idMensajeAplazamiento"
+                                                class="alert alert-danger alert-dismissible mt-6"
+                                                style="Display: None;">
+                                                <h5>
+                                                    <i id="idIConBoxComenAplazamiento" class="icon fas fa-ban"></i>
+                                                    Alerta
+                                                </h5>
+                                                <p id="idMessageAplazamientoBody"></p>
+
+                                            </div>
+                                        </div>
+
+
+                                        <!-- /.card-body -->
+                                    </div>
+
                                 </div>
 
-                        </div>
+                            </div>
 
-                        </form>
+                </form>
 
-                    </div>
+            </div>
 
-        <!-- Pestana5 ---------------------------------------------------------------------------------------------------------- -->
-        
-        
-
-
-    </div>
+            <!-- Pestana5 ---------------------------------------------------------------------------------------------------------- -->
 
 
 
-    </section>
+
+        </div>
+
+
+
+        </section>
 
     </div>
 
@@ -1089,7 +1158,7 @@ $raiz = "../archivos";
     <!-- /.content-wrapper -->
     <!-- Footer -->
     <?php include '../footer.php'; ?>
-        <!-- /. Footer -->
+    <!-- /. Footer -->
 
 
     <?php include 'chat.php'; ?>
