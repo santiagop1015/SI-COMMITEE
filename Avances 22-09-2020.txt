@@ -1,3 +1,0 @@
-Rediseño y Mejoras:
-Mejora chat estudiante: efectos de transicion mejorados
-Intranet (Pagina Principal): Mejora visual, mejora del Login y generacion de recuperacion de contraseñas por usuario

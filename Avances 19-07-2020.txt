@@ -1,5 +1,0 @@
-Rediseño y Mejoras en usuarios:
-Administrador
-Coordinador
-Secretaria
-Chat (Prototipo, ubicado en usuario Estudiante. Al finalizar se aplicara a todos los usuarios) 
