@@ -152,7 +152,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                              //   echo '<option value="'.$arreglo[0].'">'.$arreglo[0].'</option>';
                           // echo '<option>'.$arreglo[0].'</option>';
                         //  if($arreglo[0] != "Administrador") {
-                            if($programa == 'Sistemas' || $programa == 'Industrial') {
+                         /*   if($programa == 'Sistemas' || $programa == 'Industrial') {
 
                                 if($arreglo[0] == "Sistemas" || $arreglo[0] == "Industrial") {
                                 echo '<option value="'.$arreglo[0].'"';
@@ -162,7 +162,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                 echo '>'.$arreglo[0].'</option>';
                             }
 
-                            } else {
+                            } else {*/
 
                                 if($arreglo[0] == $programa) {
                                 echo '<option value="'.$arreglo[0].'"';
@@ -172,7 +172,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                 echo '>'.$arreglo[0].'</option>';
                                 }
 
-                            }
+                           // } 
                            
                            }
                             

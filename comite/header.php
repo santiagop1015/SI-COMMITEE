@@ -202,7 +202,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
 
             <div class="container-fluid" style="background-color: #f4f6f9; padding: 15px 15px 15px 15px;">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-none">
                         <div class="callout callout-info" style="border-left-color: #B42A2A;">
                             Este es un recurso para estar informado de lo que esta sucediendo en el
                             comite, por favor solo comentarios académicos
@@ -342,7 +342,7 @@ while ($arreglo = mysqli_fetch_array($query)) {
                         </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="callout callout-info" style="border-left-color: #B42A2A;">
                             Para solicitudes y/o casos especiales, por favor enviar correo
                             electronico

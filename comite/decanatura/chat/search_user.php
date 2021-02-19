@@ -16,7 +16,7 @@ $name_user = $_POST['name_user'];
 $id = $_SESSION['id'];
 
 require("../../connect_db.php");
-$sql = ("SELECT * FROM login where user like '%$name_user%' and programa='Sistemas' ORDER BY Id DESC");
+$sql = ("SELECT * FROM login where user like '%$name_user%' and user!='".$_SESSION['user']."' ORDER BY Id DESC");
 
 //echo $sql;
 $query = mysqli_query($mysqli, $sql);

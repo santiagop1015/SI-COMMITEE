@@ -122,7 +122,7 @@
 
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <!-- text input -->
 
                             <div class="form-group">
@@ -132,7 +132,7 @@
                             </div>
 
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 d-none">
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Programa</label>

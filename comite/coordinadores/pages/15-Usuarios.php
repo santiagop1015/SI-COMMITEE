@@ -189,25 +189,25 @@ if(!$_GET) {
 
                  if (@$_POST['buscar']) {
                      $limpio = preg_replace('([^A-Za-z0-9])', '', $buscar);
-                     if($programa == 'Sistemas') {
+                   /*  if($programa == 'Sistemas') {
                         $sql=("SELECT * FROM login where user like '%$limpio%' and (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
                         ORDER BY Id DESC");
-                     } else {
+                     } else {*/
                         $sql=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
                         ORDER BY Id DESC");
-                     }
+                  //   }
                   /*   $sql=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
                  ORDER BY Id DESC"); */
                  } else {
                 /*  $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
                  ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina"); */
-                 if($programa == 'Sistemas') {
+                /* if($programa == 'Sistemas') {
                     $sql=("SELECT * FROM login where (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
                     ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina");
-                 } else {
+                 } else {*/
                     $sql=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
                  ORDER BY Id DESC LIMIT $iniciar,$estudiantes_x_pagina");
-                 }
+                // }
 
                  }
 
@@ -297,26 +297,26 @@ if(!$_GET) {
                 <?php
         if (@$_POST['buscar']) {
             $limpio = preg_replace('([^A-Za-z0-9])', '', $buscar);
-            if($programa == 'Sistemas') {
+           /* if($programa == 'Sistemas') {
                 $sql2=("SELECT * FROM login where user like '%$limpio%' and (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
                 ORDER BY Id DESC");
-             } else {
+             } else { */
                 $sql2=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
                 ORDER BY Id DESC");
-             }
+            // }
 
           /*  $sql2=("SELECT * FROM login where user like '%$limpio%' and programa='$programa' and tipoUsuario='$tipousuario'
                 ORDER BY Id DESC"); */
         } else {
         /*    $sql2=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
                 ORDER BY Id DESC"); */
-                if($programa == 'Sistemas') {
+              /*  if($programa == 'Sistemas') {
                     $sql2=("SELECT * FROM login where (programa='Sistemas' or programa='Industrial') and tipoUsuario='$tipousuario'
                     ORDER BY Id DESC");
-                 } else {
+                 } else { */
                     $sql2=("SELECT * FROM login where programa='$programa' and tipoUsuario='$tipousuario'
                     ORDER BY Id DESC");
-                 }
+               //  }
         }
 
         $query2=mysqli_query($mysqli,$sql2);
