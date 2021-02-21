@@ -84,7 +84,7 @@ $dir = $_SESSION['user'];
                 <a href="profile.php" class="d-block" style="color: white;">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                        <?php
+                            <?php
                         if(empty($foto)) {
                             echo '<img src="dist/img/avatar-user.jpg" class="img-circle elevation-2" alt="User Image">';
                           } else {
@@ -132,36 +132,20 @@ $dir = $_SESSION['user'];
                                 <a href="javascript:cambiarPestanna(pestanas,pestana3);" class="nav-link">
                                     <i class="nav-icon fas fa-copy white"></i>
                                     <p class="white">
-                                        Monografias/Poster
+                                        Evaluar
                                     </p>
                                 </a>
                             </li>
                             <li id="pestana4" class="nav-item">
                                 <a href="javascript:cambiarPestanna(pestanas,pestana4);" class="nav-link">
-                                    <i class="nav-icon fa fa-book white"></i>
-                                    <p class="white">
-                                        Anteproyectos
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana5" class="nav-item">
-                                <a href="javascript:cambiarPestanna(pestanas,pestana5);" class="nav-link">
-                                    <i class="nav-icon fas fa-copy white"></i>
-                                    <p class="white">
-                                        Proyectos
-                                    </p>
-                                </a>
-                            </li>
-                            <li id="pestana6" class="nav-item">
-                                <a href="javascript:cambiarPestanna(pestanas,pestana6);" class="nav-link">
                                     <i class="nav-icon fa fa-edit white"></i>
                                     <p class="white">
                                         Evaluados
                                     </p>
                                 </a>
                             </li>
-                            <li id="pestana7" class="nav-item">
-                                <a href="javascript:cambiarPestanna(pestanas,pestana7);" class="nav-link">
+                            <li id="pestana5" class="nav-item">
+                                <a href="javascript:cambiarPestanna(pestanas,pestana5);" class="nav-link">
                                     <i class="nav-icon fa fa-book white"></i>
                                     <p class="white">
                                         Actas de Comité
@@ -471,45 +455,58 @@ $dir = $_SESSION['user'];
 
                         <div class="container-fluid">
 
-                            <div class="card card-warning">
+                            <!--tabs -->
+                            <div class="card card-primary card-tabs">
+                                <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
+                                    <ul class="nav nav-tabs" id="custom-tabs-evaluar-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="custom-tabs-evaluarproyectos-tab"
+                                                data-toggle="pill" href="#custom-tabs-evaluarproyectos" role="tab"
+                                                aria-controls="custom-tabs-one-1" aria-selected="true">Proyectos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-evaluaranteproyectos-tab"
+                                                data-toggle="pill" href="#custom-tabs-evaluaranteproyectos" role="tab"
+                                                aria-controls="custom-tabs-one-2"
+                                                aria-selected="false">Anteproyectos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-evluarmonografiasposter-tab"
+                                                data-toggle="pill" href="#custom-tabs-evaluarmonografiasposter"
+                                                role="tab" aria-controls="custom-tabs-one-2"
+                                                aria-selected="false">Monografias/Poster</a>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div class="card-body">
-                                    <?php
-
+                                    <div class="tab-content" id="custom-tabs-evaluar-tabContent">
+                                        <div class="tab-pane fade active show" id="custom-tabs-evaluarproyectos"
+                                            role="tabpanel" aria-labelledby="custom-tabs-evaluarproyectos-tab">
+                                            <?php
+                                $total_proyects = 0;
                                 require("../connect_db.php");
-                                $total = 0;
-                                $totalm = 0;
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Monografia' or ID_estado='Entrega Poster' or ID_estado='Correccion Monografia') and terminado!=2 ORDER BY id_tesis DESC ");
-                             // prueba// $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') ORDER BY id_tesis DESC ");
-
+                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto') ORDER BY  id_tesis DESC");
                                 $query = mysqli_query($mysqli, $sql);
-                                //var_dump($sql);
                                 ?>
-
-                                    <div class="box">
-
-                                        <div class="box-body table-responsive no-padding">
-                                            <table class="table table-bordered table-striped">
+                                            <div class="box">
+                                                <div class="box-body table-responsive no-padding">
+                                                <table class="table table-bordered table-striped">
                                                 <thead>
-
                                                     <tr>
-                                                        <th style="width: 50%">Titulo</th>
+                                                        <th style="width: 40%">Titulo</th>
                                                         <th class="text-center">Director</th>
                                                         <th class="text-center">Estado</th>
                                                         <th class="text-center">Fecha_Aprob</th>
                                                         <th class="text-center">Archivo</th>
                                                         <th class="text-center">Evaluar</th>
-                                                        <th class="text-center">Modificar</th>
-                                                        <th class="text-center">Evaluacion</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
                                                     <?php
-
+                                                $proyectos_exist = false;
                                                 while ($arreglo = mysqli_fetch_array($query)) {
-
-
-                                                    if ($arreglo[6] == "Entrega Monografia") {
+                                                    if ($arreglo[6] == "Entrega Propuesta") {
                                                         $alma = "./propuestas";
                                                     } else if ($arreglo[6] == "Entrega Anteproyecto") {
                                                         $alma = "./anteproyectos";
@@ -519,18 +516,31 @@ $dir = $_SESSION['user'];
                                                         $alma = "./otros";
                                                     }
                                                     $ide = $arreglo[0];
-                                                    $totalm++;
+                                                    $total_proyects++;
                                                 ?>
+
                                                     <tr>
+                                                        <?php
+                                                        require("../connect_db.php");
+                                                        
+                                                            $sql_eval = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                            $result_Evalproyect = mysqli_query($mysqli, $sql_eval);
+                                                            $state = 0;
+                                                            
+                                                            while ($row = mysqli_fetch_row($result_Evalproyect)) {
+                                                                $state = 1;
+                                                            }
+                                                            
+                                                            if($state != 1) {
+                                                                $proyectos_exist = true;
+                                                                ?>
                                                         <td><?php echo "$arreglo[3] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
                                                         <td class="text-center"><?php echo "$arreglo[6] "; ?></td>
                                                         <td class="text-center">
                                                             <?php echo str_replace("-","/",$arreglo[10]); ?></td>
                                                         <td class="text-center">
-
-                                                            <?php 
-                                                            
+                                                            <?php
                                                             if(strlen($arreglo[8]) > 1) {
                                                     
                                                                 if(strlen($arreglo[8]) > 15) {
@@ -551,104 +561,49 @@ $dir = $_SESSION['user'];
                                                                 } else {
                                                                 echo "";
                                                                 }
-                                                            
-                                                           // echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8]</a> "; ?>
+                                                            ?>
                                                         </td>
-                                                        <?php
-                                                        require("../connect_db.php");
-                                                        $sql = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
-                                                        //var_dump($sql);
-                                                        $ressql = mysqli_query($mysqli, $sql);
-                                                        while ($row = mysqli_fetch_row($ressql)) {
-                                                            $asd = $row[1];
-                                                            $jurado = utf8_decode($row[15]);
-                                                            $fecha_eval = $row[16];
-
-                                                        ?>
-                                                        <td class="text-center">EVALUADO</td>
-                                                        <td class="text-center">
-                                                            <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
-                                                                ?>
+                                                        <td>
                                                             <?php
-
-                                                                echo "
-                                                                <a class='btn btn-info btn-sm' href='pages/act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
-                                                                <i class='fas fa-pencil-alt'>
-                                                                
-                                                                </i>
-                                                                </a>
-                                                                ";
-
-                                                            /*    $direccion = '"pages/act_evaluacionposter.php?"';
-
-                                                                $parametro = '"id=' . $row[0] . '&jurado=' . $dir . '&ID_tesis=' . $arreglo[0] . '"';
-                                                                //$name = '"name"';
-                                                                $img = '<img src="images/actualizar.png"  width="30"  height="30" class="img-rounded"></img>';
-
-                                                                echo "<button onclick='CenterWindow($direccion, $parametro, 600, 600);'>$img</button>";
-                                                                */
-                                                                ?>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <?php 
                                                             echo "
-                                                            <a class='btn btn-danger btn-sm' target='_blank' href='../archivos/pdf/verevalposter.php?id=$arreglo[0]'>
-                                                            <i class='fas fa-file-pdf'></i>
-                                                            Ver
+                                                            <a class='btn btn-warning btn-sm' href='pages/evaluartesispro.php?id=$arreglo[0]&jurado=$dir'>
+                                                            <i class='fas fa-spell-check'></i>
+                                                            
                                                             </i>
                                                             </a>
-                                                            ";
-
-                                                            if ($asd !== $ide) {
-                                                                echo "
-                                                                <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
-                                                                <i class='fas fa-spell-check'></i>
-                                                                Evaluar
-                                                                </i>
-                                                                </a>
-                                                                ";
-                                                            }
-
-                                                        //    echo "<a href='./pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded';" 
+                                                            ";	
                                                         ?>
                                                         </td>
                                                         <?php
-                                                        }
-                                                        ?>
-                                                        <?php
+                                                          } else {
+                                                            $state = 0;
+                                                            $total_proyects = $total_proyects - 1;
+                                                            $proyectos_exist = false;
+                                                          }
                                                     }
                                                     ?>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <?php echo "<center><font color='red' size='3'>Total registros: $totalm</font><br></center>"; ?>
+
+                                            <?php
+
+                                        echo "<center><font color='red' size='3'>Total registros: $total_proyects</font><br></center>"; ?>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!--Termina pestana3-->
-                    <!--Empieza pestana4-->
-                    <div id="cpestana4">
-
-                        <div class="container-fluid">
-                            <div class="card card-warning">
-                                <div class="card-body">
-
-                                    <?php
-
-                                $total_anteproyects = 0;
-                                //echo $total2;
-                                require("../connect_db.php");
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto') ORDER BY id_tesis DESC ");
-                                $query = mysqli_query($mysqli, $sql);
-                                ?>
-                                    <div class="box">
-                                        <div class="box-body table-responsive no-padding">
-                                            <table class="table table-bordered table-striped">
+                                        <div class="tab-pane fade" id="custom-tabs-evaluaranteproyectos" role="tabpanel"
+                                            aria-labelledby="custom-tabs-evaluaranteproyectos-tab">
+                                            <?php
+                                               $total_anteproyects = 0;
+                                               //echo $total2;
+                                               require("../connect_db.php");
+                                               $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto') ORDER BY id_tesis DESC ");
+                                               $query = mysqli_query($mysqli, $sql);
+                                               ?>
+                                            <div class="box">
+                                                <div class="box-body table-responsive no-padding">
+                                                <table class="table table-bordered table-striped">
                                                 <thead>
 
                                                     <tr>
@@ -754,48 +709,50 @@ $dir = $_SESSION['user'];
                                             <?php
 
                                         echo "<center><font color='red' size='3'>Total registros: $total_anteproyects</font><br></center>"; ?>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!-- /.box-body -->
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="tab-pane fade" id="custom-tabs-evaluarmonografiasposter"
+                                            role="tabpanel" aria-labelledby="custom-tabs-evaluarmonografiasposter-tab">
+                                            <div class="box">
+                                                <div class="box-body table-responsive no-padding">
 
-                        </div>
-
-                    </div>
-                    <!--Termina pestana4-->
-                    <!--Empieza pestana5-->
-                    <div id="cpestana5">
-
-                        <div class="container-fluid">
-                            <div class="card card-warning">
-                                <div class="card-body">
-
-                                    <?php
-                                $total_proyects = 0;
-                                require("../connect_db.php");
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto') ORDER BY  id_tesis DESC");
-                                $query = mysqli_query($mysqli, $sql);
-                                ?>
-                                    <div class="box">
-                                        <div class="box-body table-responsive no-padding">
-                                            <table class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 40%">Titulo</th>
-                                                        <th class="text-center">Director</th>
-                                                        <th class="text-center">Estado</th>
-                                                        <th class="text-center">Fecha_Aprob</th>
-                                                        <th class="text-center">Archivo</th>
-                                                        <th class="text-center">Evaluar</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
                                                     <?php
-                                                $proyectos_exist = false;
+
+                                require("../connect_db.php");
+                                $total = 0;
+                                $totalm = 0;
+                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Monografia' or ID_estado='Entrega Poster' or ID_estado='Correccion Monografia') and terminado!=2 ORDER BY id_tesis DESC ");
+                             // prueba// $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') ORDER BY id_tesis DESC ");
+
+                                $query = mysqli_query($mysqli, $sql);
+                                //var_dump($sql);
+                                ?>
+
+
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+
+                                                            <tr>
+                                                                <th style="width: 50%">Titulo</th>
+                                                                <th class="text-center">Director</th>
+                                                                <th class="text-center">Estado</th>
+                                                                <th class="text-center">Fecha_Aprob</th>
+                                                                <th class="text-center">Archivo</th>
+                                                                <th class="text-center">Evaluar</th>
+                                                                <th class="text-center">Modificar</th>
+                                                                <th class="text-center">Evaluacion</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <?php
+
                                                 while ($arreglo = mysqli_fetch_array($query)) {
-                                                    if ($arreglo[6] == "Entrega Propuesta") {
+
+
+                                                    if ($arreglo[6] == "Entrega Monografia") {
                                                         $alma = "./propuestas";
                                                     } else if ($arreglo[6] == "Entrega Anteproyecto") {
                                                         $alma = "./anteproyectos";
@@ -805,31 +762,21 @@ $dir = $_SESSION['user'];
                                                         $alma = "./otros";
                                                     }
                                                     $ide = $arreglo[0];
-                                                    $total_proyects++;
+                                                    $totalm++;
                                                 ?>
+                                                            <tr>
+                                                                <td><?php echo "$arreglo[3] "; ?></td>
+                                                                <td class="text-center">
+                                                                    <?php echo "$arreglo[5] "; ?></td>
+                                                                <td class="text-center">
+                                                                    <?php echo "$arreglo[6] "; ?></td>
+                                                                <td class="text-center">
+                                                                    <?php echo str_replace("-","/",$arreglo[10]); ?>
+                                                                </td>
+                                                                <td class="text-center">
 
-                                                    <tr>
-                                                        <?php
-                                                        require("../connect_db.php");
-                                                        
-                                                            $sql_eval = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
-                                                            $result_Evalproyect = mysqli_query($mysqli, $sql_eval);
-                                                            $state = 0;
+                                                                    <?php 
                                                             
-                                                            while ($row = mysqli_fetch_row($result_Evalproyect)) {
-                                                                $state = 1;
-                                                            }
-                                                            
-                                                            if($state != 1) {
-                                                                $proyectos_exist = true;
-                                                                ?>
-                                                        <td><?php echo "$arreglo[3] "; ?></td>
-                                                        <td class="text-center"><?php echo "$arreglo[5] "; ?></td>
-                                                        <td class="text-center"><?php echo "$arreglo[6] "; ?></td>
-                                                        <td class="text-center">
-                                                            <?php echo str_replace("-","/",$arreglo[10]); ?></td>
-                                                        <td class="text-center">
-                                                            <?php
                                                             if(strlen($arreglo[8]) > 1) {
                                                     
                                                                 if(strlen($arreglo[8]) > 15) {
@@ -850,46 +797,91 @@ $dir = $_SESSION['user'];
                                                                 } else {
                                                                 echo "";
                                                                 }
-                                                            ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php
-                                                            echo "
-                                                            <a class='btn btn-warning btn-sm' href='pages/evaluartesispro.php?id=$arreglo[0]&jurado=$dir'>
-                                                            <i class='fas fa-spell-check'></i>
                                                             
+                                                           // echo "<a href='$alma/$arreglo[8] ' target='_blank'>$arreglo[8]</a> "; ?>
+                                                                </td>
+                                                                <?php
+                                                        require("../connect_db.php");
+                                                        $sql = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                        //var_dump($sql);
+                                                        $ressql = mysqli_query($mysqli, $sql);
+                                                        while ($row = mysqli_fetch_row($ressql)) {
+                                                            $asd = $row[1];
+                                                            $jurado = utf8_decode($row[15]);
+                                                            $fecha_eval = $row[16];
+
+                                                        ?>
+                                                                <td class="text-center">EVALUADO</td>
+                                                                <td class="text-center">
+                                                                    <?php //echo "<a href='act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'><img src='images/actualizar.png'  width='30'  height='30' class='img-rounded';"
+                                                                ?>
+                                                                    <?php
+
+                                                                echo "
+                                                                <a class='btn btn-info btn-sm' href='pages/act_evaluacionposter.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                                <i class='fas fa-pencil-alt'>
+                                                                
+                                                                </i>
+                                                                </a>
+                                                                ";
+
+                                                            /*    $direccion = '"pages/act_evaluacionposter.php?"';
+
+                                                                $parametro = '"id=' . $row[0] . '&jurado=' . $dir . '&ID_tesis=' . $arreglo[0] . '"';
+                                                                //$name = '"name"';
+                                                                $img = '<img src="images/actualizar.png"  width="30"  height="30" class="img-rounded"></img>';
+
+                                                                echo "<button onclick='CenterWindow($direccion, $parametro, 600, 600);'>$img</button>";
+                                                                */
+                                                                ?>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <?php 
+                                                            echo "
+                                                            <a class='btn btn-danger btn-sm' target='_blank' href='../archivos/pdf/verevalposter.php?id=$arreglo[0]'>
+                                                            <i class='fas fa-file-pdf'></i>
+                                                            Ver
                                                             </i>
                                                             </a>
-                                                            ";	
+                                                            ";
+
+                                                            if ($asd !== $ide) {
+                                                                echo "
+                                                                <a class='btn btn-warning btn-sm' href='pages/evaluartesis.php?id=$row[0]&jurado=$dir&ID_tesis=$arreglo[0]'>
+                                                                <i class='fas fa-spell-check'></i>
+                                                                Evaluar
+                                                                </i>
+                                                                </a>
+                                                                ";
+                                                            }
+
+                                                        //    echo "<a href='./pdf/verevalposter.php?id=$arreglo[0]' target='_blank'><img src='images/pdf.png' width='20'  height='10'  class='img-rounded';" 
                                                         ?>
-                                                        </td>
-                                                        <?php
-                                                          } else {
-                                                            $state = 0;
-                                                            $total_proyects = $total_proyects - 1;
-                                                            $proyectos_exist = false;
-                                                          }
+                                                                </td>
+                                                                <?php
+                                                        }
+                                                        ?>
+                                                                <?php
                                                     }
                                                     ?>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
-                                            <?php
-
-                                        echo "<center><font color='red' size='3'>Total registros: $total_proyects</font><br></center>"; ?>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <?php echo "<center><font color='red' size='3'>Total registros: $totalm</font><br></center>"; ?>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!-- /.box-body -->
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
 
+
+                        </div>
                     </div>
-                    <!--Termina pestana5-->
+                    <!--Termina pestana3-->
                     <!--Empieza pestana6-->
-                    <div id="cpestana6">
+                    <div id="cpestana4">
 
                         <div class="container-fluid">
                             <!-- Tabs -->
@@ -1325,7 +1317,7 @@ $dir = $_SESSION['user'];
                     </div>
                     <!--Termina pestana6-->
                     <!--Empieza pestana7-->
-                    <div id="cpestana7">
+                    <div id="cpestana5">
 
 
                         <div class="container-fluid">

@@ -13,15 +13,11 @@ function cambiarPestanna(pestannas, pestanna) {
     "cpestana3",
     "cpestana4",
     "cpestana5",
-    "cpestana6",
-    "cpestana7",
   ];
   var Titulos = [
     "Documentos por Visto Bueno..",
     "Documentos bajo su Dirección...",
-    "Monografías/Poster para Evaluar",
-    "Anteproyectos para Evaluar...",
-    "Proyectos para Evaluar",
+    "Documentos por Evaluar",
     "Documentos Evaluados...",
     "Actas de Comité",
   ];
@@ -111,12 +107,6 @@ function myfunction() {
         break;
       case 5:
         cambiarPestanna(pestanas, pestana5);
-        break;
-      case 6:
-        cambiarPestanna(pestanas, pestana6);
-        break;
-      case 7:
-        cambiarPestanna(pestanas, pestana7);
         break;
       default:
         cambiarPestanna(pestanas, pestana1);
