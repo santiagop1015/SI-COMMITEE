@@ -485,8 +485,9 @@ $dir = $_SESSION['user'];
                                             <?php
                                 $total_proyects = 0;
                                 require("../connect_db.php");
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto') ORDER BY  id_tesis DESC");
-                                $query = mysqli_query($mysqli, $sql);
+                                $sql_proyects = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Proyecto') ORDER BY  id_tesis DESC");
+                                
+                                $query = mysqli_query($mysqli, $sql_proyects);
                                 ?>
                                             <div class="box">
                                                 <div class="box-body table-responsive no-padding">
@@ -523,8 +524,8 @@ $dir = $_SESSION['user'];
                                                         <?php
                                                         require("../connect_db.php");
                                                         
-                                                            $sql_eval = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
-                                                            $result_Evalproyect = mysqli_query($mysqli, $sql_eval);
+                                                            $sql_evalproyect = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                            $result_Evalproyect = mysqli_query($mysqli, $sql_evalproyect);
                                                             $state = 0;
                                                             
                                                             while ($row = mysqli_fetch_row($result_Evalproyect)) {
@@ -598,8 +599,8 @@ $dir = $_SESSION['user'];
                                                $total_anteproyects = 0;
                                                //echo $total2;
                                                require("../connect_db.php");
-                                               $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto') ORDER BY id_tesis DESC ");
-                                               $query = mysqli_query($mysqli, $sql);
+                                               $sql_anteproyects = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and terminado!=2 and (ID_estado='Entrega Anteproyecto') ORDER BY id_tesis DESC ");
+                                               $query = mysqli_query($mysqli, $sql_anteproyects);
                                                ?>
                                             <div class="box">
                                                 <div class="box-body table-responsive no-padding">
@@ -723,10 +724,10 @@ $dir = $_SESSION['user'];
                                 require("../connect_db.php");
                                 $total = 0;
                                 $totalm = 0;
-                                $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Monografia' or ID_estado='Entrega Poster' or ID_estado='Correccion Monografia') and terminado!=2 ORDER BY id_tesis DESC ");
+                                $sql_monposters = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') and (ID_estado='Entrega Monografia' or ID_estado='Entrega Poster' or ID_estado='Correccion Monografia') and terminado!=2 ORDER BY id_tesis DESC ");
                              // prueba// $sql = ("SELECT * FROM tesis where (jurado1='$jur' or jurado2='$jur') ORDER BY id_tesis DESC ");
 
-                                $query = mysqli_query($mysqli, $sql);
+                                $query = mysqli_query($mysqli, $sql_monposters);
                                 //var_dump($sql);
                                 ?>
 
@@ -802,9 +803,9 @@ $dir = $_SESSION['user'];
                                                                 </td>
                                                                 <?php
                                                         require("../connect_db.php");
-                                                        $sql = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
+                                                        $sql_evalmonposters = ("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
                                                         //var_dump($sql);
-                                                        $ressql = mysqli_query($mysqli, $sql);
+                                                        $ressql = mysqli_query($mysqli, $sql_evalmonposters);
                                                         while ($row = mysqli_fetch_row($ressql)) {
                                                             $asd = $row[1];
                                                             $jurado = utf8_decode($row[15]);
