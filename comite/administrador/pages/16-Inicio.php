@@ -180,6 +180,11 @@ $passd=$arreglo[8];
                                     <i class="fab fa-buffer"></i> Eje Temático
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a id="idNavFechas" class="nav-link" href="#tabFecha" data-toggle="tab">
+                                    <i class="fa fa-calendar"></i> Fechas de Reuniones
+                                </a>
+                            </li>
                             <script>
                             // Cuando hace click al algun elemento con nav-link
                             $(document).on("click", ".nav-link", function() {
@@ -643,7 +648,7 @@ $passd=$arreglo[8];
                                     url: "16.3-registro_jur.php",
                                     data: paqueteDeDatos_Jur,
                                 }).done(function(info) {
-                                    console.log(info);
+                                    //console.log(info);
                                     //debugger;
                                     if (info == "1") {
                                         MensajeJur.innerHTML =
@@ -892,7 +897,7 @@ $passd=$arreglo[8];
                                     url: "16.5-registro_eje.php",
                                     data: paqueteDeDatos_Eje,
                                 }).done(function(info) {
-                                    console.log(info);
+                                    //console.log(info);
                                     //debugger;
                                     if (info == "1") {
                                         MensajeEje.innerHTML = "Línea Registrada Correctamente";
@@ -913,6 +918,116 @@ $passd=$arreglo[8];
                                         ButtonRegistarEje.disabled = false;
                                     }
                                     Evaluar();
+                                });
+
+
+                            });
+                            </script>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tabFecha">
+                        <div class="card card-default card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">Fechas de Reuniones</h3>
+
+                            </div>
+                            <form id="idFormFechas">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                          <?php
+										     require("../../connect_db.php");
+                                             $query = $mysqli -> query ("SELECT * FROM fechascom WHERE programa='$programa'");
+                                             $fecha = '';
+                                             while ($valores = mysqli_fetch_array($query)) {
+                                               $id_fecha=$valores[0];
+                                               $fecha=$valores[1];
+                                             } 
+                                             ?>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" value="<?php echo $fecha ?>" name="fecha" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer">
+                                    <div id="idBoxFecha" class="alert alert-danger alert-dismissible mt-6"
+                                        style="Display: None;">
+                                        <h5>
+                                            <i id="idIConBoxFecha" class="icon fas fa-ban"></i>
+
+                                        </h5>
+                                        <p id="idMessageComenFecha"></p>
+
+                                    </div>
+                                    <button id="idButtonRegFecha" type="submit"
+                                        class="btn btn-primary float-right">
+                                        Registrar
+                                    </button>
+                                </div>
+                            </form>
+                            <script> 
+                            var action = ''
+                            $('#idFormFechas').submit(function(e) {
+                                e.preventDefault();
+                                var data_Fecha = $("#idFormFechas").serializeArray();
+                                var paqueteDeDatos_Fecha = new FormData();
+                                if(action.length == 0) {
+                                  action = <?php echo strlen($fecha) > 0 ? '"update"' : '"insert"'; ?>;
+                                } 
+                                $.each(data_Fecha, function(key, input) {
+                                    paqueteDeDatos_Fecha.append(input.name, input.value);
+                                });
+                                paqueteDeDatos_Fecha.append("action", action);
+                                paqueteDeDatos_Fecha.append("programa", "<?php echo $programa ?>");
+
+                                var BoxFecha = document.getElementById("idBoxFecha");
+                                BoxFecha.style.display = 'None';
+                                var iconBoxFecha = document.getElementById(
+                                    "idIConBoxFecha");
+                                var MensajeFecha = document.getElementById(
+                                    "idMessageComenFecha");
+                                var ButtonRegistarFecha = document.getElementById("idButtonRegFecha");
+                                ButtonRegistarFecha.disabled = true
+
+                                $.ajax({
+                                    type: "POST",
+                                    contentType: false,
+                                    processData: false,
+                                    cache: false,
+                                    url: "16.6-registro_fecha.php",
+                                    data: paqueteDeDatos_Fecha,
+                                }).done(function(info) {
+                                    //console.log(info);
+                                    if (info === "1") {
+                                        action = 'update' 
+                                        BoxFecha.className =
+                                            "alert alert-success alert-dismissible";
+                                        MensajeFecha.innerHTML = "Fechas Registradas Correctamente";
+                                        iconBoxFecha.className = "icon fas fa-check";
+                                        iconBoxFecha.innerHTML = " Correcto";
+                                        setTimeout(() => {
+                                            BoxFecha.style.display = "Block";
+                                            Evaluar();
+                                            ButtonRegistarFecha.disabled = false
+                                        }, 500);
+                                    } else {
+                                        BoxFecha.style.display = "Block";
+                                        BoxFecha.className =
+                                            "alert alert-danger alert-dismissible";
+                                        MensajeFecha.innerHTML =
+                                            "Error registrando las fechas por favor contacte al administrador";
+                                        iconBoxFecha.className = "icon fas fa-exclamation-triangle";
+                                        iconBoxFecha.innerHTML = " Atencion";
+                                        setTimeout(() => {
+                                            BoxFecha.style.display = "Block";
+                                            Evaluar();
+                                            ButtonRegistarFecha.disabled = false
+                                        }, 500);
+                                    }
+
                                 });
 
 

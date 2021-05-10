@@ -181,7 +181,7 @@ $passd=$arreglo[8];
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a id="idNavFechas" class="nav-link" href="#tabFecha" data-toggle="tab">
+                                <a class="nav-link" href="#tabFecha" data-toggle="tab">
                                     <i class="fa fa-calendar"></i> Fechas de Reuniones
                                 </a>
                             </li>
@@ -980,7 +980,7 @@ $passd=$arreglo[8];
                                         iconBoxFecha.innerHTML = " Correcto";
                                         setTimeout(() => {
                                             BoxFecha.style.display = "Block";
-                                            document.getElementById("idNavFechas").click()
+                                            Evaluar()
                                             ButtonRegistarFecha.disabled = false
                                         }, 500);
                                     } else {
@@ -993,7 +993,7 @@ $passd=$arreglo[8];
                                         iconBoxFecha.innerHTML = " Atencion";
                                         setTimeout(() => {
                                             BoxFecha.style.display = "Block";
-                                            document.getElementById("idNavFechas").click()
+                                            Evaluar()
                                             ButtonRegistarFecha.disabled = false
                                         }, 500);
                                     }
