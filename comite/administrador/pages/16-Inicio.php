@@ -713,10 +713,17 @@ $passd=$arreglo[8];
                                                 <!-- <input type="text" class="form-control" name="programa"
                                                     value="<?php //echo $programa;?>" readonly="readonly"> -->
                                                 <select class="form-control" name="programa">
-                                                    <option>Sistemas</option>
+                                                    <!--<option>Sistemas</option>
                                                     <option>Industrial</option>
                                                     <option>Mecanica</option>
-                                                    <option>Ambiental</option>
+                                                    <option>Ambiental</option>-->
+                                                    <?php
+		                                               require("../../connect_db.php");
+                                                       $query = $mysqli -> query ("SELECT * FROM programas");
+                                                       while ($valores = mysqli_fetch_array($query)) {
+                                                           echo '<option>'.$valores[programa].'</option>';
+														}
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -934,20 +941,30 @@ $passd=$arreglo[8];
                             </div>
                             <form id="idFormFechas">
                                 <div class="card-body">
+                                
+
                                     <div class="row">
+                                    
                                         <div class="col-sm-12">
-                                          <?php
-										     require("../../connect_db.php");
-                                             $query = $mysqli -> query ("SELECT * FROM fechascom WHERE programa='$programa'");
-                                             $fecha = '';
-                                             while ($valores = mysqli_fetch_array($query)) {
-                                               $id_fecha=$valores[0];
-                                               $fecha=$valores[1];
-                                             } 
-                                             ?>
+                                        
+                                        <iframe id="idFrameTable" class="mb-2" src="16.6.1-tabla_registro_fecha.php" width="100%" height="230px" style="border: none;"
+                                frameborder="0" scrolling="yes"></iframe>
+                   
                                             <div class="form-group">
-                                                <input type="text" class="form-control" value="<?php echo $fecha ?>" name="fecha" required>
+                                                <input type="text" class="form-control" value="" name="fecha" required> 
                                             </div>
+                                            <div class="form-group">
+                                            <select class="form-control" name="programa">   
+                                                    <?php
+		                                               require("../../connect_db.php");
+                                                       $query = $mysqli -> query ("SELECT * FROM programas");
+                                                       while ($valores = mysqli_fetch_array($query)) {
+                                                           echo '<option>'.$valores[programa].'</option>';
+														}
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -972,6 +989,7 @@ $passd=$arreglo[8];
                             var action = ''
                             $('#idFormFechas').submit(function(e) {
                                 e.preventDefault();
+                                //$(this).find("td:eq(3)").text("nuevo");
                                 var data_Fecha = $("#idFormFechas").serializeArray();
                                 var paqueteDeDatos_Fecha = new FormData();
                                 if(action.length == 0) {
@@ -981,7 +999,7 @@ $passd=$arreglo[8];
                                     paqueteDeDatos_Fecha.append(input.name, input.value);
                                 });
                                 paqueteDeDatos_Fecha.append("action", action);
-                                paqueteDeDatos_Fecha.append("programa", "<?php echo $programa ?>");
+                                //paqueteDeDatos_Fecha.append("programa", "<?php echo $programa ?>");
 
                                 var BoxFecha = document.getElementById("idBoxFecha");
                                 BoxFecha.style.display = 'None';
@@ -1012,7 +1030,10 @@ $passd=$arreglo[8];
                                             BoxFecha.style.display = "Block";
                                             Evaluar();
                                             ButtonRegistarFecha.disabled = false
+                                            var iframe = document.getElementById('idFrameTable');
+                                            iframe.contentWindow.location.reload();
                                         }, 500);
+                                        
                                     } else {
                                         BoxFecha.style.display = "Block";
                                         BoxFecha.className =
@@ -1117,6 +1138,14 @@ $passd=$arreglo[8];
                                     <input type="HIDDEN" class="form-control" name="Jurado" readonly="readonly">
 
                                     <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_estudiante2"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_user"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
                                         value="<?php echo $usuario;?>" readonly="readonly">
 
@@ -1126,9 +1155,9 @@ $passd=$arreglo[8];
                                                 <select class="form-control" name="ID_directores">
                                                     <?php
 		                                               require("../../connect_db.php");
-                                                       $query = $mysqli -> query ("SELECT * FROM login where (TipoUsuario='Director' or tipoUsuario='Coordinador') and programa='$programa' ORDER BY  TipoUsuario DESC");
+                                                       $query = $mysqli -> query ("SELECT * FROM login where (TipoUsuario='Director' or tipoUsuario='Coordinador') ORDER BY  TipoUsuario DESC");
                                                        while ($valores = mysqli_fetch_array($query))	{
-		                                               	echo '<option value="'.$valores[user].'">'.$valores[user].'</option>';
+		                                               	echo '<option value="'.$valores['user'].'">'.$valores['user'].'</option>';
 		                                               	}
                                                     ?>
                                                 </select>
@@ -1179,6 +1208,14 @@ $passd=$arreglo[8];
                                     <input type="HIDDEN" class="form-control" name="ID_directores" readonly="readonly">
 
                                     <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_estudiante2"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_user"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
                                         value="<?php echo $usuario;?>" readonly="readonly">
 
@@ -1188,9 +1225,9 @@ $passd=$arreglo[8];
                                                 <select class="form-control" name="Jurado">
                                                     <?php
 		                                               require("../../connect_db.php");
-                                                       $query = $mysqli -> query ("SELECT * FROM login where (TipoUsuario='Director' or tipoUsuario='Coordinador') and programa='$programa' ORDER BY  TipoUsuario DESC");
+                                                       $query = $mysqli -> query ("SELECT * FROM login where (TipoUsuario='Director' or tipoUsuario='Coordinador') ORDER BY  TipoUsuario DESC");
                                                        while ($valores = mysqli_fetch_array($query))	{
-                                                        echo '<option value="'.$valores[user].'">'.$valores[user].'</option>';
+                                                        echo '<option value="'.$valores['user'].'">'.$valores['user'].'</option>';
 		                                               	}
                                                     ?>
                                                 </select>
@@ -1242,6 +1279,14 @@ $passd=$arreglo[8];
                                     <input type="HIDDEN" class="form-control" name="Jurado" readonly="readonly">
 
                                     <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_estudiante2"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_user"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
                                         value="<?php echo $usuario;?>" readonly="readonly">
 
@@ -1251,9 +1296,9 @@ $passd=$arreglo[8];
                                                 <select class="form-control" name="terminado">
                                                     <?php
 		                                               require("../../connect_db.php");
-                                                       $query = $mysqli -> query ("SELECT * FROM estado ORDER BY  id_estado DESC");
+                                                       $query = $mysqli -> query ("SELECT * FROM estado ORDER BY id_estado DESC");
                                                        while ($valores = mysqli_fetch_array($query))	{
-                                                        echo '<option value='.$valores[id_estado].'>'.$valores[nombree].'</option>';
+                                                        echo '<option value='.$valores['id_estado'].'>'.$valores['nombree'].'</option>';
 		                                               	}
                                                     ?>
                                                 </select>
@@ -1309,6 +1354,14 @@ $passd=$arreglo[8];
                                         readonly="readonly">
 
                                     <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_estudiante2"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_user"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
                                         value="<?php echo $usuario;?>" readonly="readonly">
 
@@ -1318,9 +1371,9 @@ $passd=$arreglo[8];
                                                 <select class="form-control" name="id_area">
                                                     <?php
 		                                               require("../../connect_db.php");
-                                                       $query = $mysqli -> query ("SELECT * FROM area_inves where programa='$programa'");
+                                                       $query = $mysqli -> query ("SELECT * FROM area_inves");
                                                        while ($valores = mysqli_fetch_array($query))	{
-                                                        echo '<option value="'.$valores[id_area].'">'.$valores[nombre_area].'</option>';
+                                                        echo '<option value="'.$valores['id_area'].'">'.$valores['nombre_area'].'</option>';
 		                                               	}
                                                     ?>
                                                 </select>
@@ -1362,6 +1415,14 @@ $passd=$arreglo[8];
                                         readonly="readonly">
 
                                     <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_estudiante2"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_user"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="usuario"
                                         value="<?php echo $usuario;?>" readonly="readonly">
 
@@ -1371,9 +1432,9 @@ $passd=$arreglo[8];
                                                 <select class="form-control" name="id_eje">
                                                     <?php
 		                                               require("../../connect_db.php");
-                                                       $query = $mysqli -> query ("SELECT * FROM ejes_tem where programa='$programa'");
+                                                       $query = $mysqli -> query ("SELECT * FROM ejes_tem");
                                                        while ($valores = mysqli_fetch_array($query))	{
-                                                           echo '<option value="'.$valores[id_eje].'">'.$valores[nombre_eje].'</option>';
+                                                           echo '<option value="'.$valores['id_eje'].'">'.$valores['nombre_eje'].'</option>';
 														}
                                                     ?>
                                                 </select>
@@ -1400,6 +1461,66 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Opción de Grado</h3>
                             </div>
+                            <form id="idFormOpcion" target="_blank" action="pdf/generarreportes.php" method="post">
+                                <div class="card-body">
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="programa"
+                                        value="<?php echo $programa;?>" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="ID_directores" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="terminado" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_area" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="Jurado" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_eje"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_user"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="usuario"
+                                        value="<?php echo $usuario;?>" readonly="readonly">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <select class="form-control" name="id_estudiante2"> 
+                                                    <option value="0">Proyecto</option>
+                                                    <option value="1">Semillero</option>
+                                                    <option value="2">Auxiliar de investigación</option>
+                                                    <option value="3">Posgrados</option>
+                                                    <option value="4">Curso/Diplomado</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary float-right">Generar</button>
+                                </div>
+                            </form>
+                            <script>
+                            $('#idFormOpcion').submit(function(e) {
+                                //e.preventDefault();
+
+                                var data_repeje = $("#idFormOpcion").serializeArray();
+                                console.log(data_repeje);
+                            });
+                            </script>
                         </div>
                     </div>
                     <div class="tab-pane" id="tabRepIngreso">
@@ -1407,6 +1528,60 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Ingreso a la Plataforma</h3>
                             </div>
+                            <form target="_blank" action="pdf/generarreportes.php" method="post">
+                                <div class="card-body">
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="programa"
+                                        value="<?php echo $programa;?>" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="ID_directores" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="terminado" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_area" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="Jurado" value=""
+                                        readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_eje"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="id_estudiante2"
+                                        value="" readonly="readonly">
+
+                                    <!-- text input -->
+                                    <input type="HIDDEN" class="form-control" name="usuario"
+                                        value="<?php echo $usuario;?>" readonly="readonly">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <select class="form-control" name="id_user"> 
+                                                    <?php
+		                                               require("../../connect_db.php");
+                                                       $query = $mysqli -> query ("SELECT * FROM login");
+                                                       while ($valores = mysqli_fetch_array($query)) {
+                                                           echo '<option value="'.$valores['id'].'">'.$valores['user'].'</option>';
+														}
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary float-right">Generar</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -1438,6 +1613,7 @@ function Evaluar(event) {
     //var elmnt = document.getElementById("idHeader");
     // card.scrollIntoView();
 }
+
 </script>
 
 </html>

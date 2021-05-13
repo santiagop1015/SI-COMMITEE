@@ -11,8 +11,12 @@
 
 	require("../../connect_db.php");
 
-
-    if($action == 'update') {
+    $query = $mysqli -> query ("SELECT * FROM fechascom WHERE programa='$programa'");
+    $exist = false;
+    while ($valores = mysqli_fetch_array($query)) {
+        $exist = true;
+    }
+    if($exist) {
         mysqli_query($mysqli,"UPDATE fechascom SET fechas='$fecha' WHERE programa='$programa'");
         //$sentencia = "update fechascom set fechas=".$fecha." where id_user='$id_user' ";
     } else {
