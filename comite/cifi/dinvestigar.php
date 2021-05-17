@@ -5,7 +5,6 @@ session_start();
 if (@!$_SESSION['user']) {
     header("Location:../../index.html");
 }
-$coor=$_SESSION['user'];
 date_default_timezone_set ('America/Bogota');
 $fecha=date("Y-m-d");
 $nuevafecha = date('Y-m-d', strtotime($fecha .'+3 month'));
@@ -31,7 +30,7 @@ while($arreglo=mysqli_fetch_array($query)){
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Decanatura</title>
+    <title>SI-COMMITEE || Director de Investigación</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../LocalSources/css/ionicons/ionicons.min.css">
@@ -126,18 +125,18 @@ while($arreglo=mysqli_fetch_array($query)){
                             <li id="pestana1" class="nav-item">
                                 <a href='javascript:cambiarPestanna(pestanas,pestana1);ReloadsFrames();'
                                     class="nav-link">
-                                    <i class="nav-icon fa fa-users white"></i>
+                                    <i class="nav-icon fas fa-check-double white"></i>
                                     <p class="white">
-                                        Semilleros
+                                        VoBo
                                     </p>
                                 </a>
                             </li>
                             <li id="pestana2" class="nav-item">
                                 <a href='javascript:cambiarPestanna(pestanas,pestana2);ReloadsFrames();'
                                     class="nav-link">
-                                    <i class="nav-icon fa fa-users white"></i>
+                                    <i class="nav-icon fas fa-user-circle white"></i>
                                     <p class="white">
-                                        Aux.Investigación
+                                        Dirección
                                     </p>
                                 </a>
                             </li>
@@ -146,7 +145,25 @@ while($arreglo=mysqli_fetch_array($query)){
                                     class="nav-link">
                                     <i class="nav-icon fa fa-users white"></i>
                                     <p class="white">
-                                        Dirección
+                                        Evaluar
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="pestana4" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana4);ReloadsFrames();'
+                                    class="nav-link">
+                                    <i class="nav-icon fa fa-users white"></i>
+                                    <p class="white">
+                                        Evaluados
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="pestana5" class="nav-item">
+                                <a href='javascript:cambiarPestanna(pestanas,pestana5);ReloadsFrames();'
+                                    class="nav-link">
+                                    <i class="nav-icon fa fa-users white"></i>
+                                    <p class="white">
+                                        Actas de comité
                                     </p>
                                 </a>
                             </li>
@@ -180,16 +197,21 @@ while($arreglo=mysqli_fetch_array($query)){
                 <div class="container-fluid">
                     <div id="contenidopestanas">
                         <div id="cpestana1">
-                        <iframe id="idFrameSemillero" src="pages/1-Semillero.php" width="100%" style="border: none;"
+                        <iframe id="idFrameSemillero" src="pages/1-VoBo.php" width="100%" style="border: none;"
                                     frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
                         </div>
                         <div id="cpestana2">
-                        <iframe id="idFrameAuxInvest" src="pages/2-AuxInvestigacion.php" width="100%" style="border: none;"
+                        <iframe id="idFrameDireccion" src="pages/2-Direccion.php" width="100%" style="border: none;"
                                     frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
                         </div>
                         <div id="cpestana3">
-                        <iframe id="idFrameDireccion" src="pages/3-Direccion.php" width="100%" style="border: none;"
-                                    frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+                                <?php include("pages/3-evaluar.php"); ?>
+                        </div>
+                        <div id="cpestana4">
+                                <?php include("pages/4-evaluados.php"); ?>
+                        </div>
+                        <div id="cpestana5">
+                                <?php include("pages/5-actas.php"); ?>
                         </div>
                     </div>
                 </div>
@@ -250,10 +272,11 @@ $(document).ready(function() {
 
 
 });
-var Frames = ['idFrameSemillero', 'idFrameAuxInvest', 'idFrameDireccion'];
+var Frames = ['idFrameSemillero', 'idFrameDireccion'];
 
 function ReloadsFrames(param) {
     var ItemNow = localStorage.getItem("number");
+    if(ItemNow < 2) {
     //debugger;
     //var Frames = ['idFrameGenerar', 'idFrameEvaluar', 'idFrameProceso', 'idFrameAplazar'];
     //var iframe = document.getElementById(Frames[(id - 1)]);
@@ -272,6 +295,7 @@ function ReloadsFrames(param) {
     }
     //iframe.contentDocument.location.reload(true);
     // document.getElementById(idFrame).contentDocument.history.back(true);
+   }
 
 }
 

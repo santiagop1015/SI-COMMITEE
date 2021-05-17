@@ -203,7 +203,7 @@ $raiz = "../archivos";
                                     </p>
                                 </a>
                             </li>
-                            <li id="pestana5" class="nav-item">
+                            <li id="pestana5" class="nav-item d-none">
                                 <a href='javascript:cambiarPestanna(pestanas,pestana5);' class="nav-link">
                                     <i class="nav-icon fa fa-user-md white"></i>
                                     <p class="white">

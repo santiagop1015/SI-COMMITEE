@@ -72,7 +72,7 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
         //echo "<script>location.href='jurado.php'</script>";
         echo "<script>location.href='Delayed.php?jurado'</script>";
     }
-    if ($pass == $f2['area']) {
+    /*if ($pass == $f2['area']) {
         $_SESSION['id'] = $f2['id'];
         $_SESSION['user'] = $f2['user'];
         $id_user = $_SESSION['id'];
@@ -92,8 +92,8 @@ if ($f2 = mysqli_fetch_assoc($sql2)) {
         }
         //echo '<script>alert("BIENVENIDO Director de Investigación")</script> ';
         //echo "<script>location.href='dinvestigar.php'</script>";
-        echo "<script>location.href='Delayed.php?dinvestigar'</script>";
-    }
+        //echo "<script>location.href='Delayed.php?dinvestigar'</script>";
+    }*/
     if ($pass == $f2['pascor']) {
         $_SESSION['id'] = $f2['id'];
         $_SESSION['user'] = $f2['user'];

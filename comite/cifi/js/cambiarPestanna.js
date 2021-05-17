@@ -7,11 +7,13 @@ function cambiarPestanna(pestannas, pestanna) {
     var cpestana2 = document.getElementById("cpestana2");
     var cpestana3 = document.getElementById("cpestana3");
     var cpestana4 = document.getElementById("cpestana4");
-    var cpestana = ["cpestana1", "cpestana2", "cpestana3"];
+    var cpestana = ["cpestana1", "cpestana2", "cpestana3", "cpestana4", "cpestana5"];
     var Titulos = [
-        "Semilleros",
-        "Semilleros",
-        "Semilleros"
+        "VoBo",
+        "Dirección",
+        "Evaluar",
+        "Evaluados",
+        "Actas de comité"
     ];
 
     pestanna = document.getElementById(pestanna.id);
@@ -87,6 +89,12 @@ function myfunction() {
                 break;
             case 3:
                 cambiarPestanna(pestanas, pestana3);
+                break;
+            case 4:
+                cambiarPestanna(pestanas, pestana4);
+                break;
+            case 5:
+                cambiarPestanna(pestanas, pestana5);
                 break;
             default: 1
                 cambiarPestanna(pestanas, pestana1);

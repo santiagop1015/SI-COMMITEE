@@ -34,7 +34,7 @@ $dir=$_SESSION['user'];
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SI-COMMITEE || Semillero</title>
+    <title>SI-COMMITEE || Dirección</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../../LocalSources/css/ionicons/ionicons.min.css">
@@ -79,24 +79,25 @@ $dir=$_SESSION['user'];
                         <?php
                 $totalp=0;
                 require("../../connect_db.php");
-                 $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and id_estudiante2=1 ORDER BY programa DESC");
-                // prueba $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
-               $query=mysqli_query($mysqli,$sql);
-                
+                $total=0;
+                 $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and (id_estudiante2=1 or id_estudiante2=2) and ID_directores='$dir' ORDER BY id_tesis DESC");
+                 //$sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and ID_directores='Fredys Simanca' ORDER BY id_tesis DESC"); 
+                 $query=mysqli_query($mysqli,$sql);
                 ?>
                         <tr>
                             <th style="width: 30%">Título</th>
-                            <th class="text-center">Director</th>
-                            <th class="text-center">Fecha_Aprob</th>
-                            <th class="text-center">Programa</th>
-
+                            <th class="text-center">Aprob_Dir</th>
+                            <th class="text-center">Documento</th>
+                            <th class="text-center">Opción de grado</th>
+                            <th class="text-center">Fecha_Entrega</th>
                             <th class="text-center">Archivo</th>
-                            <th class="text-center">VoBo</th>
-                            <th class="text-center">Editar</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <?php
+                        $total1=0;
+                        $atencion = 0;
               while($arreglo=mysqli_fetch_array($query)){
                 $ide=$arreglo[1]; 
 				$titu=$arreglo[3];
@@ -112,14 +113,41 @@ $dir=$_SESSION['user'];
                    }else {
                             $alma="./otros";	
                          }	
-                           $totalp++;
+                           $total1++;
                 
              echo "<tr>";
 
              echo "<td>$arreglo[3]</td>";
-             echo "<td class='text-center'>$arreglo[5]</td>";
-             echo "<td class='text-center'>$arreglo[10]</td>";
-             echo "<td class='text-center'>$arreglo[12]</td>";
+             echo "<td class='text-center'>$arreglo[4]</td>";
+             if($arreglo[4]=="") {
+                $atencion++; 
+             } 
+
+             echo "<td class='text-center'>$arreglo[6]</td>";
+
+             echo "<td class='text-center'>";
+             switch ($arreglo[18]) {
+                case 0:
+                    echo "Proyecto";
+                    break;
+                case 1:
+                  echo "Semillero";
+                  break;
+                case 2:
+                  echo "Aux. Investigación";
+                  break;
+                case 3:
+                  echo "Postgrados";
+                  break;
+                case 4:
+                  echo "Curso/Diplomado";
+                  break;
+                default:
+                  echo "";
+              }
+              echo "</td>";
+
+             echo "<td class='text-center'>$arreglo[9]</td>";
               
              echo "<td class='text-center'>";
              $raiz = "../../archivos";
@@ -140,62 +168,23 @@ $dir=$_SESSION['user'];
                ";
                }
                } else {
-               echo "";
+               echo "Archivo no disponible";
                }
-           echo "</td>";
+               
+               echo "</td>";
 
-           require("../../connect_db.php");
-           $asd=0;
-           $sql=("SELECT * FROM cifi where Id_tesis=$ide");
-		   $ressql=mysqli_query($mysqli,$sql);
-		   while ($row=mysqli_fetch_row ($ressql))
-		   {
-		   	$asd++;
-           }
-           
-           if($asd==0){
-             
-             echo "<td class='text-center'>
-             <a class='btn btn-info btn-sm' href='1.1-vobodinvestigar.php?id=$arreglo[0]'>
-             <i class='fas fa-pencil-alt'>
-             </i>
-             </a>
-             </td>
-             ";
-
-             echo "<td class='text-center'>VoBo</td>";
-
-           } else {
-
-            echo "<td class='text-center'>Procesado</td>";
-
-            echo "<td class='text-center'>
-             <a class='btn btn-info btn-sm' href='1.2-act_tesis_dinvestigar.php?ide=$arreglo[0]&Titulo_tesis=$arreglo[3]'>
-             <i class='fas fa-pencil-alt'>
-             </i>
-             </a>
-             </td>
-             ";
-
-           }
-
-           require("../../connect_db.php");
-           $sql=("SELECT * FROM evaluacion where Id_tesis='$ide' and jurado='$jur'");
-           $ressql=mysqli_query($mysqli,$sql);
-           while ($row=mysqli_fetch_row ($ressql))	{
-					$asd=$row[1];
-					$jurado=utf8_decode($row[15]);
-					$fecha_eval=$row[16];
-			}
-
-            // $totalp++;
              echo "</tr>";
             }
-            ?>
 
+            if($atencion > 0) {
+                echo "<div class='alert alert-info'><strong>¡Atención!</strong> usted
+                 tiene <strong>documentos</strong> para darle el visto bueno
+                 </div>";
+            }
+            ?>
                     </tbody>
                 </table>
-                <?php echo "<center><font color='red' size='3'>Total registros: $totalp</font><br></center>"; ?>
+                <?php echo "<center><font color='red' size='3'>Total registros: $total1</font><br></center>"; ?>
             </div>
         </div>
     </div>
@@ -212,7 +201,7 @@ $(document).ready(function() {
           Evaluar();
       });
       */
-      window.addEventListener('resize', function(event) {
+    window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
     });

@@ -395,6 +395,12 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             </div>
                         </div>
                     </div>
+                    <?php
+                                $file = '../archivos/documentacion/'.$tipoUser.'.pdf';
+                                // Devuelve true
+                                $exists = is_file($file);
+                                if($exists) {
+                                ?>
                     <div class="col-md-12">
                         <div class="card card-warning">
                             <div class="card-header" style="background-color: #B42A2A; color: white">
@@ -402,15 +408,16 @@ while ($arreglo = mysqli_fetch_array($query)) {
                             </div>
                             <div class="card-body">
                                 <div class="col-sm-12">
-                                    <!--<iframe
-                                        src="https://docs.google.com/viewer?url=http://sicomite.unilibre.edu.co/committeees.pdf&embedded=true"
-                                        width="100%" height="600" style="border: none;"></iframe> -->
+                                
+                                    <embed src=<?php echo '"../archivos/documentacion/'.$tipoUser.'.pdf"' ?> type="application/pdf" width="100%" height="600" style="border: none;" />
+                                
                                     <a href="../modelo/committeees.pdf" style="color: blue;"
                                         target="_blanck">Descargar..</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                     <div class="col-md-6">
                         <div class="card card-warning">
                             <div class="card-header" style="background-color: #B42A2A; color: white">

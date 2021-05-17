@@ -79,24 +79,25 @@ $dir=$_SESSION['user'];
                         <?php
                 $totalp=0;
                 require("../../connect_db.php");
-                $total=0;
-                 $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and ID_directores='$dir' ORDER BY id_tesis DESC");
-                // $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%'"); 
-                 $query=mysqli_query($mysqli,$sql);
+                $sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and (id_estudiante2=1 or id_estudiante2=2) and ID_directores='$jur' ORDER BY programa DESC");
+                //$sql=("SELECT * FROM tesis where titulo_tesis like '%$buscar%' and ID_directores='Fredys Simanca' ORDER BY programa DESC"); 
+                $query=mysqli_query($mysqli,$sql);
+                
                 ?>
                         <tr>
                             <th style="width: 30%">Título</th>
-                            <th class="text-center">Aprob_Dir</th>
-                            <th class="text-center">Documento</th>
-                            <th class="text-center">Fecha_Entrega</th>
+                            <th class="text-center">Director</th>
+                            <th class="text-center">Fecha_Aprob</th>
+                            <th class="text-center">Programa</th>
+                            <th class="text-center">Opcion de grado</th>
+
                             <th class="text-center">Archivo</th>
+                            <th class="text-center">VoBo</th>
                             <th class="text-center">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $total1=0;
-                        $atencion = 0;
               while($arreglo=mysqli_fetch_array($query)){
                 $ide=$arreglo[1]; 
 				$titu=$arreglo[3];
@@ -112,26 +113,37 @@ $dir=$_SESSION['user'];
                    }else {
                             $alma="./otros";	
                          }	
-                           $total1++;
+                           $totalp++;
                 
              echo "<tr>";
 
              echo "<td>$arreglo[3]</td>";
-             if($arreglo[4]!="" and $total==0) {
-                 ++$total1;
+             echo "<td class='text-center'>$arreglo[5]</td>";
+             echo "<td class='text-center'>$arreglo[10]</td>";
+             echo "<td class='text-center'>$arreglo[12]</td>";
+             
+             echo "<td class='text-center'>";
+             switch ($arreglo[18]) {
+                case 0:
+                    echo "Proyecto";
+                    break;
+                case 1:
+                  echo "Semillero";
+                  break;
+                case 2:
+                  echo "Aux. Investigación";
+                  break;
+                case 3:
+                  echo "Postgrados";
+                  break;
+                case 4:
+                  echo "Curso/Diplomado";
+                  break;
+                default:
+                  echo "";
+              }
+              echo "</td>";
 
-                 echo "<td class='text-center'>$arreglo[4]</td>";
-                 
-                 $atencion++;
-
-                 
-             } else {
-                echo "<td class='text-center'>$arreglo[4]</td>";
-             }
-
-             echo "<td class='text-center'>$arreglo[6]</td>";
-             echo "<td class='text-center'>$arreglo[9]</td>";
-              
              echo "<td class='text-center'>";
              $raiz = "../../archivos";
              if(strlen($arreglo[8]) > 1) {                         
@@ -151,33 +163,55 @@ $dir=$_SESSION['user'];
                ";
                }
                } else {
-               echo "Archivo no disponible";
+               echo "";
                }
            echo "</td>";
 
-           echo "<td class='text-center'>
-             <a class='btn btn-info btn-sm' href='1.1-vobodinvestigar.php?id=$arreglo[0]'>
+           //require("../../connect_db.php");
+           //$asd=0;
+           //$sql=("SELECT * FROM cifi where Id_tesis=$ide");
+		   //$ressql=mysqli_query($mysqli,$sql);
+		   //while ($row=mysqli_fetch_row ($ressql))
+		   //{
+		   //	$asd++;
+           //}
+
+           
+           if($arreglo[4]==''){
+             
+             echo "<td class='text-center'>
+             <a class='btn btn-info btn-sm' href='1.1-vobo.php?id=$arreglo[0]'>
+             <i class='fas fa-check-double'>
+             </i>
+             </a>
+             </td>
+             ";
+
+             echo "<td class='text-center'>VoBo</td>";
+
+           } else {
+
+            echo "<td class='text-center'>Realizado</td>";
+
+            echo "<td class='text-center'>
+             <!--<a class='btn btn-info btn-sm' href='1.2-act_tesis_dinvestigar.php?ide=$arreglo[0]&Titulo_tesis=$arreglo[3]'>-->
+             <a class='btn btn-info btn-sm' href='1.1-vobo.php?id=$arreglo[0]'>
              <i class='fas fa-pencil-alt'>
              </i>
              </a>
              </td>
              ";
 
+           }
+
             // $totalp++;
              echo "</tr>";
-            }
-
-            if($atencion > 0) {
-                echo "<div class='alert alert-info'><strong>¡Atención!</strong> usted
-                 tiene <strong>direcciones</strong> por aprobar y
-                 <strong>documentos</strong> por evaluar...
-                 </div>";
             }
             ?>
 
                     </tbody>
                 </table>
-                <?php echo "<center><font color='red' size='3'>Total registros: $total1</font><br></center>"; ?>
+                <?php echo "<center><font color='red' size='3'>Total registros: $totalp</font><br></center>"; ?>
             </div>
         </div>
     </div>
@@ -194,7 +228,7 @@ $(document).ready(function() {
           Evaluar();
       });
       */
-    window.addEventListener('resize', function(event) {
+      window.addEventListener('resize', function(event) {
         // do stuff here
         Evaluar();
     });
