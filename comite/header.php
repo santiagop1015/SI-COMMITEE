@@ -411,8 +411,8 @@ while ($arreglo = mysqli_fetch_array($query)) {
                                 
                                     <embed src=<?php echo '"../archivos/documentacion/'.$tipoUser.'.pdf"' ?> type="application/pdf" width="100%" height="600" style="border: none;" />
                                 
-                                    <a href="../modelo/committeees.pdf" style="color: blue;"
-                                        target="_blanck">Descargar..</a>
+                                    <!--<a href="../modelo/committeees.pdf" style="color: blue;"
+                                        target="_blanck">Descargar..</a>-->
                                 </div>
                             </div>
                         </div>

@@ -967,7 +967,7 @@ $dir = $_SESSION['user'];
 
                                                             $state = 1;
                                                         }
-                                                        if($state != 1) {
+                                                        if($state == 1) {
                                                         ?>
                                                                 <td><?php echo "$arreglo[3] "; ?></td>
 
