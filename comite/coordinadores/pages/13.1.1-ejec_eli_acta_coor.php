@@ -29,8 +29,14 @@ utf8_decode(extract($_POST));	//extraer todos los valores del metodo post del fo
 	//	echo "<script>location.href='Listados.php'</script>";
 	}else {
 	//	echo '<script>alert("EL ACTA FUE BORRADA CON EXITO!")</script> ';
+	    $sql=("SELECT * FROM login where id='$id_User'");
+		$query=mysqli_query($mysqli,$sql);
+        while($arreglo=mysqli_fetch_array($query)){
+		  $correo = $arreglo[4];
+		}
 		
 		//enviar mensaje de registro
+		if(isset($correo)) {
 		$escudo = "http://sicomite.unilibre.edu.co/comite/LocalSources/images/escudo.jpg";
 	    $inicio = "http://sicomite.unilibre.edu.co/";
 		$email = $correo;
@@ -41,7 +47,7 @@ utf8_decode(extract($_POST));	//extraer todos los valores del metodo post del fo
 		mail($email, "Cambios en registros Comite de Proyectos UL", $msg, $headers);
 				//echo '<script>alert("Se ha enviado el correo con éxito!!!")</script> ';
 				//termina envio 
-				
+		}	
     //	echo "<script>location.href='Listados.php'</script>";
     
     echo '1';

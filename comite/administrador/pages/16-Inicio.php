@@ -1120,7 +1120,7 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar reporte por Director</h3>
                             </div>
-                            <form target="_blank" action="pdf/generarreportes.php" method="post">
+                            <form id="formGenerateReportDirector" target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
@@ -1178,6 +1178,26 @@ $passd=$arreglo[8];
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                         <div class="form-group">
+                                            <label>Formato:</label>
+                                            <select id="selectFormatDirector" class="form-control">
+                                                <option value="pdf">PDF</option>
+                                                <option value="xls">XLS</option>
+                                            </select>
+                                            <script>
+                                                document.getElementById("selectFormatDirector").addEventListener('change', (event) => {
+                                                    if(event.target.value == 'xls') {
+                                                      document.getElementById("formGenerateReportDirector").action = 'Lista.php';
+                                                    } else if(event.target.value == 'pdf') {
+                                                      document.getElementById("formGenerateReportDirector").action = 'pdf/generarreportes.php';
+                                                    }
+                                                });
+                                            </script>
+                                         </div>
+                                      </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary float-right">Generar</button>
@@ -1190,7 +1210,7 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Evaluador</h3>
                             </div>
-                            <form target="_blank" action="pdf/generarreportes.php" method="post">
+                            <form id="formGenerateReportJurado" target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
@@ -1248,6 +1268,26 @@ $passd=$arreglo[8];
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                         <div class="form-group">
+                                            <label>Formato:</label>
+                                            <select id="selectFormatJurado" class="form-control">
+                                                <option value="pdf">PDF</option>
+                                                <option value="xls">XLS</option>
+                                            </select>
+                                            <script>
+                                                document.getElementById("selectFormatJurado").addEventListener('change', (event) => {
+                                                    if(event.target.value == 'xls') {
+                                                      document.getElementById("formGenerateReportJurado").action = 'Lista.php';
+                                                    } else if(event.target.value == 'pdf') {
+                                                      document.getElementById("formGenerateReportJurado").action = 'pdf/generarreportes.php';
+                                                    }
+                                                });
+                                            </script>
+                                         </div>
+                                      </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary float-right">Generar</button>
@@ -1260,7 +1300,7 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Estado</h3>
                             </div>
-                            <form target="_blank" action="pdf/generarreportes.php" method="post">
+                            <form id="formGenerateReportEstado" target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
@@ -1319,6 +1359,26 @@ $passd=$arreglo[8];
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                         <div class="form-group">
+                                            <label>Formato:</label>
+                                            <select id="selectFormatEstado" class="form-control">
+                                                <option value="pdf">PDF</option>
+                                                <option value="xls">XLS</option>
+                                            </select>
+                                            <script>
+                                                document.getElementById("selectFormatEstado").addEventListener('change', (event) => {
+                                                    if(event.target.value == 'xls') {
+                                                      document.getElementById("formGenerateReportEstado").action = 'Lista.php';
+                                                    } else if(event.target.value == 'pdf') {
+                                                      document.getElementById("formGenerateReportEstado").action = 'pdf/generarreportes.php';
+                                                    }
+                                                });
+                                            </script>
+                                         </div>
+                                      </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary float-right">Generar</button>
@@ -1331,7 +1391,7 @@ $passd=$arreglo[8];
                             <div class="card-header">
                                 <h3 class="card-title">Generar Reporte por Línea de Investigación</h3>
                             </div>
-                            <form target="_blank" action="pdf/generarreportes.php" method="post">
+                            <form id="formGenerateReportLinea" target="_blank" action="pdf/generarreportes.php" method="post">
                                 <div class="card-body">
                                     <!-- text input -->
                                     <input type="HIDDEN" class="form-control" name="programa"
@@ -1379,6 +1439,26 @@ $passd=$arreglo[8];
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                         <div class="form-group">
+                                            <label>Formato:</label>
+                                            <select id="selectFormatLinea" class="form-control">
+                                                <option value="pdf">PDF</option>
+                                                <option value="xls">XLS</option>
+                                            </select>
+                                            <script>
+                                                document.getElementById("selectFormatLinea").addEventListener('change', (event) => {
+                                                    if(event.target.value == 'xls') {
+                                                      document.getElementById("formGenerateReportLinea").action = 'Lista.php';
+                                                    } else if(event.target.value == 'pdf') {
+                                                      document.getElementById("formGenerateReportLinea").action = 'pdf/generarreportes.php';
+                                                    }
+                                                });
+                                            </script>
+                                         </div>
+                                      </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -1440,6 +1520,26 @@ $passd=$arreglo[8];
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                         <div class="form-group">
+                                            <label>Formato:</label>
+                                            <select id="selectFormatEje" class="form-control">
+                                                <option value="pdf">PDF</option>
+                                                <option value="xls">XLS</option>
+                                            </select>
+                                            <script>
+                                                document.getElementById("selectFormatEje").addEventListener('change', (event) => {
+                                                    if(event.target.value == 'xls') {
+                                                      document.getElementById("idFormRepEje").action = 'Lista.php';
+                                                    } else if(event.target.value == 'pdf') {
+                                                      document.getElementById("idFormRepEje").action = 'pdf/generarreportes.php';
+                                                    }
+                                                });
+                                            </script>
+                                         </div>
+                                      </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -1507,6 +1607,26 @@ $passd=$arreglo[8];
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-12">
+                                         <div class="form-group">
+                                            <label>Formato:</label>
+                                            <select id="selectFormatoOpcion" class="form-control">
+                                                <option value="pdf">PDF</option>
+                                                <option value="xls">XLS</option>
+                                            </select>
+                                            <script>
+                                                document.getElementById("selectFormatoOpcion").addEventListener('change', (event) => {
+                                                    if(event.target.value == 'xls') {
+                                                      document.getElementById("idFormOpcion").action = 'Lista.php';
+                                                    } else if(event.target.value == 'pdf') {
+                                                      document.getElementById("idFormOpcion").action = 'pdf/generarreportes.php';
+                                                    }
+                                                });
+                                            </script>
+                                         </div>
+                                      </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">

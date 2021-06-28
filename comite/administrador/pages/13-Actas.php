@@ -68,7 +68,7 @@ $passd=$arreglo[8];
         <div class="card-header p-0 pt-1" style="background-color:#B42A2A; color: white;">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                 <?php
-                        $raiz = "../archivos";
+                        $raiz = "../../archivos";
                         $año = date("Y");
                        // $año = gettype($año);
                         $año = (int)$año;
@@ -113,6 +113,7 @@ $passd=$arreglo[8];
         </div>
         <div class="card-body">
             <div class="tab-content" id="custom-tabs-one-tabContent">
+                
                 <?php
                             require('../../connect_db.php');
                             $año = date("Y");

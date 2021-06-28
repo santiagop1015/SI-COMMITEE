@@ -82,6 +82,7 @@ require("../../connect_db.php");
                             <label>Programa:</label>
                             <input type="text" class="form-control" name="programa" value="<?php echo $programa?>"
                                 readonly="readonly">
+                            <input type="HIDDEN" class="form-control" name="id_User" value="<?php echo $_SESSION['id']?>">
                         </div>
                     </div>
 

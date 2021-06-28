@@ -6,7 +6,7 @@
 
 if ($ID_directores!='')
 { //se hace el reporte para el director
-$query = "SELECT * FROM tesis where ID_directores='$ID_directores' and ((fecha_propuesta between '$fini' and '$ffin') or(fecha_ent_anteproyecto between '$fini' and '$ffin') or (proyecto between '$fini' and '$ffin' ))";
+    $query = "SELECT * FROM tesis where ID_directores='$ID_directores' and ((fecha_propuesta between '$fini' and '$ffin') or (fecha_ent_anteproyecto between '$fini' and '$ffin') or (proyecto between '$fini' and '$ffin' ))";
 	$resultado = $mysqli->query($query);
 	
 	$pdf = new FPDF();
@@ -48,10 +48,11 @@ $query = "SELECT * FROM tesis where ID_directores='$ID_directores' and ((fecha_p
 	{
 		
 		$contador=$contador+1;
-		$pdf->SetFillColor(232,232,232);
-		$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+		//$pdf->SetFillColor(232,232,232);
+		//$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
 		if($row['terminado']==1 or $row['terminado']==2 or $row['terminado']==3 or $row['terminado']==4 and $row['ID_directores']==$ID_directores)
 		{
+		$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
 		$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
 		}else{
 			$contador=$contador-1;
@@ -167,10 +168,11 @@ $query = "SELECT * FROM tesis where (ID_estado='Entrega Propuesta' or ID_estado=
 	while($row = $resultado->fetch_assoc())
 	{
 		$contador=$contador+1;
-		$pdf->SetFillColor(232,232,232);
-		$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+		//$pdf->SetFillColor(232,232,232);
+		//$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
 		if($row['terminado']==1 or $row['terminado']==2 or $row['terminado']==3 or $row['terminado']==4)
 		{
+		$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
 		$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
 		}else{
 			$contador=$contador-1;
@@ -695,11 +697,20 @@ if($id_estudiante2!=="") {
  
 			 while($row = $resultado->fetch_assoc())
 			 {
-			   $contador=$contador+1;
+				$contador=$contador+1;
+				if($row['terminado']==1 or $row['terminado']==2 or $row['terminado']==3 or $row['terminado']==4 or $row['terminado']==5) {
+			        $pdf->SetFillColor(232,232,232);
+			        $pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+			        $pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
+			        $pdf->SetFillColor(255,255,255);
+				} else {
+					$contador=$contador-1;
+				}
+			   /*$contador=$contador+1;
 			   $pdf->SetFillColor(232,232,232);
 			   $pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
 			   $pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
-			   $pdf->SetFillColor(255,255,255); 
+			   $pdf->SetFillColor(255,255,255); */
 				if($row['terminado']==2){
 					$ter='Terminado';
 					$pdf->SetFillColor(213, 245, 227);

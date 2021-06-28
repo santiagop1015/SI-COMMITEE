@@ -5,18 +5,22 @@
     utf8_decode(extract($_POST));
 
 
-$sqln="SELECT * FROM actas where programa='$programa' ORDER BY numero asc";
+	$numeroacta = 0;
+	$codver = 0;
+    $sqln="SELECT * FROM actas where programa='$programa' ORDER BY numero asc";
 		$ressql12=mysqli_query($mysqli,$sqln);
 		while ($row=mysqli_fetch_row ($ressql12)){
         $numeroacta=$row[1]+1;
 		$codver=$row[0];
-		    }
+	    }
 
 
-$sqln="SELECT * FROM actas where programa='$programa' ORDER BY numero asc";
+/*$sqln="SELECT * FROM actas where programa='$programa' ORDER BY numero asc";
 		$ressql12=mysqli_query($mysqli,$sqln);
 		while ($row=mysqli_fetch_row ($ressql12)){
-		    }
+
+		    }*/
+	
 
 if($numeroacta==0){
 $numeroacta=1;
@@ -33,7 +37,7 @@ If($programa=='Sistemas')
 	$pdf = new FPDF();
 
 	$pdf->AddPage();
-        $pdf->Image('../images/logo.png',40,20,120,0);
+    $pdf->Image('./pdf/logo.png',40,20,120,0);
        	                         $pdf->SetFont('Arial','B',15);
       	                          $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
       	                          $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -100,14 +104,14 @@ If($programa=='Sistemas')
        	                          $pdf->Cell(180, 6, '1. LLAMADO A LISTA ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Los integrantes del comité asistieron en su totalidad ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Los integrantes del comité asistieron en su totalidad '), 0, 1, 'L'); 
  	                                $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
        	                          $pdf->SetFont('Arial','B',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
        	                          $pdf->Cell(180, 6, '2. LECTURA Y VERIFICACION DEL ACTA ANTERIOR ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  '), 0, 1, 'L'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
 								                  $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -136,11 +140,13 @@ while ($row2=mysqli_fetch_row ($ressql)){
 		    	$fis=$row2[1];		    	
 		    	}
 $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-      	                        $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+      	                        //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+								  $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', '.utf8_decode($id). 1, 1, 'L');
 }else{
                                 $pdf->Cell(20, 6, ' ', 0, 0, 'C');  
-                                $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
- } 
+                                //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
+								$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']). 1, 1, 'L');
+ }
 								$pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
       	                        $pdf->MultiCell(160, 6, 'Contexto:   '.utf8_decode($row['ID_estado']).', " '.utf8_decode($row['Titulo_tesis']).'", Dir: '.utf8_decode($row['ID_directores']), 1, 1, 'L');
       	                        $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
@@ -193,7 +199,7 @@ $pdf->Cell(20, 6, ' ', 0, 0, 'C');
 								$pdf->SetFont('Arial','',10);
        	                        $pdf->Cell(130, 6, 'Copyright © 2018 Unilibre' , 0, 1, 'C'); 
 								$pdf->SetFont('Arial','',10);
-       	                        $pdf->Cell(180, 6, 'Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación' , 0, 1, 'C'); 
+       	                        $pdf->Cell(180, 6, utf8_decode('Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación') , 0, 1, 'C'); 
 								$pdf->SetFont('Arial','',10);
        	                        $pdf->Cell(170, 6, 'Cod-Ver-bd No.  '.$numeroacta.' id-'.$codver.' c '.$idc, 0, 1, 'C'); 
 
@@ -208,8 +214,13 @@ while($row =$result->fetch_assoc())
   $nombrear='as'.$numeroacta.'.pdf';
   utf8_decode($disposiciones=$nombrear);
   mysqli_query($mysqli,"INSERT INTO actas VALUES('','$numeroacta','$fi','$ff','$fecha','$programa','$disposiciones')");
-
-$pdf->Output();
+  //$pdf->Output();
+ /* echo '<script type="text/javascript">
+       window.open("'.'../../archivos/pdf/'.'as'.$numeroacta.'.pdf'.'", "_blank");
+    </script>';
+	*/
+	//echo '<a href="'.'../../archivos/pdf/'.'as'.$numeroacta.'.pdf'.'" target="_blank">Ver Acta</a>';
+	echo '<embed src='.'../../archivos/pdf/'.'as'.$numeroacta.'.pdf'.' type="application/pdf" width="100%" height="600" style="border: none;" />';
 	}
 //industrial ------------------------------------------------------------
 
@@ -217,7 +228,7 @@ If($programa=='Industrial')
 {
 	$pdf = new FPDF();
 	$pdf->AddPage();
-        $pdf->Image('logoi.png',40,20,120,0);
+        $pdf->Image('./pdf/logoi.png',40,20,120,0);
        	                         $pdf->SetFont('Arial','B',15);
       	                          $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
       	                          $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -286,14 +297,14 @@ If($programa=='Industrial')
        	                          $pdf->Cell(180, 6, '1. LLAMADO A LISTA ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Los integrantes del comité asistieron en su totalidad ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Los integrantes del comité asistieron en su totalidad '), 0, 1, 'L'); 
  	                              $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
        	                          $pdf->SetFont('Arial','B',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
        	                          $pdf->Cell(180, 6, '2. LECTURA Y VERIFICACION DEL ACTA ANTERIOR ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  '), 0, 1, 'L'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
 								  $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -322,10 +333,12 @@ while ($row2=mysqli_fetch_row ($ressql)){
 		    	$fis=$row2[1];		    	
 		    	}
 $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-      	                        $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+      	                        //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+								$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', '.utf8_decode($id). 1, 1, 'L');  
 }else{
                                 $pdf->Cell(20, 6, ' ', 0, 0, 'C');  
-                                $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
+                                //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
+								$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']). 1, 1, 'L');
  } 
 								$pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
       	                        $pdf->MultiCell(160, 6, 'Contexto:   '.utf8_decode($row['ID_estado']).', " '.utf8_decode($row['Titulo_tesis']).'", Dir: '.utf8_decode($row['ID_directores']), 1, 1, 'L');
@@ -378,7 +391,7 @@ $pdf->Cell(20, 6, ' ', 0, 0, 'C');
 								$pdf->SetFont('Arial','',10);
        	                        $pdf->Cell(130, 6, 'Copyright © 2018 Unilibre' , 0, 1, 'C'); 
 								$pdf->SetFont('Arial','',10);
-       	                        $pdf->Cell(180, 6, 'Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación' , 0, 1, 'C'); 
+       	                        $pdf->Cell(180, 6, utf8_decode('Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación') , 0, 1, 'C'); 
 								$pdf->SetFont('Arial','',10);
        	                        $pdf->Cell(170, 6, 'Cod-Ver-bd No.  '.$numeroacta.' id-'.$codver.' c '.$idc, 0, 1, 'C'); 
 
@@ -392,7 +405,8 @@ while($row =$result->fetch_assoc())
   $nombrear='ai'.$numeroacta.'.pdf';
   $disposiciones=$nombrear;
   mysqli_query($mysqli,"INSERT INTO actas VALUES('','$numeroacta','$fi','$ff','$fecha','$programa','$disposiciones')");
-	$pdf->Output();
+	//$pdf->Output();
+	echo '<embed src='.'../../archivos/pdf/'.'ai'.$numeroacta.'.pdf'.' type="application/pdf" width="100%" height="600" style="border: none;" />';
 	}
 //termina industrial ----------------------------------------------------
 
@@ -402,7 +416,7 @@ If(utf8_decode($programa=='Mecanica'))
 {
 	$pdf = new FPDF();
 	$pdf->AddPage();
-        $pdf->Image('logom.png',40,20,120,0);
+        $pdf->Image('./pdf/logom.png',40,20,120,0);
 $pdf->SetFont('Arial','B',15);
                                   $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
                                   $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -475,14 +489,14 @@ $pdf->SetFont('Arial','B',15);
        	                          $pdf->Cell(180, 6, '1. LLAMADO A LISTA ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Los integrantes del comité asistieron en su totalidad ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Los integrantes del comité asistieron en su totalidad '), 0, 1, 'L'); 
  	                              $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
        	                          $pdf->SetFont('Arial','B',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
        	                          $pdf->Cell(180, 6, '2. LECTURA Y VERIFICACION DEL ACTA ANTERIOR ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  '), 0, 1, 'L'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
 								  $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -511,10 +525,12 @@ while ($row2=mysqli_fetch_row ($ressql)){
 		    	$fis=$row2[1];		    	
 		    	}
 $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-      	                        $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+      	                        //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+								$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', '.utf8_decode($id). 1, 1, 'L');
 }else{
                                 $pdf->Cell(20, 6, ' ', 0, 0, 'C');  
-                                $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
+                                //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
+								$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']). 1, 1, 'L');
  } 
 								$pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
       	                        $pdf->MultiCell(160, 6, 'Contexto:   '.utf8_decode($row['ID_estado']).', " '.utf8_decode($row['Titulo_tesis']).'", Dir: '.utf8_decode($row['ID_directores']), 1, 1, 'L');
@@ -581,7 +597,7 @@ $pdf->Cell(20, 6, ' ', 0, 0, 'C');
                 $pdf->SetFont('Arial','',10);
                                 $pdf->Cell(130, 6, 'Copyright © 2018 Unilibre' , 0, 1, 'C'); 
                 $pdf->SetFont('Arial','',10);
-                                $pdf->Cell(180, 6, 'Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación' , 0, 1, 'C'); 
+                                $pdf->Cell(180, 6, utf8_decode('Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación') , 0, 1, 'C'); 
                 $pdf->SetFont('Arial','',10);
                                 $pdf->Cell(170, 6, 'Cod-Ver-bd No.  '.$numeroacta.' id-'.$codver.' c '.$idc, 0, 1, 'C'); 
 
@@ -596,7 +612,8 @@ while($row =$result->fetch_assoc())
   $disposiciones=$nombrear;
 
   mysqli_query($mysqli,"INSERT INTO actas VALUES('','$numeroacta','$fi','$ff','$fecha','$programa','$disposiciones')");
-	$pdf->Output();
+	//$pdf->Output();
+	echo '<embed src='.'../../archivos/pdf/'.'am'.$numeroacta.'.pdf'.' type="application/pdf" width="100%" height="600" style="border: none;" />';
 	}
 //termina mecanica ----------------------------------------------------
 
@@ -606,7 +623,7 @@ If($programa=='Ambiental')
 {
 	$pdf = new FPDF();
 	$pdf->AddPage();
-        $pdf->Image('logoa.png',40,20,120,0);
+        $pdf->Image('./pdf/logoa.png',40,20,120,0);
        	                         $pdf->SetFont('Arial','B',15);
       	                          $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
       	                          $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -675,14 +692,14 @@ If($programa=='Ambiental')
        	                          $pdf->Cell(180, 6, '1. LLAMADO A LISTA ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Los integrantes del comité asistieron en su totalidad ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Los integrantes del comité asistieron en su totalidad '), 0, 1, 'L'); 
  	                              $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
        	                          $pdf->SetFont('Arial','B',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
        	                          $pdf->Cell(180, 6, '2. LECTURA Y VERIFICACION DEL ACTA ANTERIOR ', 0, 1, 'L'); 
                                   $pdf->SetFont('Arial','',12);
       	                          $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-       	                          $pdf->Cell(200, 6, '         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  ', 0, 1, 'L'); 
+       	                          $pdf->Cell(200, 6, utf8_decode('         Cumplido; se aprobó el acta anterior sin ninguna modificacion.  '), 0, 1, 'L'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
       	                          $pdf->Cell(200, 6, '', 0, 1, 'C'); 
 								  $pdf->Cell(200, 6, ' ', 0, 1, 'C'); 
@@ -711,10 +728,12 @@ while ($row2=mysqli_fetch_row ($ressql)){
 		    	$fis=$row2[1];		    	
 		    	}
 $pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
-      	                        $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+      	                        //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C:'.$row['cedula'].' , '.utf8_decode($id).', C.C: '.$fis, 1, 1, 'L');
+								$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', '.utf8_decode($id). 1, 1, 'L');
 }else{
                                 $pdf->Cell(20, 6, ' ', 0, 0, 'C');  
-                                $pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
+                                //$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']).', C.C: '.$row['cedula'], 1, 1, 'L');
+								$pdf->MultiCell(160, 6, 'De: '.utf8_decode($row['user']). 1, 1, 'L');
  } 
 								$pdf->Cell(20, 6, ' ', 0, 0, 'C'); 
       	                        $pdf->MultiCell(160, 6, 'Contexto:   '.utf8_decode($row['ID_estado']).', " '.utf8_decode($row['Titulo_tesis']).'", Dir: '.utf8_decode($row['ID_directores']), 1, 1, 'L');
@@ -767,7 +786,7 @@ $pdf->Cell(20, 6, ' ', 0, 0, 'C');
 								$pdf->SetFont('Arial','',10);
        	                        $pdf->Cell(130, 6, 'Copyright © 2018 Unilibre' , 0, 1, 'C'); 
 								$pdf->SetFont('Arial','',10);
-       	                        $pdf->Cell(180, 6, 'Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación' , 0, 1, 'C'); 
+       	                        $pdf->Cell(180, 6, utf8_decode('Institución de Educación Superior sujeta a inspección y vigilancia por el Ministerio de Educación') , 0, 1, 'C'); 
 								$pdf->SetFont('Arial','',10);
        	                        $pdf->Cell(170, 6, 'Cod-Ver-bd No.  '.$numeroacta.' id-'.$codver.' c '.$idc, 0, 1, 'C'); 
 
@@ -781,7 +800,8 @@ while($row =$result->fetch_assoc())
   $nombrear='aa'.$numeroacta.'.pdf';
   $disposiciones=$nombrear;
   mysqli_query($mysqli,"INSERT INTO actas VALUES('','$numeroacta','$fi','$ff','$fecha','$programa','$disposiciones')");
-	$pdf->Output();
+	//$pdf->Output();
+	echo '<embed src='.'../../archivos/pdf/'.'aa'.$numeroacta.'.pdf'.' type="application/pdf" width="100%" height="600" style="border: none;" />';
 	}
 //termina ambiental ----------------------------------------------------
 
