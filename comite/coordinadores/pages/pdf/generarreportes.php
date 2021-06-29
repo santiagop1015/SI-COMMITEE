@@ -697,8 +697,9 @@ if($id_estudiante2!=="") {
 
 			while($row = $resultado->fetch_assoc())
 			{
+				$contador=$contador+1;
 				if($row['terminado']==1 or $row['terminado']==2 or $row['terminado']==3 or $row['terminado']==4 or $row['terminado']==5) {
-					$contador=$contador+1;
+					
 			        $pdf->SetFillColor(232,232,232);
 			        $pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
 			        $pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
