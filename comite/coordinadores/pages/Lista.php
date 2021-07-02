@@ -41,10 +41,10 @@ $passd=$arreglo[8];
 header("Pragma: public");
 header("Expires: 0");
 $filename = "listadodeproyectos.xls";
-header("Content-type: application/x-msdownload");
-header("Content-Disposition: attachment; filename=$filename");
-header("Pragma: no-cache");
-header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+//header("Content-type: application/x-msdownload");
+//header("Content-Disposition: attachment; filename=$filename");
+//header("Pragma: no-cache");
+//header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 
 ?>
 	
@@ -56,15 +56,15 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 			require("../../connect_db.php");
 			/*$sql=("Select * from tesis where ID_Directores='$usuario' and ID_estado='Entrega Proyecto' and nota>0 ORDER BY proyecto DESC");*/
 			if ($ID_directores!='') {
-              $sql = "SELECT * FROM tesis where ID_Directores='$ID_directores' and nota>0 and ((fecha_propuesta between '$fini' and '$ffin') or(fecha_ent_anteproyecto between '$fini' and '$ffin') or (proyecto between '$fini' and '$ffin' )) ORDER BY proyecto DESC";
-              $nombreDocente = utf8_decode($ID_directores);
+                $sql = "SELECT * FROM tesis where programa='$programa' and ID_directores='$ID_directores' and ((fecha_propuesta between '$fini' and '$ffin') or(fecha_ent_anteproyecto between '$fini' and '$ffin') or (proyecto between '$fini' and '$ffin' ))";
+                $nombreDocente = utf8_decode($ID_directores);
             }
             if ($Jurado!='') {
-              $sql = "SELECT * FROM tesis where (ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto' or ID_estado='Entrega Monografia' or ID_estado='Entrega Proyecto') and (jurado1='$Jurado' or jurado2='$Jurado') and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
+              $sql = "SELECT * FROM tesis where programa='$programa' and (ID_estado='Entrega Propuesta' or ID_estado='Entrega Anteproyecto' or ID_estado='Entrega Monografia' or ID_estado='Entrega Proyecto') and (jurado1='$Jurado' or jurado2='$Jurado') and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
               $nombreDocente = utf8_decode($Jurado);
             }
             if ($terminado>0) {
-              $sql = "SELECT * FROM tesis where terminado='$terminado' and (fecha_propuesta between '$fini' and '$ffin' or fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by proyecto asc";
+                $sql = "SELECT * FROM tesis where programa='$programa' and terminado='$terminado' and (fecha_propuesta between '$fini' and '$ffin' or fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by proyecto asc";
              // $nombreDocente = $terminado;
               switch ($terminado) {
                 case '1':
@@ -94,7 +94,8 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
               }
             }
             if ($id_area!=="" && $id_eje==0) {
-              $sql = "SELECT * FROM tesis where id_area='$id_area'";
+              //$sql = "SELECT * FROM tesis where id_area='$id_area'";
+              $sql = "SELECT * FROM tesis where programa='$programa' and id_area='$id_area' and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
               $sqlLinea = $mysqli -> query ("SELECT * FROM area_inves where id_area='$id_area'");
 			  while ($valores = mysqli_fetch_array($sqlLinea))	{
 			  $nombre_area=$valores['nombre_area'];
@@ -102,7 +103,8 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
               $nombreDocente = utf8_decode($nombre_area);
             }
             if ($id_eje!=0) {
-              $sql = "SELECT * FROM tesis where id_eje='$id_eje'";
+              //$sql = "SELECT * FROM tesis where id_eje='$id_eje'";
+              $sql = "SELECT * FROM tesis where programa='$programa' and id_eje='$id_eje' and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
               $sqlEje = $mysqli -> query ("SELECT * FROM ejes_tem where id_eje='$id_eje'");
 			  while ($valores = mysqli_fetch_array($sqlEje)) {
 			    $nombre_eje=$valores['nombre_eje'];
@@ -111,7 +113,7 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
             }
 
             if($id_estudiante2!=="") {
-              $sql = "SELECT * FROM tesis where id_estudiante2='$id_estudiante2'";
+              $sql = "SELECT * FROM tesis where programa='$programa' and id_estudiante2='$id_estudiante2' and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
               switch ($id_estudiante2) {
                 case '0':
                     $nombreDocente='Proyecto';
@@ -146,7 +148,7 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
                 <?php } else if($id_eje!=0) { ?>
                 <p><b>Eje Temático: </b><?php echo $nombreDocente; ?></p>
                 <?php } else if($id_estudiante2!=="") { ?>
-                <p><b>Opción de grado: </b><?php echo $nombreDocente; ?></p>
+                <p><b>Opción de grado: </b><?php echo $nombreDocente.', Fecha inicial: '.$fini.', Fecha final: '.$ffin. ' del reporte.'; ?></p>
                 <?php } else { ?>
                 <p><b>Docente: </b><?php echo $nombreDocente; ?>, <b>Fecha inicial:</b> <?php echo $fini ?>, <b>Fecha final:</b> <?php echo $ffin ?></p>
                 <?php } ?>
@@ -161,72 +163,111 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 			</thead>
 			<tbody>
 				<?php
+                
 				while($arreglo=mysqli_fetch_array($query)){
-                   
-                    echo "<tr>";
-                    echo "<td>$arreglo[0]</td>";
-                    echo "<td>$arreglo[2]</td>";
-                    echo "<td>$arreglo[3]</td>";
+                    $output = '';
+                    $output .= "<tr>";
+                    // Modificar por reporte y pasar a administrador
+                    
+                    
+                    $output .= "<td>$arreglo[0]</td>";
+                    $output .= "<td>$arreglo[2]</td>";
+                    $output .= "<td>$arreglo[3]</td>";
                     if($arreglo[15] != '0' || $arreglo[18] != '0') {
                         $sql1=("SELECT * FROM login where id='$arreglo[1]' or id='$arreglo[15]'");
                         $query1=mysqli_query($mysqli,$sql1);
-                        echo "<td>";
+                        $output .= "<td>";
 			            while($arregloe=mysqli_fetch_array($query1)){
-			                echo "$arregloe[3]<br>";
+			                $output .= "$arregloe[3]<br>";
 		                }
-                        echo '</td>';
+                        $output .= '</td>';
                         //
                         $query2=mysqli_query($mysqli,$sql1);
-                        echo "<td>";
+                        $output .= "<td>";
 			            while($arregloc=mysqli_fetch_array($query2)){
-			                echo "$arregloc[4]<br>";
+			                $output .= "$arregloc[4]<br>";
 		                }
-                        echo '</td>';
+                        $output .= '</td>';
 
                     } else {
-                        echo "<td></td>";
-                        echo "<td></td>";
+                        $output .= "<td></td>";
+                        $output .= "<td></td>";
                     }
                     
                     
                     //echo "<td>$arreglo[15] - $arreglo[18]</td>";
                     //echo "<td>$arreglo[15] - $arreglo[18]</td>";
-                    echo "<td>$arreglo[20]</td>";
-                    echo "<td>";
+                    $output .= "<td>$arreglo[20]</td>";
+                    $output .= "<td>";
                     switch ($arreglo[19]) {
                         case '1':
-                            echo "En Proceso";
+                            $output .= "En Proceso";
                             break;
                         case '2':
-                            echo "Terminado";
+                            $output .= "Terminado";
                             break;
                         case '3':
-                            echo "Aplazado";
+                            $output .= "Aplazado";
                             break;
                         case '4':
-                            echo "Rechazado";
+                            $output .= "Rechazado";
                             break;
                         case '6':
-                            echo "Por Evaluar";
+                            $output .= "Por Evaluar";
                             break;
                         case '0':
-                            echo "Por Evaluar";
+                            $output .= "Por Evaluar";
                             break;
                         case '7':
-                            echo "Procesado";
+                            $output .= "Procesado";
                             break;
                         default:
-                            echo "Por Definir";
+                        $output .= "Por Definir";
                             break;
                     }
-                    echo "</td>";
+                    $output .= "</td>";
+                    $output .= "</tr>";
+
+                    if ($ID_directores!='') {
+
+                        if($arreglo['terminado']==1 or $arreglo['terminado']==2 or $arreglo['terminado']==3 or $arreglo['terminado']==4 and $arreglo['ID_directores']==$ID_directores) {
+		                    echo $output;
+                        }
+
+                    } else if ($Jurado!=''){
+
+                        if($arreglo['terminado']==1 or $arreglo['terminado']==2 or $arreglo['terminado']==3 or $arreglo['terminado']==4) {
+                            echo $output;
+                        }
+
+                    } else if ($terminado>0){
+
+                        if(($arreglo['terminado']==2 and $arreglo['nota']>0) or $arreglo['terminado']==1 or $arreglo['terminado']==3 or $arreglo['terminado']==4 or $arreglo['terminado']==7 or ($arreglo['terminado']==6 or $arreglo['terminado']==0)) {
+                            echo $output;
+                        }
+
+                    } else if ($id_area!=="" && $id_eje==0){
+
+                        if($arreglo['terminado']==1 or $arreglo['terminado']==2 or $arreglo['terminado']==3 or $arreglo['terminado']==4 or $arreglo['terminado']==7) {
+                            echo $output;
+                        }
+
+                    } else {
+                        if($arreglo['terminado']==1 or $arreglo['terminado']==2 or $arreglo['terminado']==3 or $arreglo['terminado']==4 or $arreglo['terminado']==5) {
+                            echo $output;
+                        }
+                    }
 
                 }
+               
+                
+                
 				
-				echo "</tr>";
+				
 				echo "</tbody>";
 				echo "</table><br><br>";
 				echo "<h4>Copyright © ".date("Y")." SICOMMITTEE - Unilibre</h4>";
+                
 				?>
 
 			</div>

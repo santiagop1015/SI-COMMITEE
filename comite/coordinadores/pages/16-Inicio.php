@@ -1386,6 +1386,20 @@ $passd=$arreglo[8];
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>F. Ini:</label>
+                                                <input type="date" class="form-control" name="fini" value="" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>F. Fin:</label>
+                                                <input type="date" class="form-control" name="ffin" value="" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                       <div class="col-sm-12">
                                          <div class="form-group">
                                             <label>Formato:</label>
@@ -1463,6 +1477,20 @@ $passd=$arreglo[8];
 														}
                                                     ?>
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>F. Ini:</label>
+                                                <input type="date" class="form-control" name="fini" value="" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>F. Fin:</label>
+                                                <input type="date" class="form-control" name="ffin" value="" required>
                                             </div>
                                         </div>
                                     </div>
@@ -1550,6 +1578,20 @@ $passd=$arreglo[8];
                                                     <option value="3">Posgrados</option>
                                                     <option value="4">Curso/Diplomado</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>F. Ini:</label>
+                                                <input type="date" class="form-control" name="fini" value="" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>F. Fin:</label>
+                                                <input type="date" class="form-control" name="ffin" value="" required>
                                             </div>
                                         </div>
                                     </div>

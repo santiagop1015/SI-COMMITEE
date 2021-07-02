@@ -314,10 +314,19 @@ $query = "SELECT * FROM tesis where programa='$programa' and terminado='$termina
 		$contador=$contador+1;
 		$user=$row['ID_estudiante'];
 		$user1=$row['ID_estudiante1'];
-		$pdf->SetFillColor(232,232,232);
-		$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
-		$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
-		$pdf->SetFillColor(255,255,255); 
+		if(($row['terminado']==2 and $row['nota']>0) or $row['terminado']==1 or $row['terminado']==3 or $row['terminado']==4 or $row['terminado']==7 or ($row['terminado']==6 or $row['terminado']==0))
+		{
+			$pdf->SetFillColor(232,232,232);
+			$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+			$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
+			$pdf->SetFillColor(255,255,255); 
+		}else{
+			$contador=$contador-1;
+		}
+		//$pdf->SetFillColor(232,232,232);
+		//$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+		//$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
+		//$pdf->SetFillColor(255,255,255); 
 	    if($row['terminado']==2 and $row['nota']>0){
 	     	//nombre alumno
 		$sqln="SELECT * FROM login where id=$user";
@@ -401,7 +410,8 @@ $query = "SELECT * FROM tesis where programa='$programa' and terminado='$termina
 
 if ($id_area!=="" && $id_eje==0){ //se hace el reporte para linea de investigacion
 
-$query = "SELECT * FROM tesis where programa='$programa' and id_area='$id_area'";
+//$query = "SELECT * FROM tesis where programa='$programa' and id_area='$id_area'";
+$query = "SELECT * FROM tesis where programa='$programa' and id_area='$id_area' and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
 	$resultado = $mysqli->query($query);
 	$pdf = new FPDF();
 	$pdf->AliasNbPages();
@@ -435,7 +445,8 @@ $query = "SELECT * FROM tesis where programa='$programa' and id_area='$id_area'"
 									while ($valores = mysqli_fetch_array($query))	{
 									$nombre_area=$valores['nombre_area'];
 														}
-								  $pdf->MultiCell(100,6,utf8_decode('Línea de Investigación: ').utf8_decode($nombre_area),0,1,'C');	
+								  //$pdf->MultiCell(100,6,utf8_decode('Línea de Investigación: ').utf8_decode($nombre_area),0,1,'C');	
+								  $pdf->MultiCell(190,6,utf8_decode('Eje Temático: ').utf8_decode($nombre_area).', Fecha inicial: '.$fini.', Fecha final: '.$ffin. ' del reporte.',0,1,'C');		
 								  $pdf->Cell(200, 6, ' ', 0, 1, 'C');
 								  $pdf->SetFont('Arial','B',12);
 								  $pdf->SetFillColor(235,235,235);
@@ -445,10 +456,18 @@ $query = "SELECT * FROM tesis where programa='$programa' and id_area='$id_area'"
 	while($row = $resultado->fetch_assoc())
 	{
 		$contador=$contador+1;
-		$pdf->SetFillColor(232,232,232);
-		$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
-		$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
-		$pdf->SetFillColor(255,255,255); 
+		if($row['terminado']==1 or $row['terminado']==2 or $row['terminado']==3 or $row['terminado']==4 or $row['terminado']==7) {	
+			$pdf->SetFillColor(232,232,232);
+		    $pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+		    $pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
+		    $pdf->SetFillColor(255,255,255);
+		} else {
+			$contador=$contador-1;
+		}
+		//$pdf->SetFillColor(232,232,232);
+		//$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+		//$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
+		//$pdf->SetFillColor(255,255,255); 
 	     if($row['terminado']==2){
 			 $ter='Terminado';
 			 $pdf->SetFillColor(213, 245, 227);
@@ -510,7 +529,8 @@ $query = "SELECT * FROM tesis where programa='$programa' and id_area='$id_area'"
 
 if ($id_eje!=0){ //se hace el reporte para eje tematico
 
-$query = "SELECT * FROM tesis where programa='$programa' and id_eje='$id_eje'";
+//$query = "SELECT * FROM tesis where programa='$programa' and id_eje='$id_eje'";
+$query = "SELECT * FROM tesis where programa='$programa' and id_eje='$id_eje' and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
 	$resultado = $mysqli->query($query);
 	$pdf = new FPDF();
 	$pdf->AliasNbPages();
@@ -545,7 +565,8 @@ $query = "SELECT * FROM tesis where programa='$programa' and id_eje='$id_eje'";
 								  while ($valores = mysqli_fetch_array($query))	{
 									$nombre_eje=$valores['nombre_eje'];
 														}
-								  $pdf->MultiCell(100,6,utf8_decode('Eje Temático: ').utf8_decode($nombre_eje),0,1,'C');	
+								  //$pdf->MultiCell(100,6,utf8_decode('Eje Temático: ').utf8_decode($nombre_eje),0,1,'C');
+								  $pdf->MultiCell(190,6,utf8_decode('Eje Temático: ').utf8_decode($nombre_eje).', Fecha inicial: '.$fini.', Fecha final: '.$ffin. ' del reporte.',0,1,'C');		
 								  $pdf->Cell(200, 6, ' ', 0, 1, 'C');
 								
 								  
@@ -557,10 +578,19 @@ $query = "SELECT * FROM tesis where programa='$programa' and id_eje='$id_eje'";
 	while($row = $resultado->fetch_assoc())
 	{
 		$contador=$contador+1;
-		$pdf->SetFillColor(232,232,232);
-		$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
-		$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
-		$pdf->SetFillColor(255,255,255); 
+		if($row['terminado']==1 or $row['terminado']==2 or $row['terminado']==3 or $row['terminado']==4 or $row['terminado']==5) {
+					
+			$pdf->SetFillColor(232,232,232);
+			$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+			$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
+			$pdf->SetFillColor(255,255,255);
+		} else {
+			$contador=$contador-1;
+		}
+		//$pdf->SetFillColor(232,232,232);
+		//$pdf->Cell(1, 6, ' ', 0, 1, 'C'); 
+		//$pdf->Cell(5, 6, $contador , 1, 1, 'C',1); 
+		//$pdf->SetFillColor(255,255,255); 
 	     if($row['terminado']==2){
 			 $ter='Terminado';
 			 $pdf->SetFillColor(213, 245, 227);
@@ -623,7 +653,9 @@ $query = "SELECT * FROM tesis where programa='$programa' and id_eje='$id_eje'";
 
 if($id_estudiante2!=="") {
    //echo $id_estudiante2;
-   $query = "SELECT * FROM tesis where programa='$programa' and id_estudiante2='$id_estudiante2'";
+   //$query = "SELECT * FROM tesis where programa='$programa' and id_estudiante2='$id_estudiante2'";
+   $query = "SELECT * FROM tesis where programa='$programa' and id_estudiante2='$id_estudiante2' and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta";
+   //and (fecha_aprob_propuesta between '$fini' and '$ffin' or fecha_ent_anteproyecto between '$fini' and '$ffin' or proyecto between '$fini' and '$ffin' ) order by fecha_aprob_propuesta
    $resultado = $mysqli->query($query);
    $pdf = new FPDF();
    $pdf->AliasNbPages();
@@ -685,7 +717,7 @@ if($id_estudiante2!=="") {
 		//while ($valores = mysqli_fetch_array($query))	{
 		//  $nombre_eje=$valores['nombre_eje'];
 		//}
-				$pdf->MultiCell(100,6,utf8_decode('Opción de grado: ').utf8_decode($nombre_eje),0,1,'C');	
+				$pdf->MultiCell(190,6,utf8_decode('Opción de grado: ').utf8_decode($nombre_eje).', Fecha inicial: '.$fini.', Fecha final: '.$ffin. ' del reporte.',0,1,'C');	
 				$pdf->Cell(200, 6, ' ', 0, 1, 'C');
 			
 				

@@ -144,7 +144,7 @@ $("#idFormSendMessage").on("submit", function (e) {
   var chat_message = $("#idMessage_Content").val();
 
   if (chat_message == "") {
-    alert("Vacio");
+   // alert("Vacio");
   } else {
     $("#idMessage_Content").val("");
     $.ajax({
